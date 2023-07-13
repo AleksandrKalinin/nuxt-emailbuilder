@@ -4,7 +4,9 @@
     <div class="editor-inner-wrap">
       <Editor />
     </div>
-    <Menu />
+    <Settings />
+    <!--
+    <Menu /> -->
   </div>
 </template>
 <style scoped>
