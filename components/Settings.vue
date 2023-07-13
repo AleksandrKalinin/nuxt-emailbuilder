@@ -13,24 +13,7 @@
                 >
                   Top
                 </h6>
-                <div class="settings-props__item item-props flex">
-                  <button class="item-props__button">
-                    <Icon name="radix-icons:plus" color="#475569" size="12px" />
-                  </button>
-                  <input
-                    type="text"
-                    class="item-props__input ml-[-1px]"
-                    placeholder="auto"
-                  />
-                  <span class="item-props__units ml-[-1px]">px</span>
-                  <button class="item-props__button ml-[-1px]">
-                    <Icon
-                      name="radix-icons:minus"
-                      color="#475569"
-                      size="12px"
-                    />
-                  </button>
-                </div>
+                <InputGroup />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -38,24 +21,7 @@
                 >
                   Bottom
                 </h6>
-                <div class="settings-props__item item-props flex">
-                  <button class="item-props__button">
-                    <Icon name="radix-icons:plus" color="#475569" size="12px" />
-                  </button>
-                  <input
-                    type="text"
-                    class="item-props__input ml-[-1px]"
-                    placeholder="auto"
-                  />
-                  <span class="item-props__units ml-[-1px]">px</span>
-                  <button class="item-props__button ml-[-1px]">
-                    <Icon
-                      name="radix-icons:minus"
-                      color="#475569"
-                      size="12px"
-                    />
-                  </button>
-                </div>
+                <InputGroup />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -63,24 +29,7 @@
                 >
                   Left
                 </h6>
-                <div class="settings-props__item item-props flex">
-                  <button class="item-props__button">
-                    <Icon name="radix-icons:plus" color="#475569" size="12px" />
-                  </button>
-                  <input
-                    type="text"
-                    class="item-props__input ml-[-1px]"
-                    placeholder="auto"
-                  />
-                  <span class="item-props__units ml-[-1px]">px</span>
-                  <button class="item-props__button ml-[-1px]">
-                    <Icon
-                      name="radix-icons:minus"
-                      color="#475569"
-                      size="12px"
-                    />
-                  </button>
-                </div>
+                <InputGroup />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -88,24 +37,7 @@
                 >
                   Right
                 </h6>
-                <div class="settings-props__item item-props flex">
-                  <button class="item-props__button">
-                    <Icon name="radix-icons:plus" color="#475569" size="12px" />
-                  </button>
-                  <input
-                    type="text"
-                    class="item-props__input ml-[-1px]"
-                    placeholder="auto"
-                  />
-                  <span class="item-props__units ml-[-1px]">px</span>
-                  <button class="item-props__button ml-[-1px]">
-                    <Icon
-                      name="radix-icons:minus"
-                      color="#475569"
-                      size="12px"
-                    />
-                  </button>
-                </div>
+                <InputGroup />
               </div>
             </div>
           </div>
@@ -118,24 +50,7 @@
                 >
                   Top
                 </h6>
-                <div class="settings-props__item item-props flex">
-                  <button class="item-props__button">
-                    <Icon name="radix-icons:plus" color="#475569" size="12px" />
-                  </button>
-                  <input
-                    type="text"
-                    class="item-props__input ml-[-1px]"
-                    placeholder="auto"
-                  />
-                  <span class="item-props__units ml-[-1px]">px</span>
-                  <button class="item-props__button ml-[-1px]">
-                    <Icon
-                      name="radix-icons:minus"
-                      color="#475569"
-                      size="12px"
-                    />
-                  </button>
-                </div>
+                <InputGroup />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -143,24 +58,7 @@
                 >
                   Bottom
                 </h6>
-                <div class="settings-props__item item-props flex">
-                  <button class="item-props__button">
-                    <Icon name="radix-icons:plus" color="#475569" size="12px" />
-                  </button>
-                  <input
-                    type="text"
-                    class="item-props__input ml-[-1px]"
-                    placeholder="auto"
-                  />
-                  <span class="item-props__units ml-[-1px]">px</span>
-                  <button class="item-props__button ml-[-1px]">
-                    <Icon
-                      name="radix-icons:minus"
-                      color="#475569"
-                      size="12px"
-                    />
-                  </button>
-                </div>
+                <InputGroup />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -168,24 +66,7 @@
                 >
                   Left
                 </h6>
-                <div class="settings-props__item item-props flex">
-                  <button class="item-props__button">
-                    <Icon name="radix-icons:plus" color="#475569" size="12px" />
-                  </button>
-                  <input
-                    type="text"
-                    class="item-props__input ml-[-1px]"
-                    placeholder="auto"
-                  />
-                  <span class="item-props__units ml-[-1px]">px</span>
-                  <button class="item-props__button ml-[-1px]">
-                    <Icon
-                      name="radix-icons:minus"
-                      color="#475569"
-                      size="12px"
-                    />
-                  </button>
-                </div>
+                <InputGroup />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -193,60 +74,17 @@
                 >
                   Right
                 </h6>
-                <div class="settings-props__item item-props flex">
-                  <button class="item-props__button">
-                    <Icon name="radix-icons:plus" color="#475569" size="12px" />
-                  </button>
-                  <input
-                    type="text"
-                    class="item-props__input ml-[-1px]"
-                    placeholder="auto"
-                  />
-                  <span class="item-props__units ml-[-1px]">px</span>
-                  <button class="item-props__button ml-[-1px]">
-                    <Icon
-                      name="radix-icons:minus"
-                      color="#475569"
-                      size="12px"
-                    />
-                  </button>
-                </div>
+                <InputGroup />
               </div>
             </div>
           </div>
           <div class="settings-options__item settings-item settings-item_row">
             <h5 class="settings-item__header">Height</h5>
-            <div class="settings-props__item item-props flex">
-              <button class="item-props__button">
-                <Icon name="radix-icons:plus" color="#475569" size="12px" />
-              </button>
-              <input
-                type="text"
-                class="item-props__input ml-[-1px]"
-                placeholder="auto"
-              />
-              <span class="item-props__units ml-[-1px]">px</span>
-              <button class="item-props__button ml-[-1px]">
-                <Icon name="radix-icons:minus" color="#475569" size="12px" />
-              </button>
-            </div>
+            <InputGroup />
           </div>
           <div class="settings-options__item settings-item settings-item_row">
             <h5 class="settings-item__header">Width</h5>
-            <div class="settings-props__item item-props flex">
-              <button class="item-props__button">
-                <Icon name="radix-icons:plus" color="#475569" size="12px" />
-              </button>
-              <input
-                type="text"
-                class="item-props__input ml-[-1px]"
-                placeholder="auto"
-              />
-              <span class="item-props__units ml-[-1px]">px</span>
-              <button class="item-props__button ml-[-1px]">
-                <Icon name="radix-icons:minus" color="#475569" size="12px" />
-              </button>
-            </div>
+            <InputGroup />
           </div>
         </div>
       </div>
@@ -259,7 +97,7 @@
           </div>
           <div class="settings-options__item settings-item settings-item_row">
             <h5 class="settings-item__header">Font weight</h5>
-            <div class="settings-item__toggle settings-toggle"></div>
+            <SelectionGroup />
           </div>
           <!--
           <div class="settings-options__item settings-item settings-item_row">
@@ -306,13 +144,7 @@
               >
                 Background
               </h6>
-              <div class="setting-props__colorpicker settings-colorpicker">
-                <input
-                  class="settings-colorpicker__input"
-                  type="text"
-                  placeholder="none"
-                /><input class="settings-colorpicker__picker" type="color" />
-              </div>
+              <Colorpicker />
             </div>
           </div>
           <div class="settings-options__item settings-item settings-item_col">
@@ -324,24 +156,7 @@
                 >
                   Width
                 </h6>
-                <div class="settings-props__item item-props flex">
-                  <button class="item-props__button">
-                    <Icon name="radix-icons:plus" color="#475569" size="12px" />
-                  </button>
-                  <input
-                    type="text"
-                    class="item-props__input ml-[-1px]"
-                    placeholder="auto"
-                  />
-                  <span class="item-props__units ml-[-1px]">px</span>
-                  <button class="item-props__button ml-[-1px]">
-                    <Icon
-                      name="radix-icons:minus"
-                      color="#475569"
-                      size="12px"
-                    />
-                  </button>
-                </div>
+                <InputGroup />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -349,11 +164,7 @@
                 >
                   Style
                 </h6>
-                <select class="settings-props__dropdown settings-dropdown">
-                  <option>Solid</option>
-                  <option>Dashed</option>
-                  <option>Dotted</option>
-                </select>
+                <Dropdown />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -361,13 +172,7 @@
                 >
                   Style
                 </h6>
-                <div class="setting-props__colorpicker settings-colorpicker">
-                  <input
-                    class="settings-colorpicker__input"
-                    type="text"
-                    placeholder="none"
-                  /><input class="settings-colorpicker__picker" type="color" />
-                </div>
+                <ColorPicker />
               </div>
             </div>
           </div>
@@ -380,24 +185,7 @@
                 >
                   Top
                 </h6>
-                <div class="settings-props__item item-props flex">
-                  <button class="item-props__button">
-                    <Icon name="radix-icons:plus" color="#475569" size="12px" />
-                  </button>
-                  <input
-                    type="text"
-                    class="item-props__input ml-[-1px]"
-                    placeholder="auto"
-                  />
-                  <span class="item-props__units ml-[-1px]">px</span>
-                  <button class="item-props__button ml-[-1px]">
-                    <Icon
-                      name="radix-icons:minus"
-                      color="#475569"
-                      size="12px"
-                    />
-                  </button>
-                </div>
+                <InputGroup />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -405,24 +193,7 @@
                 >
                   Bottom
                 </h6>
-                <div class="settings-props__item item-props flex">
-                  <button class="item-props__button">
-                    <Icon name="radix-icons:plus" color="#475569" size="12px" />
-                  </button>
-                  <input
-                    type="text"
-                    class="item-props__input ml-[-1px]"
-                    placeholder="auto"
-                  />
-                  <span class="item-props__units ml-[-1px]">px</span>
-                  <button class="item-props__button ml-[-1px]">
-                    <Icon
-                      name="radix-icons:minus"
-                      color="#475569"
-                      size="12px"
-                    />
-                  </button>
-                </div>
+                <InputGroup />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -430,24 +201,7 @@
                 >
                   Left
                 </h6>
-                <div class="settings-props__item item-props flex">
-                  <button class="item-props__button">
-                    <Icon name="radix-icons:plus" color="#475569" size="12px" />
-                  </button>
-                  <input
-                    type="text"
-                    class="item-props__input ml-[-1px]"
-                    placeholder="auto"
-                  />
-                  <span class="item-props__units ml-[-1px]">px</span>
-                  <button class="item-props__button ml-[-1px]">
-                    <Icon
-                      name="radix-icons:minus"
-                      color="#475569"
-                      size="12px"
-                    />
-                  </button>
-                </div>
+                <InputGroup />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -455,43 +209,13 @@
                 >
                   Right
                 </h6>
-                <div class="settings-props__item item-props flex">
-                  <button class="item-props__button">
-                    <Icon name="radix-icons:plus" color="#475569" size="12px" />
-                  </button>
-                  <input
-                    type="text"
-                    class="item-props__input ml-[-1px]"
-                    placeholder="auto"
-                  />
-                  <span class="item-props__units ml-[-1px]">px</span>
-                  <button class="item-props__button ml-[-1px]">
-                    <Icon
-                      name="radix-icons:minus"
-                      color="#475569"
-                      size="12px"
-                    />
-                  </button>
-                </div>
+                <InputGroup />
               </div>
             </div>
           </div>
           <div class="settings-options__item settings-item settings-item_row">
             <h5 class="settings-item__header">Border collapse</h5>
-            <div class="settings-props__item item-props flex">
-              <button class="item-props__button">
-                <Icon name="radix-icons:plus" color="#475569" size="12px" />
-              </button>
-              <input
-                type="text"
-                class="item-props__input ml-[-1px]"
-                placeholder="auto"
-              />
-              <span class="item-props__units ml-[-1px]">px</span>
-              <button class="item-props__button ml-[-1px]">
-                <Icon name="radix-icons:minus" color="#475569" size="12px" />
-              </button>
-            </div>
+            <ToggleInput />
           </div>
         </div>
       </div>
@@ -543,62 +267,5 @@
 .settings-item__properties {
   @apply flex flex-wrap justify-between;
   gap: 20px;
-}
-
-.settings-props__dropdown {
-  @apply h-[30px] px-[10px] border border-slate-300 outline-none;
-}
-
-.item-props__button {
-  @apply z-10 w-[30px] h-[30px] bg-white flex justify-center items-center border border-slate-300 transition duration-100 hover:border-slate-400;
-}
-
-.item-props__input {
-  @apply w-[60px] h-[30px] border border-slate-300 px-[5px] outline-none leading-[30px];
-}
-
-.item-props__input::placeholder {
-  line-height: 22px;
-  font-weight: 300;
-}
-
-.item-props__units {
-  @apply w-[30px] h-[30px] bg-slate-100 flex justify-center items-center border border-slate-300 text-sm text-slate-800;
-}
-
-.settings-colorpicker {
-  @apply h-[30px] flex items-start;
-}
-
-.settings-colorpicker__input {
-  @apply h-[30px] border border-slate-300 px-[5px] outline-none leading-[30px];
-}
-
-.settings-colorpicker__input::placeholder {
-  line-height: 30px;
-}
-
-.settings-colorpicker__picker {
-  @apply min-h-[30px] min-w-[30px] max-h-[30px] max-w-[30px];
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: none;
-  margin: 0;
-  padding: 0;
-  outline: 0;
-  overflow: hidden;
-  background: transparent;
-  cursor: pointer;
-}
-
-.settings-colorpicker__picker::-webkit-color-swatch {
-  border: none;
-  @apply min-h-[30px] min-w-[30px] max-h-[30px] max-w-[30px] mt-[-4px] ml-[-2px];
-}
-
-.settings-colorpicker__picker::-moz-color-swatch {
-  border: none;
-  @apply min-h-[30px] min-w-[30px] max-h-[30px] max-w-[30px] mt-[-4px] ml-[-2px];
 }
 </style>

@@ -1,17 +1,17 @@
 <template>
   <div class="selection-group">
-    <span class="selection-group__item selection-item">
+    <div class="selection-group__item selection-item">
       <Icon name="lucide:heading-1" size="20px" />
-    </span>
-    <span class="selection-group__item selection-item selection-item_selected">
+    </div>
+    <div class="selection-group__item selection-item selection-item_selected">
       <Icon name="lucide:heading-2" size="20px" />
-    </span>
-    <span class="sselection-group__item selection-item">
+    </div>
+    <div class="selection-group__item selection-item">
       <Icon name="lucide:heading-3" size="20px" />
-    </span>
-    <span class="selection-group__item selection-item">
+    </div>
+    <div class="selection-group__item selection-item">
       <Icon name="lucide:heading-4" size="20px" />
-    </span>
+    </div>
   </div>
 </template>
 
