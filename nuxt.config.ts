@@ -7,6 +7,10 @@ export default defineNuxtConfig({
       path: "~/components/Inputs",
       global: true,
     },
+    {
+      path: "~/components/EditorMenu",
+      global: true,
+    },
   ],
   css: ["~/assets/style/variables.scss", "~/assets/style/main.scss"],
   modules: [

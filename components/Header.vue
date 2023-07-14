@@ -1,11 +1,13 @@
 <template>
-  <header
-    class="w-full h-[100px] header flex justify-end items-center px-5 bg-neutral-700"
-  >
+  <header class="header">
     <button class="button_regular">Login</button>
   </header>
 </template>
 
 <script setup lang="ts"></script>
 
-<style scoped></style>
+<style scoped>
+.header {
+  @apply w-full h-[100px] flex justify-end items-center px-5 bg-neutral-700;
+}
+</style>
