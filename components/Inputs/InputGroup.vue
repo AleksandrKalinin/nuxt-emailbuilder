@@ -1,7 +1,7 @@
 <template>
   <div class="input-group">
     <button class="input-group__button">
-      <Icon name="radix-icons:plus" color="#475569" size="12px" />
+      <Icon name="radix-icons:minus" color="#475569" size="12px" />
     </button>
     <input
       type="text"
@@ -10,7 +10,7 @@
     />
     <span class="input-group__units ml-[-1px]">px</span>
     <button class="input-group__button ml-[-1px]">
-      <Icon name="radix-icons:minus" color="#475569" size="12px" />
+      <Icon name="radix-icons:plus" color="#475569" size="12px" />
     </button>
   </div>
 </template>

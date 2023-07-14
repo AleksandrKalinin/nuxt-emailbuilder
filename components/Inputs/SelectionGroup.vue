@@ -4,8 +4,9 @@
       class="selection-group__item selection-item"
       v-for="item in options"
       :class="item.default ? 'selection-item_selected' : ''"
+      :title="item.name"
     >
-      <Icon :name="item.icon" size="20px" :title="item.name" />
+      <Icon :name="item.icon" size="20px" />
     </div>
   </div>
 </template>

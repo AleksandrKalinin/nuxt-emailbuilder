@@ -96,16 +96,16 @@ export const typography = {
       type: "selection",
       options: [
         {
-          name: "Lowercase",
-          icon: "mdi:format-lowercase",
-          value: "lowercase",
-          default: false,
-        },
-        {
           name: "Regular",
           icon: "mdi:format-letter-case",
           value: "regular",
           default: true,
+        },
+        {
+          name: "Lowercase",
+          icon: "mdi:format-lowercase",
+          value: "lowercase",
+          default: false,
         },
         {
           name: "Uppercase",
