@@ -1,6 +1,7 @@
 <template>
   <div class="settings-wrap">
     <div class="settings">
+      <!--
       <div class="settings-block settings__block">
         <h4 class="settings-block__header">Image</h4>
         <div class="settings-block__options settings-options">
@@ -153,7 +154,6 @@
             <h5 class="settings-item__header">Font weight</h5>
             <SelectionGroup />
           </div>
-          <!--
           <div class="settings-options__item settings-item settings-item_row">
             <h5 class="settings-item__header">Font style</h5>
             <div class="settings-item__properties">Lorem ipsum</div>
@@ -186,7 +186,7 @@
             <h5 class="settings-item__header">Text decoration</h5>
             <div class="settings-item__properties">Lorem ipsum</div>
           </div>
-        --></div>
+        </div>
       </div>
       <div class="settings-block settings__block">
         <h4 class="settings-block__header">Decorations</h4>
@@ -272,12 +272,35 @@
             <ToggleInput />
           </div>
         </div>
+      </div> -->
+      <div class="settings-block settings__block">
+        <h4 class="settings-block__header">{{ typography.title }}</h4>
+        <div class="settings-block__options settings-options">
+          <div
+            class="settings-options__item settings-item settings-item_row"
+            v-for="option in typography.fields"
+          >
+            <h5 class="settings-item__header">{{ option.name }}</h5>
+            <InputGroup v-if="option.type === 'input'" />
+            <Colorpicker v-else-if="option.type === 'colorpicker'" />
+            <Dropdown v-if="option.type === 'dropdown'" />
+            <SelectionGroup
+              v-else-if="option.type === 'selection'"
+              :options="option.options"
+            />
+            <FileUpload v-else-if="option.type === 'fileupload'" />
+            <FileUpload v-else-if="option.type === 'toggle'" />
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { typography } from "../constants/settings";
+import Upload from "./Inputs/Upload.vue";
+</script>
 
 <style scoped>
 .settings-wrap {

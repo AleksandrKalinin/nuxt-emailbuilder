@@ -4,7 +4,7 @@
     <div class="editor-inner-wrap">
       <Editor />
     </div>
-    <EditorMenu />
+    <Settings />
     <!--
     <Menu /> -->
   </div>

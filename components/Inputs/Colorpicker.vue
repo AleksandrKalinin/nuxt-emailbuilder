@@ -1,6 +1,6 @@
 <template>
   <div class="colorpicker">
-    <input class="colorpicker__input" type="text" placeholder="none" /><input
+    <input class="colorpicker__input" type="text" placeholder="auto" /><input
       class="colorpicker__select"
       type="color"
     />
@@ -20,6 +20,7 @@
 
 .colorpicker__input::placeholder {
   line-height: 30px;
+  font-weight: 300;
 }
 
 .colorpicker__select {

@@ -27,7 +27,7 @@ import { header } from "./data";
 }
 
 .editor-menu__item {
-  @apply cursor-pointer transition ease-in-out duration-100 hover:scale-105 hover:shadow-xl hover:shadow-slate-300/90 w-[100px] h-[120px] border border-slate-300 rounded-md bg-slate-50 flex justify-center items-center flex-col;
+  @apply cursor-pointer transition ease-in-out duration-100 hover:scale-105 hover:shadow-xl hover:shadow-slate-300/90 w-[100px] h-[100px] border border-slate-300 rounded-md bg-slate-50 flex justify-center items-center flex-col;
 }
 
 .menu-item__heading {
