@@ -1,8 +1,10 @@
 <template>
   <div class="editor">
+    <!--
     <div class="editor-placeholder">
       Select a component from menu and drop it to create a new element
     </div>
+    <EditorItem /> -->
   </div>
 </template>
 
