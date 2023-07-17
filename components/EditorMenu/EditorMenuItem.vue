@@ -1,5 +1,5 @@
 <template>
-  <div class="editor-menu__item menu-item">
+  <div class="editor-menu__item menu-item" draggable="true">
     <Icon name="radix-icons:image" color="#475569" size="40px" class="mb-1" />
     <p class="menu-item__heading">Image</p>
   </div>

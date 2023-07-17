@@ -1,40 +1,22 @@
 <template>
   <div class="input-group">
-    <button class="input-group__button">
-      <Icon name="radix-icons:minus" color="#475569" size="12px" />
-    </button>
-    <input
-      type="text"
-      class="input-group__input ml-[-1px]"
-      placeholder="auto"
-    />
-    <span class="input-group__units ml-[-1px]">px</span>
-    <button class="input-group__button ml-[-1px]">
-      <Icon name="radix-icons:plus" color="#475569" size="12px" />
-    </button>
+    <div class="input-group__item" v-for="item in items">
+      <h6 class="input-group__header">{{ item.name }}</h6>
+      <InputSingle />
+    </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps(["items"]);
+</script>
 
 <style scoped>
 .input-group {
-  @apply flex;
-}
-.input-group__button {
-  @apply z-10 w-[30px] h-[30px] bg-white flex justify-center items-center border border-slate-300 transition duration-100 hover:border-slate-400;
+  @apply flex flex-wrap justify-between gap-y-2.5;
 }
 
-.input-group__input {
-  @apply w-[60px] h-[30px] border border-slate-300 px-[5px] outline-none leading-[30px];
-}
-
-.input-group__input::placeholder {
-  line-height: 22px;
-  font-weight: 300;
-}
-
-.input-group__units {
-  @apply w-[30px] h-[30px] bg-slate-100 flex justify-center items-center border border-slate-300 text-sm text-slate-800;
+.input-group__header {
+  @apply text-sm text-slate-500 font-medium tracking-[0.5px] mb-2;
 }
 </style>

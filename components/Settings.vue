@@ -18,7 +18,7 @@
                 >
                   Top
                 </h6>
-                <InputGroup />
+                <InputSingle />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -26,7 +26,7 @@
                 >
                   Bottom
                 </h6>
-                <InputGroup />
+                <InputSingle />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -34,7 +34,7 @@
                 >
                   Left
                 </h6>
-                <InputGroup />
+                <InputSingle />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -42,17 +42,17 @@
                 >
                   Right
                 </h6>
-                <InputGroup />
+                <InputSingle />
               </div>
             </div>
           </div>
           <div class="settings-options__item settings-item settings-item_row">
             <h5 class="settings-item__header">Height</h5>
-            <InputGroup />
+            <InputSingle />
           </div>
           <div class="settings-options__item settings-item settings-item_row">
             <h5 class="settings-item__header">Width</h5>
-            <InputGroup />
+            <InputSingle />
           </div>
         </div>
       </div>
@@ -68,7 +68,7 @@
                 >
                   Top
                 </h6>
-                <InputGroup />
+                <InputSingle />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -76,7 +76,7 @@
                 >
                   Bottom
                 </h6>
-                <InputGroup />
+                <InputSingle />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -84,7 +84,7 @@
                 >
                   Left
                 </h6>
-                <InputGroup />
+                <InputSingle />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -92,7 +92,7 @@
                 >
                   Right
                 </h6>
-                <InputGroup />
+                <InputSingle />
               </div>
             </div>
           </div>
@@ -105,7 +105,7 @@
                 >
                   Top
                 </h6>
-                <InputGroup />
+                <InputSingle />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -113,7 +113,7 @@
                 >
                   Bottom
                 </h6>
-                <InputGroup />
+                <InputSingle />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -121,7 +121,7 @@
                 >
                   Left
                 </h6>
-                <InputGroup />
+                <InputSingle />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -129,17 +129,17 @@
                 >
                   Right
                 </h6>
-                <InputGroup />
+                <InputSingle />
               </div>
             </div>
           </div>
           <div class="settings-options__item settings-item settings-item_row">
             <h5 class="settings-item__header">Height</h5>
-            <InputGroup />
+            <InputSingle />
           </div>
           <div class="settings-options__item settings-item settings-item_row">
             <h5 class="settings-item__header">Width</h5>
-            <InputGroup />
+            <InputSingle />
           </div>
         </div>
       </div>
@@ -210,7 +210,7 @@
                 >
                   Width
                 </h6>
-                <InputGroup />
+                <InputSingle />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -239,7 +239,7 @@
                 >
                   Top
                 </h6>
-                <InputGroup />
+                <InputSingle />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -247,7 +247,7 @@
                 >
                   Bottom
                 </h6>
-                <InputGroup />
+                <InputSingle />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -255,7 +255,7 @@
                 >
                   Left
                 </h6>
-                <InputGroup />
+                <InputSingle />
               </div>
               <div class="settings-props__block">
                 <h6
@@ -263,7 +263,7 @@
                 >
                   Right
                 </h6>
-                <InputGroup />
+                <InputSingle />
               </div>
             </div>
           </div>
@@ -272,21 +272,39 @@
             <ToggleInput />
           </div>
         </div>
-      </div> -->
-      <div class="settings-block settings__block">
-        <h4 class="settings-block__header">{{ typography.title }}</h4>
+      </div>
+    -->
+
+      <div
+        class="settings-block settings__block"
+        v-for="settingBlock in properties"
+      >
+        <h4 class="settings-block__header">{{ settingBlock.title }}</h4>
         <div class="settings-block__options settings-options">
           <div
-            class="settings-options__item settings-item settings-item_row"
-            v-for="option in typography.fields"
+            class="settings-options__item settings-item"
+            v-for="option in settingBlock.fields"
+            :class="
+              option.display === 'row'
+                ? 'settings-item_row'
+                : 'settings-item_col'
+            "
           >
             <h5 class="settings-item__header">{{ option.name }}</h5>
-            <InputGroup v-if="option.type === 'input'" />
+            <InputSingle v-if="option.type === 'input'" />
+            <InputGroup
+              v-if="option.type === 'inputgroup'"
+              :items="option.properties"
+            />
             <Colorpicker v-else-if="option.type === 'colorpicker'" />
             <Dropdown v-if="option.type === 'dropdown'" />
             <SelectionGroup
               v-else-if="option.type === 'selection'"
               :options="option.options"
+            />
+            <LayoutGroup
+              v-else-if="option.type === 'layout'"
+              :items="option.options"
             />
             <FileUpload v-else-if="option.type === 'fileupload'" />
             <FileUpload v-else-if="option.type === 'toggle'" />
@@ -298,8 +316,19 @@
 </template>
 
 <script setup lang="ts">
-import { typography } from "../constants/settings";
-import Upload from "./Inputs/Upload.vue";
+import {
+  typographySettings,
+  imageSettings,
+  dimensionsSettings,
+  layoutSettings,
+} from "../constants/settings";
+
+const properties = [
+  layoutSettings,
+  dimensionsSettings,
+  typographySettings,
+  imageSettings,
+];
 </script>
 
 <style scoped>
@@ -323,13 +352,13 @@ import Upload from "./Inputs/Upload.vue";
 }
 
 .settings-item {
-  @apply w-full px-[15px] py-[15px] border-b border-slate-300 flex;
+  @apply w-full px-[15px] py-[15px] border-b border-slate-300 flex flex-wrap;
 }
 
 .settings-item_col {
   @apply flex-col;
   .settings-item__header {
-    @apply mb-2;
+    @apply mb-3;
   }
 }
 
