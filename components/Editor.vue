@@ -1,14 +1,25 @@
 <template>
   <div class="editor">
-    <!--
-    <div class="editor-placeholder">
-      Select a component from menu and drop it to create a new element
-    </div>
-    <EditorItem /> -->
+    <EditorItem />
+    <EditorItem />
+    <EditorItem />
+    <template v-for="item in rawHtml">
+      <div v-dompurify-html="item"></div>
+    </template>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useEditorStore } from "@/store/editorStore";
+
+const { createDOMItems } = useEditorStore();
+const rawHtml = ref(null);
+
+onMounted(() => {
+  console.log(this);
+  rawHtml.value = createDOMItems();
+});
+</script>
 
 <style scoped>
 .editor {

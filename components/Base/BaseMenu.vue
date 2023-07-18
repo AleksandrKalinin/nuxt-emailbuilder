@@ -1,5 +1,5 @@
 <template>
-  <div class="settings-wrap" v-if="menuOpen" ref="target">
+  <div class="settings-wrap" ref="target">
     <div class="settings">
       <div
         class="settings-block settings__block"
@@ -42,14 +42,12 @@
 </template>
 
 <script setup lang="ts">
-import { useSettingsStore } from "@/store/settingsStore";
 import {
   layoutSettings,
   typographySettings,
   imageSettings,
   dimensionsSettings,
 } from "../constants/settings";
-import { storeToRefs } from "pinia";
 
 const properties = [
   layoutSettings,
@@ -58,58 +56,11 @@ const properties = [
   imageSettings,
 ];
 
-const settingsStore = useSettingsStore();
-
-const { menuOpen } = storeToRefs(settingsStore);
-
-const target = ref(null);
+const menu = ref(null);
 
 onClickOutside(target, () => {
   console.log("outside");
 });
 </script>
 
-<style scoped>
-.settings-wrap {
-  @apply bg-slate-100 w-[380px] flex justify-center h-full overflow-y-auto;
-}
-.settings {
-  @apply flex flex-wrap w-full min-h-full h-auto justify-start items-start py-[20px] mb-auto;
-}
-
-.settings-block {
-  @apply w-full mb-[10px];
-}
-
-.settings-block__header {
-  @apply bg-slate-200 py-[10px] px-[15px] w-full text-slate-800 cursor-pointer uppercase text-sm tracking-[1.5px];
-}
-
-.settings-block__options {
-  @apply w-full;
-}
-
-.settings-item {
-  @apply w-full px-[15px] py-[15px] border-b border-slate-300 flex flex-wrap;
-}
-
-.settings-item_col {
-  @apply flex-col;
-  .settings-item__header {
-    @apply mb-3;
-  }
-}
-
-.settings-item_row {
-  @apply justify-between items-center;
-}
-
-.settings-item__header {
-  @apply text-base text-slate-800 font-medium tracking-[0.5px];
-}
-
-.settings-item__properties {
-  @apply flex flex-wrap justify-between;
-  gap: 20px;
-}
-</style>
+<style scoped></style>
