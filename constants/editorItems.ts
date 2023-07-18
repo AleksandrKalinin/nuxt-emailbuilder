@@ -1,3 +1,22 @@
+export const tableWrapperProperties = {
+  attributes: {
+    cellspacing: "0",
+    cellpadding: "0",
+    role: "presentation",
+  },
+  styles: {
+    "margin-top": 0,
+    "margin-bottom": 0,
+    "margin-left": "auto",
+    "margin-right": "auto",
+    width: "100%",
+    "max-width": "600px",
+    "border-spacing": 0,
+    "mso-cellspacing": 0,
+    "mso-padding-alt": 0,
+  },
+};
+
 const item1 = {
   type: "p",
   value: "Lorem Ipsum dolor sit amen",
@@ -48,3 +67,15 @@ const item3 = {
 };
 
 export const tempItems = [item1, item2, item3];
+
+const block1 = {
+  columns: 1,
+  content: [item1, item2],
+};
+
+const block2 = {
+  columns: 1,
+  content: [item3],
+};
+
+export const tempBlocks = [block1, block2];

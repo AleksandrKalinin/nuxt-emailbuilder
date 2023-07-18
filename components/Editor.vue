@@ -3,21 +3,23 @@
     <EditorItem />
     <EditorItem />
     <EditorItem />
-    <template v-for="item in rawHtml">
+    <div v-dompurify-html="editorTemplate"></div>
+    <!--
+    <template v-for="item in editorBlocks">
       <div v-dompurify-html="item"></div>
-    </template>
+    </template> -->
   </div>
 </template>
 
 <script setup lang="ts">
 import { useEditorStore } from "@/store/editorStore";
+import { storeToRefs } from "pinia";
 
-const { createDOMItems } = useEditorStore();
-const rawHtml = ref(null);
+const { createBuildingBlocks } = useEditorStore();
+const { editorTemplate } = storeToRefs(useEditorStore());
 
 onMounted(() => {
-  console.log(this);
-  rawHtml.value = createDOMItems();
+  createBuildingBlocks();
 });
 </script>
 
