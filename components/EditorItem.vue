@@ -1,15 +1,22 @@
 <template>
-  <div class="editor-item">
+  <div
+    class="editor-item"
+    @click="
+      setActiveSettings([layoutSettings, typographySettings, actionSettings])
+    "
+    @mouseenter="toggleItemState(true)"
+    @mouseleave="toggleItemState(false)"
+    @mouseup="checkState()"
+    @dragleave="leaveDropArea($event)"
+    @dragenter="enterDropArea($event)"
+  >
     <div class="editor-item__wrapper item-wrapper item-wrapper_top">
       <div class="editor-item__placeholder item-placeholder">
         <span class="item-placeholder__text"> Drag it here </span>
       </div>
     </div>
-    <div
-      class="editor-item__content item-content"
-      @click="console.log('fafefe')"
-    >
-      No content here yet. Select item from menu and drag it here
+    <div class="editor-item__content item-content">
+      {{ text }}
       <div class="item-content__drag" draggable="true">
         <Icon name="ant-design:drag-outlined" color="#FFFFFF" size="30px" />
       </div>
@@ -27,11 +34,56 @@ import { storeToRefs } from "pinia";
 import { useEditorStore } from "@/store/editorStore";
 import { useSettingsStore } from "@/store/settingsStore";
 
-const editorStore = useEditorStore();
-const settingsStore = useSettingsStore();
+import {
+  layoutSettings,
+  typographySettings,
+  imageSettings,
+  dimensionsSettings,
+  actionSettings,
+} from "../constants/settings";
 
-const { editorItems } = storeToRefs(editorStore);
-const { menuOpen } = storeToRefs(settingsStore);
+defineProps(["text"]);
+
+const isActive = ref<boolean>(false);
+
+const toggleItemState = (state: boolean) => {
+  if (isActive.value !== state) isActive.value = state;
+};
+
+const checkState = () => {
+  if (selectedMenuItem.value) {
+    console.log("selected", selectedMenuItem.value);
+  } else {
+    console.log("not selected");
+  }
+};
+
+const areaActive = ref(false);
+const eventCounter = ref(0);
+
+const enterDropArea = (event) => {
+  eventCounter.value += 1;
+  if (selectedMenuItem.value && areaActive.value === false) {
+    areaActive.value = true;
+    console.log("in area!");
+  }
+};
+
+const leaveDropArea = (event) => {
+  eventCounter.value -= 1;
+  if (
+    selectedMenuItem.value &&
+    areaActive.value === true &&
+    eventCounter.value === 0
+  ) {
+    areaActive.value = false;
+    console.log("out of area");
+  }
+};
+
+const { setActiveSettings } = useSettingsStore();
+
+const { selectedMenuItem } = storeToRefs(useEditorStore());
 </script>
 
 <style scoped lang="scss">
@@ -56,14 +108,14 @@ const { menuOpen } = storeToRefs(settingsStore);
 }
 
 .editor-item__content {
-  @apply border border-dashed border-blue-300 w-full h-[80px] flex justify-center items-center items-center bg-blue-100/80 relative;
+  @apply border border-dashed border-blue-300 w-full h-[150px] flex justify-center items-center items-center bg-blue-100/80 relative;
 }
 
 .editor-item__content:hover .editor-item__drag {
   @apply opacity-100;
 }
 
-.editor-item:not(:last-of-type) .item-wrapper_bottom {
+.editor-item .item-wrapper_bottom {
   display: none;
 }
 

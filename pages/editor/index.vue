@@ -5,13 +5,12 @@
       <Editor />
     </div>
     <Settings />
-    <!--
-    <Menu /> -->
+    <EditorMenu />
   </div>
 </template>
 <style scoped>
 .editor-outer-wrap {
-  @apply flex w-full h-[calc(100vh-100px)] overflow-hidden bg-slate-100;
+  @apply flex w-full h-[calc(100vh-100px)] overflow-hidden bg-slate-100 relative;
 }
 
 .editor-inner-wrap {

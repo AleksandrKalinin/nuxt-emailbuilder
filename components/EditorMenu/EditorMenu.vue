@@ -1,7 +1,13 @@
 <template>
   <div class="editor-menu-wrap">
     <div class="editor-menu">
-      <div class="editor-menu__item menu-item" v-for="item in header">
+      <div
+        class="editor-menu__item menu-item"
+        v-for="item in header"
+        draggable="true"
+        @mousedown="selectMenuItem(item)"
+        @mouseup="selectMenuItem(null)"
+      >
         <Icon :name="item.icon" color="#475569" size="40px" class="mb-1" />
         <p class="menu-item__heading">{{ item.title }}</p>
       </div>
@@ -11,6 +17,9 @@
 
 <script setup lang="ts">
 import { header } from "./data";
+import { useEditorStore } from "@/store/editorStore";
+
+const { selectMenuItem } = useEditorStore();
 </script>
 
 <style scoped>

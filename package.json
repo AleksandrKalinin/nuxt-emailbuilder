@@ -17,7 +17,8 @@
     "nuxt-icon": "^0.4.2",
     "sass": "^1.63.6",
     "sass-loader": "^13.3.2",
-    "vue-dompurify-html": "^4.1.4"
+    "vue-dompurify-html": "^4.1.4",
+    "vue-draggable-next": "^2.2.1"
   },
   "dependencies": {
     "@nuxt/image": "^0.7.1",

@@ -24,4 +24,7 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@vueuse/nuxt",
   ],
+  routeRules: {
+    "/editor/**": { ssr: false },
+  },
 });

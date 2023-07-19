@@ -5,14 +5,11 @@ import {
   tableWrapperProperties,
 } from "@/constants/editorItems";
 
-export const useEditorStore = defineStore("settings", () => {
+export const useEditorStore = defineStore("editor", () => {
   const editorItems = ref<any>(tempItems);
+
   const editorBlocks = ref<any>(tempBlocks);
   const editorTemplate = ref(null);
-
-  const addItem = (item) => {
-    editorItems.push(item);
-  };
 
   const createOuterTable = (blocks) => {
     const table = document.createElement("table");
@@ -60,10 +57,20 @@ export const useEditorStore = defineStore("settings", () => {
       blocks.push(table.outerHTML);
     });
     createOuterTable(blocks);
+    return blocks;
+  };
+
+  const selectedMenuItem = ref(null);
+
+  const selectMenuItem = (item) => {
+    selectedMenuItem.value = item;
+    console.log(selectedMenuItem.value);
   };
 
   return {
     editorTemplate,
     createBuildingBlocks,
+    selectedMenuItem,
+    selectMenuItem,
   };
 });

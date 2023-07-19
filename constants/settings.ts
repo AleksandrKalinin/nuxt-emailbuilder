@@ -259,3 +259,31 @@ export const imageSettings = {
     },
   ],
 };
+
+export const actionSettings = {
+  title: "Action",
+  fields: [
+    {
+      name: "Url",
+      value: "url",
+      type: "text",
+      display: "row",
+    },
+    {
+      name: "Target",
+      value: "target",
+      type: "dropdown",
+      options: [
+        {
+          name: "Same tab",
+          value: "_self",
+        },
+        {
+          name: "New tab",
+          value: "_blank",
+        },
+      ],
+      display: "row",
+    },
+  ],
+};

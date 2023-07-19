@@ -70,11 +70,13 @@ export const tempItems = [item1, item2, item3];
 
 const block1 = {
   columns: 1,
+  id: 1,
   content: [item1, item2],
 };
 
 const block2 = {
   columns: 1,
+  id: 2,
   content: [item3],
 };
 
