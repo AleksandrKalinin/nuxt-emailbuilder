@@ -7,6 +7,7 @@
         draggable="true"
         @mousedown="selectMenuItem(item)"
         @mouseup="selectMenuItem(null)"
+        @dragend="checkDropZone(item.element)"
       >
         <Icon :name="item.icon" color="#475569" size="40px" class="mb-1" />
         <p class="menu-item__heading">{{ item.title }}</p>
@@ -16,10 +17,12 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
 import { header } from "./data";
 import { useEditorStore } from "@/store/editorStore";
 
-const { selectMenuItem } = useEditorStore();
+const { selectMenuItem, checkDropZone } = useEditorStore();
+const { dragEventCounter } = storeToRefs(useEditorStore());
 </script>
 
 <style scoped>

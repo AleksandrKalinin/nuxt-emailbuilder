@@ -1,16 +1,15 @@
 <template>
   <div class="editor">
-    <EditorItem />
-    <EditorItem />
-    <EditorItem />
-    <div v-dompurify-html="editorTemplate"></div>
-    <VueDraggableNext class="dragArea list-group w-full" :list="list">
+    <!--
+    <div v-dompurify-html="editorTemplate"></div> -->
+    <VueDraggableNext class="dragArea list-group w-full" :list="editorItems">
       <EditorItem
-        v-for="element in list"
-        :key="element.name"
-        :text="element.name"
+        v-for="element in editorItems"
+        :key="element.id"
+        :item="element"
       />
     </VueDraggableNext>
+    <button class="button_regular" @click="addEditorItem()">Add</button>
   </div>
 </template>
 
@@ -19,15 +18,8 @@ import { VueDraggableNext } from "vue-draggable-next";
 import { useEditorStore } from "@/store/editorStore";
 import { storeToRefs } from "pinia";
 
-const { createBuildingBlocks } = useEditorStore();
-const { editorTemplate } = storeToRefs(useEditorStore());
-
-const list = ref([
-  { name: "John", id: 1 },
-  { name: "Joao", id: 2 },
-  { name: "Jean", id: 3 },
-  { name: "Gerard", id: 4 },
-]);
+const { createBuildingBlocks, addEditorItem } = useEditorStore();
+const { editorTemplate, editorItems } = storeToRefs(useEditorStore());
 
 onMounted(() => {
   createBuildingBlocks();

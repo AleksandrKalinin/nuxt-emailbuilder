@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import { defineStore } from "pinia";
 import {
   tempBlocks,
@@ -6,7 +7,13 @@ import {
 } from "@/constants/editorItems";
 
 export const useEditorStore = defineStore("editor", () => {
-  const editorItems = ref<any>(tempItems);
+  const editorItems = ref<any>([
+    {
+      id: "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
+      children: ["<h1>No heading</h1>"],
+      placeholder: "No content here. Drag content from menu",
+    },
+  ]);
 
   const editorBlocks = ref<any>(tempBlocks);
   const editorTemplate = ref(null);
@@ -64,13 +71,55 @@ export const useEditorStore = defineStore("editor", () => {
 
   const selectMenuItem = (item) => {
     selectedMenuItem.value = item;
-    console.log(selectedMenuItem.value);
+  };
+
+  const addEditorItem = () => {
+    const item = {};
+    item.id = uuidv4();
+    item.children = [];
+    item.placeholder = "No content here. Drag item from menu";
+    editorItems.value.push(item);
+  };
+
+  const dragActive = ref(false);
+
+  const dragEventCounter = ref<number>(0);
+
+  const activeDropZone = ref<string | null>(null);
+
+  const setDropZone = (id: string) => {
+    activeDropZone.value = id;
+  };
+
+  const checkDropZone = (item: any) => {
+    if (activeDropZone.value !== null) {
+      appendItemToEditorBlock(activeDropZone.value, item);
+    }
+    activeDropZone.value = null;
+  };
+
+  const appendItemToEditorBlock = (id: string, item: any) => {
+    const index = editorItems.value.findIndex((item: any) => item.id == id);
+    const tagName: string = item.tag;
+    const placeholder: string = item.placeholder;
+    const element = document.createElement(tagName);
+    if (placeholder) {
+      element.innerText = placeholder;
+    }
+    element.innerText = placeholder;
+    editorItems.value[index].children.push(element.outerHTML);
   };
 
   return {
     editorTemplate,
+    editorItems,
     createBuildingBlocks,
     selectedMenuItem,
     selectMenuItem,
+    addEditorItem,
+    dragActive,
+    checkDropZone,
+    dragEventCounter,
+    setDropZone,
   };
 });

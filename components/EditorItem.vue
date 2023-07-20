@@ -4,11 +4,11 @@
     @click="
       setActiveSettings([layoutSettings, typographySettings, actionSettings])
     "
-    @mouseenter="toggleItemState(true)"
-    @mouseleave="toggleItemState(false)"
     @mouseup="checkState()"
     @dragleave="leaveDropArea($event)"
     @dragenter="enterDropArea($event)"
+    @dragover="($event) => $event.preventDefault()"
+    @drop="setDropZone(props.item.id)"
   >
     <div class="editor-item__wrapper item-wrapper item-wrapper_top">
       <div class="editor-item__placeholder item-placeholder">
@@ -16,7 +16,23 @@
       </div>
     </div>
     <div class="editor-item__content item-content">
-      {{ text }}
+      <template v-if="!item.children.length">
+        {{ item.placeholder }}
+      </template>
+      <template v-else v-for="htmlEl in item.children">
+        <div
+          style="
+            margin: 0 auto;
+            min-width: 100%;
+            max-width: 600px;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+            background-color: transparent;
+          "
+          v-dompurify-html="htmlEl"
+        ></div>
+      </template>
       <div class="item-content__drag" draggable="true">
         <Icon name="ant-design:drag-outlined" color="#FFFFFF" size="30px" />
       </div>
@@ -42,48 +58,40 @@ import {
   actionSettings,
 } from "../constants/settings";
 
-defineProps(["text"]);
+const props = defineProps(["item"]);
 
 const isActive = ref<boolean>(false);
 
-const toggleItemState = (state: boolean) => {
-  if (isActive.value !== state) isActive.value = state;
-};
-
-const checkState = () => {
-  if (selectedMenuItem.value) {
-    console.log("selected", selectedMenuItem.value);
-  } else {
-    console.log("not selected");
-  }
-};
-
 const areaActive = ref(false);
-const eventCounter = ref(0);
 
 const enterDropArea = (event) => {
-  eventCounter.value += 1;
+  dragEventCounter.value += 1;
   if (selectedMenuItem.value && areaActive.value === false) {
     areaActive.value = true;
-    console.log("in area!");
   }
 };
 
 const leaveDropArea = (event) => {
-  eventCounter.value -= 1;
+  event.preventDefault();
+  dragEventCounter.value -= 1;
   if (
     selectedMenuItem.value &&
     areaActive.value === true &&
-    eventCounter.value === 0
+    dragEventCounter.value === 0
   ) {
     areaActive.value = false;
-    console.log("out of area");
+    if (dragActive.value) {
+    }
   }
 };
 
 const { setActiveSettings } = useSettingsStore();
 
-const { selectedMenuItem } = storeToRefs(useEditorStore());
+const { selectedMenuItem, dragActive, dragEventCounter } = storeToRefs(
+  useEditorStore()
+);
+
+const { setDropZone } = useEditorStore();
 </script>
 
 <style scoped lang="scss">
@@ -108,7 +116,7 @@ const { selectedMenuItem } = storeToRefs(useEditorStore());
 }
 
 .editor-item__content {
-  @apply border border-dashed border-blue-300 w-full h-[150px] flex justify-center items-center items-center bg-blue-100/80 relative;
+  @apply border border-dashed border-blue-300 w-full min-h-[80px] h-auto flex flex-col justify-center items-center items-center bg-blue-100/80 relative;
 }
 
 .editor-item__content:hover .editor-item__drag {
