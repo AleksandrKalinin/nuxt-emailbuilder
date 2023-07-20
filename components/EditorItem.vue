@@ -42,6 +42,16 @@
         <span class="item-placeholder__text"> Drag it here </span>
       </div>
     </div>
+    <div class="editor-item__menu editor-menu">
+      <div class="editor-menu__items">
+        <div class="editor-menu__element" title="Delete">
+          <Icon name="radix-icons:trash" size="20px" />
+        </div>
+        <div class="editor-menu__element" title="Duplicate">
+          <Icon name="radix-icons:copy" size="20px" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -144,5 +154,17 @@ const { setDropZone } = useEditorStore();
 }
 .item-placeholder__text {
   @apply absolute left-[50%] -translate-x-[50%] px-2 py-1 bg-blue-400 rounded-md text-sm text-white;
+}
+
+.editor-item__menu {
+  @apply absolute bottom-[-55px] right-[5px] bg-white flex z-10 shadow-sm shadow-slate-300/50;
+}
+
+.editor-menu__items {
+  @apply relative flex after:absolute after:top-[-10px] after:right-0 after:w-[0] after:h-[0px] after:border-solid after:border-t-transparent after:border-r-transparent after:border-b-white after:border-l-transparent after:border-t-[0px] after:border-r-[15px] after:border-b-[15px] after:border-l-[15px];
+}
+
+.editor-menu__element {
+  @apply p-1 m-1 min-w-[35px] min-h-[35px] flex justify-center items-center cursor-pointer hover:bg-slate-100 transition duration-100;
 }
 </style>

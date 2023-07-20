@@ -9,7 +9,9 @@
         :item="element"
       />
     </VueDraggableNext>
-    <button class="button_regular" @click="addEditorItem()">Add</button>
+    <button class="button_regular mx-auto mt-3" @click="addEditorItem()">
+      Add
+    </button>
   </div>
 </template>
 
@@ -28,7 +30,7 @@ onMounted(() => {
 
 <style scoped>
 .editor {
-  @apply max-w-[600px] w-full min-h-[calc(100%-100px)] h-[1000px] border mx-auto bg-white;
+  @apply max-w-[600px] w-full min-h-[calc(100%-100px)] h-[1000px] border mx-auto bg-slate-100;
 }
 
 .editor-placeholder {
