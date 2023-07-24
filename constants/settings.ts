@@ -1,9 +1,10 @@
 export const layoutSettings = {
   title: "Layout",
+  type: "layout",
   fields: [
     {
       name: "Columns",
-      value: "columns",
+      property: "columns",
       type: "layout",
       display: "col",
       options: [
@@ -30,6 +31,7 @@ export const layoutSettings = {
 
 export const dimensionsSettings = {
   title: "Dimensions",
+  type: "dimension",
   fields: [
     {
       name: "Margin",
@@ -40,18 +42,26 @@ export const dimensionsSettings = {
         {
           name: "Top",
           value: "margin-top",
+          max: 1920,
+          min: 0,
         },
         {
           name: "Bottom",
           value: "margin-bottom",
+          max: 1920,
+          min: 0,
         },
         {
           name: "Left",
           value: "margin-left",
+          max: 1920,
+          min: 0,
         },
         {
           name: "Right",
           value: "margin-right",
+          max: 1920,
+          min: 0,
         },
       ],
     },
@@ -64,18 +74,26 @@ export const dimensionsSettings = {
         {
           name: "Top",
           value: "padding-top",
+          max: 1920,
+          min: 0,
         },
         {
           name: "Bottom",
           value: "padding-bottom",
+          max: 1920,
+          min: 0,
         },
         {
           name: "Left",
           value: "padding-left",
+          max: 1920,
+          min: 0,
         },
         {
           name: "Right",
           value: "padding-right",
+          max: 1920,
+          min: 0,
         },
       ],
     },
@@ -84,22 +102,25 @@ export const dimensionsSettings = {
 
 export const typographySettings = {
   title: "Typography",
+  type: "typography",
   fields: [
     {
       name: "Font size",
-      value: "font-size",
+      property: "font-size",
       type: "input",
       display: "row",
+      max: 96,
+      min: 0,
     },
     {
       name: "Font color",
-      value: "color",
+      property: "color",
       type: "colorpicker",
       display: "row",
     },
     {
       name: "Font weight",
-      value: "font-weight",
+      property: "font-weight",
       type: "selection",
       display: "row",
       options: [
@@ -125,7 +146,7 @@ export const typographySettings = {
     },
     {
       name: "Font style",
-      value: "font-style",
+      property: "font-style",
       type: "selection",
       display: "row",
       options: [
@@ -145,19 +166,21 @@ export const typographySettings = {
     },
     {
       name: "Line height",
-      value: "line-height",
+      property: "line-height",
       type: "input",
       display: "row",
     },
     {
       name: "Letter spacing",
-      value: "letter-spacing",
+      property: "letter-spacing",
       type: "input",
       display: "row",
+      max: 100,
+      min: 0,
     },
     {
       name: "Text align",
-      value: "text-align",
+      property: "text-align",
       type: "selection",
       display: "row",
       options: [
@@ -183,14 +206,14 @@ export const typographySettings = {
     },
     {
       name: "Text transform",
-      value: "text-transform",
+      property: "text-transform",
       type: "selection",
       display: "row",
       options: [
         {
-          name: "Regular",
+          name: "None",
           icon: "mdi:format-letter-case",
-          value: "regular",
+          value: "none",
           default: true,
         },
         {
@@ -212,16 +235,17 @@ export const typographySettings = {
 
 export const imageSettings = {
   title: "Image",
+  type: "image",
   fields: [
     {
       name: "Image",
-      value: "url",
+      property: "url",
       type: "fileupload",
       display: "col",
     },
     {
       name: "Align",
-      value: "align",
+      property: "align",
       type: "selection",
       display: "row",
       options: [
@@ -247,13 +271,13 @@ export const imageSettings = {
     },
     {
       name: "Width",
-      value: "width",
+      property: "width",
       type: "input",
       display: "row",
     },
     {
       name: "Height",
-      value: "height",
+      property: "height",
       type: "input",
       display: "row",
     },
@@ -262,6 +286,7 @@ export const imageSettings = {
 
 export const actionSettings = {
   title: "Action",
+  type: "action",
   fields: [
     {
       name: "Url",

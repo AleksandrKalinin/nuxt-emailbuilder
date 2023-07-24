@@ -13,6 +13,7 @@ export const header = [
     element: {
       tag: "Layout",
       placeholder: "New container",
+      attributes: [],
     },
   },
   {
@@ -22,6 +23,8 @@ export const header = [
     element: {
       tag: "h1",
       placeholder: "Heading",
+      attributes: [],
+      style: "",
     },
   },
   {
@@ -31,6 +34,8 @@ export const header = [
     element: {
       tag: "p",
       placeholder: "This is a new text",
+      attributes: [],
+      style: "",
     },
   },
   {
@@ -40,6 +45,10 @@ export const header = [
     element: {
       tag: "a",
       placeholder: "Button text",
+      attributes: {
+        href: "https://developer.mozilla.org/ru/docs/Web/HTML/Element/video",
+      },
+      style: ["button_regular", "mx-auto", "grow-0", "w-[200px]"],
     },
   },
   {
@@ -48,6 +57,10 @@ export const header = [
     options: [imageSettings, dimensionsSettings],
     element: {
       tag: "img",
+      attributes: {
+        src: "https://i.imgur.com/6T90fqr.png",
+      },
+      style: "",
     },
   },
   {
@@ -56,6 +69,8 @@ export const header = [
     options: [dimensionsSettings],
     element: {
       tag: "hr",
+      attributes: [],
+      style: "",
     },
   },
   {
@@ -65,6 +80,8 @@ export const header = [
     element: {
       tag: "table",
       placeholder: "This is a new table",
+      attributes: [],
+      style: "",
     },
   },
   {
@@ -74,6 +91,13 @@ export const header = [
     element: {
       tag: "video",
       placeholder: "This is a new video",
+      attributes: {
+        autoplay: false,
+        controls: true,
+        width: "100%",
+        height: "300px",
+      },
+      style: "",
     },
   },
   {
@@ -83,45 +107,8 @@ export const header = [
     element: {
       tag: "html",
       placeholder: "insert your html here",
+      attributes: [],
+      style: "",
     },
-  },
-];
-
-const editorMenuSettings = [
-  {
-    title: "Layout",
-    options: [layoutSettings, dimensionsSettings],
-  },
-  {
-    title: "Heading",
-    options: [typographySettings, dimensionsSettings],
-  },
-  {
-    title: "Text",
-    options: [typographySettings, dimensionsSettings],
-  },
-  {
-    title: "Button",
-    options: [typographySettings, dimensionsSettings],
-  },
-  {
-    title: "Image",
-    options: [imageSettings, dimensionsSettings],
-  },
-  {
-    title: "Divider",
-    options: [dimensionsSettings],
-  },
-  {
-    title: "Table",
-    options: [typographySettings, dimensionsSettings],
-  },
-  {
-    title: "Video",
-    options: [dimensionsSettings],
-  },
-  {
-    title: "Html",
-    options: [dimensionsSettings],
   },
 ];

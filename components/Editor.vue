@@ -1,12 +1,11 @@
 <template>
   <div class="editor">
-    <!--
-    <div v-dompurify-html="editorTemplate"></div> -->
     <VueDraggableNext class="dragArea list-group w-full" :list="editorItems">
       <EditorItem
         v-for="element in editorItems"
         :key="element.id"
         :item="element"
+        :style="element.inlineStyles"
       />
     </VueDraggableNext>
     <button class="button_regular mx-auto mt-3" @click="addEditorItem()">
@@ -25,6 +24,7 @@ const { editorTemplate, editorItems } = storeToRefs(useEditorStore());
 
 onMounted(() => {
   createBuildingBlocks();
+  // console.log(editorItems.value);
 });
 </script>
 

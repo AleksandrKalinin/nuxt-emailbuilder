@@ -1,41 +1,42 @@
 <template>
   <div
     class="editor-item"
-    @click="
-      setActiveSettings([layoutSettings, typographySettings, actionSettings])
-    "
-    @mouseup="checkState()"
+    :class="[
+      selectedEditorItem === props.item.id ? 'editor-item_selected' : '',
+      isActive ? 'editor-item_hovered' : '',
+    ]"
+    ref="targetItem"
+    :id="props.item.id"
+    @click="selectElement($event)"
     @dragleave="leaveDropArea($event)"
     @dragenter="enterDropArea($event)"
     @dragover="($event) => $event.preventDefault()"
-    @drop="setDropZone(props.item.id)"
+    @drop="dropItem(props.item.id)"
   >
     <div class="editor-item__wrapper item-wrapper item-wrapper_top">
       <div class="editor-item__placeholder item-placeholder">
         <span class="item-placeholder__text"> Drag it here </span>
       </div>
     </div>
-    <div class="editor-item__content item-content">
-      <template v-if="!item.children.length">
-        {{ item.placeholder }}
-      </template>
-      <template v-else v-for="htmlEl in item.children">
-        <div
-          style="
-            margin: 0 auto;
-            min-width: 100%;
-            max-width: 600px;
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-            word-break: break-word;
-            background-color: transparent;
-          "
-          v-dompurify-html="htmlEl"
-        ></div>
-      </template>
-      <div class="item-content__drag" draggable="true">
-        <Icon name="ant-design:drag-outlined" color="#FFFFFF" size="30px" />
-      </div>
+    <div class="editor-item__content item-content" v-if="!item.children.length">
+      {{ item.placeholder }}
+    </div>
+    <div
+      style="
+        margin: 0 auto;
+        min-width: 100%;
+        max-width: 600px;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: break-word;
+        background-color: transparent;
+      "
+      v-else
+      v-for="htmlEl in item.children"
+      v-dompurify-html="htmlEl.markup"
+    ></div>
+    <div class="item-content__drag" draggable="true">
+      <Icon name="ant-design:drag-outlined" color="#FFFFFF" size="30px" />
     </div>
     <div class="editor-item__wrapper item-wrapper item-wrapper_bottom">
       <div class="editor-item__placeholder item-placeholder">
@@ -44,10 +45,18 @@
     </div>
     <div class="editor-item__menu editor-menu">
       <div class="editor-menu__items">
-        <div class="editor-menu__element" title="Delete">
+        <div
+          class="editor-menu__element"
+          title="Delete"
+          @click="deleteEditorItem(props.item.id)"
+        >
           <Icon name="radix-icons:trash" size="20px" />
         </div>
-        <div class="editor-menu__element" title="Duplicate">
+        <div
+          class="editor-menu__element"
+          title="Duplicate"
+          @click="copyEditorItem(props.item.id)"
+        >
           <Icon name="radix-icons:copy" size="20px" />
         </div>
       </div>
@@ -74,16 +83,18 @@ const isActive = ref<boolean>(false);
 
 const areaActive = ref(false);
 
-const enterDropArea = (event) => {
+const enterDropArea = (event: Event) => {
+  isActive.value = true;
   dragEventCounter.value += 1;
   if (selectedMenuItem.value && areaActive.value === false) {
     areaActive.value = true;
   }
 };
 
-const leaveDropArea = (event) => {
+const leaveDropArea = (event: Event) => {
   event.preventDefault();
   dragEventCounter.value -= 1;
+  isActive.value = false;
   if (
     selectedMenuItem.value &&
     areaActive.value === true &&
@@ -95,21 +106,43 @@ const leaveDropArea = (event) => {
   }
 };
 
+const selectElement = (event: Event) => {
+  const target = event.target as HTMLElement;
+  setActiveSettings([typographySettings]);
+  selectEditorItem(event, target.getAttribute("id"));
+};
+
+const targetItem = ref(null);
+
+onClickOutside(targetItem, (e) => {
+  // console.log("target");
+  // selectEditorItem(e, null);
+});
+
+const dropItem = (id: string) => {
+  isActive.value = false;
+  setDropZone(id);
+};
+
 const { setActiveSettings } = useSettingsStore();
 
-const { selectedMenuItem, dragActive, dragEventCounter } = storeToRefs(
-  useEditorStore()
-);
+const { selectedMenuItem, dragActive, dragEventCounter, selectedEditorItem } =
+  storeToRefs(useEditorStore());
 
-const { setDropZone } = useEditorStore();
+const { setDropZone, deleteEditorItem, copyEditorItem, selectEditorItem } =
+  useEditorStore();
 </script>
 
 <style scoped lang="scss">
 .editor-item {
-  @apply relative;
+  @apply relative after:opacity-0 after:content-[''] after:border after:border-dashed after:border-blue-300 after:w-[700px] after:absolute after:top-[0] after:left-[-50px] after:h-full;
 }
 
-.editor-item:hover .editor-item__placeholder {
+.editor-item_selected {
+  @apply after:opacity-100;
+}
+
+.editor-item_hovered .editor-item__placeholder {
   @apply block;
 }
 
@@ -126,7 +159,7 @@ const { setDropZone } = useEditorStore();
 }
 
 .editor-item__content {
-  @apply border border-dashed border-blue-300 w-full min-h-[80px] h-auto flex flex-col justify-center items-center items-center bg-blue-100/80 relative;
+  @apply border border-dashed border-blue-300 text-blue-400 w-full min-h-[80px] h-auto flex flex-col justify-center items-center items-center bg-blue-100/80 relative;
 }
 
 .editor-item__content:hover .editor-item__drag {
@@ -156,12 +189,15 @@ const { setDropZone } = useEditorStore();
   @apply absolute left-[50%] -translate-x-[50%] px-2 py-1 bg-blue-400 rounded-md text-sm text-white;
 }
 
+.editor-item_selected .editor-item__menu {
+  @apply flex;
+}
 .editor-item__menu {
-  @apply absolute bottom-[-55px] right-[5px] bg-white flex z-10 shadow-sm shadow-slate-300/50;
+  @apply absolute bottom-[-55px] right-[5px] bg-white flex z-10 shadow-sm shadow-slate-300/50 hidden;
 }
 
 .editor-menu__items {
-  @apply relative flex after:absolute after:top-[-10px] after:right-0 after:w-[0] after:h-[0px] after:border-solid after:border-t-transparent after:border-r-transparent after:border-b-white after:border-l-transparent after:border-t-[0px] after:border-r-[15px] after:border-b-[15px] after:border-l-[15px];
+  @apply relative flex after:absolute after:top-[-10px] after:right-[5px] after:w-[0] after:h-[0px] after:border-solid after:border-t-transparent after:border-r-transparent after:border-b-white after:border-l-transparent after:border-t-[0px] after:border-r-[15px] after:border-b-[15px] after:border-l-[15px];
 }
 
 .editor-menu__element {
