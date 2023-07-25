@@ -28,16 +28,15 @@ const inputValue = ref(props.property);
 const emit = defineEmits(["updateEditorItem"]);
 
 const decreaseValue = () => {
-  if (inputValue.value.value > props.min) {
+  if (inputValue.value.value > 0) {
     inputValue.value.value -= 1;
   }
   emit("updateEditorItem", props.itemKey, Number(inputValue.value.value));
 };
 
 const increaseValue = () => {
-  if (inputValue.value.value < props.max) {
-    inputValue.value.value += 1;
-  }
+  inputValue.value.value += 1;
+  console.log(inputValue.value.value);
   emit("updateEditorItem", props.itemKey, Number(inputValue.value.value));
 };
 

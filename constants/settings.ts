@@ -42,26 +42,18 @@ export const dimensionsSettings = {
         {
           name: "Top",
           value: "margin-top",
-          max: 1920,
-          min: 0,
         },
         {
           name: "Bottom",
           value: "margin-bottom",
-          max: 1920,
-          min: 0,
         },
         {
           name: "Left",
           value: "margin-left",
-          max: 1920,
-          min: 0,
         },
         {
           name: "Right",
           value: "margin-right",
-          max: 1920,
-          min: 0,
         },
       ],
     },
@@ -74,26 +66,18 @@ export const dimensionsSettings = {
         {
           name: "Top",
           value: "padding-top",
-          max: 1920,
-          min: 0,
         },
         {
           name: "Bottom",
           value: "padding-bottom",
-          max: 1920,
-          min: 0,
         },
         {
           name: "Left",
           value: "padding-left",
-          max: 1920,
-          min: 0,
         },
         {
           name: "Right",
           value: "padding-right",
-          max: 1920,
-          min: 0,
         },
       ],
     },
@@ -109,8 +93,6 @@ export const typographySettings = {
       property: "font-size",
       type: "input",
       display: "row",
-      max: 96,
-      min: 0,
     },
     {
       name: "Font color",

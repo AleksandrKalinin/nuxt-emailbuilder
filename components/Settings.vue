@@ -23,8 +23,6 @@
                   v-if="option.type === 'input'"
                   :property="selectedItemProperties[option.property]"
                   :itemKey="option.property"
-                  :min="option.min"
-                  :max="option.max"
                   @updateEditorItem="updateItemCssProperties"
                 />
                 <InputGroup
