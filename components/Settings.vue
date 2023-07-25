@@ -28,8 +28,15 @@
                 <InputGroup
                   v-if="option.type === 'inputgroup'"
                   :items="option.properties"
+                  :selectedProperties="selectedItemProperties"
+                  @inputGroupEmit="updateItemCssProperties"
                 />
-                <Colorpicker v-else-if="option.type === 'colorpicker'" />
+                <Colorpicker
+                  :property="option.value"
+                  :itemKey="option.property"
+                  @updateEditorItem="updateItemCssProperties"
+                  v-else-if="option.type === 'colorpicker'"
+                />
                 <Dropdown
                   v-if="option.type === 'dropdown'"
                   :options="option.options"
@@ -38,6 +45,9 @@
                 <SelectionGroup
                   v-else-if="option.type === 'selection'"
                   :options="option.options"
+                  :property="selectedItemProperties[option.property]"
+                  :itemKey="option.property"
+                  @updateEditorItem="updateItemCssProperties"
                 />
                 <LayoutGroup
                   v-else-if="option.type === 'layout'"

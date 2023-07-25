@@ -3,8 +3,12 @@
     <div
       class="selection-group__item selection-item"
       v-for="item in options"
-      :class="item.default ? 'selection-item_selected' : ''"
+      :class="
+        item.value === props.property.value ? 'selection-item_selected' : ''
+      "
       :title="item.name"
+      :value="item.value"
+      @click="emit('updateEditorItem', props.itemKey, item.value)"
     >
       <Icon :name="item.icon" size="20px" />
     </div>
@@ -12,7 +16,9 @@
 </template>
 
 <script setup lang="ts">
-defineProps(["options"]);
+const props = defineProps(["options", "property", "itemKey"]);
+
+const emit = defineEmits(["updateEditorItem"]);
 </script>
 
 <style scoped>

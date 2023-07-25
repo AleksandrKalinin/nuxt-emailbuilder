@@ -1,4 +1,4 @@
-export const cssProperties = {
+export const initialTypographyValues = {
   "font-size": {
     cssProperty: "font-size",
     value: 14,
@@ -33,6 +33,19 @@ export const cssProperties = {
   "text-transform": {
     cssProperty: "text-transform",
     value: "none",
+  },
+};
+
+export const initialDimensionValues = {
+  width: {
+    cssProperty: "width",
+    value: 600,
+    unit: "px",
+  },
+  height: {
+    cssProperty: "height",
+    value: 80,
+    unit: "px",
   },
   "margin-top": {
     cssProperty: "margin-top",
@@ -72,20 +85,6 @@ export const cssProperties = {
   "padding-right": {
     cssProperty: "padding-right",
     value: 0,
-    unit: "px",
-  },
-  align: {
-    cssProperty: "align",
-    value: "left",
-  },
-  width: {
-    cssProperty: "width",
-    value: 600,
-    unit: "px",
-  },
-  height: {
-    cssProperty: "height",
-    value: 80,
     unit: "px",
   },
 };

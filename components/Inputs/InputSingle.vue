@@ -36,13 +36,11 @@ const decreaseValue = () => {
 
 const increaseValue = () => {
   inputValue.value.value += 1;
-  console.log(inputValue.value.value);
   emit("updateEditorItem", props.itemKey, Number(inputValue.value.value));
 };
 
 const updateValue = (event: Event) => {
   const target = event.target as HTMLInputElement;
-  console.log(target.value);
   emit("updateEditorItem", props.itemKey, Number(target.value));
 };
 </script>

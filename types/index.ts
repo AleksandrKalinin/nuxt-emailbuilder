@@ -13,6 +13,7 @@ declare global {
     [key: string]: {
       cssProperty: string;
       value: string | number | boolean;
+      unit?: string;
     };
   }
 }

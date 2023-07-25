@@ -11,8 +11,50 @@ export const header = [
     icon: "radix-icons:layout",
     options: [layoutSettings, dimensionsSettings],
     element: {
-      tag: "Layout",
+      tag: "div",
       placeholder: "New container",
+      initialCssValues: {
+        "margin-top": {
+          cssProperty: "margin-top",
+          value: 0,
+          unit: "px",
+        },
+        "margin-bottom": {
+          cssProperty: "margin-bottom",
+          value: 0,
+          unit: "px",
+        },
+        "margin-left": {
+          cssProperty: "margin-left",
+          value: 0,
+          unit: "px",
+        },
+        "margin-right": {
+          cssProperty: "margin-right",
+          value: 0,
+          unit: "px",
+        },
+        "padding-top": {
+          cssProperty: "padding-top",
+          value: 0,
+          unit: "px",
+        },
+        "padding-bottom": {
+          cssProperty: "padding-bottom",
+          value: 0,
+          unit: "px",
+        },
+        "padding-left": {
+          cssProperty: "padding-left",
+          value: 0,
+          unit: "px",
+        },
+        "padding-right": {
+          cssProperty: "padding-right",
+          value: 0,
+          unit: "px",
+        },
+      },
       attributes: [],
     },
   },
@@ -23,6 +65,43 @@ export const header = [
     element: {
       tag: "h1",
       placeholder: "Heading",
+      initialCssValues: {
+        "font-size": {
+          cssProperty: "font-size",
+          value: 26,
+          unit: "px",
+        },
+        color: {
+          cssProperty: "color",
+          value: "#222222",
+        },
+        "font-weight": {
+          cssProperty: "font-weight",
+          value: 400,
+        },
+        "font-style": {
+          cssProperty: "font-style",
+          value: "normal",
+        },
+        "line-height": {
+          cssProperty: "line-height",
+          value: 36,
+          unit: "px",
+        },
+        "letter-spacing": {
+          cssProperty: "letter-spacing",
+          value: 1,
+          unit: "px",
+        },
+        "text-align": {
+          cssProperty: "text-align",
+          value: "left",
+        },
+        "text-transform": {
+          cssProperty: "text-transform",
+          value: "none",
+        },
+      },
       attributes: [],
       style: "",
     },
@@ -33,6 +112,44 @@ export const header = [
     options: [typographySettings, dimensionsSettings],
     element: {
       tag: "p",
+      initialCssValues: {
+        "font-size": {
+          cssProperty: "font-size",
+          value: 14,
+          unit: "px",
+        },
+        color: {
+          cssProperty: "color",
+          value: "#222222",
+        },
+        "font-weight": {
+          cssProperty: "font-weight",
+          value: 400,
+        },
+        "font-style": {
+          cssProperty: "font-style",
+          value: "normal",
+        },
+        "line-height": {
+          cssProperty: "line-height",
+          value: 22,
+          unit: "px",
+        },
+        "letter-spacing": {
+          cssProperty: "letter-spacing",
+          value: 1,
+          unit: "px",
+        },
+        "text-align": {
+          cssProperty: "text-align",
+          value: "left",
+        },
+        "text-transform": {
+          cssProperty: "text-transform",
+          value: "none",
+        },
+      },
+
       placeholder: "This is a new text",
       attributes: [],
       style: "",
@@ -45,6 +162,43 @@ export const header = [
     element: {
       tag: "a",
       placeholder: "Button text",
+      initialCssValues: {
+        "font-size": {
+          cssProperty: "font-size",
+          value: 14,
+          unit: "px",
+        },
+        color: {
+          cssProperty: "color",
+          value: "#222222",
+        },
+        "font-weight": {
+          cssProperty: "font-weight",
+          value: 400,
+        },
+        "font-style": {
+          cssProperty: "font-style",
+          value: "normal",
+        },
+        "line-height": {
+          cssProperty: "line-height",
+          value: 22,
+          unit: "px",
+        },
+        "letter-spacing": {
+          cssProperty: "letter-spacing",
+          value: 1,
+          unit: "px",
+        },
+        "text-align": {
+          cssProperty: "text-align",
+          value: "left",
+        },
+        "text-transform": {
+          cssProperty: "text-transform",
+          value: "none",
+        },
+      },
       attributes: {
         href: "https://developer.mozilla.org/ru/docs/Web/HTML/Element/video",
       },
@@ -58,7 +212,7 @@ export const header = [
     element: {
       tag: "img",
       attributes: {
-        src: "https://i.imgur.com/6T90fqr.png",
+        src: "https://i.imgur.com/SdIjrA0.png",
       },
       style: "",
     },
@@ -80,6 +234,43 @@ export const header = [
     element: {
       tag: "table",
       placeholder: "This is a new table",
+      initialCssValues: {
+        "font-size": {
+          cssProperty: "font-size",
+          value: 14,
+          unit: "px",
+        },
+        color: {
+          cssProperty: "color",
+          value: "#222222",
+        },
+        "font-weight": {
+          cssProperty: "font-weight",
+          value: 400,
+        },
+        "font-style": {
+          cssProperty: "font-style",
+          value: "normal",
+        },
+        "line-height": {
+          cssProperty: "line-height",
+          value: 22,
+          unit: "px",
+        },
+        "letter-spacing": {
+          cssProperty: "letter-spacing",
+          value: 1,
+          unit: "px",
+        },
+        "text-align": {
+          cssProperty: "text-align",
+          value: "left",
+        },
+        "text-transform": {
+          cssProperty: "text-transform",
+          value: "none",
+        },
+      },
       attributes: [],
       style: "",
     },

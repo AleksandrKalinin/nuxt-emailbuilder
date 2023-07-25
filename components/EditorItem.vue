@@ -108,7 +108,7 @@ const leaveDropArea = (event: Event) => {
 
 const selectElement = (event: Event) => {
   const target = event.target as HTMLElement;
-  setActiveSettings([typographySettings]);
+  setActiveSettings([layoutSettings, dimensionsSettings]);
   selectEditorItem(event, target.getAttribute("id"));
 };
 

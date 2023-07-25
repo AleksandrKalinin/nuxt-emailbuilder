@@ -2,13 +2,18 @@
   <div class="input-group">
     <div class="input-group__item" v-for="item in items">
       <h6 class="input-group__header">{{ item.name }}</h6>
-      <InputSingle />
+      <InputSingle
+        :property="selectedProperties[item.property]"
+        :itemKey="item.property"
+        @updateEditorItem="(a, b) => emit('inputGroupEmit', a, b)"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-defineProps(["items"]);
+defineProps(["items", "selectedProperties"]);
+const emit = defineEmits(["inputGroupEmit"]);
 </script>
 
 <style scoped>

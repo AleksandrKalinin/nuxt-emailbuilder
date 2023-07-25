@@ -6,22 +6,24 @@ import {
   tempItems,
   tableWrapperProperties,
 } from "@/constants/editorItems";
-import { cssProperties } from "@/constants/cssProperties";
+import {
+  initialDimensionValues,
+  initialTypographyValues,
+} from "@/constants/initialCssValues";
 
 export const useEditorStore = defineStore("editor", () => {
   const { setSettingsValues } = useSettingsStore();
 
   const createInlineStyles = (params: CssProperty[]) => {
+    console.log(params);
     let inlineStyles: string = "";
     for (const item in params) {
-      for (const item in params) {
-        let val: string | number | boolean = params[item].value;
-        if (typeof val === "number") {
-          val += "px";
-        }
-        const cssStyle = `${params[item].cssProperty} : ${val}; `;
-        inlineStyles += cssStyle;
+      let val: string | number | boolean = params[item].value;
+      if (params[item].unit) {
+        val += params[item].unit;
       }
+      const cssStyle = `${params[item].cssProperty} : ${val}; `;
+      inlineStyles += cssStyle;
     }
     return inlineStyles;
   };
@@ -31,8 +33,8 @@ export const useEditorStore = defineStore("editor", () => {
       id: "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
       children: [],
       placeholder: "No content here. Drag content from menu",
-      cssProperties,
-      inlineStyles: createInlineStyles(cssProperties),
+      cssProperties: initialDimensionValues,
+      inlineStyles: createInlineStyles(initialDimensionValues),
     },
   ]);
 
@@ -99,8 +101,8 @@ export const useEditorStore = defineStore("editor", () => {
     item.id = uuidv4();
     item.children = [];
     item.placeholder = "No content here. Drag item from menu";
-    item.cssProperties = cssProperties;
-    item.inlineStyles = createInlineStyles(cssProperties);
+    item.cssProperties = initialDimensionValues;
+    item.inlineStyles = createInlineStyles(item.cssProperties);
     editorItems.value.push(item);
   };
 
@@ -190,10 +192,13 @@ export const useEditorStore = defineStore("editor", () => {
     const index = editorItems.value.findIndex(
       (item) => item.id === selectedEditorItem.value
     );
+    console.log(key, value);
+    console.log(editorItems.value[index].cssProperties);
     editorItems.value[index].cssProperties[key].value = value;
     editorItems.value[index].inlineStyles = createInlineStyles(
       editorItems.value[index].cssProperties
     );
+    console.log(editorItems.value[index].inlineStyles);
   };
 
   return {

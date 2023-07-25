@@ -41,19 +41,23 @@ export const dimensionsSettings = {
       properties: [
         {
           name: "Top",
-          value: "margin-top",
+          property: "margin-top",
+          value: 0,
         },
         {
           name: "Bottom",
-          value: "margin-bottom",
+          property: "margin-bottom",
+          value: 0,
         },
         {
           name: "Left",
-          value: "margin-left",
+          property: "margin-left",
+          value: 0,
         },
         {
           name: "Right",
-          value: "margin-right",
+          property: "margin-right",
+          value: 0,
         },
       ],
     },
@@ -65,19 +69,23 @@ export const dimensionsSettings = {
       properties: [
         {
           name: "Top",
-          value: "padding-top",
+          property: "padding-top",
+          value: 0,
         },
         {
           name: "Bottom",
-          value: "padding-bottom",
+          property: "padding-bottom",
+          value: 0,
         },
         {
           name: "Left",
-          value: "padding-left",
+          property: "padding-left",
+          value: 0,
         },
         {
           name: "Right",
-          value: "padding-right",
+          property: "padding-right",
+          value: 0,
         },
       ],
     },
@@ -98,6 +106,7 @@ export const typographySettings = {
       name: "Font color",
       property: "color",
       type: "colorpicker",
+      value: "#222222",
       display: "row",
     },
     {
@@ -109,19 +118,19 @@ export const typographySettings = {
         {
           name: "Light",
           icon: "ph:text-b-light",
-          value: "300",
+          value: 300,
           default: false,
         },
         {
           name: "Regular",
           icon: "ph:text-b",
-          value: "400",
+          value: 400,
           default: true,
         },
         {
           name: "Bold",
           icon: "ph:text-b-bold",
-          value: "600",
+          value: 600,
           default: false,
         },
       ],
@@ -133,9 +142,9 @@ export const typographySettings = {
       display: "row",
       options: [
         {
-          name: "Regular",
+          name: "Normal",
           icon: "bx:font",
-          value: "regular",
+          value: "normal",
           default: true,
         },
         {
