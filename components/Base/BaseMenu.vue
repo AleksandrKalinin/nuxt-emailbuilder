@@ -47,7 +47,7 @@ import {
   typographySettings,
   imageSettings,
   dimensionsSettings,
-} from "../constants/settings";
+} from "@/constants/settings";
 
 const properties = [
   layoutSettings,
@@ -57,10 +57,6 @@ const properties = [
 ];
 
 const menu = ref(null);
-
-onClickOutside(target, () => {
-  console.log("outside");
-});
 </script>
 
 <style scoped></style>

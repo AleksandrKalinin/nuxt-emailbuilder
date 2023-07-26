@@ -15,7 +15,6 @@ export const useEditorStore = defineStore("editor", () => {
   const { setSettingsValues } = useSettingsStore();
 
   const createInlineStyles = (params: CssProperty[]) => {
-    console.log(params);
     let inlineStyles: string = "";
     for (const item in params) {
       let val: string | number | boolean = params[item].value;
@@ -35,6 +34,14 @@ export const useEditorStore = defineStore("editor", () => {
       placeholder: "No content here. Drag content from menu",
       cssProperties: initialDimensionValues,
       inlineStyles: createInlineStyles(initialDimensionValues),
+    },
+  ]);
+
+  const editorRows = ref<any>([
+    {
+      id: "c089b428-f859-465c-ae77-83a9d00a2cc3",
+      items: [toRaw(editorItems.value[0])],
+      columns: 1,
     },
   ]);
 
@@ -96,6 +103,35 @@ export const useEditorStore = defineStore("editor", () => {
     selectedMenuItem.value = item;
   };
 
+  const addEditorRow = () => {
+    const row = {} as EditorRow;
+    row.id = uuidv4();
+    row.items = [toRaw(addEditorItem())];
+    row.columns = 1;
+    editorRows.value.push(row);
+  };
+
+  const updateEditorRowLayout = (cols: number) => {
+    const id = selectedEditorItem.value?.id;
+    const index = editorRows.value.findIndex(
+      (item: EditorRow) => item.id === id
+    );
+    editorRows.value[index].columns = cols;
+    const nestedItems = selectedEditorItem.value?.items.length;
+    if (nestedItems < cols) {
+      for (let i = 0; i < cols - nestedItems; i++) {
+        const newEditorItem = addEditorItem();
+        editorRows.value[index].items.push(newEditorItem);
+      }
+    } else if (nestedItems > cols) {
+      const newItems = editorRows.value[index].items.slice(
+        0,
+        -(nestedItems - cols)
+      );
+      editorRows.value[index].items = newItems;
+    }
+  };
+
   const addEditorItem = () => {
     const item = {} as EditorItem;
     item.id = uuidv4();
@@ -104,19 +140,20 @@ export const useEditorStore = defineStore("editor", () => {
     item.cssProperties = initialDimensionValues;
     item.inlineStyles = createInlineStyles(item.cssProperties);
     editorItems.value.push(item);
+    return item;
   };
 
-  const deleteEditorItem = (id: string) => {
-    const index = editorItems.value.findIndex((item: any) => item.id == id);
-    editorItems.value.splice(index, 1);
+  const deleteEditorRow = (id: string) => {
+    const index = editorRows.value.findIndex((item: any) => item.id == id);
+    editorRows.value.splice(index, 1);
   };
 
-  const copyEditorItem = (id: string) => {
-    const index = editorItems.value.findIndex((item: any) => item.id == id);
-    const copiedItem = structuredClone(toRaw(editorItems.value[index]));
-    const newId = uuidv4();
-    copiedItem.id = newId;
-    editorItems.value.splice(index, 0, copiedItem);
+  const copyEditorRow = (id: string) => {
+    const index = editorRows.value.findIndex((item: any) => item.id == id);
+    console.log(editorRows.value[index]);
+    const copiedItem = structuredClone(toRaw(editorRows.value[index]));
+    copiedItem.id = uuidv4();
+    editorRows.value.splice(index, 0, copiedItem);
   };
 
   const dragActive = ref(false);
@@ -173,11 +210,11 @@ export const useEditorStore = defineStore("editor", () => {
     // console.log(editorItems.value);
   };
 
-  const selectedEditorItem = ref<string | null>(null);
+  const selectedEditorItem = ref<EditorRow | null>(null);
 
   const selectEditorItem = (event: Event, value: string | null) => {
-    selectedEditorItem.value = value;
-    const index = editorItems.value.findIndex((item: any) => item.id == value);
+    const el = editorRows.value.find((item: any) => item.id == value);
+    selectedEditorItem.value = el;
     //console.log(selectedEditorItem.value);
     // console.log("value is ", value);
     if (value) {
@@ -192,24 +229,25 @@ export const useEditorStore = defineStore("editor", () => {
     const index = editorItems.value.findIndex(
       (item) => item.id === selectedEditorItem.value
     );
-    console.log(key, value);
-    console.log(editorItems.value[index].cssProperties);
+
     editorItems.value[index].cssProperties[key].value = value;
     editorItems.value[index].inlineStyles = createInlineStyles(
       editorItems.value[index].cssProperties
     );
-    console.log(editorItems.value[index].inlineStyles);
   };
 
   return {
     editorTemplate,
     editorItems,
+    editorRows,
     createBuildingBlocks,
     selectedMenuItem,
     selectMenuItem,
+    addEditorRow,
+    updateEditorRowLayout,
     addEditorItem,
-    deleteEditorItem,
-    copyEditorItem,
+    deleteEditorRow,
+    copyEditorRow,
     dragActive,
     checkDropZone,
     dragEventCounter,

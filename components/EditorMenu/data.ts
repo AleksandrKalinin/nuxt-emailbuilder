@@ -202,7 +202,7 @@ export const header = [
       attributes: {
         href: "https://developer.mozilla.org/ru/docs/Web/HTML/Element/video",
       },
-      style: ["button_regular", "mx-auto", "grow-0", "w-[200px]"],
+      style: ["button_regular", "mx-auto", "grow-0"],
     },
   },
   {

@@ -3,17 +3,22 @@
     <div
       class="layout-group__item layout-item"
       v-for="item in items"
-      draggable="true"
+      :class="activeRow?.columns === item.number ? 'layout-item_active' : ''"
+      @click="emit('updateEditorRow', item.number)"
     >
-      <span class="layout-item__column" v-for="el in parseInt(item.number)">{{
-        el
-      }}</span>
+      <span
+        class="layout-item__column layout-column"
+        v-for="el in item.number"
+        >{{ el }}</span
+      >
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["items"]);
+const props = defineProps(["items", "activeRow"]);
+
+const emit = defineEmits(["updateEditorRow"]);
 </script>
 
 <style scoped>
@@ -30,5 +35,9 @@ const props = defineProps(["items"]);
 
 .layout-item__column {
   @apply flex grow bg-slate-200 border border-slate-300 px-3 h-[40px] justify-center items-center text-slate-600;
+}
+
+.layout-item.layout-item_active .layout-item__column {
+  @apply bg-white;
 }
 </style>

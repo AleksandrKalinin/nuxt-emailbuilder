@@ -6,7 +6,13 @@ declare global {
     children: any[];
     placeholder: string;
     cssProperties: CssProperty[];
-    inlineStyles: "";
+    inlineStyles: string;
+  }
+
+  interface EditorRow {
+    id: string;
+    items: EditorItem[];
+    columns: 1;
   }
 
   interface CssProperty {

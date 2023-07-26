@@ -1,6 +1,6 @@
 <template>
   <Transition>
-    <div class="settings-wrap" v-if="menuOpen" ref="target">
+    <div class="settings-wrap" v-if="menuOpen" ref="settingsMenu">
       <div class="settings">
         <div
           class="settings-block settings__block"
@@ -52,6 +52,8 @@
                 <LayoutGroup
                   v-else-if="option.type === 'layout'"
                   :items="option.options"
+                  :activeRow="selectedEditorItem"
+                  @updateEditorRow="updateEditorRowLayout"
                 />
                 <FileUpload v-else-if="option.type === 'fileupload'" />
                 <FileUpload v-else-if="option.type === 'toggle'" />
@@ -71,23 +73,27 @@ import { storeToRefs } from "pinia";
 
 const { menuOpen, settingsActive } = storeToRefs(useSettingsStore());
 
-const { updateItemCssProperties } = useEditorStore();
-const { editorItems, selectedEditorItem } = storeToRefs(useEditorStore());
+const { updateItemCssProperties, updateEditorRowLayout } = useEditorStore();
+const { editorItems, editorRows, selectedEditorItem } = storeToRefs(
+  useEditorStore()
+);
 
 const selectedItemProperties = computed(() => {
   if (selectedEditorItem.value) {
-    const item = editorItems.value.find(
-      (item: EditorItem) => item.id === selectedEditorItem.value
+    const item = editorRows.value.find(
+      (item: EditorItem) => item.id === selectedEditorItem.value?.id
     );
-    return item.cssProperties;
+    return item.items[0].cssProperties;
   } else return null;
 });
 
-const target = ref(null);
+const settingsMenu = ref(null);
 
-onClickOutside(target, () => {
+onClickOutside(settingsMenu, () => {
   menuOpen.value = false;
 });
+
+defineExpose({ settingsMenu });
 </script>
 
 <style scoped>
