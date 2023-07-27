@@ -65,6 +65,7 @@ const areaActive = ref(false);
 
 const enterDropArea = (event: Event) => {
   isActive.value = true;
+
   dragEventCounter.value += 1;
   if (selectedMenuItem.value && areaActive.value === false) {
     areaActive.value = true;
@@ -115,7 +116,7 @@ const { setDropZone, selectEditorItem } = useEditorStore();
 
 <style scoped lang="scss">
 .editor-item {
-  @apply relative;
+  @apply relative z-20;
 }
 
 .editor-item_selected {

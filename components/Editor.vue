@@ -34,13 +34,6 @@
           </div>
         </div>
       </div>
-      <!--
-      <EditorItem
-        v-for="element in editorItems"
-        :key="element.id"
-        :item="element"
-        :style="element.inlineStyles"
-      /> -->
     </VueDraggableNext>
     <button class="button_regular mx-auto mt-3" @click="addEditorRow()">
       Add
@@ -79,7 +72,6 @@ const { selectEditorItem, deleteEditorRow, copyEditorRow } = useEditorStore();
 
 onMounted(() => {
   createBuildingBlocks();
-  // console.log(editorItems.value);
 });
 </script>
 
@@ -97,14 +89,14 @@ onMounted(() => {
 }
 
 .editor-row_selected {
-  @apply after:opacity-0;
+  @apply after:opacity-100;
 }
 
 .editor-row_selected .editor-row__menu {
-  @apply flex z-10;
+  @apply flex;
 }
 .editor-row__menu {
-  @apply absolute bottom-[-55px] right-[5px] bg-white flex z-10 shadow-sm shadow-slate-300/50 hidden;
+  @apply absolute bottom-[-55px] right-[5px] bg-white flex z-30 shadow-sm shadow-slate-300/50 hidden;
 }
 
 .editor-menu__items {

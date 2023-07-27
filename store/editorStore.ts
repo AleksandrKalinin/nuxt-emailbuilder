@@ -31,7 +31,7 @@ export const useEditorStore = defineStore("editor", () => {
     {
       id: "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
       children: [],
-      placeholder: "No content here. Drag content from menu",
+      placeholder: "No content here. Drag item from menu",
       cssProperties: initialDimensionValues,
       inlineStyles: createInlineStyles(initialDimensionValues),
     },
@@ -121,14 +121,14 @@ export const useEditorStore = defineStore("editor", () => {
     if (nestedItems < cols) {
       for (let i = 0; i < cols - nestedItems; i++) {
         const newEditorItem = addEditorItem();
-        editorRows.value[index].items.push(newEditorItem);
+        editorRows.value[index].items.push(toRaw(newEditorItem));
       }
     } else if (nestedItems > cols) {
-      const newItems = editorRows.value[index].items.slice(
+      const newItems = toRaw(editorRows.value)[index].items.slice(
         0,
         -(nestedItems - cols)
       );
-      editorRows.value[index].items = newItems;
+      editorRows.value[index].items = toRaw(newItems);
     }
   };
 
@@ -150,9 +150,14 @@ export const useEditorStore = defineStore("editor", () => {
 
   const copyEditorRow = (id: string) => {
     const index = editorRows.value.findIndex((item: any) => item.id == id);
-    console.log(editorRows.value[index]);
     const copiedItem = structuredClone(toRaw(editorRows.value[index]));
+    const newEditorItems = copiedItem.items;
+    newEditorItems.forEach((el) => {
+      el.id = uuidv4();
+      editorItems.value.push(el);
+    });
     copiedItem.id = uuidv4();
+    copiedItem.items = newEditorItems;
     editorRows.value.splice(index, 0, copiedItem);
   };
 

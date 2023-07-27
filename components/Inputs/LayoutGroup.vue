@@ -26,7 +26,7 @@ const emit = defineEmits(["updateEditorRow"]);
   @apply flex flex-wrap justify-between gap-y-2.5;
 }
 .layout-item {
-  @apply w-[147px] flex hover:shadow-xl hover:shadow-slate-300/90 transition ease-in-out duration-100 cursor-pointer;
+  @apply w-[160px] flex hover:shadow-xl hover:shadow-slate-300/90 transition ease-in-out duration-100 cursor-pointer;
 }
 
 .layout-item .layout-item__column:not(:first-child) {
