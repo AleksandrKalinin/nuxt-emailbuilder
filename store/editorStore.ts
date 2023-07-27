@@ -219,6 +219,8 @@ export const useEditorStore = defineStore("editor", () => {
 
   const selectEditorRow = (event: Event, value: string | null) => {
     const el = editorRows.value.find((item: any) => item.id == value);
+    console.log(event.target);
+    console.log(event.currentTarget);
     selectedEditorRow.value = el;
     if (value) {
       // setSettingsValues(editorItems.value[index].styles);

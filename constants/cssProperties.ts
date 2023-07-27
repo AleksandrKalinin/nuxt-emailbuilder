@@ -85,8 +85,7 @@ export const cssProperties = {
   },
   height: {
     cssProperty: "height",
-    value: 80,
-    unit: "px",
+    value: "auto",
   },
 };
 

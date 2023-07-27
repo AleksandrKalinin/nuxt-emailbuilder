@@ -61,7 +61,7 @@ const item3 = {
     "padding-left": 0,
     "font-size": 16,
     background: "#ffffff",
-    height: 80,
+    height: "auto",
     width: 600,
     color: "#222222",
   },
