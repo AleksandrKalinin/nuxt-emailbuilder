@@ -2,7 +2,7 @@
   <div
     class="editor-item"
     :class="[
-      selectedEditorItem === props.item.id ? 'editor-item_selected' : '',
+      selectedEditorRow === props.item.id ? 'editor-item_selected' : '',
       isActive ? 'editor-item_hovered' : '',
     ]"
     ref="targetItem"
@@ -90,14 +90,14 @@ const leaveDropArea = (event: Event) => {
 const selectElement = (event: Event) => {
   const target = event.target as HTMLElement;
   setActiveSettings([layoutSettings, dimensionsSettings]);
-  selectEditorItem(event, target.getAttribute("id"));
+  selectEditorRow(event, target.getAttribute("id"));
 };
 
 const targetItem = ref(null);
 
 onClickOutside(targetItem, (e) => {
   if (props.menuRef && !props.menuRef.contains(e.target)) {
-    selectEditorItem(e, null);
+    selectEditorRow(e, null);
   }
 });
 
@@ -108,10 +108,10 @@ const dropItem = (id: string) => {
 
 const { setActiveSettings } = useSettingsStore();
 
-const { selectedMenuItem, dragActive, dragEventCounter, selectedEditorItem } =
+const { selectedMenuItem, dragActive, dragEventCounter, selectedEditorRow } =
   storeToRefs(useEditorStore());
 
-const { setDropZone, selectEditorItem } = useEditorStore();
+const { setDropZone, selectEditorRow } = useEditorStore();
 </script>
 
 <style scoped lang="scss">

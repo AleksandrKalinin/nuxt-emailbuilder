@@ -112,12 +112,12 @@ export const useEditorStore = defineStore("editor", () => {
   };
 
   const updateEditorRowLayout = (cols: number) => {
-    const id = selectedEditorItem.value?.id;
+    const id = selectedEditorRow.value?.id;
     const index = editorRows.value.findIndex(
       (item: EditorRow) => item.id === id
     );
     editorRows.value[index].columns = cols;
-    const nestedItems = selectedEditorItem.value?.items.length;
+    const nestedItems = selectedEditorRow.value?.items.length;
     if (nestedItems < cols) {
       for (let i = 0; i < cols - nestedItems; i++) {
         const newEditorItem = addEditorItem();
@@ -193,9 +193,10 @@ export const useEditorStore = defineStore("editor", () => {
     newItem.style = style;
     element.setAttribute("id", newItem.id);
     element.addEventListener("click", (e) => {
+      console.log("clicked");
       e.stopPropagation();
       const target = e.target as HTMLElement;
-      selectEditorItem(e, target.getAttribute("id"));
+      selectEditorRow(e, target.getAttribute("id"));
     });
     if (placeholder) {
       element.innerText = placeholder;
@@ -212,16 +213,13 @@ export const useEditorStore = defineStore("editor", () => {
     }
     newItem.markup = element.outerHTML;
     editorItems.value[index].children.push(newItem);
-    // console.log(editorItems.value);
   };
 
-  const selectedEditorItem = ref<EditorRow | null>(null);
+  const selectedEditorRow = ref<EditorRow | null>(null);
 
-  const selectEditorItem = (event: Event, value: string | null) => {
+  const selectEditorRow = (event: Event, value: string | null) => {
     const el = editorRows.value.find((item: any) => item.id == value);
-    selectedEditorItem.value = el;
-    //console.log(selectedEditorItem.value);
-    // console.log("value is ", value);
+    selectedEditorRow.value = el;
     if (value) {
       // setSettingsValues(editorItems.value[index].styles);
     }
@@ -232,7 +230,7 @@ export const useEditorStore = defineStore("editor", () => {
     value: string | number | boolean
   ) => {
     const index = editorItems.value.findIndex(
-      (item) => item.id === selectedEditorItem.value
+      (item) => item.id === selectedEditorRow.value
     );
 
     editorItems.value[index].cssProperties[key].value = value;
@@ -257,8 +255,8 @@ export const useEditorStore = defineStore("editor", () => {
     checkDropZone,
     dragEventCounter,
     setDropZone,
-    selectedEditorItem,
-    selectEditorItem,
+    selectedEditorRow,
+    selectEditorRow,
     updateItemCssProperties,
   };
 });

@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { useEditorStore } from "./editorStore";
 
 export const useSettingsStore = defineStore("settings", () => {
-  const { selectEditorItem } = useEditorStore();
+  const { selectEditorRow } = useEditorStore();
 
   const settingsActive = ref<string[] | null>([]);
   const settingsValues = ref<any>([]);

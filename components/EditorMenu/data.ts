@@ -103,7 +103,7 @@ export const header = [
         },
       },
       attributes: [],
-      style: "",
+      style: ["z-50"],
     },
   },
   {

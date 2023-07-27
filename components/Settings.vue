@@ -52,7 +52,7 @@
                 <LayoutGroup
                   v-else-if="option.type === 'layout'"
                   :items="option.options"
-                  :activeRow="selectedEditorItem"
+                  :activeRow="selectedEditorRow"
                   @updateEditorRow="updateEditorRowLayout"
                 />
                 <FileUpload v-else-if="option.type === 'fileupload'" />
@@ -74,14 +74,14 @@ import { storeToRefs } from "pinia";
 const { menuOpen, settingsActive } = storeToRefs(useSettingsStore());
 
 const { updateItemCssProperties, updateEditorRowLayout } = useEditorStore();
-const { editorItems, editorRows, selectedEditorItem } = storeToRefs(
+const { editorItems, editorRows, selectedEditorRow } = storeToRefs(
   useEditorStore()
 );
 
 const selectedItemProperties = computed(() => {
-  if (selectedEditorItem.value) {
+  if (selectedEditorRow.value) {
     const item = editorRows.value.find(
-      (item: EditorItem) => item.id === selectedEditorItem.value?.id
+      (item: EditorItem) => item.id === selectedEditorRow.value?.id
     );
     return item.items[0].cssProperties;
   } else return null;

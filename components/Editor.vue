@@ -4,7 +4,7 @@
       <div
         v-for="row in editorRows"
         class="editor-row"
-        :class="selectedEditorItem?.id === row.id ? 'editor-row_selected' : ''"
+        :class="selectedEditorRow?.id === row.id ? 'editor-row_selected' : ''"
         :id="row.id"
         @click="selectElement($event)"
       >
@@ -57,18 +57,18 @@ import {
 const props = defineProps(["settingsMenuRef"]);
 
 const { createBuildingBlocks, addEditorItem, addEditorRow } = useEditorStore();
-const { editorTemplate, editorItems, editorRows, selectedEditorItem } =
+const { editorTemplate, editorItems, editorRows, selectedEditorRow } =
   storeToRefs(useEditorStore());
+
+const { setActiveSettings } = useSettingsStore();
+
+const { selectEditorRow, deleteEditorRow, copyEditorRow } = useEditorStore();
 
 const selectElement = (event: Event) => {
   const target = event.currentTarget as HTMLElement;
   setActiveSettings([layoutSettings]);
-  selectEditorItem(event, target.getAttribute("id"));
+  selectEditorRow(event, target.getAttribute("id"));
 };
-
-const { setActiveSettings } = useSettingsStore();
-
-const { selectEditorItem, deleteEditorRow, copyEditorRow } = useEditorStore();
 
 onMounted(() => {
   createBuildingBlocks();
