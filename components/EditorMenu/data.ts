@@ -208,7 +208,7 @@ export const header = [
   {
     title: "Image",
     icon: "radix-icons:image",
-    options: [imageSettings, dimensionsSettings],
+    options: [imageSettings],
     element: {
       tag: "img",
       attributes: {

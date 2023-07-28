@@ -4,18 +4,18 @@ import { useEditorStore } from "./editorStore";
 export const useSettingsStore = defineStore("settings", () => {
   const { selectEditorRow } = useEditorStore();
 
-  const settingsActive = ref<string[] | null>([]);
+  const settingsActive = ref<EditorRow[] | MenuSetting[] | null>([]);
   const settingsValues = ref<any>([]);
   const menuOpen = ref<boolean>(false);
 
-  const setActiveSettings = (properties) => {
+  const setActiveSettings = (properties: MenuSetting[]) => {
     properties.forEach((element) => {
       settingsActive.value = properties;
     });
     menuOpen.value = true;
   };
 
-  const setSettingsValues = (params) => {
+  const setSettingsValues = (params: EditorRow[]) => {
     settingsActive.value = params;
   };
 

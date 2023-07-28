@@ -87,12 +87,6 @@ const leaveDropArea = (event: Event) => {
   }
 };
 
-const selectElement = (event: Event) => {
-  const target = event.target as HTMLElement;
-  setActiveSettings([layoutSettings, dimensionsSettings]);
-  selectEditorRow(event, target.getAttribute("id"));
-};
-
 const targetItem = ref(null);
 
 onClickOutside(targetItem, (e) => {
@@ -105,8 +99,6 @@ const dropItem = (id: string) => {
   isActive.value = false;
   setDropZone(id);
 };
-
-const { setActiveSettings } = useSettingsStore();
 
 const { selectedMenuItem, dragActive, dragEventCounter, selectedEditorRow } =
   storeToRefs(useEditorStore());

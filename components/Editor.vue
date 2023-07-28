@@ -57,17 +57,30 @@ import {
 const props = defineProps(["settingsMenuRef"]);
 
 const { createBuildingBlocks, addEditorItem, addEditorRow } = useEditorStore();
-const { editorTemplate, editorItems, editorRows, selectedEditorRow } =
-  storeToRefs(useEditorStore());
+const {
+  editorTemplate,
+  editorItems,
+  editorRows,
+  selectedEditorRow,
+  currentEditorRowId,
+} = storeToRefs(useEditorStore());
 
 const { setActiveSettings } = useSettingsStore();
 
-const { selectEditorRow, deleteEditorRow, copyEditorRow } = useEditorStore();
+const { selectEditorRow, selectEditorElement, deleteEditorRow, copyEditorRow } =
+  useEditorStore();
 
 const selectElement = (event: Event) => {
-  const target = event.currentTarget as HTMLElement;
-  setActiveSettings([layoutSettings]);
-  selectEditorRow(event, target.getAttribute("id"));
+  const currentTarget = event.currentTarget as HTMLElement;
+  const target = event.target as HTMLElement;
+  currentEditorRowId.value = currentTarget.getAttribute("id");
+  if (target.hasAttribute("data-type")) {
+    selectEditorElement(target.getAttribute("id"));
+    setActiveSettings([typographySettings]);
+  } else {
+    setActiveSettings([layoutSettings]);
+    selectEditorRow(event, currentTarget.getAttribute("id"));
+  }
 };
 
 onMounted(() => {

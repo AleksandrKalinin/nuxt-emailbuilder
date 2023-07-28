@@ -14,7 +14,7 @@ import {
 export const useEditorStore = defineStore("editor", () => {
   const { setSettingsValues } = useSettingsStore();
 
-  const createInlineStyles = (params: CssProperty[]) => {
+  const createInlineStyles = (params: CssProperty) => {
     let inlineStyles: string = "";
     for (const item in params) {
       let val: string | number | boolean = params[item].value;
@@ -42,16 +42,19 @@ export const useEditorStore = defineStore("editor", () => {
       id: "c089b428-f859-465c-ae77-83a9d00a2cc3",
       items: [toRaw(editorItems.value[0])],
       columns: 1,
+      "data-type": "block",
     },
   ]);
 
-  const editorBlocks = ref<any>(tempBlocks);
-  const editorTemplate = ref(null);
+  const currentEditorRowId = ref<string | null>(null);
 
-  const createOuterTable = (blocks) => {
+  const editorBlocks = ref<any>(tempBlocks);
+  const editorTemplate = ref<string | null>(null);
+
+  const createOuterTable = (blocks: string[]) => {
     const table = document.createElement("table");
-    const attrs = tableWrapperProperties.attributes;
-    const styles = tableWrapperProperties.styles;
+    const attrs: OuterTableAttributes = tableWrapperProperties.attributes;
+    const styles: OuterTableStyles = tableWrapperProperties.styles;
     for (const key in attrs) {
       table.setAttribute(key, attrs[key]);
     }
@@ -71,8 +74,8 @@ export const useEditorStore = defineStore("editor", () => {
   };
 
   const createBuildingBlocks = () => {
-    const blocks = [];
-    editorBlocks.value.forEach((block) => {
+    const blocks = [] as string[];
+    editorBlocks.value.forEach((block: BlockItem) => {
       const table = document.createElement("table");
       const tbody = document.createElement("tbody");
       const tr = document.createElement("tr");
@@ -97,9 +100,9 @@ export const useEditorStore = defineStore("editor", () => {
     return blocks;
   };
 
-  const selectedMenuItem = ref(null);
+  const selectedMenuItem = ref<MenuItem | null>(null);
 
-  const selectMenuItem = (item) => {
+  const selectMenuItem = (item: MenuItem | null) => {
     selectedMenuItem.value = item;
   };
 
@@ -108,6 +111,7 @@ export const useEditorStore = defineStore("editor", () => {
     row.id = uuidv4();
     row.items = [toRaw(addEditorItem())];
     row.columns = 1;
+    row["data-type"] = "block";
     editorRows.value.push(row);
   };
 
@@ -118,15 +122,15 @@ export const useEditorStore = defineStore("editor", () => {
     );
     editorRows.value[index].columns = cols;
     const nestedItems = selectedEditorRow.value?.items.length;
-    if (nestedItems < cols) {
-      for (let i = 0; i < cols - nestedItems; i++) {
+    if (nestedItems! < cols) {
+      for (let i = 0; i < cols - nestedItems!; i++) {
         const newEditorItem = addEditorItem();
         editorRows.value[index].items.push(toRaw(newEditorItem));
       }
-    } else if (nestedItems > cols) {
+    } else if (nestedItems! > cols) {
       const newItems = toRaw(editorRows.value)[index].items.slice(
         0,
-        -(nestedItems - cols)
+        -(nestedItems! - cols)
       );
       editorRows.value[index].items = toRaw(newItems);
     }
@@ -152,7 +156,7 @@ export const useEditorStore = defineStore("editor", () => {
     const index = editorRows.value.findIndex((item: any) => item.id == id);
     const copiedItem = structuredClone(toRaw(editorRows.value[index]));
     const newEditorItems = copiedItem.items;
-    newEditorItems.forEach((el) => {
+    newEditorItems.forEach((el: EditorItem) => {
       el.id = uuidv4();
       editorItems.value.push(el);
     });
@@ -178,52 +182,73 @@ export const useEditorStore = defineStore("editor", () => {
     activeDropZone.value = null;
   };
 
+  const editorElements = ref<EditorElement[]>([]);
+
   const appendItemToEditorBlock = (id: string, item: any) => {
     const index = editorItems.value.findIndex((item: any) => item.id == id);
     const tagName: string = item.tag;
     const placeholder: string = item.placeholder;
     const attributes: any = item.attributes;
     const style: string[] = item.style;
-    const element = document.createElement(tagName);
-    const newItem = {} as any;
+    const newItem = {} as EditorElement;
     newItem.id = uuidv4();
     newItem.tag = tagName;
     newItem.placeholder = placeholder;
     newItem.attributes = attributes;
     newItem.style = style;
-    element.setAttribute("id", newItem.id);
-    element.addEventListener("click", (e) => {
-      console.log("clicked");
+    newItem.cssProperties = item.initialCssValues;
+    newItem.inlineStyles = createInlineStyles(item.initialCssValues);
+    newItem.markup = createHtmlElement(newItem);
+    editorElements.value.push(newItem);
+    editorItems.value[index].children.push(newItem);
+  };
+
+  const createHtmlElement = (item: EditorElement) => {
+    console.log("item", item);
+    const element = document.createElement(item.tag);
+    element.setAttribute("id", item.id);
+    element.setAttribute("data-type", "item");
+    element.addEventListener("click", (e: Event) => {
       e.stopPropagation();
       const target = e.target as HTMLElement;
       selectEditorRow(e, target.getAttribute("id"));
     });
-    if (placeholder) {
-      element.innerText = placeholder;
+    for (const key in item.cssProperties) {
+      const cssObj = item.cssProperties[key];
+      cssObj.unit
+        ? (element.style[cssObj.cssProperty] = cssObj.value + cssObj.unit)
+        : (element.style[cssObj.cssProperty] = cssObj.value);
     }
-    if (attributes) {
-      for (const key in attributes) {
-        element.setAttribute(key, attributes[key]);
+    if (item.placeholder) {
+      element.innerText = item.placeholder;
+    }
+    if (item.attributes) {
+      for (const key in item.attributes) {
+        element.setAttribute(key, item.attributes[key]);
       }
     }
-    if (style) {
-      style.forEach((className) => {
+    if (item.style) {
+      item.style.forEach((className: string) => {
         element.classList.add(className);
       });
     }
-    newItem.markup = element.outerHTML;
-    editorItems.value[index].children.push(newItem);
+    return element.outerHTML;
   };
 
-  const selectedEditorRow = ref<EditorRow | null>(null);
+  const selectedEditorRow = ref<EditorElement | EditorRow | null>(null);
 
   const selectEditorRow = (event: Event, value: string | null) => {
     const el = editorRows.value.find((item: any) => item.id == value);
-    console.log(event.target);
-    console.log(event.currentTarget);
     selectedEditorRow.value = el;
     if (value) {
       // setSettingsValues(editorItems.value[index].styles);
+    }
+  };
+
+  const selectEditorElement = (value: string | null) => {
+    const el = editorElements.value.find((item: any) => item.id == value);
+    if (el) {
+      selectedEditorRow.value = el;
     }
   };
 
@@ -231,14 +256,24 @@ export const useEditorStore = defineStore("editor", () => {
     key: string,
     value: string | number | boolean
   ) => {
-    const index = editorItems.value.findIndex(
-      (item) => item.id === selectedEditorRow.value
+    const index = editorElements.value.findIndex(
+      (item) => item.id === selectedEditorRow.value?.id
     );
-
-    editorItems.value[index].cssProperties[key].value = value;
-    editorItems.value[index].inlineStyles = createInlineStyles(
-      editorItems.value[index].cssProperties
+    editorElements.value[index].cssProperties[key].value = value;
+    editorElements.value[index].inlineStyles = createInlineStyles(
+      editorElements.value[index].cssProperties
     );
+    editorElements.value[index].markup = createHtmlElement(
+      editorElements.value[index]
+    );
+    editorRows.value.forEach((row: EditorRow) => {
+      row.items.forEach((item: EditorItem) => {
+        const index = item.children.findIndex(
+          (el) => el.id === selectedEditorRow.value?.id
+        );
+        item.children[index] = editorElements.value[index];
+      });
+    });
   };
 
   return {
@@ -259,6 +294,8 @@ export const useEditorStore = defineStore("editor", () => {
     setDropZone,
     selectedEditorRow,
     selectEditorRow,
+    selectEditorElement,
     updateItemCssProperties,
+    currentEditorRowId,
   };
 });

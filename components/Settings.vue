@@ -81,9 +81,9 @@ const { editorItems, editorRows, selectedEditorRow } = storeToRefs(
 const selectedItemProperties = computed(() => {
   if (selectedEditorRow.value) {
     const item = editorRows.value.find(
-      (item: EditorItem) => item.id === selectedEditorRow.value?.id
+      (item: EditorRow) => item.id === selectedEditorRow.value?.id
     );
-    return item.items[0].cssProperties;
+    return selectedEditorRow.value?.cssProperties;
   } else return null;
 });
 
