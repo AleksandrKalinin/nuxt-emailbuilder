@@ -1,15 +1,22 @@
 <template>
-  <select class="dropdown">
-    <option class="dropdown__option">Solid</option>
-    <option class="dropdown__option">Dashed</option>
-    <option class="dropdown__option">Dotted</option>
-  </select>
+  <div class="drowpdown">
+    <select class="dropdown__select dropdown-select">
+      <option class="dropdown-select__option" v-for="option in options">
+        {{ option.name }}
+      </option>
+    </select>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps(["options"]);
+</script>
 
 <style scoped>
 .dropdown {
-  @apply h-[30px] px-[10px] border border-slate-300 outline-none;
+  @apply flex;
+}
+.dropdown__select {
+  @apply w-[240px] h-[30px] border border-slate-300 outline-none leading-[30px] h-[30px] px-[10px] outline-none;
 }
 </style>
