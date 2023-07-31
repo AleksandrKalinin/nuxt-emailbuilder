@@ -196,7 +196,7 @@ export const useEditorStore = defineStore("editor", () => {
     newItem.placeholder = placeholder;
     newItem.attributes = attributes;
     newItem.style = style;
-    newItem.cssProperties = item.initialCssValues;
+    newItem.cssProperties = structuredClone(item.initialCssValues);
     newItem.inlineStyles = createInlineStyles(item.initialCssValues);
     newItem.markup = createHtmlElement(newItem);
     editorElements.value.push(newItem);
@@ -204,7 +204,6 @@ export const useEditorStore = defineStore("editor", () => {
   };
 
   const createHtmlElement = (item: EditorElement) => {
-    console.log("item", item);
     const element = document.createElement(item.tag);
     element.setAttribute("id", item.id);
     element.setAttribute("data-type", "item");
@@ -239,6 +238,7 @@ export const useEditorStore = defineStore("editor", () => {
 
   const selectEditorRow = (event: Event, value: string | null) => {
     const el = editorRows.value.find((item: any) => item.id == value);
+    //console.log(el, value);
     selectedEditorRow.value = el;
     if (value) {
       // setSettingsValues(editorItems.value[index].styles);
@@ -247,6 +247,7 @@ export const useEditorStore = defineStore("editor", () => {
 
   const selectEditorElement = (value: string | null) => {
     const el = editorElements.value.find((item: any) => item.id == value);
+    //console.log(el, value);
     if (el) {
       selectedEditorRow.value = el;
     }
@@ -259,18 +260,23 @@ export const useEditorStore = defineStore("editor", () => {
     const index = editorElements.value.findIndex(
       (item) => item.id === selectedEditorRow.value?.id
     );
+    console.log("editor elements before", editorElements.value);
     editorElements.value[index].cssProperties[key].value = value;
+    console.log("editor elements after", editorElements.value);
     editorElements.value[index].inlineStyles = createInlineStyles(
       editorElements.value[index].cssProperties
     );
     editorElements.value[index].markup = createHtmlElement(
       editorElements.value[index]
     );
+    //console.log("key is", key);
+    //console.log("value", value);
     editorRows.value.forEach((row: EditorRow) => {
       row.items.forEach((item: EditorItem) => {
         const index = item.children.findIndex(
           (el) => el.id === selectedEditorRow.value?.id
         );
+        //console.log("index is", index);
         item.children[index] = editorElements.value[index];
       });
     });

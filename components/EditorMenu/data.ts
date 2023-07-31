@@ -102,7 +102,12 @@ export const header = [
           value: "none",
         },
       },
-      attributes: [],
+      attributes: [
+        {
+          attributeName: "contenteditable",
+          value: true,
+        },
+      ],
       style: ["z-50"],
     },
   },
@@ -160,7 +165,7 @@ export const header = [
     icon: "radix-icons:button",
     options: [typographySettings, dimensionsSettings],
     element: {
-      tag: "a",
+      tag: "div",
       placeholder: "Button text",
       initialCssValues: {
         "font-size": {
@@ -170,7 +175,7 @@ export const header = [
         },
         color: {
           cssProperty: "color",
-          value: "#222222",
+          value: "#ffffff",
         },
         "font-weight": {
           cssProperty: "font-weight",
@@ -197,6 +202,59 @@ export const header = [
         "text-transform": {
           cssProperty: "text-transform",
           value: "none",
+        },
+        "margin-top": {
+          cssProperty: "margin-top",
+          value: 0,
+          unit: "px",
+        },
+        "margin-bottom": {
+          cssProperty: "margin-bottom",
+          value: 0,
+          unit: "px",
+        },
+        "margin-left": {
+          cssProperty: "margin-left",
+          value: 0,
+          unit: "px",
+        },
+        "margin-right": {
+          cssProperty: "margin-right",
+          value: 0,
+          unit: "px",
+        },
+        "padding-top": {
+          cssProperty: "padding-top",
+          value: 0,
+          unit: "px",
+        },
+        "padding-bottom": {
+          cssProperty: "padding-bottom",
+          value: 0,
+          unit: "px",
+        },
+        "padding-left": {
+          cssProperty: "padding-left",
+          value: 0,
+          unit: "px",
+        },
+        "padding-right": {
+          cssProperty: "padding-right",
+          value: 0,
+          unit: "px",
+        },
+        align: {
+          cssProperty: "align",
+          value: "left",
+        },
+        width: {
+          cssProperty: "width",
+          value: 600,
+          unit: "px",
+        },
+        height: {
+          cssProperty: "height",
+          value: "auto",
         },
       },
       attributes: {

@@ -87,6 +87,15 @@ const selectedItemProperties = computed(() => {
   } else return null;
 });
 
+const selectedItemAttributes = computed(() => {
+  if (selectedEditorRow.value) {
+    const item = editorRows.value.find(
+      (item: EditorRow) => item.id === selectedEditorRow.value?.id
+    );
+    return selectedEditorRow.value?.htmlAttributes;
+  } else return null;
+});
+
 const settingsMenu = ref(null);
 
 onClickOutside(settingsMenu, () => {
@@ -94,6 +103,11 @@ onClickOutside(settingsMenu, () => {
 });
 
 defineExpose({ settingsMenu });
+
+watch(selectedItemProperties, () => {
+  console.log(selectedEditorRow.value);
+  console.log(selectedEditorRow.value?.cssProperties);
+});
 </script>
 
 <style scoped>
