@@ -1,339 +1,128 @@
 <template>
-  <div class="settings-wrap">
-    <div class="settings">
-      <!--
-      <div class="settings-block settings__block">
-        <h4 class="settings-block__header">Image</h4>
-        <div class="settings-block__options settings-options">
-          <div class="settings-options__item settings-item settings-item_col">
-            <h5 class="settings-item__header">Image</h5>
-            <Upload />
-          </div>
-          <div class="settings-options__item settings-item settings-item_col">
-            <h5 class="settings-item__header">Margin</h5>
-            <div class="settings-item__properties settings-props">
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Top
-                </h6>
-                <InputSingle />
-              </div>
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Bottom
-                </h6>
-                <InputSingle />
-              </div>
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Left
-                </h6>
-                <InputSingle />
-              </div>
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Right
-                </h6>
-                <InputSingle />
-              </div>
+  <Transition>
+    <div class="settings-wrap" v-if="menuOpen" ref="settingsMenu">
+      <div class="settings">
+        <div
+          class="settings-block settings__block"
+          v-for="settingBlock in settingsActive"
+        >
+          <h4 class="settings-block__header">{{ settingBlock.title }}</h4>
+          <div class="settings-block__options settings-options">
+            <div
+              class="settings-options__item settings-item"
+              v-for="(option, index) in settingBlock.fields"
+              :class="
+                option.display === 'row'
+                  ? 'settings-item_row'
+                  : 'settings-item_col'
+              "
+            >
+              <h5 class="settings-item__header">{{ option.name }}</h5>
+              <form>
+                <InputSingle
+                  v-if="option.type === 'input'"
+                  :property="selectedItemProperties[option.property]"
+                  :itemKey="option.property"
+                  @updateEditorItem="updateItemCssProperties"
+                />
+                <InputGroup
+                  v-if="option.type === 'inputgroup'"
+                  :items="option.properties"
+                  :selectedProperties="selectedItemProperties"
+                  @inputGroupEmit="updateItemCssProperties"
+                />
+                <Colorpicker
+                  :property="option.value"
+                  :itemKey="option.property"
+                  @updateEditorItem="updateItemCssProperties"
+                  v-else-if="option.type === 'colorpicker'"
+                />
+                <Dropdown
+                  v-if="option.type === 'dropdown'"
+                  :options="option.options"
+                />
+                <TextField v-if="option.type === 'text'" />
+                <SelectionGroup
+                  v-else-if="option.type === 'selection'"
+                  :options="option.options"
+                  :property="selectedItemProperties[option.property]"
+                  :itemKey="option.property"
+                  @updateEditorItem="updateItemCssProperties"
+                />
+                <LayoutGroup
+                  v-else-if="option.type === 'layout'"
+                  :items="option.options"
+                  :activeRow="selectedEditorRow"
+                  @updateEditorRow="updateEditorRowLayout"
+                />
+                <FileUpload v-else-if="option.type === 'fileupload'" />
+                <FileUpload v-else-if="option.type === 'toggle'" />
+              </form>
             </div>
-          </div>
-          <div class="settings-options__item settings-item settings-item_row">
-            <h5 class="settings-item__header">Height</h5>
-            <InputSingle />
-          </div>
-          <div class="settings-options__item settings-item settings-item_row">
-            <h5 class="settings-item__header">Width</h5>
-            <InputSingle />
-          </div>
-        </div>
-      </div>
-      <div class="settings-block settings__block">
-        <h4 class="settings-block__header">Dimension</h4>
-        <div class="settings-block__options settings-options">
-          <div class="settings-options__item settings-item settings-item_col">
-            <h5 class="settings-item__header">Padding</h5>
-            <div class="settings-item__properties settings-props">
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Top
-                </h6>
-                <InputSingle />
-              </div>
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Bottom
-                </h6>
-                <InputSingle />
-              </div>
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Left
-                </h6>
-                <InputSingle />
-              </div>
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Right
-                </h6>
-                <InputSingle />
-              </div>
-            </div>
-          </div>
-          <div class="settings-options__item settings-item settings-item_col">
-            <h5 class="settings-item__header">Margin</h5>
-            <div class="settings-item__properties settings-props">
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Top
-                </h6>
-                <InputSingle />
-              </div>
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Bottom
-                </h6>
-                <InputSingle />
-              </div>
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Left
-                </h6>
-                <InputSingle />
-              </div>
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Right
-                </h6>
-                <InputSingle />
-              </div>
-            </div>
-          </div>
-          <div class="settings-options__item settings-item settings-item_row">
-            <h5 class="settings-item__header">Height</h5>
-            <InputSingle />
-          </div>
-          <div class="settings-options__item settings-item settings-item_row">
-            <h5 class="settings-item__header">Width</h5>
-            <InputSingle />
-          </div>
-        </div>
-      </div>
-      <div class="settings-block settings__block">
-        <h4 class="settings-block__header">Typography</h4>
-        <div class="settings-block__options settings-options">
-          <div class="settings-options__item settings-item settings-item_row">
-            <h5 class="settings-item__header">Font size</h5>
-            <SelectionGroup />
-          </div>
-          <div class="settings-options__item settings-item settings-item_row">
-            <h5 class="settings-item__header">Font weight</h5>
-            <SelectionGroup />
-          </div>
-          <div class="settings-options__item settings-item settings-item_row">
-            <h5 class="settings-item__header">Font style</h5>
-            <div class="settings-item__properties">Lorem ipsum</div>
-          </div>
-          <div class="settings-options__item settings-item settings-item_row">
-            <h5 class="settings-item__header">Font family</h5>
-            <div class="settings-item__properties">Lorem ipsum</div>
-          </div>
-          <div class="settings-options__item settings-item settings-item_row">
-            <h5 class="settings-item__header">Letter spacing</h5>
-            <div class="settings-item__properties">Lorem ipsum</div>
-          </div>
-          <div class="settings-options__item settings-item settings-item_row">
-            <h5 class="settings-item__header">Font color</h5>
-            <div class="settings-item__properties">Lorem ipsum</div>
-          </div>
-          <div class="settings-options__item settings-item settings-item_row">
-            <h5 class="settings-item__header">Line height</h5>
-            <div class="settings-item__properties">Lorem ipsum</div>
-          </div>
-          <div class="settings-options__item settings-item settings-item_row">
-            <h5 class="settings-item__header">Text align</h5>
-            <div class="settings-item__properties">Lorem ipsum</div>
-          </div>
-          <div class="settings-options__item settings-item settings-item_row">
-            <h5 class="settings-item__header">Text transform</h5>
-            <div class="settings-item__properties">Lorem ipsum</div>
-          </div>
-          <div class="settings-options__item settings-item settings-item_row">
-            <h5 class="settings-item__header">Text decoration</h5>
-            <div class="settings-item__properties">Lorem ipsum</div>
-          </div>
-        </div>
-      </div>
-      <div class="settings-block settings__block">
-        <h4 class="settings-block__header">Decorations</h4>
-        <div class="settings-block__options settings-options">
-          <div class="settings-options__item settings-item settings-item_row">
-            <div class="settings-props__block">
-              <h6
-                class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-              >
-                Background
-              </h6>
-              <Colorpicker />
-            </div>
-          </div>
-          <div class="settings-options__item settings-item settings-item_col">
-            <h5 class="settings-item__header">Border</h5>
-            <div class="settings-item__properties settings-props">
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Width
-                </h6>
-                <InputSingle />
-              </div>
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Style
-                </h6>
-                <Dropdown />
-              </div>
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Style
-                </h6>
-                <ColorPicker />
-              </div>
-            </div>
-          </div>
-          <div class="settings-options__item settings-item settings-item_col">
-            <h5 class="settings-item__header">Border radius</h5>
-            <div class="settings-item__properties settings-props">
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Top
-                </h6>
-                <InputSingle />
-              </div>
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Bottom
-                </h6>
-                <InputSingle />
-              </div>
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Left
-                </h6>
-                <InputSingle />
-              </div>
-              <div class="settings-props__block">
-                <h6
-                  class="setting-props__header text-sm text-slate-500 font-medium tracking-[0.5px] mb-1"
-                >
-                  Right
-                </h6>
-                <InputSingle />
-              </div>
-            </div>
-          </div>
-          <div class="settings-options__item settings-item settings-item_row">
-            <h5 class="settings-item__header">Border collapse</h5>
-            <ToggleInput />
-          </div>
-        </div>
-      </div>
-    -->
-
-      <div
-        class="settings-block settings__block"
-        v-for="settingBlock in properties"
-      >
-        <h4 class="settings-block__header">{{ settingBlock.title }}</h4>
-        <div class="settings-block__options settings-options">
-          <div
-            class="settings-options__item settings-item"
-            v-for="option in settingBlock.fields"
-            :class="
-              option.display === 'row'
-                ? 'settings-item_row'
-                : 'settings-item_col'
-            "
-          >
-            <h5 class="settings-item__header">{{ option.name }}</h5>
-            <InputSingle v-if="option.type === 'input'" />
-            <InputGroup
-              v-if="option.type === 'inputgroup'"
-              :items="option.properties"
-            />
-            <Colorpicker v-else-if="option.type === 'colorpicker'" />
-            <Dropdown v-if="option.type === 'dropdown'" />
-            <SelectionGroup
-              v-else-if="option.type === 'selection'"
-              :options="option.options"
-            />
-            <LayoutGroup
-              v-else-if="option.type === 'layout'"
-              :items="option.options"
-            />
-            <FileUpload v-else-if="option.type === 'fileupload'" />
-            <FileUpload v-else-if="option.type === 'toggle'" />
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </Transition>
 </template>
 
 <script setup lang="ts">
-import {
-  typographySettings,
-  imageSettings,
-  dimensionsSettings,
-  layoutSettings,
-} from "../constants/settings";
+import { useSettingsStore } from "@/store/settingsStore";
+import { useEditorStore } from "@/store/editorStore";
+import { storeToRefs } from "pinia";
 
-const properties = [
-  layoutSettings,
-  dimensionsSettings,
-  typographySettings,
-  imageSettings,
-];
+const { menuOpen, settingsActive } = storeToRefs(useSettingsStore());
+
+const { updateItemCssProperties, updateEditorRowLayout } = useEditorStore();
+const { editorItems, editorRows, selectedEditorRow } = storeToRefs(
+  useEditorStore()
+);
+
+const selectedItemProperties = computed(() => {
+  if (selectedEditorRow.value) {
+    const item = editorRows.value.find(
+      (item: EditorRow) => item.id === selectedEditorRow.value?.id
+    );
+    return selectedEditorRow.value?.cssProperties;
+  } else return null;
+});
+
+const selectedItemAttributes = computed(() => {
+  if (selectedEditorRow.value) {
+    const item = editorRows.value.find(
+      (item: EditorRow) => item.id === selectedEditorRow.value?.id
+    );
+    return selectedEditorRow.value?.htmlAttributes;
+  } else return null;
+});
+
+const settingsMenu = ref(null);
+
+onClickOutside(settingsMenu, () => {
+  menuOpen.value = false;
+});
+
+defineExpose({ settingsMenu });
+
+watch(selectedItemProperties, () => {
+  console.log(selectedEditorRow.value);
+  console.log(selectedEditorRow.value?.cssProperties);
+});
 </script>
 
 <style scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.3s;
+}
+
+.v-enter-from,
+.v-leave-to {
+  transform: translateX(380px);
+}
+
 .settings-wrap {
-  @apply bg-slate-100 w-[380px] flex justify-center h-full overflow-y-auto;
+  @apply bg-slate-100 w-[380px] flex justify-center h-full overflow-y-auto absolute right-[0] top-0;
 }
 .settings {
   @apply flex flex-wrap w-full min-h-full h-auto justify-start items-start py-[20px] mb-auto;

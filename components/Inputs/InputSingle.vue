@@ -1,21 +1,49 @@
 <template>
   <div class="input-single">
-    <button class="input-single__button">
+    <button class="input-single__button" @click.prevent="decreaseValue()">
       <Icon name="radix-icons:minus" color="#475569" size="12px" />
     </button>
     <input
       type="text"
       class="input-single__input ml-[-1px]"
       placeholder="auto"
+      :value="inputValue.value"
+      @input="updateValue($event)"
     />
     <span class="input-single__units ml-[-1px]">px</span>
-    <button class="input-single__button ml-[-1px]">
+    <button
+      class="input-single__button ml-[-1px]"
+      @click.prevent="increaseValue()"
+    >
       <Icon name="radix-icons:plus" color="#475569" size="12px" />
     </button>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const props = defineProps(["property", "itemKey", "opt", "max", "min"]);
+
+const inputValue = ref(props.property);
+
+const emit = defineEmits(["updateEditorItem"]);
+
+const decreaseValue = () => {
+  if (inputValue.value.value > 0) {
+    inputValue.value.value -= 1;
+  }
+  emit("updateEditorItem", props.itemKey, Number(inputValue.value.value));
+};
+
+const increaseValue = () => {
+  inputValue.value.value += 1;
+  emit("updateEditorItem", props.itemKey, Number(inputValue.value.value));
+};
+
+const updateValue = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  emit("updateEditorItem", props.itemKey, Number(target.value));
+};
+</script>
 
 <style scoped>
 .input-single {

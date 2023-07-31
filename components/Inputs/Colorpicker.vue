@@ -1,13 +1,29 @@
 <template>
   <div class="colorpicker">
-    <input class="colorpicker__input" type="text" placeholder="auto" /><input
+    <input
+      class="colorpicker__input"
+      type="text"
+      placeholder="auto"
+      readonly
+      :value="props.property"
+    /><input
       class="colorpicker__select"
       type="color"
+      @input="setColor($event)"
     />
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const props = defineProps(["property", "itemKey"]);
+
+const emit = defineEmits(["updateEditorItem"]);
+
+const setColor = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  emit("updateEditorItem", props.itemKey, target.value);
+};
+</script>
 
 <style scoped>
 .colorpicker {

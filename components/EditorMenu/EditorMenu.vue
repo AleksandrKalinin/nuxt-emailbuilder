@@ -1,7 +1,14 @@
 <template>
   <div class="editor-menu-wrap">
     <div class="editor-menu">
-      <div class="editor-menu__item menu-item" v-for="item in header">
+      <div
+        class="editor-menu__item menu-item"
+        v-for="item in header"
+        draggable="true"
+        @mousedown="selectMenuItem(item)"
+        @mouseup="selectMenuItem(null)"
+        @dragend="checkDropZone(item.element)"
+      >
         <Icon :name="item.icon" color="#475569" size="40px" class="mb-1" />
         <p class="menu-item__heading">{{ item.title }}</p>
       </div>
@@ -10,7 +17,12 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
 import { header } from "./data";
+import { useEditorStore } from "@/store/editorStore";
+
+const { selectMenuItem, checkDropZone } = useEditorStore();
+const { dragEventCounter } = storeToRefs(useEditorStore());
 </script>
 
 <style scoped>
