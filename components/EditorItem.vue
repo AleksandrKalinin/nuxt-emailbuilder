@@ -31,8 +31,21 @@
       "
       v-else
       v-for="htmlEl in item.children"
-      v-dompurify-html="htmlEl.markup"
-    ></div>
+    >
+      <div
+        v-if="htmlEl.id !== editableItem"
+        v-dompurify-html="htmlEl.markup"
+      ></div>
+      <div v-else>
+        <Editable
+          :el="htmlEl"
+          :rowId="rowId"
+          :itemId="props.item.id"
+          @updateText="updateEditableValue"
+          @updateElement="updateEditorElement"
+        />
+      </div>
+    </div>
     <div class="item-content__drag" draggable="true">
       <Icon name="ant-design:drag-outlined" color="#FFFFFF" size="30px" />
     </div>
@@ -57,7 +70,20 @@ import {
   actionSettings,
 } from "../constants/settings";
 
-const props = defineProps(["item", "menuRef"]);
+const props = defineProps(["item", "menuRef", "rowId"]);
+
+const itemId = computed(() => props.item.id);
+
+const {
+  selectedMenuItem,
+  dragActive,
+  dragEventCounter,
+  selectedEditorRow,
+  editableItem,
+} = storeToRefs(useEditorStore());
+
+const { setDropZone, selectEditorRow, setEditableItem, updateEditorElement } =
+  useEditorStore();
 
 const isActive = ref<boolean>(false);
 
@@ -89,7 +115,21 @@ const leaveDropArea = (event: Event) => {
 
 const targetItem = ref(null);
 
+const editableValue = ref<string>("");
+
+const updateEditableValue = (text: string) => {
+  editableValue.value = text;
+};
+
 onClickOutside(targetItem, (e) => {
+  const currentId = editableItem.value as string;
+  if (editableItem.value) {
+    console.log("outside click item");
+    console.log("item id", itemId.value);
+    console.log("element id", currentId);
+    console.log("text is", editableValue.value);
+    updateEditorElement(props.item.id, currentId, editableValue.value);
+  }
   if (props.menuRef && !props.menuRef.contains(e.target)) {
     selectEditorRow(e, null);
   }
@@ -99,11 +139,6 @@ const dropItem = (id: string) => {
   isActive.value = false;
   setDropZone(id);
 };
-
-const { selectedMenuItem, dragActive, dragEventCounter, selectedEditorRow } =
-  storeToRefs(useEditorStore());
-
-const { setDropZone, selectEditorRow } = useEditorStore();
 </script>
 
 <style scoped lang="scss">

@@ -102,12 +102,12 @@ export const header = [
           value: "none",
         },
       },
-      attributes: [
-        {
+      attributes: {
+        contenteditable: {
           attributeName: "contenteditable",
           value: true,
         },
-      ],
+      },
       style: ["z-50"],
     },
   },
@@ -154,7 +154,6 @@ export const header = [
           value: "none",
         },
       },
-
       placeholder: "This is a new text",
       attributes: [],
       style: "",
