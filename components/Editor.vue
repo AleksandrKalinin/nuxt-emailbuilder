@@ -58,6 +58,7 @@ import {
 const props = defineProps(["settingsMenuRef"]);
 
 const { createBuildingBlocks, addEditorItem, addEditorRow } = useEditorStore();
+
 const {
   editorTemplate,
   editorItems,
@@ -77,14 +78,13 @@ const {
   setEditableItem,
 } = useEditorStore();
 
+const editorItemsRefs = ref([]);
+
 const selectElement = (event: Event) => {
   const currentTarget = event.currentTarget as HTMLElement;
   const target = event.target as HTMLElement;
   currentEditorRowId.value = currentTarget.getAttribute("id");
-  /*
-  if (selectedEditorRow.value?.id === target.getAttribute("id")) {
-    setEditableItem(selectedEditorRow.value?.id);
-  } */
+
   if (target.hasAttribute("data-type")) {
     selectEditorElement(target.getAttribute("id"));
     setActiveSettings([typographySettings]);
@@ -97,6 +97,7 @@ const selectElement = (event: Event) => {
 
 onMounted(() => {
   createBuildingBlocks();
+  // createEditorItemsRefs();
 });
 </script>
 

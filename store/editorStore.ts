@@ -209,7 +209,6 @@ export const useEditorStore = defineStore("editor", () => {
     elementId: string,
     text: string
   ) => {
-    console.log("editor items", editorItems.value);
     const editorItemIndex = editorItems.value.findIndex(
       (item: EditorItem) => item.id === itemId
     );
@@ -314,6 +313,12 @@ export const useEditorStore = defineStore("editor", () => {
     editableItem.value = item;
   };
 
+  const editableBlock = ref<string | null>(null);
+
+  const setEditableBlock = (item: string | null) => {
+    editableBlock.value = item;
+  };
+
   return {
     editorTemplate,
     editorItems,
@@ -337,6 +342,8 @@ export const useEditorStore = defineStore("editor", () => {
     currentEditorRowId,
     editableItem,
     setEditableItem,
+    editableBlock,
+    setEditableBlock,
     updateEditorElement,
   };
 });

@@ -17,7 +17,7 @@ const { editorRows } = storeToRefs(useEditorStore());
 
 const props = defineProps(["el", "rowId", "itemId"]);
 
-const emit = defineEmits(["updateText", "updateElement"]);
+const emit = defineEmits(["updateText", "updateElement", "setEditableBlock"]);
 
 const inputValue = ref(props.el.placeholder);
 
@@ -26,6 +26,7 @@ const editableElement = ref<HTMLInputElement | null>(null);
 const focusInput = () => {
   const target = editableElement.value as HTMLInputElement;
   target.focus();
+  emit("setEditableBlock", props.rowId);
 };
 
 onMounted(() => {
@@ -33,9 +34,6 @@ onMounted(() => {
 });
 
 onClickOutside(editableElement, (e) => {
-  console.log("outside click element");
-  console.log("itemId", props.itemId);
-  console.log("props el id", props.el.id);
   emit("updateElement", props.itemId, props.el.id, inputValue.value);
   inputValue.value = "";
 });
@@ -44,7 +42,9 @@ const updateTextContent = () => {
   const rowIndex = editorRows.value.findIndex(
     (row: EditorRow) => row.id === props.rowId
   );
+
   const currentRow = editorRows.value[rowIndex];
+
   const itemIndex = currentRow.items.findIndex(
     (item: EditorItem) => item.id === props.itemId
   );

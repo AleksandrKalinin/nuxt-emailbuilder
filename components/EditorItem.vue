@@ -5,7 +5,7 @@
       selectedEditorRow === props.item.id ? 'editor-item_selected' : '',
       isActive ? 'editor-item_hovered' : '',
     ]"
-    ref="targetItem"
+    :ref="editorItemRef"
     @dragleave="leaveDropArea($event)"
     @dragenter="enterDropArea($event)"
     @dragover="($event) => $event.preventDefault()"
@@ -43,6 +43,7 @@
           :itemId="props.item.id"
           @updateText="updateEditableValue"
           @updateElement="updateEditorElement"
+          @setEditorBlock="setEditableBlock"
         />
       </div>
     </div>
@@ -74,16 +75,24 @@ const props = defineProps(["item", "menuRef", "rowId"]);
 
 const itemId = computed(() => props.item.id);
 
+const editorItemRef = ref(props.item.id);
+
 const {
   selectedMenuItem,
   dragActive,
   dragEventCounter,
   selectedEditorRow,
   editableItem,
+  editableBlock,
 } = storeToRefs(useEditorStore());
 
-const { setDropZone, selectEditorRow, setEditableItem, updateEditorElement } =
-  useEditorStore();
+const {
+  setDropZone,
+  selectEditorRow,
+  setEditableItem,
+  setEditableBlock,
+  updateEditorElement,
+} = useEditorStore();
 
 const isActive = ref<boolean>(false);
 
@@ -121,13 +130,9 @@ const updateEditableValue = (text: string) => {
   editableValue.value = text;
 };
 
-onClickOutside(targetItem, (e) => {
-  const currentId = editableItem.value as string;
-  if (editableItem.value) {
-    console.log("outside click item");
-    console.log("item id", itemId.value);
-    console.log("element id", currentId);
-    console.log("text is", editableValue.value);
+onClickOutside(editorItemRef, (e) => {
+  if (editableBlock.value === props.item.id && editableItem.value) {
+    const currentId = editableItem.value as string;
     updateEditorElement(props.item.id, currentId, editableValue.value);
   }
   if (props.menuRef && !props.menuRef.contains(e.target)) {
