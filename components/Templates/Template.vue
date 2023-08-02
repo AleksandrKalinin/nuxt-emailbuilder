@@ -30,6 +30,6 @@
 }
 
 .template__title {
-  @apply text-2xl text-center mb-5;
+  @apply text-2xl text-center mb-5 font-semibold;
 }
 </style>
