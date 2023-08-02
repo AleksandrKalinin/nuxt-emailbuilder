@@ -62,6 +62,7 @@ const { createBuildingBlocks, addEditorItem, addEditorRow } = useEditorStore();
 const {
   editorTemplate,
   editorItems,
+  editorElements,
   editorRows,
   selectedEditorRow,
   currentEditorRowId,
@@ -78,8 +79,6 @@ const {
   setEditableItem,
 } = useEditorStore();
 
-const editorItemsRefs = ref([]);
-
 const selectElement = (event: Event) => {
   const currentTarget = event.currentTarget as HTMLElement;
   const target = event.target as HTMLElement;
@@ -88,7 +87,14 @@ const selectElement = (event: Event) => {
   if (target.hasAttribute("data-type")) {
     selectEditorElement(target.getAttribute("id"));
     setActiveSettings([typographySettings]);
-    setEditableItem(target.getAttribute("id"));
+
+    const activeElement = editorElements.value.find(
+      (el: EditorElement) => el.id === target.getAttribute("id")
+    );
+
+    if (activeElement?.editable) {
+      setEditableItem(target.getAttribute("id"));
+    }
   } else {
     setActiveSettings([layoutSettings]);
     selectEditorRow(event, currentTarget.getAttribute("id"));
@@ -97,7 +103,6 @@ const selectElement = (event: Event) => {
 
 onMounted(() => {
   createBuildingBlocks();
-  // createEditorItemsRefs();
 });
 </script>
 

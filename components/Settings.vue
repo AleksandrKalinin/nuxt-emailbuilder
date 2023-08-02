@@ -1,7 +1,7 @@
 <template>
   <Transition>
     <div class="settings-wrap" v-if="menuOpen" ref="settingsMenu">
-      <div class="settings" v-if="selectedItemProperties">
+      <div class="settings">
         <div
           class="settings-block settings__block"
           v-for="settingBlock in settingsActive"

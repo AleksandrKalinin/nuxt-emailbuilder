@@ -196,6 +196,8 @@ export const useEditorStore = defineStore("editor", () => {
     newItem.tag = tagName;
     newItem.placeholder = placeholder;
     newItem.attributes = attributes;
+    newItem.type = item.type;
+    newItem.editable = item.editable;
     newItem.style = style;
     newItem.cssProperties = structuredClone(item.initialCssValues);
     newItem.inlineStyles = createInlineStyles(item.initialCssValues);
@@ -321,6 +323,7 @@ export const useEditorStore = defineStore("editor", () => {
 
   return {
     editorTemplate,
+    editorElements,
     editorItems,
     editorRows,
     createBuildingBlocks,

@@ -86,13 +86,8 @@ const {
   editableBlock,
 } = storeToRefs(useEditorStore());
 
-const {
-  setDropZone,
-  selectEditorRow,
-  setEditableItem,
-  setEditableBlock,
-  updateEditorElement,
-} = useEditorStore();
+const { setDropZone, selectEditorRow, setEditableBlock, updateEditorElement } =
+  useEditorStore();
 
 const isActive = ref<boolean>(false);
 
