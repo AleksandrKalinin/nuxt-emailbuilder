@@ -5,7 +5,7 @@
       selectedEditorRow === props.item.id ? 'editor-item_selected' : '',
       isActive ? 'editor-item_hovered' : '',
     ]"
-    ref="targetItem"
+    :ref="editorItemRef"
     @dragleave="leaveDropArea($event)"
     @dragenter="enterDropArea($event)"
     @dragover="($event) => $event.preventDefault()"
@@ -31,8 +31,22 @@
       "
       v-else
       v-for="htmlEl in item.children"
-      v-dompurify-html="htmlEl.markup"
-    ></div>
+    >
+      <div
+        v-if="htmlEl.id !== editableItem"
+        v-dompurify-html="htmlEl.markup"
+      ></div>
+      <div v-else>
+        <Editable
+          :el="htmlEl"
+          :rowId="rowId"
+          :itemId="props.item.id"
+          @updateText="updateEditableValue"
+          @updateElement="updateEditorElement"
+          @setEditorBlock="setEditableBlock"
+        />
+      </div>
+    </div>
     <div class="item-content__drag" draggable="true">
       <Icon name="ant-design:drag-outlined" color="#FFFFFF" size="30px" />
     </div>
@@ -57,7 +71,23 @@ import {
   actionSettings,
 } from "../constants/settings";
 
-const props = defineProps(["item", "menuRef"]);
+const props = defineProps(["item", "menuRef", "rowId"]);
+
+const itemId = computed(() => props.item.id);
+
+const editorItemRef = ref(props.item.id);
+
+const {
+  selectedMenuItem,
+  dragActive,
+  dragEventCounter,
+  selectedEditorRow,
+  editableItem,
+  editableBlock,
+} = storeToRefs(useEditorStore());
+
+const { setDropZone, selectEditorRow, setEditableBlock, updateEditorElement } =
+  useEditorStore();
 
 const isActive = ref<boolean>(false);
 
@@ -89,7 +119,17 @@ const leaveDropArea = (event: Event) => {
 
 const targetItem = ref(null);
 
-onClickOutside(targetItem, (e) => {
+const editableValue = ref<string>("");
+
+const updateEditableValue = (text: string) => {
+  editableValue.value = text;
+};
+
+onClickOutside(editorItemRef, (e) => {
+  if (editableBlock.value === props.item.id && editableItem.value) {
+    const currentId = editableItem.value as string;
+    updateEditorElement(props.item.id, currentId, editableValue.value);
+  }
   if (props.menuRef && !props.menuRef.contains(e.target)) {
     selectEditorRow(e, null);
   }
@@ -99,11 +139,6 @@ const dropItem = (id: string) => {
   isActive.value = false;
   setDropZone(id);
 };
-
-const { selectedMenuItem, dragActive, dragEventCounter, selectedEditorRow } =
-  storeToRefs(useEditorStore());
-
-const { setDropZone, selectEditorRow } = useEditorStore();
 </script>
 
 <style scoped lang="scss">

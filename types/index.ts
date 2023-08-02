@@ -3,9 +3,11 @@ export {};
 declare global {
   interface MenuItem {
     element: any;
-    icon: any;
+    icon: string;
     options: any;
     title: string;
+    type: string;
+    editable: false;
   }
 
   interface MenuItemElement {
@@ -27,6 +29,8 @@ declare global {
     inlineStyles: string;
     style: string[];
     cssProperties: CssProperty;
+    editable: boolean;
+    type: string;
   }
 
   interface EditorItem {

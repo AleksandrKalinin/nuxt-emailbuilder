@@ -14,6 +14,7 @@
           :item="element"
           :style="element.inlineStyles"
           :menuRef="settingsMenuRef"
+          :rowId="row.id"
         />
         <div class="editor-row__menu editor-menu">
           <div class="editor-menu__items">
@@ -57,26 +58,43 @@ import {
 const props = defineProps(["settingsMenuRef"]);
 
 const { createBuildingBlocks, addEditorItem, addEditorRow } = useEditorStore();
+
 const {
   editorTemplate,
   editorItems,
+  editorElements,
   editorRows,
   selectedEditorRow,
   currentEditorRowId,
+  editableItem,
 } = storeToRefs(useEditorStore());
 
 const { setActiveSettings } = useSettingsStore();
 
-const { selectEditorRow, selectEditorElement, deleteEditorRow, copyEditorRow } =
-  useEditorStore();
+const {
+  selectEditorRow,
+  selectEditorElement,
+  deleteEditorRow,
+  copyEditorRow,
+  setEditableItem,
+} = useEditorStore();
 
 const selectElement = (event: Event) => {
   const currentTarget = event.currentTarget as HTMLElement;
   const target = event.target as HTMLElement;
   currentEditorRowId.value = currentTarget.getAttribute("id");
+
   if (target.hasAttribute("data-type")) {
     selectEditorElement(target.getAttribute("id"));
     setActiveSettings([typographySettings]);
+
+    const activeElement = editorElements.value.find(
+      (el: EditorElement) => el.id === target.getAttribute("id")
+    );
+
+    if (activeElement?.editable) {
+      setEditableItem(target.getAttribute("id"));
+    }
   } else {
     setActiveSettings([layoutSettings]);
     selectEditorRow(event, currentTarget.getAttribute("id"));
