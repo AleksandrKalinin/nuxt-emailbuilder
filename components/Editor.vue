@@ -36,7 +36,7 @@
         </div>
       </div>
     </VueDraggableNext>
-    <button class="button_regular mx-auto mt-3" @click="addEditorRow()">
+    <button class="button button_regular mx-auto mt-3" @click="addEditorRow()">
       Add
     </button>
   </div>

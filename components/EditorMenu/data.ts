@@ -267,7 +267,13 @@ export const header = [
       attributes: {
         href: "https://developer.mozilla.org/ru/docs/Web/HTML/Element/video",
       },
-      style: ["button_regular", "mx-auto", "grow-0"],
+      style: [
+        "button",
+        "button_initial",
+        "button_regular",
+        "mx-auto",
+        "grow-0",
+      ],
     },
   },
   {

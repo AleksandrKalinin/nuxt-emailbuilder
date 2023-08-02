@@ -11,8 +11,20 @@
   box-sizing: border-box;
 }
 
+.button {
+  @apply flex justify-center justify-self-center items-center grow-0 transition duration-200 hover:bg-blue-500 bg-blue-400 text-white uppercase rounded-md text-center;
+}
+
 .button_regular {
-  @apply flex justify-center self-start justify-self-center items-center grow-0 transition duration-200 hover:bg-blue-500 text-base px-7 py-2 bg-blue-400 text-white uppercase tracking-[2px] rounded-md text-center;
+  @apply text-base tracking-[2px] px-7 py-2;
+}
+
+.button_initial {
+  @apply self-start;
+}
+
+.button_small {
+  @apply text-sm tracking-[1px] px-5 py-3;
 }
 
 /* width */

@@ -11,6 +11,10 @@ export default defineNuxtConfig({
       path: "~/components/EditorMenu",
       global: true,
     },
+    {
+      path: "~/components/Templates",
+      global: true,
+    },
   ],
   css: ["~/assets/style/variables.scss", "~/assets/style/main.scss"],
   modules: [
