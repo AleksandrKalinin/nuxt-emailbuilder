@@ -273,6 +273,55 @@ export const header = [
       options: [typographySettings, dimensionsSettings],
       placeholder: "Button text",
       initialCssValues: {
+        "margin-top": {
+          cssProperty: "margin-top",
+          value: 0,
+          unit: "px",
+        },
+        "margin-bottom": {
+          cssProperty: "margin-bottom",
+          value: 0,
+          unit: "px",
+        },
+        "margin-left": {
+          cssProperty: "margin-left",
+          value: 0,
+          unit: "px",
+        },
+        "margin-right": {
+          cssProperty: "margin-right",
+          value: 0,
+          unit: "px",
+        },
+        "padding-top": {
+          cssProperty: "padding-top",
+          value: 10,
+          unit: "px",
+        },
+        "padding-bottom": {
+          cssProperty: "padding-bottom",
+          value: 10,
+          unit: "px",
+        },
+        "padding-left": {
+          cssProperty: "padding-left",
+          value: 0,
+          unit: "px",
+        },
+        "padding-right": {
+          cssProperty: "padding-right",
+          value: 0,
+          unit: "px",
+        },
+        width: {
+          cssProperty: "width",
+          value: 100,
+          unit: "%",
+        },
+        height: {
+          cssProperty: "height",
+          value: "auto",
+        },
         "font-size": {
           cssProperty: "font-size",
           value: 14,

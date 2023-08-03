@@ -155,16 +155,25 @@ export const useEditorStore = defineStore("editor", () => {
   };
 
   const copyEditorRow = (id: string) => {
-    const index = editorRows.value.findIndex((item: any) => item.id == id);
-    const copiedItem = structuredClone(toRaw(editorRows.value[index]));
-    const newEditorItems = copiedItem.items;
-    newEditorItems.forEach((el: EditorItem) => {
-      el.id = uuidv4();
-      editorItems.value.push(el);
+    const index = editorRows.value.findIndex((row: any) => row.id == id);
+    const copiedRow = structuredClone(toRaw(editorRows.value[index]));
+
+    const newEditorItems = copiedRow.items.map((item: EditorItem) => {
+      const newElements = item.children.map((el: EditorElement) => {
+        el.id = uuidv4();
+        el.markup = createHtmlElement(el);
+        editorElements.value.push(el);
+        return el;
+      });
+      item.children = newElements;
+      item.id = uuidv4();
+      editorItems.value.push(item);
+      return item;
     });
-    copiedItem.id = uuidv4();
-    copiedItem.items = newEditorItems;
-    editorRows.value.splice(index, 0, copiedItem);
+
+    copiedRow.id = uuidv4();
+    copiedRow.items = newEditorItems;
+    editorRows.value.splice(index, 0, copiedRow);
   };
 
   const dragActive = ref(false);
@@ -300,7 +309,9 @@ export const useEditorStore = defineStore("editor", () => {
         const index = item.children.findIndex(
           (el) => el.id === selectedEditorRow.value?.id
         );
-        item.children[index] = editorElements.value[index];
+        if (index) {
+          item.children[index] = editorElements.value[index];
+        }
       });
     });
   };
