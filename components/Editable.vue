@@ -63,5 +63,6 @@ const updateTextContent = () => {
   background: transparent;
   border-radius: 0;
   outline: 1px solid cornflowerblue;
+  width: 100%;
 }
 </style>

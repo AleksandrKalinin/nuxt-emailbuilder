@@ -1,18 +1,19 @@
 import { defineStore } from "pinia";
-import { useEditorStore } from "./editorStore";
 
 export const useSettingsStore = defineStore("settings", () => {
-  const { selectEditorRow } = useEditorStore();
-
   const settingsActive = ref<EditorRow[] | MenuSetting[] | null>([]);
   const settingsValues = ref<any>([]);
-  const menuOpen = ref<boolean>(false);
+  const settingsOpen = ref<boolean>(false);
+
+  const toggleSettingsState = (state: boolean) => {
+    settingsOpen.value = state;
+  };
 
   const setActiveSettings = (properties: MenuSetting[]) => {
-    properties.forEach((element) => {
+    properties.forEach(() => {
       settingsActive.value = properties;
     });
-    menuOpen.value = true;
+    toggleSettingsState(true);
   };
 
   const setSettingsValues = (params: EditorRow[]) => {
@@ -21,7 +22,8 @@ export const useSettingsStore = defineStore("settings", () => {
 
   return {
     settingsActive,
-    menuOpen,
+    settingsOpen,
+    toggleSettingsState,
     setActiveSettings,
     setSettingsValues,
   };

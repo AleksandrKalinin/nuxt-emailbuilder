@@ -36,7 +36,7 @@
         </div>
       </div>
     </VueDraggableNext>
-    <button class="button_regular mx-auto mt-3" @click="addEditorRow()">
+    <button class="button button_regular mx-auto mt-3" @click="addEditorRow()">
       Add
     </button>
   </div>
@@ -59,15 +59,8 @@ const props = defineProps(["settingsMenuRef"]);
 
 const { createBuildingBlocks, addEditorItem, addEditorRow } = useEditorStore();
 
-const {
-  editorTemplate,
-  editorItems,
-  editorElements,
-  editorRows,
-  selectedEditorRow,
-  currentEditorRowId,
-  editableItem,
-} = storeToRefs(useEditorStore());
+const { editorElements, editorRows, selectedEditorRow, currentEditorRowId } =
+  storeToRefs(useEditorStore());
 
 const { setActiveSettings } = useSettingsStore();
 
@@ -97,7 +90,7 @@ const selectElement = (event: Event) => {
     }
   } else {
     setActiveSettings([layoutSettings]);
-    selectEditorRow(event, currentTarget.getAttribute("id"));
+    selectEditorRow(currentTarget.getAttribute("id"));
   }
 };
 
