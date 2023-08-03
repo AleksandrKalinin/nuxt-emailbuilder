@@ -42,11 +42,6 @@ export const initialDimensionValues = {
     value: 600,
     unit: "px",
   },
-  "min-height": {
-    cssProperty: "min-height",
-    value: 80,
-    unit: "px",
-  },
   "margin-top": {
     cssProperty: "margin-top",
     value: 0,

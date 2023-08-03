@@ -28,7 +28,6 @@
         word-wrap: break-word;
         word-break: break-word;
         background-color: transparent;
-        height: 100%;
       "
       v-else
       v-for="htmlEl in item.children"
@@ -137,7 +136,7 @@ const dropItem = (id: string) => {
 
 <style scoped lang="scss">
 .editor-item {
-  @apply relative z-20 h-full self-stretch;
+  @apply relative z-20 h-auto self-stretch;
 }
 
 .editor-item_selected {
