@@ -1,30 +1,26 @@
 <template>
-  <input
+  <textarea
     type="text"
-    class="editable"
+    class="editable resize-none"
     v-model="inputValue"
     :style="el.inlineStyles"
     @input="$emit('updateText', inputValue)"
-    ref="editableElement"
-  />
+    ref="textarea"
+  >
+  </textarea>
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import { useEditorStore } from "@/store/editorStore";
-
-const { editorRows } = storeToRefs(useEditorStore());
-
 const props = defineProps(["el", "rowId", "itemId"]);
 
 const emit = defineEmits(["updateText", "updateElement", "setEditableBlock"]);
 
+const { textarea } = useTextareaAutosize();
+
 const inputValue = ref(props.el.placeholder);
 
-const editableElement = ref<HTMLInputElement | null>(null);
-
 const focusInput = () => {
-  const target = editableElement.value as HTMLInputElement;
+  const target = textarea.value;
   target.focus();
   emit("setEditableBlock", props.rowId);
 };
@@ -33,29 +29,10 @@ onMounted(() => {
   focusInput();
 });
 
-onClickOutside(editableElement, (e) => {
+onClickOutside(textarea, (e) => {
   emit("updateElement", props.itemId, props.el.id, inputValue.value);
   inputValue.value = "";
 });
-
-const updateTextContent = () => {
-  const rowIndex = editorRows.value.findIndex(
-    (row: EditorRow) => row.id === props.rowId
-  );
-
-  const currentRow = editorRows.value[rowIndex];
-
-  const itemIndex = currentRow.items.findIndex(
-    (item: EditorItem) => item.id === props.itemId
-  );
-  const currentItem = currentRow.items[itemIndex];
-  const elementIndex = currentItem.children.findIndex(
-    (element: EditorElement) => element.id === props.el.id
-  );
-  editorRows.value[rowIndex].items[itemIndex].children[
-    elementIndex
-  ].placeholder = "content";
-};
 </script>
 
 <style scoped>
@@ -64,5 +41,6 @@ const updateTextContent = () => {
   border-radius: 0;
   outline: 1px solid cornflowerblue;
   width: 100%;
+  resize: none;
 }
 </style>

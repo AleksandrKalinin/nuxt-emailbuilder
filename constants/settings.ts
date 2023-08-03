@@ -355,6 +355,18 @@ export const dimensionsSettings = {
         },
       ],
     },
+    {
+      name: "Width",
+      property: "width",
+      type: "input",
+      display: "row",
+    },
+    {
+      name: "Height",
+      property: "height",
+      type: "input",
+      display: "row",
+    },
   ],
 };
 

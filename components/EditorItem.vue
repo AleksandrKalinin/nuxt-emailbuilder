@@ -20,6 +20,7 @@
       <span class="px-3 text-center">{{ item.placeholder }}</span>
     </div>
     <div
+      ref="el"
       style="
         margin: 0 auto;
         min-width: 100%;
@@ -64,8 +65,6 @@ import { useEditorStore } from "@/store/editorStore";
 import { useSettingsStore } from "@/store/settingsStore";
 
 const props = defineProps(["item", "menuRef", "rowId"]);
-
-const { settingsOpen } = storeToRefs(useSettingsStore());
 
 const { toggleSettingsState } = useSettingsStore();
 
