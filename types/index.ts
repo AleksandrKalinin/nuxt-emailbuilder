@@ -31,6 +31,7 @@ declare global {
   interface EditorElement {
     id: string;
     tag: string;
+    options: any;
     placeholder?: string;
     attributes: any[];
     markup: string;

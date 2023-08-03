@@ -197,6 +197,7 @@ export const useEditorStore = defineStore("editor", () => {
     newItem.tag = tagName;
     newItem.placeholder = placeholder;
     newItem.attributes = attributes;
+    newItem.options = item.options;
     newItem.type = item.type;
     newItem.editable = item.editable;
     newItem.style = style;

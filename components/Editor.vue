@@ -79,11 +79,12 @@ const selectElement = (event: Event) => {
 
   if (target.hasAttribute("data-type")) {
     selectEditorElement(target.getAttribute("id"));
-    setActiveSettings([typographySettings]);
 
     const activeElement = editorElements.value.find(
       (el: EditorElement) => el.id === target.getAttribute("id")
     );
+
+    setActiveSettings(activeElement?.options);
 
     if (activeElement?.editable) {
       setEditableItem(target.getAttribute("id"));

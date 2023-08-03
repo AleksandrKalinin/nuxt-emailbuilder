@@ -9,11 +9,11 @@ export const header = [
   {
     title: "Layout",
     icon: "radix-icons:layout",
-    options: [layoutSettings, dimensionsSettings],
     type: "element",
     element: {
       tag: "div",
       placeholder: "New container",
+      options: [layoutSettings, dimensionsSettings],
       editable: false,
       initialCssValues: {
         "margin-top": {
@@ -63,11 +63,11 @@ export const header = [
   {
     title: "Heading",
     icon: "radix-icons:heading",
-    options: [typographySettings, dimensionsSettings],
     type: "element",
     element: {
       tag: "h1",
       editable: true,
+      options: [typographySettings, dimensionsSettings],
       placeholder: "Heading",
       initialCssValues: {
         "font-size": {
@@ -167,11 +167,11 @@ export const header = [
   {
     title: "Text",
     icon: "radix-icons:text",
-    options: [typographySettings, dimensionsSettings],
     type: "element",
     element: {
       tag: "p",
       editable: true,
+      options: [typographySettings, dimensionsSettings],
       initialCssValues: {
         "margin-top": {
           cssProperty: "margin-top",
@@ -266,11 +266,11 @@ export const header = [
   {
     title: "Button",
     icon: "radix-icons:button",
-    options: [typographySettings, dimensionsSettings],
     type: "element",
     element: {
       tag: "div",
       editable: false,
+      options: [typographySettings, dimensionsSettings],
       placeholder: "Button text",
       initialCssValues: {
         "font-size": {
@@ -308,54 +308,6 @@ export const header = [
           cssProperty: "text-transform",
           value: "none",
         },
-        "margin-top": {
-          cssProperty: "margin-top",
-          value: 0,
-          unit: "px",
-        },
-        "margin-bottom": {
-          cssProperty: "margin-bottom",
-          value: 0,
-          unit: "px",
-        },
-        "margin-left": {
-          cssProperty: "margin-left",
-          value: 0,
-          unit: "px",
-        },
-        "margin-right": {
-          cssProperty: "margin-right",
-          value: 0,
-          unit: "px",
-        },
-        "padding-top": {
-          cssProperty: "padding-top",
-          value: 10,
-          unit: "px",
-        },
-        "padding-bottom": {
-          cssProperty: "padding-bottom",
-          value: 10,
-          unit: "px",
-        },
-        "padding-left": {
-          cssProperty: "padding-left",
-          value: 0,
-          unit: "px",
-        },
-        "padding-right": {
-          cssProperty: "padding-right",
-          value: 0,
-          unit: "px",
-        },
-        width: {
-          cssProperty: "width",
-          value: "auto",
-        },
-        height: {
-          cssProperty: "height",
-          value: "auto",
-        },
       },
       attributes: {
         href: "https://developer.mozilla.org/ru/docs/Web/HTML/Element/video",
@@ -372,66 +324,12 @@ export const header = [
   {
     title: "Image",
     icon: "radix-icons:image",
-    options: [imageSettings],
     type: "element",
     element: {
       tag: "img",
       editable: false,
-      attributes: {
-        src: {
-          attributeName: "src",
-          value: "https://i.imgur.com/SdIjrA0.png",
-        },
-      },
-      style: "",
-    },
-  },
-  {
-    title: "Divider",
-    icon: "radix-icons:divider-horizontal",
-    options: [typographySettings],
-    type: "element",
-    element: {
-      tag: "div",
-      editable: false,
-      placeholder: "fiahfie",
-      attributes: [],
+      options: [dimensionsSettings],
       initialCssValues: {
-        "font-size": {
-          cssProperty: "font-size",
-          value: 14,
-          unit: "px",
-        },
-        color: {
-          cssProperty: "color",
-          value: "#ffffff",
-        },
-        "font-weight": {
-          cssProperty: "font-weight",
-          value: 400,
-        },
-        "font-style": {
-          cssProperty: "font-style",
-          value: "normal",
-        },
-        "line-height": {
-          cssProperty: "line-height",
-          value: 22,
-          unit: "px",
-        },
-        "letter-spacing": {
-          cssProperty: "letter-spacing",
-          value: 1,
-          unit: "px",
-        },
-        "text-align": {
-          cssProperty: "text-align",
-          value: "left",
-        },
-        "text-transform": {
-          cssProperty: "text-transform",
-          value: "none",
-        },
         "margin-top": {
           cssProperty: "margin-top",
           value: 0,
@@ -472,18 +370,87 @@ export const header = [
           value: 0,
           unit: "px",
         },
-        align: {
-          cssProperty: "align",
-          value: "left",
-        },
         width: {
           cssProperty: "width",
-          value: 600,
-          unit: "px",
+          value: "auto",
         },
         height: {
           cssProperty: "height",
           value: "auto",
+        },
+      },
+      attributes: {
+        src: {
+          attributeName: "src",
+          value: "https://i.imgur.com/SdIjrA0.png",
+        },
+      },
+      style: "",
+    },
+  },
+  {
+    title: "Divider",
+    icon: "radix-icons:divider-horizontal",
+    type: "element",
+    element: {
+      tag: "div",
+      editable: false,
+      options: [dimensionsSettings],
+      placeholder: "",
+      attributes: [],
+      initialCssValues: {
+        "margin-top": {
+          cssProperty: "margin-top",
+          value: 5,
+          unit: "px",
+        },
+        "margin-bottom": {
+          cssProperty: "margin-bottom",
+          value: 5,
+          unit: "px",
+        },
+        "margin-left": {
+          cssProperty: "margin-left",
+          value: 15,
+          unit: "px",
+        },
+        "margin-right": {
+          cssProperty: "margin-right",
+          value: 15,
+          unit: "px",
+        },
+        "padding-top": {
+          cssProperty: "padding-top",
+          value: 0,
+          unit: "px",
+        },
+        "padding-bottom": {
+          cssProperty: "padding-bottom",
+          value: 0,
+          unit: "px",
+        },
+        "padding-left": {
+          cssProperty: "padding-left",
+          value: 0,
+          unit: "px",
+        },
+        "padding-right": {
+          cssProperty: "padding-right",
+          value: 0,
+          unit: "px",
+        },
+        width: {
+          cssProperty: "width",
+          value: "auto",
+        },
+        height: {
+          cssProperty: "height",
+          value: 2,
+          unit: "px",
+        },
+        background: {
+          cssProperty: "background",
+          value: "#444444",
         },
       },
       style: ["z-50"],
@@ -492,11 +459,11 @@ export const header = [
   {
     title: "Table",
     icon: "radix-icons:table",
-    options: [typographySettings, dimensionsSettings],
     type: "element",
     element: {
       tag: "table",
       editable: false,
+      options: [typographySettings, dimensionsSettings],
       placeholder: "This is a new table",
       initialCssValues: {
         "font-size": {
@@ -542,11 +509,11 @@ export const header = [
   {
     title: "Video",
     icon: "octicon:video-24",
-    options: [dimensionsSettings],
     type: "element",
     element: {
       tag: "video",
       editable: false,
+      options: [dimensionsSettings],
       placeholder: "This is a new video",
       attributes: {
         autoplay: false,
@@ -560,11 +527,11 @@ export const header = [
   {
     title: "Html",
     icon: "radix-icons:code",
-    options: [dimensionsSettings],
     type: "element",
     element: {
       tag: "html",
       editable: false,
+      options: [dimensionsSettings],
       placeholder: "insert your html here",
       attributes: [],
       style: "",
