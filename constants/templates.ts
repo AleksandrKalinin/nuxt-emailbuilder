@@ -15,7 +15,7 @@ export const templates = [
                 attributes: {},
                 cssProperties: {
                   color: { cssProperty: "color", value: "#222222" },
-                  "font-size ": {
+                  "font-size": {
                     cssProperty: "font-size",
                     value: 26,
                     unit: "px",
@@ -36,6 +36,55 @@ export const templates = [
                   "text-transform": {
                     cssProperty: "text-transform",
                     value: "none",
+                  },
+                  "margin-top": {
+                    cssProperty: "margin-top",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "margin-bottom": {
+                    cssProperty: "margin-bottom",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "margin-left": {
+                    cssProperty: "margin-left",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "margin-right": {
+                    cssProperty: "margin-right",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "padding-top": {
+                    cssProperty: "padding-top",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "padding-bottom": {
+                    cssProperty: "padding-bottom",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "padding-left": {
+                    cssProperty: "padding-left",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "padding-right": {
+                    cssProperty: "padding-right",
+                    value: 0,
+                    unit: "px",
+                  },
+                  width: {
+                    cssProperty: "width",
+                    value: 100,
+                    unit: "%",
+                  },
+                  height: {
+                    cssProperty: "height",
+                    value: "auto",
                   },
                 },
                 editable: true,
@@ -120,7 +169,7 @@ export const templates = [
                 attributes: {},
                 cssProperties: {
                   color: { cssProperty: "color", value: "#222222" },
-                  "font-size ": {
+                  "font-size": {
                     cssProperty: "font-size",
                     value: 26,
                     unit: "px",
@@ -225,7 +274,7 @@ export const templates = [
                 attributes: {},
                 cssProperties: {
                   color: { cssProperty: "color", value: "#222222" },
-                  "font-size ": {
+                  "font-size": {
                     cssProperty: "font-size",
                     value: 26,
                     unit: "px",
@@ -330,7 +379,7 @@ export const templates = [
                 attributes: {},
                 cssProperties: {
                   color: { cssProperty: "color", value: "#222222" },
-                  "font-size ": {
+                  "font-size": {
                     cssProperty: "font-size",
                     value: 26,
                     unit: "px",
@@ -435,7 +484,7 @@ export const templates = [
                 attributes: {},
                 cssProperties: {
                   color: { cssProperty: "color", value: "#222222" },
-                  "font-size ": {
+                  "font-size": {
                     cssProperty: "font-size",
                     value: 26,
                     unit: "px",
@@ -540,7 +589,7 @@ export const templates = [
                 attributes: {},
                 cssProperties: {
                   color: { cssProperty: "color", value: "#222222" },
-                  "font-size ": {
+                  "font-size": {
                     cssProperty: "font-size",
                     value: 26,
                     unit: "px",
@@ -645,7 +694,7 @@ export const templates = [
                 attributes: {},
                 cssProperties: {
                   color: { cssProperty: "color", value: "#222222" },
-                  "font-size ": {
+                  "font-size": {
                     cssProperty: "font-size",
                     value: 26,
                     unit: "px",

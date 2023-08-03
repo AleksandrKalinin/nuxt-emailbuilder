@@ -64,17 +64,11 @@ import { storeToRefs } from "pinia";
 import { useEditorStore } from "@/store/editorStore";
 import { useSettingsStore } from "@/store/settingsStore";
 
-import {
-  layoutSettings,
-  typographySettings,
-  imageSettings,
-  dimensionsSettings,
-  actionSettings,
-} from "../constants/settings";
-
 const props = defineProps(["item", "menuRef", "rowId"]);
 
-const itemId = computed(() => props.item.id);
+const { settingsOpen } = storeToRefs(useSettingsStore());
+
+const { toggleSettingsState } = useSettingsStore();
 
 const editorItemRef = ref(props.item.id);
 
@@ -113,8 +107,6 @@ const leaveDropArea = (event: Event) => {
     dragEventCounter.value === 0
   ) {
     areaActive.value = false;
-    if (dragActive.value) {
-    }
   }
 };
 
@@ -132,7 +124,8 @@ onClickOutside(editorItemRef, (e) => {
     updateEditorElement(props.item.id, currentId, editableValue.value);
   }
   if (props.menuRef && !props.menuRef.contains(e.target)) {
-    selectEditorRow(e, null);
+    toggleSettingsState(false);
+    selectEditorRow(null);
   }
 });
 

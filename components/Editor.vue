@@ -79,7 +79,7 @@ const selectElement = (event: Event) => {
 
   if (target.hasAttribute("data-type")) {
     selectEditorElement(target.getAttribute("id"));
-    setActiveSettings([typographySettings, dimensionsSettings]);
+    setActiveSettings([typographySettings]);
 
     const activeElement = editorElements.value.find(
       (el: EditorElement) => el.id === target.getAttribute("id")
@@ -90,7 +90,7 @@ const selectElement = (event: Event) => {
     }
   } else {
     setActiveSettings([layoutSettings]);
-    selectEditorRow(event, currentTarget.getAttribute("id"));
+    selectEditorRow(currentTarget.getAttribute("id"));
   }
 };
 

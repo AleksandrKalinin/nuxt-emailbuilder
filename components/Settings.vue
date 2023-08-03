@@ -1,6 +1,6 @@
 <template>
   <Transition>
-    <div class="settings-wrap" v-if="menuOpen" ref="settingsMenu">
+    <div class="settings-wrap" v-if="settingsOpen" ref="settingsMenu">
       <div class="settings">
         <div
           class="settings-block settings__block"
@@ -71,18 +71,13 @@ import { useSettingsStore } from "@/store/settingsStore";
 import { useEditorStore } from "@/store/editorStore";
 import { storeToRefs } from "pinia";
 
-const { menuOpen, settingsActive } = storeToRefs(useSettingsStore());
+const { settingsOpen, settingsActive } = storeToRefs(useSettingsStore());
 
 const { updateItemCssProperties, updateEditorRowLayout } = useEditorStore();
-const { editorItems, editorRows, selectedEditorRow } = storeToRefs(
-  useEditorStore()
-);
+const { selectedEditorRow } = storeToRefs(useEditorStore());
 
 const selectedItemProperties = computed(() => {
   if (selectedEditorRow.value) {
-    const item = editorRows.value.find(
-      (item: EditorRow) => item.id === selectedEditorRow.value?.id
-    );
     return selectedEditorRow.value?.cssProperties;
   } else return null;
 });
@@ -98,10 +93,6 @@ const selectedItemAttributes = computed(() => {
 });
 */
 const settingsMenu = ref(null);
-
-onClickOutside(settingsMenu, () => {
-  menuOpen.value = false;
-});
 
 defineExpose({ settingsMenu });
 </script>

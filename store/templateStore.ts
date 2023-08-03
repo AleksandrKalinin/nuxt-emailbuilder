@@ -3,7 +3,9 @@ import { templates } from "@/constants/templates";
 import { useEditorStore } from "./editorStore";
 
 export const useTemplateStore = defineStore("template", () => {
-  const { setEditorRows } = useEditorStore();
+  const editorStore = useEditorStore();
+  const { setEditorRows, selectEditorRow, extractFromTemplate } =
+    useEditorStore();
 
   const emailTemplates = ref<EmailTemplate[] | []>([]);
 
@@ -25,10 +27,11 @@ export const useTemplateStore = defineStore("template", () => {
     }
   });
 
-  const selectTemplate = async (rows: EditorRow[]) => {
-    setEditorRows(rows);
+  const selectTemplate = async (template: EmailTemplate) => {
+    setEditorRows(template.content);
+    extractFromTemplate(template.content);
+    selectEditorRow(template.id);
     await navigateTo("/editor");
-    console.log(rows);
   };
 
   return {

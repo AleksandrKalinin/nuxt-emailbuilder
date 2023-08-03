@@ -10,7 +10,7 @@
       <h2 class="template__title">{{ template.name }}</h2>
       <a
         class="button button_small cursor-pointer"
-        @click="emit('selectTemplate', template.content)"
+        @click="emit('selectTemplate', template)"
         >Open template</a
       >
     </div>

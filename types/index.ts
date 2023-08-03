@@ -15,7 +15,6 @@ declare global {
     options: any;
     title: string;
     type: string;
-    editable: false;
   }
 
   interface MenuItemElement {
@@ -24,6 +23,7 @@ declare global {
     placeholder: string;
     style: string[];
     tag: string;
+    editable: false;
   }
 
   interface MenuItemOption {}
