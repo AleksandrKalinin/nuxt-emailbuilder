@@ -1,6 +1,14 @@
 export {};
 
 declare global {
+  interface EmailTemplate {
+    id: string;
+    name: string;
+    category: string;
+    preview: string;
+    content: EditorRow[];
+  }
+
   interface MenuItem {
     element: any;
     icon: string;

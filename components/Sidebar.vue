@@ -2,15 +2,36 @@
   <div class="sidebar">
     <ul class="filter">
       <li class="filter__option filter-option">
-        <input type="radio" id="all" class="mr-2" />
+        <input
+          type="radio"
+          id="all"
+          value="all"
+          class="mr-2"
+          v-model="selectedOption"
+          @change="selectCategory(selectedOption)"
+        />
         <label for="all" class="filter-option__label">All</label>
       </li>
       <li class="filter__option filter-option">
-        <input type="radio" id="free" class="mr-2" />
+        <input
+          type="radio"
+          id="free"
+          value="free"
+          class="mr-2"
+          v-model="selectedOption"
+          @change="selectCategory(selectedOption)"
+        />
         <label for="free" class="filter-option__label">Free</label>
       </li>
       <li class="filter__option filter-option">
-        <input type="radio" id="premium" class="mr-2" />
+        <input
+          type="radio"
+          id="premium"
+          value="premium"
+          class="mr-2"
+          v-model="selectedOption"
+          @change="selectCategory(selectedOption)"
+        />
         <label for="premium" class="filter-option__label">Premium</label>
       </li>
     </ul>
@@ -18,7 +39,13 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useTemplateStore } from "@/store/templateStore";
+
+const { selectCategory } = useTemplateStore();
+
+const selectedOption = ref("all");
+</script>
 
 <style scoped>
 .sidebar {

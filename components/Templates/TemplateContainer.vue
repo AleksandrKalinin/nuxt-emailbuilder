@@ -1,10 +1,22 @@
 <template>
   <div class="templates-container">
-    <Template v-for="item in 9" />
+    <Template
+      v-for="template in filteredEmailTemplates"
+      :key="template.id"
+      :template="template"
+      @selectTemplate="selectTemplate"
+    />
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useTemplateStore } from "@/store/templateStore";
+import { storeToRefs } from "pinia";
+
+const { filteredEmailTemplates } = storeToRefs(useTemplateStore());
+
+const { selectTemplate } = useTemplateStore();
+</script>
 
 <style scoped>
 .templates-container {

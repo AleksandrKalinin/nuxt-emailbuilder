@@ -74,10 +74,6 @@ export const cssProperties = {
     value: 0,
     unit: "px",
   },
-  align: {
-    cssProperty: "align",
-    value: "left",
-  },
   width: {
     cssProperty: "width",
     value: 600,

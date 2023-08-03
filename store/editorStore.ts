@@ -13,8 +13,6 @@ import {
 import { create } from "domain";
 
 export const useEditorStore = defineStore("editor", () => {
-  const { setSettingsValues } = useSettingsStore();
-
   const createInlineStyles = (params: CssProperty) => {
     let inlineStyles: string = "";
     for (const item in params) {
@@ -47,8 +45,11 @@ export const useEditorStore = defineStore("editor", () => {
     },
   ]);
 
-  const currentEditorRowId = ref<string | null>(null);
+  const setEditorRows = (rows: EditorRow[]) => {
+    editorRows.value = rows;
+  };
 
+  const currentEditorRowId = ref<string | null>(null);
   const editorBlocks = ref<any>(tempBlocks);
   const editorTemplate = ref<string | null>(null);
 
@@ -107,15 +108,6 @@ export const useEditorStore = defineStore("editor", () => {
     selectedMenuItem.value = item;
   };
 
-  const addEditorRow = () => {
-    const row = {} as EditorRow;
-    row.id = uuidv4();
-    row.items = [toRaw(addEditorItem())];
-    row.columns = 1;
-    row["data-type"] = "block";
-    editorRows.value.push(row);
-  };
-
   const updateEditorRowLayout = (cols: number) => {
     const id = selectedEditorRow.value?.id;
     const index = editorRows.value.findIndex(
@@ -146,6 +138,15 @@ export const useEditorStore = defineStore("editor", () => {
     item.inlineStyles = createInlineStyles(item.cssProperties);
     editorItems.value.push(item);
     return item;
+  };
+
+  const addEditorRow = () => {
+    const row = {} as EditorRow;
+    row.id = uuidv4();
+    row.items = [toRaw(addEditorItem())];
+    row.columns = 1;
+    row["data-type"] = "block";
+    editorRows.value.push(row);
   };
 
   const deleteEditorRow = (id: string) => {
@@ -187,6 +188,7 @@ export const useEditorStore = defineStore("editor", () => {
 
   const addEditorElement = (id: string, item: any) => {
     const index = editorItems.value.findIndex((item: any) => item.id == id);
+    console.log("item", item);
     const tagName: string = item.tag;
     const placeholder: string = item.placeholder;
     const attributes: any = item.attributes;
@@ -202,6 +204,7 @@ export const useEditorStore = defineStore("editor", () => {
     newItem.cssProperties = structuredClone(item.initialCssValues);
     newItem.inlineStyles = createInlineStyles(item.initialCssValues);
     newItem.markup = createHtmlElement(newItem);
+    console.log("new item", newItem);
     editorElements.value.push(newItem);
     editorItems.value[index].children.push(newItem);
   };
@@ -229,7 +232,6 @@ export const useEditorStore = defineStore("editor", () => {
     const element = document.createElement(item.tag);
     element.setAttribute("id", item.id);
     element.setAttribute("data-type", "item");
-    element.setAttribute("contenteditable", "true");
     element.addEventListener("click", (e: Event) => {
       e.stopPropagation();
       const target = e.target as HTMLElement;
@@ -244,27 +246,23 @@ export const useEditorStore = defineStore("editor", () => {
     if (item.placeholder) {
       element.innerText = item.placeholder;
     }
-    /*
+
     if (item.attributes) {
       console.log(item.attributes);
       for (const key in item.attributes) {
-        console.log(
-          "key is",
-          item.attributes[key].attributeName,
-          item.attributes[key].value
-        );
         element.setAttribute(
           item.attributes[key].attributeName,
           item.attributes[key].value
         );
       }
     }
-    */
+
     if (item.style) {
       item.style.forEach((className: string) => {
         element.classList.add(className);
       });
     }
+    console.log("html is ", element.outerHTML);
     return element.outerHTML;
   };
 
@@ -313,6 +311,7 @@ export const useEditorStore = defineStore("editor", () => {
 
   const setEditableItem = (item: string | null) => {
     editableItem.value = item;
+    console.log(editorRows.value);
   };
 
   const editableBlock = ref<string | null>(null);
@@ -331,6 +330,7 @@ export const useEditorStore = defineStore("editor", () => {
     selectMenuItem,
     addEditorRow,
     updateEditorRowLayout,
+    setEditorRows,
     addEditorItem,
     deleteEditorRow,
     copyEditorRow,

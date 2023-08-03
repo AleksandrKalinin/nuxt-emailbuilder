@@ -124,6 +124,55 @@ export const header = [
       tag: "p",
       editable: true,
       initialCssValues: {
+        "margin-top": {
+          cssProperty: "margin-top",
+          value: 0,
+          unit: "px",
+        },
+        "margin-bottom": {
+          cssProperty: "margin-bottom",
+          value: 0,
+          unit: "px",
+        },
+        "margin-left": {
+          cssProperty: "margin-left",
+          value: 0,
+          unit: "px",
+        },
+        "margin-right": {
+          cssProperty: "margin-right",
+          value: 0,
+          unit: "px",
+        },
+        "padding-top": {
+          cssProperty: "padding-top",
+          value: 0,
+          unit: "px",
+        },
+        "padding-bottom": {
+          cssProperty: "padding-bottom",
+          value: 0,
+          unit: "px",
+        },
+        "padding-left": {
+          cssProperty: "padding-left",
+          value: 0,
+          unit: "px",
+        },
+        "padding-right": {
+          cssProperty: "padding-right",
+          value: 0,
+          unit: "px",
+        },
+        width: {
+          cssProperty: "width",
+          value: 100,
+          unit: "%",
+        },
+        height: {
+          cssProperty: "height",
+          value: "auto",
+        },
         "font-size": {
           cssProperty: "font-size",
           value: 14,
@@ -285,7 +334,10 @@ export const header = [
       tag: "img",
       editable: false,
       attributes: {
-        src: "https://i.imgur.com/SdIjrA0.png",
+        src: {
+          attributeName: "src",
+          value: "https://i.imgur.com/SdIjrA0.png",
+        },
       },
       style: "",
     },

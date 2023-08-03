@@ -1,20 +1,35 @@
 <template>
-  <div class="template">
+  <div class="template group">
+    <span class="template__ribbon" v-if="template.category === 'premium'"
+      >Premium</span
+    >
     <div class="template__image template-image">
       <img src="@/assets/images/temp.png" class="template-image__picture" />
     </div>
     <div class="template__overlay template-overlay">
-      <h2 class="template__title">Infographic Promotion Email</h2>
-      <a class="button button_small cursor-pointer">Open template</a>
+      <h2 class="template__title">{{ template.name }}</h2>
+      <a
+        class="button button_small cursor-pointer"
+        @click="emit('selectTemplate', template.content)"
+        >Open template</a
+      >
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const props = defineProps(["template"]);
+
+const emit = defineEmits(["selectTemplate"]);
+</script>
 
 <style scoped>
 .template {
-  @apply w-[280px] h-[370px] relative hover:scale-[1.02] transition duration-200;
+  @apply w-[280px] h-[370px] relative hover:scale-[1.02] transition duration-200 relative overflow-hidden;
+}
+
+.template__ribbon {
+  @apply absolute top-[20px] left-[-35px] z-10 bg-red-500 text-white px-10 py-1 uppercase text-xs tracking-[1px] rotate-[-45deg];
 }
 
 .template__image {
@@ -26,7 +41,7 @@
 }
 
 .template__overlay {
-  @apply h-full w-full absolute bg-white/[0.9] flex flex-col justify-center items-center top-0 left-0 shadow-xl p-[20px] opacity-0 hover:opacity-100 transition duration-200;
+  @apply h-full w-full absolute bg-white/[0.9] flex flex-col justify-center items-center top-0 left-0 shadow-xl p-[20px] opacity-0 group-hover:opacity-100 transition duration-200;
 }
 
 .template__title {

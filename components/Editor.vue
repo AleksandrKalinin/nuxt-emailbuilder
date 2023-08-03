@@ -59,15 +59,8 @@ const props = defineProps(["settingsMenuRef"]);
 
 const { createBuildingBlocks, addEditorItem, addEditorRow } = useEditorStore();
 
-const {
-  editorTemplate,
-  editorItems,
-  editorElements,
-  editorRows,
-  selectedEditorRow,
-  currentEditorRowId,
-  editableItem,
-} = storeToRefs(useEditorStore());
+const { editorElements, editorRows, selectedEditorRow, currentEditorRowId } =
+  storeToRefs(useEditorStore());
 
 const { setActiveSettings } = useSettingsStore();
 
@@ -86,7 +79,7 @@ const selectElement = (event: Event) => {
 
   if (target.hasAttribute("data-type")) {
     selectEditorElement(target.getAttribute("id"));
-    setActiveSettings([typographySettings]);
+    setActiveSettings([typographySettings, dimensionsSettings]);
 
     const activeElement = editorElements.value.find(
       (el: EditorElement) => el.id === target.getAttribute("id")
