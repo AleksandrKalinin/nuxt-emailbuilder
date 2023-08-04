@@ -7,7 +7,7 @@
       type="text"
       class="input-single__input ml-[-1px]"
       placeholder="auto"
-      :value="inputValue.value"
+      :value="inputValue"
       @input="updateValue($event)"
     />
     <span class="input-single__units ml-[-1px]">px</span>
@@ -25,18 +25,18 @@ const props = defineProps(["property", "itemKey", "opt", "max", "min"]);
 
 const emit = defineEmits(["updateEditorItem"]);
 
-const inputValue = ref(props.property);
+const inputValue = ref(props.property.value);
 
 const decreaseValue = () => {
-  if (inputValue.value.value > 0) {
-    inputValue.value.value -= 1;
+  if (inputValue.value > 0) {
+    inputValue.value = Number(inputValue.value) - 1;
   }
-  emit("updateEditorItem", props.itemKey, Number(inputValue.value.value));
+  emit("updateEditorItem", props.itemKey, Number(inputValue.value));
 };
 
 const increaseValue = () => {
-  inputValue.value.value += 1;
-  emit("updateEditorItem", props.itemKey, Number(inputValue.value.value));
+  inputValue.value = Number(inputValue.value) + 1;
+  emit("updateEditorItem", props.itemKey, Number(inputValue.value));
 };
 
 const updateValue = (event: Event) => {

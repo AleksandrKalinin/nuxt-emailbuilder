@@ -39,7 +39,7 @@ onClickOutside(textarea, (e) => {
 .editable {
   background: transparent;
   border-radius: 0;
-  outline: 1px solid cornflowerblue;
+  outline: 1px solid #60a5fa;
   width: 100%;
   resize: none;
 }

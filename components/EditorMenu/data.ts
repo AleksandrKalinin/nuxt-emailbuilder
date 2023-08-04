@@ -399,6 +399,76 @@ export const header = [
       ],
     },
   },
+  {
+    title: "Spacer",
+    icon: "radix-icons:space-evenly-vertically",
+    type: "element",
+    element: {
+      tag: "div",
+      editable: false,
+      cssOptions: [dimensionsSettings],
+      htmlOptions: [],
+      placeholder: "",
+      initialCssValues: {
+        "margin-top": {
+          cssProperty: "margin-top",
+          value: 0,
+          unit: "px",
+        },
+        "margin-bottom": {
+          cssProperty: "margin-bottom",
+          value: 0,
+          unit: "px",
+        },
+        "margin-left": {
+          cssProperty: "margin-left",
+          value: 0,
+          unit: "px",
+        },
+        "margin-right": {
+          cssProperty: "margin-right",
+          value: 0,
+          unit: "px",
+        },
+        "padding-top": {
+          cssProperty: "padding-top",
+          value: 0,
+          unit: "px",
+        },
+        "padding-bottom": {
+          cssProperty: "padding-bottom",
+          value: 0,
+          unit: "px",
+        },
+        "padding-left": {
+          cssProperty: "padding-left",
+          value: 0,
+          unit: "px",
+        },
+        "padding-right": {
+          cssProperty: "padding-right",
+          value: 0,
+          unit: "px",
+        },
+        width: {
+          cssProperty: "width",
+          value: 100,
+          unit: "%",
+        },
+        height: {
+          cssProperty: "height",
+          value: "60",
+          unit: "px",
+        },
+        "background-color": {
+          cssProperty: "background-color",
+          value: "transparent",
+        },
+      },
+      initialHtmlValues: {},
+      style: ["z-50"],
+    },
+  },
   /*
   {
     title: "Icon",
