@@ -337,7 +337,7 @@ export const header = [
         },
         "background-color": {
           cssProperty: "background-color",
-          value: "transparent",
+          value: "#60A5FA",
         },
         "font-size": {
           cssProperty: "font-size",
@@ -346,7 +346,7 @@ export const header = [
         },
         color: {
           cssProperty: "color",
-          value: "#ffffff",
+          value: "#FFFFFF",
         },
         "font-weight": {
           cssProperty: "font-weight",
@@ -725,7 +725,7 @@ export const header = [
         },
         controls: {
           attributeName: "controls",
-          value: true,
+          value: false,
         },
         width: {
           attributeName: "width",

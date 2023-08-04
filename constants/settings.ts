@@ -368,10 +368,10 @@ export const dimensionsSettings = {
       display: "row",
     },
     {
-      name: "Background color",
+      name: "Background",
       property: "background-color",
       type: "colorpicker",
-      value: "#222222",
+      value: "#FFFFFF",
       display: "row",
     },
   ],

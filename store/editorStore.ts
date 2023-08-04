@@ -326,8 +326,6 @@ export const useEditorStore = defineStore("editor", () => {
 
     editorElements.value[index].htmlProperties[key].value = value;
 
-    console.log(editorElements.value[index]);
-
     editorElements.value[index].markup = createHtmlElement(
       editorElements.value[index]
     );

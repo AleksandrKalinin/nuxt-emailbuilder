@@ -32,7 +32,7 @@
                   @inputGroupEmit="updateItemCssProperties"
                 />
                 <Colorpicker
-                  :property="option.value"
+                  :property="selectedItemProperties[option.property]"
                   :itemKey="option.property"
                   @updateEditorItem="updateItemCssProperties"
                   v-else-if="option.type === 'colorpicker'"

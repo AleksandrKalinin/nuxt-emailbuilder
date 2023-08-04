@@ -5,10 +5,11 @@
       type="text"
       placeholder="auto"
       readonly
-      :value="props.property"
+      :value="props.property.value"
     /><input
       class="colorpicker__select"
       type="color"
+      :value="props.property.value"
       @input="setColor($event)"
     />
   </div>

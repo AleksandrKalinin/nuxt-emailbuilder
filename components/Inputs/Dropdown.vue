@@ -22,8 +22,6 @@ const props = defineProps(["options", "property", "itemKey"]);
 const emit = defineEmits(["updateEditorItem"]);
 
 const dropdownValue = ref(props.property.value);
-
-console.log(props);
 </script>
 
 <style scoped>
