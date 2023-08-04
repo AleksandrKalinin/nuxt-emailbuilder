@@ -40,7 +40,6 @@ declare global {
     cssOptions: string[];
     htmlOptions: string[];
     placeholder?: string;
-    attributes: any[];
     markup: string;
     inlineStyles: string;
     style: string[];

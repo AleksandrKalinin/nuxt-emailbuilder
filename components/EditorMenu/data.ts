@@ -59,6 +59,10 @@ export const header = [
           value: 0,
           unit: "px",
         },
+        "background-color": {
+          cssProperty: "background-color",
+          value: "transparent",
+        },
       },
       initialHtmlValues: {},
     },
@@ -158,6 +162,10 @@ export const header = [
           cssProperty: "height",
           value: "auto",
         },
+        "background-color": {
+          cssProperty: "background-color",
+          value: "transparent",
+        },
       },
       initialHtmlValues: {},
       style: ["z-50"],
@@ -221,6 +229,10 @@ export const header = [
         height: {
           cssProperty: "height",
           value: "auto",
+        },
+        "background-color": {
+          cssProperty: "background-color",
+          value: "transparent",
         },
         "font-size": {
           cssProperty: "font-size",
@@ -322,6 +334,10 @@ export const header = [
         height: {
           cssProperty: "height",
           value: "auto",
+        },
+        "background-color": {
+          cssProperty: "background-color",
+          value: "transparent",
         },
         "font-size": {
           cssProperty: "font-size",
@@ -552,6 +568,10 @@ export const header = [
         height: {
           cssProperty: "height",
           value: "auto",
+        },
+        "background-color": {
+          cssProperty: "background-color",
+          value: "transparent",
         },
       },
       initialHtmlValues: {

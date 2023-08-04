@@ -23,9 +23,9 @@
 <script setup lang="ts">
 const props = defineProps(["property", "itemKey", "opt", "max", "min"]);
 
-const inputValue = ref(props.property);
-
 const emit = defineEmits(["updateEditorItem"]);
+
+const inputValue = ref(props.property);
 
 const decreaseValue = () => {
   if (inputValue.value.value > 0) {

@@ -1,7 +1,15 @@
 <template>
   <div class="drowpdown">
-    <select class="dropdown__select dropdown-select">
-      <option class="dropdown-select__option" v-for="option in options">
+    <select
+      class="dropdown__select dropdown-select"
+      @change="emit('updateEditorItem', props.itemKey, $event.target.value)"
+      :value="dropdownValue"
+    >
+      <option
+        class="dropdown-select__option"
+        v-for="option in options"
+        :value="option.value"
+      >
         {{ option.name }}
       </option>
     </select>
@@ -9,7 +17,13 @@
 </template>
 
 <script setup lang="ts">
-defineProps(["options"]);
+const props = defineProps(["options", "property", "itemKey"]);
+
+const emit = defineEmits(["updateEditorItem"]);
+
+const dropdownValue = ref(props.property.value);
+
+console.log(props);
 </script>
 
 <style scoped>

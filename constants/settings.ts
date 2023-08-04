@@ -367,6 +367,13 @@ export const dimensionsSettings = {
       type: "input",
       display: "row",
     },
+    {
+      name: "Background color",
+      property: "background-color",
+      type: "colorpicker",
+      value: "#222222",
+      display: "row",
+    },
   ],
 };
 
@@ -508,9 +515,9 @@ export const imageSettings = {
   fields: [
     {
       name: "Image",
-      property: "url",
-      type: "fileupload",
-      display: "col",
+      property: "src",
+      type: "text",
+      display: "row",
     },
   ],
 };
@@ -521,13 +528,13 @@ export const linkSettings = {
   fields: [
     {
       name: "Href",
-      value: "href",
+      property: "href",
       type: "text",
       display: "row",
     },
     {
       name: "Target",
-      value: "target",
+      property: "target",
       type: "dropdown",
       options: [
         {
@@ -545,18 +552,18 @@ export const linkSettings = {
 };
 
 export const videoSettings = {
-  title: "Link attributes",
+  title: "Video attributes",
   type: "text",
   fields: [
     {
       name: "Src",
-      value: "src",
+      property: "src",
       type: "text",
       display: "row",
     },
     {
       name: "Target",
-      value: "target",
+      property: "target",
       type: "dropdown",
       options: [
         {

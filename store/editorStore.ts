@@ -199,13 +199,11 @@ export const useEditorStore = defineStore("editor", () => {
     const index = editorItems.value.findIndex((item: any) => item.id == id);
     const tagName: string = item.tag;
     const placeholder: string = item.placeholder;
-    const attributes: any = item.attributes;
     const style: string[] = item.style;
     const newItem = {} as EditorElement;
     newItem.id = uuidv4();
     newItem.tag = tagName;
     newItem.placeholder = placeholder;
-    newItem.attributes = attributes;
     newItem.cssOptions = item.cssOptions;
     newItem.htmlOptions = item.htmlOptions;
     newItem.type = item.type;
@@ -262,7 +260,6 @@ export const useEditorStore = defineStore("editor", () => {
 
     if (item.htmlProperties) {
       for (const key in item.htmlProperties) {
-        console.log("key", key);
         element.setAttribute(
           item.htmlProperties[key].attributeName,
           item.htmlProperties[key].value
@@ -296,7 +293,28 @@ export const useEditorStore = defineStore("editor", () => {
   const updateItemCssProperties = (
     key: string,
     value: string | number | boolean
-  ) => {};
+  ) => {
+    const index = editorElements.value.findIndex(
+      (item) => item.id === selectedEditorRow.value?.id
+    );
+
+    editorElements.value[index].cssProperties[key].value = value;
+
+    editorElements.value[index].markup = createHtmlElement(
+      editorElements.value[index]
+    );
+
+    editorRows.value.forEach((row: EditorRow) => {
+      row.items.forEach((item: EditorItem) => {
+        const index = item.children.findIndex(
+          (el) => el.id === selectedEditorRow.value?.id
+        );
+        if (index) {
+          item.children[index] = editorElements.value[index];
+        }
+      });
+    });
+  };
 
   const updateItemHtmlProperties = (
     key: string,
@@ -307,6 +325,8 @@ export const useEditorStore = defineStore("editor", () => {
     );
 
     editorElements.value[index].htmlProperties[key].value = value;
+
+    console.log(editorElements.value[index]);
 
     editorElements.value[index].markup = createHtmlElement(
       editorElements.value[index]

@@ -40,6 +40,8 @@
                 <Dropdown
                   v-if="option.type === 'dropdown'"
                   :options="option.options"
+                  :property="selectedItemProperties[option.property]"
+                  :itemKey="option.property"
                 />
                 <TextField v-if="option.type === 'text'" />
                 <SelectionGroup
@@ -80,15 +82,15 @@
               <form>
                 <InputSingle
                   v-if="option.type === 'input'"
-                  :property="selectedItemProperties[option.property]"
+                  :property="selectedItemAttributes[option.property]"
                   :itemKey="option.property"
                   @updateEditorItem="updateItemHtmlProperties"
                 />
                 <InputGroup
                   v-if="option.type === 'inputgroup'"
                   :items="option.properties"
-                  :selectedProperties="selectedItemProperties"
-                  @inputGroupEmit="updateItemCssProperties"
+                  :selectedProperties="selectedItemAttributes"
+                  @inputGroupEmit="updateItemHtmlProperties"
                 />
                 <Colorpicker
                   :property="option.value"
@@ -99,12 +101,20 @@
                 <Dropdown
                   v-if="option.type === 'dropdown'"
                   :options="option.options"
+                  :property="selectedItemAttributes[option.property]"
+                  :itemKey="option.property"
+                  @updateEditorItem="updateItemHtmlProperties"
                 />
-                <TextField v-if="option.type === 'text'" />
+                <TextField
+                  v-if="option.type === 'text'"
+                  :property="selectedItemAttributes[option.property]"
+                  :itemKey="option.property"
+                  @updateEditorItem="updateItemHtmlProperties"
+                />
                 <SelectionGroup
                   v-else-if="option.type === 'selection'"
                   :options="option.options"
-                  :property="selectedItemProperties[option.property]"
+                  :property="selectedItemAttributes[option.property]"
                   :itemKey="option.property"
                   @updateEditorItem="updateItemHtmlProperties"
                 />
@@ -150,10 +160,7 @@ const selectedItemProperties = computed(() => {
 
 const selectedItemAttributes = computed(() => {
   if (selectedEditorRow.value) {
-    const item = editorRows.value.find(
-      (item: EditorRow) => item.id === selectedEditorRow.value?.id
-    );
-    return selectedEditorRow.value?.attributes;
+    return selectedEditorRow.value?.htmlProperties;
   } else return null;
 });
 
