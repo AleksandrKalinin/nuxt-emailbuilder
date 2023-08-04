@@ -5,6 +5,7 @@ import {
   linkSettings,
   imageSettings,
   videoSettings,
+  rawHtmlSettings,
 } from "@/constants/settings";
 
 export const header = [
@@ -756,9 +757,9 @@ export const header = [
     icon: "radix-icons:code",
     type: "element",
     element: {
-      tag: "html",
+      tag: "div",
       editable: false,
-      cssOptions: [dimensionsSettings],
+      cssOptions: [rawHtmlSettings],
       htmlOptions: [],
       placeholder: "insert your html here",
       initialHtmlValues: {},

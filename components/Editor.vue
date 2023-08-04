@@ -52,7 +52,6 @@ import {
   typographySettings,
   imageSettings,
   dimensionsSettings,
-  actionSettings,
 } from "../constants/settings";
 
 defineProps(["settingsMenuRef"]);

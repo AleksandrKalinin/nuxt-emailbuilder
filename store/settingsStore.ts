@@ -16,6 +16,7 @@ export const useSettingsStore = defineStore("settings", () => {
         cssSettingsActive.value = properties;
       });
     }
+
     toggleSettingsState(true);
   };
 

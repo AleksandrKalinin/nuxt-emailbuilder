@@ -579,3 +579,8 @@ export const videoSettings = {
     },
   ],
 };
+
+export const rawHtmlSettings = {
+  title: "Insert your html code here",
+  type: "html",
+};

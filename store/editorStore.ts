@@ -365,6 +365,36 @@ export const useEditorStore = defineStore("editor", () => {
     });
   };
 
+  const updateRawHtml = (html: string) => {
+    const index = editorElements.value.findIndex(
+      (item) => item.id === selectedEditorRow.value?.id
+    );
+
+    const parser = new DOMParser();
+    const parsedHtml = parser.parseFromString(html, "text/html");
+    const htmlBody = parsedHtml.body.children[0];
+
+    htmlBody.setAttribute("id", selectedEditorRow.value?.id);
+    htmlBody.setAttribute("data-type", "item");
+
+    const attrs = htmlBody.getAttributeNames().reduce((acc, name) => {
+      return { ...acc, [name]: htmlBody.getAttribute(name) };
+    }, {});
+
+    editorElements.value[index].markup = htmlBody.outerHTML;
+
+    editorRows.value.forEach((row: EditorRow) => {
+      row.items.forEach((item: EditorItem) => {
+        const index = item.children.findIndex(
+          (el) => el.id === selectedEditorRow.value?.id
+        );
+        if (index) {
+          item.children[index] = editorElements.value[index];
+        }
+      });
+    });
+  };
+
   return {
     editorTemplate,
     editorElements,
@@ -395,5 +425,6 @@ export const useEditorStore = defineStore("editor", () => {
     setEditableBlock,
     updateEditorElement,
     extractFromTemplate,
+    updateRawHtml,
   };
 });
