@@ -1,30 +1,39 @@
 import { defineStore } from "pinia";
 
 export const useSettingsStore = defineStore("settings", () => {
-  const settingsActive = ref<EditorRow[] | MenuSetting[] | null>([]);
-  const settingsValues = ref<any>([]);
+  const cssSettingsActive = ref<EditorRow[] | MenuSetting[] | null>([]);
+  const htmlSettingsActive = ref<EditorRow[] | MenuSetting[] | null>([]);
+
   const settingsOpen = ref<boolean>(false);
 
   const toggleSettingsState = (state: boolean) => {
     settingsOpen.value = state;
   };
 
-  const setActiveSettings = (properties: MenuSetting[]) => {
-    properties.forEach(() => {
-      settingsActive.value = properties;
-    });
+  const setActiveCssSettings = (properties: MenuSetting[]) => {
+    if (properties) {
+      properties.forEach(() => {
+        cssSettingsActive.value = properties;
+      });
+    }
     toggleSettingsState(true);
   };
 
-  const setSettingsValues = (params: EditorRow[]) => {
-    settingsActive.value = params;
+  const setActiveHtmlSettings = (properties: MenuSetting[]) => {
+    if (properties) {
+      properties.forEach(() => {
+        htmlSettingsActive.value = properties;
+      });
+    }
+    toggleSettingsState(true);
   };
 
   return {
-    settingsActive,
+    cssSettingsActive,
+    htmlSettingsActive,
     settingsOpen,
     toggleSettingsState,
-    setActiveSettings,
-    setSettingsValues,
+    setActiveCssSettings,
+    setActiveHtmlSettings,
   };
 });

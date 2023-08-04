@@ -28,16 +28,24 @@ declare global {
 
   interface MenuItemOption {}
 
+  interface EditorElementCssOption {
+    cssProperty: string;
+    value: number | string | boolean;
+    unit?: string;
+  }
+
   interface EditorElement {
     id: string;
     tag: string;
-    options: any;
+    cssOptions: string[];
+    htmlOptions: string[];
     placeholder?: string;
     attributes: any[];
     markup: string;
     inlineStyles: string;
     style: string[];
     cssProperties: CssProperty;
+    htmlProperties: HtmlProperty;
     editable: boolean;
     type: string;
   }
@@ -66,7 +74,14 @@ declare global {
     };
   }
 
-  interface settingsActive {
+  interface HtmlProperty {
+    [index: string]: {
+      attributeName: string;
+      value: string;
+    };
+  }
+
+  interface cssSettingsActive {
     id: string;
     items: EditorItem[];
     columns: 1;

@@ -1,8 +1,10 @@
 import {
   layoutSettings,
   typographySettings,
-  imageSettings,
   dimensionsSettings,
+  linkSettings,
+  imageSettings,
+  videoSettings,
 } from "@/constants/settings";
 
 export const header = [
@@ -13,7 +15,8 @@ export const header = [
     element: {
       tag: "div",
       placeholder: "New container",
-      options: [layoutSettings, dimensionsSettings],
+      cssOptions: [layoutSettings, dimensionsSettings],
+      htmlOptions: [],
       editable: false,
       initialCssValues: {
         "margin-top": {
@@ -57,7 +60,7 @@ export const header = [
           unit: "px",
         },
       },
-      attributes: [],
+      initialHtmlValues: {},
     },
   },
   {
@@ -67,7 +70,8 @@ export const header = [
     element: {
       tag: "h1",
       editable: true,
-      options: [typographySettings, dimensionsSettings],
+      cssOptions: [typographySettings, dimensionsSettings],
+      htmlOptions: [],
       placeholder: "Heading",
       initialCssValues: {
         "font-size": {
@@ -155,12 +159,7 @@ export const header = [
           value: "auto",
         },
       },
-      attributes: {
-        contenteditable: {
-          attributeName: "contenteditable",
-          value: true,
-        },
-      },
+      initialHtmlValues: {},
       style: ["z-50"],
     },
   },
@@ -171,7 +170,8 @@ export const header = [
     element: {
       tag: "p",
       editable: true,
-      options: [typographySettings, dimensionsSettings],
+      cssOptions: [typographySettings, dimensionsSettings],
+      htmlOptions: [],
       initialCssValues: {
         "margin-top": {
           cssProperty: "margin-top",
@@ -259,7 +259,7 @@ export const header = [
         },
       },
       placeholder: "This is a new text",
-      attributes: [],
+      initialHtmlValues: {},
       style: "",
     },
   },
@@ -268,9 +268,10 @@ export const header = [
     icon: "radix-icons:button",
     type: "element",
     element: {
-      tag: "div",
+      tag: "span",
       editable: false,
-      options: [typographySettings, dimensionsSettings],
+      cssOptions: [typographySettings, dimensionsSettings],
+      htmlOptions: [linkSettings],
       placeholder: "Button text",
       initialCssValues: {
         "margin-top": {
@@ -358,8 +359,19 @@ export const header = [
           value: "none",
         },
       },
-      attributes: {
-        href: "https://developer.mozilla.org/ru/docs/Web/HTML/Element/video",
+      initialHtmlValues: {
+        href: {
+          attributeName: "href",
+          value: "https://developer.mozilla.org/ru/docs/Web/HTML/Element/video",
+        },
+        target: {
+          attributeName: "target",
+          value: "_blank",
+        },
+        disabled: {
+          attributeName: "disabled",
+          value: "true",
+        },
       },
       style: [
         "button",
@@ -370,6 +382,119 @@ export const header = [
       ],
     },
   },
+  /*
+  {
+    title: "Icon",
+    icon: "radix-icons:star",
+    type: "element",
+    element: {
+      tag: "span",
+      editable: false,
+      cssOptions: [typographySettings, dimensionsSettings],
+      htmlOptions: [linkSettings],
+      initialCssValues: {
+        "margin-top": {
+          cssProperty: "margin-top",
+          value: 0,
+          unit: "px",
+        },
+        "margin-bottom": {
+          cssProperty: "margin-bottom",
+          value: 0,
+          unit: "px",
+        },
+        "margin-left": {
+          cssProperty: "margin-left",
+          value: 0,
+          unit: "px",
+        },
+        "margin-right": {
+          cssProperty: "margin-right",
+          value: 0,
+          unit: "px",
+        },
+        "padding-top": {
+          cssProperty: "padding-top",
+          value: 10,
+          unit: "px",
+        },
+        "padding-bottom": {
+          cssProperty: "padding-bottom",
+          value: 10,
+          unit: "px",
+        },
+        "padding-left": {
+          cssProperty: "padding-left",
+          value: 0,
+          unit: "px",
+        },
+        "padding-right": {
+          cssProperty: "padding-right",
+          value: 0,
+          unit: "px",
+        },
+        width: {
+          cssProperty: "width",
+          value: 100,
+          unit: "%",
+        },
+        height: {
+          cssProperty: "height",
+          value: "auto",
+        },
+        "font-size": {
+          cssProperty: "font-size",
+          value: 14,
+          unit: "px",
+        },
+        color: {
+          cssProperty: "color",
+          value: "#ffffff",
+        },
+        "font-weight": {
+          cssProperty: "font-weight",
+          value: 400,
+        },
+        "font-style": {
+          cssProperty: "font-style",
+          value: "normal",
+        },
+        "line-height": {
+          cssProperty: "line-height",
+          value: 22,
+          unit: "px",
+        },
+        "letter-spacing": {
+          cssProperty: "letter-spacing",
+          value: 1,
+          unit: "px",
+        },
+        "text-align": {
+          cssProperty: "text-align",
+          value: "left",
+        },
+        "text-transform": {
+          cssProperty: "text-transform",
+          value: "none",
+        },
+      },
+      initialHtmlValues: {
+        href: {
+          attributeName: "href",
+          value: "https://developer.mozilla.org/ru/docs/Web/HTML/Element/video",
+        },
+        target: {
+          attributeName: "target",
+          value: "_blank",
+        },
+        disabled: {
+          attributeName: "disabled",
+          value: "true",
+        },
+      },
+      style: [],
+    },
+  }, */
   {
     title: "Image",
     icon: "radix-icons:image",
@@ -377,7 +502,8 @@ export const header = [
     element: {
       tag: "img",
       editable: false,
-      options: [dimensionsSettings],
+      cssOptions: [dimensionsSettings],
+      htmlOptions: [imageSettings],
       initialCssValues: {
         "margin-top": {
           cssProperty: "margin-top",
@@ -428,7 +554,7 @@ export const header = [
           value: "auto",
         },
       },
-      attributes: {
+      initialHtmlValues: {
         src: {
           attributeName: "src",
           value: "https://i.imgur.com/SdIjrA0.png",
@@ -444,9 +570,9 @@ export const header = [
     element: {
       tag: "div",
       editable: false,
-      options: [dimensionsSettings],
+      cssOptions: [dimensionsSettings],
+      htmlOptions: [],
       placeholder: "",
-      attributes: [],
       initialCssValues: {
         "margin-top": {
           cssProperty: "margin-top",
@@ -502,6 +628,7 @@ export const header = [
           value: "#444444",
         },
       },
+      initialHtmlValues: {},
       style: ["z-50"],
     },
   },
@@ -512,7 +639,8 @@ export const header = [
     element: {
       tag: "table",
       editable: false,
-      options: [typographySettings, dimensionsSettings],
+      cssOptions: [typographySettings, dimensionsSettings],
+      htmlOptions: [],
       placeholder: "This is a new table",
       initialCssValues: {
         "font-size": {
@@ -551,7 +679,7 @@ export const header = [
           value: "none",
         },
       },
-      attributes: [],
+      initialHtmlValues: {},
       style: "",
     },
   },
@@ -560,17 +688,47 @@ export const header = [
     icon: "octicon:video-24",
     type: "element",
     element: {
-      tag: "video",
+      tag: "iframe",
       editable: false,
-      options: [dimensionsSettings],
-      placeholder: "This is a new video",
-      attributes: {
-        autoplay: false,
-        controls: true,
-        width: "100%",
-        height: "300px",
+      cssOptions: [dimensionsSettings],
+      htmlOptions: [videoSettings],
+      initialCssValues: {
+        "pointer-events": {
+          cssProperty: "pointer-events",
+          value: "none",
+        },
       },
-      style: "",
+      initialHtmlValues: {
+        autoplay: {
+          attributeName: "autoplay",
+          value: false,
+        },
+        controls: {
+          attributeName: "controls",
+          value: true,
+        },
+        width: {
+          attributeName: "width",
+          value: "600",
+        },
+        height: {
+          attributeName: "height",
+          value: "300",
+        },
+        src: {
+          attributeName: "src",
+          value: "https://www.youtube.com/embed/10q09MMqU9E",
+        },
+        allowfullscreen: {
+          attributeName: "allowfullscreen",
+          value: "true",
+        },
+        title: {
+          attributeName: "title",
+          value: "Template iframe",
+        },
+      },
+      style: ["iframe_disabled"],
     },
   },
   {
@@ -580,9 +738,10 @@ export const header = [
     element: {
       tag: "html",
       editable: false,
-      options: [dimensionsSettings],
+      cssOptions: [dimensionsSettings],
+      htmlOptions: [],
       placeholder: "insert your html here",
-      attributes: [],
+      initialHtmlValues: {},
       style: "",
     },
   },

@@ -206,11 +206,13 @@ export const useEditorStore = defineStore("editor", () => {
     newItem.tag = tagName;
     newItem.placeholder = placeholder;
     newItem.attributes = attributes;
-    newItem.options = item.options;
+    newItem.cssOptions = item.cssOptions;
+    newItem.htmlOptions = item.htmlOptions;
     newItem.type = item.type;
     newItem.editable = item.editable;
     newItem.style = style;
     newItem.cssProperties = structuredClone(item.initialCssValues);
+    newItem.htmlProperties = structuredClone(item.initialHtmlValues);
     newItem.inlineStyles = createInlineStyles(item.initialCssValues);
     newItem.markup = createHtmlElement(newItem);
 
@@ -246,21 +248,24 @@ export const useEditorStore = defineStore("editor", () => {
       const target = e.target as HTMLElement;
       selectEditorRow(target.getAttribute("id"));
     });
+
     for (const key in item.cssProperties) {
       const cssObj = item.cssProperties[key];
       cssObj.unit
         ? (element.style[cssObj.cssProperty] = cssObj.value + cssObj.unit)
         : (element.style[cssObj.cssProperty] = cssObj.value);
     }
+
     if (item.placeholder) {
       element.innerText = item.placeholder;
     }
 
-    if (item.attributes) {
-      for (const key in item.attributes) {
+    if (item.htmlProperties) {
+      for (const key in item.htmlProperties) {
+        console.log("key", key);
         element.setAttribute(
-          item.attributes[key].attributeName,
-          item.attributes[key].value
+          item.htmlProperties[key].attributeName,
+          item.htmlProperties[key].value
         );
       }
     }
@@ -270,6 +275,7 @@ export const useEditorStore = defineStore("editor", () => {
         element.classList.add(className);
       });
     }
+
     return element.outerHTML;
   };
 
@@ -290,16 +296,18 @@ export const useEditorStore = defineStore("editor", () => {
   const updateItemCssProperties = (
     key: string,
     value: string | number | boolean
+  ) => {};
+
+  const updateItemHtmlProperties = (
+    key: string,
+    value: string | number | boolean
   ) => {
     const index = editorElements.value.findIndex(
       (item) => item.id === selectedEditorRow.value?.id
     );
 
-    editorElements.value[index].cssProperties[key].value = value;
+    editorElements.value[index].htmlProperties[key].value = value;
 
-    editorElements.value[index].inlineStyles = createInlineStyles(
-      editorElements.value[index].cssProperties
-    );
     editorElements.value[index].markup = createHtmlElement(
       editorElements.value[index]
     );
@@ -361,6 +369,7 @@ export const useEditorStore = defineStore("editor", () => {
     selectEditorRow,
     selectEditorElement,
     updateItemCssProperties,
+    updateItemHtmlProperties,
     currentEditorRowId,
     editableItem,
     setEditableItem,

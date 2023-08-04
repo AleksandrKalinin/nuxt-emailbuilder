@@ -55,14 +55,14 @@ import {
   actionSettings,
 } from "../constants/settings";
 
-const props = defineProps(["settingsMenuRef"]);
+defineProps(["settingsMenuRef"]);
 
 const { createBuildingBlocks, addEditorItem, addEditorRow } = useEditorStore();
 
 const { editorElements, editorRows, selectedEditorRow, currentEditorRowId } =
   storeToRefs(useEditorStore());
 
-const { setActiveSettings } = useSettingsStore();
+const { setActiveCssSettings, setActiveHtmlSettings } = useSettingsStore();
 
 const {
   selectEditorRow,
@@ -84,13 +84,14 @@ const selectElement = (event: Event) => {
       (el: EditorElement) => el.id === target.getAttribute("id")
     );
 
-    setActiveSettings(activeElement?.options);
+    setActiveCssSettings(activeElement?.cssOptions);
+    setActiveHtmlSettings(activeElement?.htmlOptions);
 
     if (activeElement?.editable) {
       setEditableItem(target.getAttribute("id"));
     }
   } else {
-    setActiveSettings([layoutSettings]);
+    setActiveCssSettings([layoutSettings]);
     selectEditorRow(currentTarget.getAttribute("id"));
   }
 };

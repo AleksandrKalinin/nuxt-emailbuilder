@@ -4,13 +4,13 @@
       <div class="settings">
         <div
           class="settings-block settings__block"
-          v-for="settingBlock in settingsActive"
+          v-for="settingBlock in cssSettingsActive"
         >
           <h4 class="settings-block__header">{{ settingBlock.title }}</h4>
           <div class="settings-block__options settings-options">
             <div
               class="settings-options__item settings-item"
-              v-for="(option, index) in settingBlock.fields"
+              v-for="option in settingBlock.fields"
               :class="
                 option.display === 'row'
                   ? 'settings-item_row'
@@ -56,7 +56,66 @@
                   @updateEditorRow="updateEditorRowLayout"
                 />
                 <FileUpload v-else-if="option.type === 'fileupload'" />
-                <FileUpload v-else-if="option.type === 'toggle'" />
+                <ToggleInput v-else-if="option.type === 'toggle'" />
+              </form>
+            </div>
+          </div>
+        </div>
+        <div
+          class="settings-block settings__block"
+          v-for="settingBlock in htmlSettingsActive"
+        >
+          <h4 class="settings-block__header">{{ settingBlock.title }}</h4>
+          <div class="settings-block__options settings-options">
+            <div
+              class="settings-options__item settings-item"
+              v-for="option in settingBlock.fields"
+              :class="
+                option.display === 'row'
+                  ? 'settings-item_row'
+                  : 'settings-item_col'
+              "
+            >
+              <h5 class="settings-item__header">{{ option.name }}</h5>
+              <form>
+                <InputSingle
+                  v-if="option.type === 'input'"
+                  :property="selectedItemProperties[option.property]"
+                  :itemKey="option.property"
+                  @updateEditorItem="updateItemHtmlProperties"
+                />
+                <InputGroup
+                  v-if="option.type === 'inputgroup'"
+                  :items="option.properties"
+                  :selectedProperties="selectedItemProperties"
+                  @inputGroupEmit="updateItemCssProperties"
+                />
+                <Colorpicker
+                  :property="option.value"
+                  :itemKey="option.property"
+                  @updateEditorItem="updateItemHtmlProperties"
+                  v-else-if="option.type === 'colorpicker'"
+                />
+                <Dropdown
+                  v-if="option.type === 'dropdown'"
+                  :options="option.options"
+                />
+                <TextField v-if="option.type === 'text'" />
+                <SelectionGroup
+                  v-else-if="option.type === 'selection'"
+                  :options="option.options"
+                  :property="selectedItemProperties[option.property]"
+                  :itemKey="option.property"
+                  @updateEditorItem="updateItemHtmlProperties"
+                />
+                <LayoutGroup
+                  v-else-if="option.type === 'layout'"
+                  :items="option.options"
+                  :activeRow="selectedEditorRow"
+                  @updateEditorRow="updateEditorRowLayout"
+                />
+                <FileUpload v-else-if="option.type === 'fileupload'" />
+                <ToggleInput v-else-if="option.type === 'toggle'" />
               </form>
             </div>
           </div>
@@ -71,10 +130,17 @@ import { useSettingsStore } from "@/store/settingsStore";
 import { useEditorStore } from "@/store/editorStore";
 import { storeToRefs } from "pinia";
 
-const { settingsOpen, settingsActive } = storeToRefs(useSettingsStore());
+const { settingsOpen, cssSettingsActive, htmlSettingsActive } = storeToRefs(
+  useSettingsStore()
+);
 
-const { updateItemCssProperties, updateEditorRowLayout } = useEditorStore();
-const { selectedEditorRow } = storeToRefs(useEditorStore());
+const { selectedEditorRow, editorRows } = storeToRefs(useEditorStore());
+
+const {
+  updateItemCssProperties,
+  updateItemHtmlProperties,
+  updateEditorRowLayout,
+} = useEditorStore();
 
 const selectedItemProperties = computed(() => {
   if (selectedEditorRow.value) {
@@ -82,16 +148,15 @@ const selectedItemProperties = computed(() => {
   } else return null;
 });
 
-/*
 const selectedItemAttributes = computed(() => {
   if (selectedEditorRow.value) {
     const item = editorRows.value.find(
       (item: EditorRow) => item.id === selectedEditorRow.value?.id
     );
-    return selectedEditorRow.value?.htmlAttributes;
+    return selectedEditorRow.value?.attributes;
   } else return null;
 });
-*/
+
 const settingsMenu = ref(null);
 
 defineExpose({ settingsMenu });

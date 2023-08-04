@@ -512,54 +512,45 @@ export const imageSettings = {
       type: "fileupload",
       display: "col",
     },
+  ],
+};
+
+export const linkSettings = {
+  title: "Link attributes",
+  type: "action",
+  fields: [
     {
-      name: "Align",
-      property: "align",
-      type: "selection",
+      name: "Href",
+      value: "href",
+      type: "text",
       display: "row",
+    },
+    {
+      name: "Target",
+      value: "target",
+      type: "dropdown",
       options: [
         {
-          name: "Left",
-          icon: "ph:text-align-left-light",
-          value: "left",
-          default: true,
+          name: "Same tab",
+          value: "_self",
         },
         {
-          name: "Center",
-          icon: "ph:text-align-center-light",
-          value: "center",
-          default: false,
-        },
-        {
-          name: "Right",
-          icon: "ph:text-align-right-light",
-          value: "right",
-          default: false,
+          name: "New tab",
+          value: "_blank",
         },
       ],
-    },
-    {
-      name: "Width",
-      property: "width",
-      type: "input",
-      display: "row",
-    },
-    {
-      name: "Height",
-      property: "height",
-      type: "input",
       display: "row",
     },
   ],
 };
 
-export const actionSettings = {
-  title: "Action",
-  type: "action",
+export const videoSettings = {
+  title: "Link attributes",
+  type: "text",
   fields: [
     {
-      name: "Url",
-      value: "url",
+      name: "Src",
+      value: "src",
       type: "text",
       display: "row",
     },
