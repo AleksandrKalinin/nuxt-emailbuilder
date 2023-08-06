@@ -359,11 +359,20 @@ export const useEditorStore = defineStore("editor", () => {
     rows.map((row: EditorRow) => {
       row.items.map((item: EditorItem, index: number) => {
         item.children.map((element: EditorElement) => {
+          editorItems.push;
+          editorElements.value.push(element);
+        });
+      });
+    });
+    /*
+    rows.map((row: EditorRow) => {
+      row.items.map((item: EditorItem, index: number) => {
+        item.children.map((element: EditorElement) => {
           editorElements.value.push(element);
           editorItems.value[index].children.push(element);
         });
       });
-    });
+    }); */
   };
 
   const updateRawHtml = (html: string) => {

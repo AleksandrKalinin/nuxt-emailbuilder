@@ -69,7 +69,7 @@ declare global {
     [index: string]: {
       property: string;
       value: string | number | boolean;
-      unit: string;
+      unit?: string;
     };
   }
 

@@ -12,8 +12,6 @@ const props = defineProps(["property", "itemKey"]);
 
 const emit = defineEmits(["updateEditorItem"]);
 
-console.log("props", props);
-
 const inputValue = ref<string>(props.property.value);
 
 const applyValue = (value: string) => {

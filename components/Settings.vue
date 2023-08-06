@@ -188,15 +188,6 @@ const editorTabs = computed(() => {
 
 const currentTab: Ref<number> = ref(0);
 
-watch(editorTabs, () => {
-  if (editorTabs.value[currentTab.value]) {
-    console.log(
-      "current tab",
-      editorTabs.value[currentTab.value].selectedItemProperties
-    );
-  }
-});
-
 const currentTabComponent = computed(() => {
   return editorTabs.value[currentTab.value];
 });
