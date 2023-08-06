@@ -1,6 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  runtimeConfig: {
+    public: {
+      supabaseUrl: "",
+      supabaseKey: "",
+    },
+  },
   components: [
     "~/components",
     {
@@ -31,6 +37,7 @@ export default defineNuxtConfig({
     "nuxt-icon",
     "@nuxtjs/tailwindcss",
     "@vueuse/nuxt",
+    "@nuxtjs/supabase",
   ],
   routeRules: {
     "/editor/**": { ssr: false },

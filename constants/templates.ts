@@ -4,6 +4,7 @@ export const templates = [
     id: "6b6cd153-2e16-41d8-a3b6-99f175877614",
     category: "free",
     preview: "preview.png",
+    created_at: new Date(),
     content: [
       {
         id: "c089b428-f859-465c-ae77-83a9d00a2cc3",
@@ -2880,6 +2881,7 @@ export const templates = [
     id: "6b6cd153-2e16-41d8-a3b6-99f175899614",
     category: "premium",
     preview: "preview.png",
+    created_at: new Date(),
     content: [
       {
         id: "c089b428-f859-465c-ae77-83a9d00a2cc3",
