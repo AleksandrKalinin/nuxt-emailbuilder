@@ -11,16 +11,17 @@ import {
   initialTypographyValues,
 } from "@/constants/initialCssValues";
 import { create } from "domain";
+import { editorItemSettings } from "@/constants/settings";
 
 export const useEditorStore = defineStore("editor", () => {
-  const createInlineStyles = (params: CssProperty) => {
+  const createInlineStyles = (params: property) => {
     let inlineStyles: string = "";
     for (const item in params) {
       let val: string | number | boolean = params[item].value;
       if (params[item].unit) {
         val += params[item].unit;
       }
-      const cssStyle = `${params[item].cssProperty} : ${val}; `;
+      const cssStyle = `${params[item].property} : ${val}; `;
       inlineStyles += cssStyle;
     }
     return inlineStyles;
@@ -31,8 +32,8 @@ export const useEditorStore = defineStore("editor", () => {
       id: "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
       children: [],
       placeholder: "No content here. Drag item from menu",
-      cssProperties: initialDimensionValues,
-      inlineStyles: createInlineStyles(initialDimensionValues),
+      cssProperties: editorItemSettings,
+      inlineStyles: createInlineStyles(editorItemSettings),
     },
   ]);
 
@@ -134,7 +135,7 @@ export const useEditorStore = defineStore("editor", () => {
     item.id = uuidv4();
     item.children = [];
     item.placeholder = "No content here. Drag item from menu";
-    item.cssProperties = initialDimensionValues;
+    item.cssProperties = editorItemSettings;
     item.inlineStyles = createInlineStyles(item.cssProperties);
     editorItems.value.push(item);
     return item;
@@ -155,16 +156,25 @@ export const useEditorStore = defineStore("editor", () => {
   };
 
   const copyEditorRow = (id: string) => {
-    const index = editorRows.value.findIndex((item: any) => item.id == id);
-    const copiedItem = structuredClone(toRaw(editorRows.value[index]));
-    const newEditorItems = copiedItem.items;
-    newEditorItems.forEach((el: EditorItem) => {
-      el.id = uuidv4();
-      editorItems.value.push(el);
+    const index = editorRows.value.findIndex((row: any) => row.id == id);
+    const copiedRow = structuredClone(toRaw(editorRows.value[index]));
+
+    const newEditorItems = copiedRow.items.map((item: EditorItem) => {
+      const newElements = item.children.map((el: EditorElement) => {
+        el.id = uuidv4();
+        el.markup = createHtmlElement(el);
+        editorElements.value.push(el);
+        return el;
+      });
+      item.children = newElements;
+      item.id = uuidv4();
+      editorItems.value.push(item);
+      return item;
     });
-    copiedItem.id = uuidv4();
-    copiedItem.items = newEditorItems;
-    editorRows.value.splice(index, 0, copiedItem);
+
+    copiedRow.id = uuidv4();
+    copiedRow.items = newEditorItems;
+    editorRows.value.splice(index, 0, copiedRow);
   };
 
   const dragActive = ref(false);
@@ -190,17 +200,18 @@ export const useEditorStore = defineStore("editor", () => {
     const index = editorItems.value.findIndex((item: any) => item.id == id);
     const tagName: string = item.tag;
     const placeholder: string = item.placeholder;
-    const attributes: any = item.attributes;
     const style: string[] = item.style;
     const newItem = {} as EditorElement;
     newItem.id = uuidv4();
     newItem.tag = tagName;
     newItem.placeholder = placeholder;
-    newItem.attributes = attributes;
+    newItem.cssOptions = item.cssOptions;
+    newItem.htmlOptions = item.htmlOptions;
     newItem.type = item.type;
     newItem.editable = item.editable;
     newItem.style = style;
     newItem.cssProperties = structuredClone(item.initialCssValues);
+    newItem.htmlProperties = structuredClone(item.initialHtmlValues);
     newItem.inlineStyles = createInlineStyles(item.initialCssValues);
     newItem.markup = createHtmlElement(newItem);
 
@@ -236,21 +247,23 @@ export const useEditorStore = defineStore("editor", () => {
       const target = e.target as HTMLElement;
       selectEditorRow(target.getAttribute("id"));
     });
+
     for (const key in item.cssProperties) {
       const cssObj = item.cssProperties[key];
       cssObj.unit
-        ? (element.style[cssObj.cssProperty] = cssObj.value + cssObj.unit)
-        : (element.style[cssObj.cssProperty] = cssObj.value);
+        ? (element.style[cssObj.property] = cssObj.value + cssObj.unit)
+        : (element.style[cssObj.property] = cssObj.value);
     }
+
     if (item.placeholder) {
       element.innerText = item.placeholder;
     }
 
-    if (item.attributes) {
-      for (const key in item.attributes) {
+    if (item.htmlProperties) {
+      for (const key in item.htmlProperties) {
         element.setAttribute(
-          item.attributes[key].attributeName,
-          item.attributes[key].value
+          item.htmlProperties[key].property,
+          item.htmlProperties[key].value
         );
       }
     }
@@ -260,6 +273,7 @@ export const useEditorStore = defineStore("editor", () => {
         element.classList.add(className);
       });
     }
+
     return element.outerHTML;
   };
 
@@ -287,9 +301,6 @@ export const useEditorStore = defineStore("editor", () => {
 
     editorElements.value[index].cssProperties[key].value = value;
 
-    editorElements.value[index].inlineStyles = createInlineStyles(
-      editorElements.value[index].cssProperties
-    );
     editorElements.value[index].markup = createHtmlElement(
       editorElements.value[index]
     );
@@ -299,7 +310,35 @@ export const useEditorStore = defineStore("editor", () => {
         const index = item.children.findIndex(
           (el) => el.id === selectedEditorRow.value?.id
         );
-        item.children[index] = editorElements.value[index];
+        if (index) {
+          item.children[index] = editorElements.value[index];
+        }
+      });
+    });
+  };
+
+  const updateItemHtmlProperties = (
+    key: string,
+    value: string | number | boolean
+  ) => {
+    const index = editorElements.value.findIndex(
+      (item) => item.id === selectedEditorRow.value?.id
+    );
+
+    editorElements.value[index].htmlProperties[key].value = value;
+
+    editorElements.value[index].markup = createHtmlElement(
+      editorElements.value[index]
+    );
+
+    editorRows.value.forEach((row: EditorRow) => {
+      row.items.forEach((item: EditorItem) => {
+        const index = item.children.findIndex(
+          (el) => el.id === selectedEditorRow.value?.id
+        );
+        if (index) {
+          item.children[index] = editorElements.value[index];
+        }
       });
     });
   };
@@ -320,9 +359,48 @@ export const useEditorStore = defineStore("editor", () => {
     rows.map((row: EditorRow) => {
       row.items.map((item: EditorItem, index: number) => {
         item.children.map((element: EditorElement) => {
+          editorItems.push;
+          editorElements.value.push(element);
+        });
+      });
+    });
+    /*
+    rows.map((row: EditorRow) => {
+      row.items.map((item: EditorItem, index: number) => {
+        item.children.map((element: EditorElement) => {
           editorElements.value.push(element);
           editorItems.value[index].children.push(element);
         });
+      });
+    }); */
+  };
+
+  const updateRawHtml = (html: string) => {
+    const index = editorElements.value.findIndex(
+      (item) => item.id === selectedEditorRow.value?.id
+    );
+
+    const parser = new DOMParser();
+    const parsedHtml = parser.parseFromString(html, "text/html");
+    const htmlBody = parsedHtml.body.children[0];
+
+    htmlBody.setAttribute("id", selectedEditorRow.value?.id);
+    htmlBody.setAttribute("data-type", "item");
+
+    const attrs = htmlBody.getAttributeNames().reduce((acc, name) => {
+      return { ...acc, [name]: htmlBody.getAttribute(name) };
+    }, {});
+
+    editorElements.value[index].markup = htmlBody.outerHTML;
+
+    editorRows.value.forEach((row: EditorRow) => {
+      row.items.forEach((item: EditorItem) => {
+        const index = item.children.findIndex(
+          (el) => el.id === selectedEditorRow.value?.id
+        );
+        if (index) {
+          item.children[index] = editorElements.value[index];
+        }
       });
     });
   };
@@ -349,6 +427,7 @@ export const useEditorStore = defineStore("editor", () => {
     selectEditorRow,
     selectEditorElement,
     updateItemCssProperties,
+    updateItemHtmlProperties,
     currentEditorRowId,
     editableItem,
     setEditableItem,
@@ -356,5 +435,6 @@ export const useEditorStore = defineStore("editor", () => {
     setEditableBlock,
     updateEditorElement,
     extractFromTemplate,
+    updateRawHtml,
   };
 });

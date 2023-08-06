@@ -20,6 +20,7 @@
       <span class="px-3 text-center">{{ item.placeholder }}</span>
     </div>
     <div
+      ref="el"
       style="
         margin: 0 auto;
         min-width: 100%;
@@ -28,7 +29,6 @@
         word-wrap: break-word;
         word-break: break-word;
         background-color: transparent;
-        height: 100%;
       "
       v-else
       v-for="htmlEl in item.children"
@@ -65,8 +65,6 @@ import { useEditorStore } from "@/store/editorStore";
 import { useSettingsStore } from "@/store/settingsStore";
 
 const props = defineProps(["item", "menuRef", "rowId"]);
-
-const { settingsOpen } = storeToRefs(useSettingsStore());
 
 const { toggleSettingsState } = useSettingsStore();
 
@@ -137,7 +135,7 @@ const dropItem = (id: string) => {
 
 <style scoped lang="scss">
 .editor-item {
-  @apply relative z-20 h-full self-stretch;
+  @apply relative z-20 h-auto self-stretch;
 }
 
 .editor-item_selected {

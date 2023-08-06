@@ -355,6 +355,25 @@ export const dimensionsSettings = {
         },
       ],
     },
+    {
+      name: "Width",
+      property: "width",
+      type: "input",
+      display: "row",
+    },
+    {
+      name: "Height",
+      property: "height",
+      type: "input",
+      display: "row",
+    },
+    {
+      name: "Background",
+      property: "background-color",
+      type: "colorpicker",
+      value: "#FFFFFF",
+      display: "row",
+    },
   ],
 };
 
@@ -496,64 +515,26 @@ export const imageSettings = {
   fields: [
     {
       name: "Image",
-      property: "url",
-      type: "fileupload",
-      display: "col",
-    },
-    {
-      name: "Align",
-      property: "align",
-      type: "selection",
-      display: "row",
-      options: [
-        {
-          name: "Left",
-          icon: "ph:text-align-left-light",
-          value: "left",
-          default: true,
-        },
-        {
-          name: "Center",
-          icon: "ph:text-align-center-light",
-          value: "center",
-          default: false,
-        },
-        {
-          name: "Right",
-          icon: "ph:text-align-right-light",
-          value: "right",
-          default: false,
-        },
-      ],
-    },
-    {
-      name: "Width",
-      property: "width",
-      type: "input",
-      display: "row",
-    },
-    {
-      name: "Height",
-      property: "height",
-      type: "input",
+      property: "src",
+      type: "text",
       display: "row",
     },
   ],
 };
 
-export const actionSettings = {
-  title: "Action",
+export const linkSettings = {
+  title: "Link attributes",
   type: "action",
   fields: [
     {
-      name: "Url",
-      value: "url",
+      name: "Href",
+      property: "href",
       type: "text",
       display: "row",
     },
     {
       name: "Target",
-      value: "target",
+      property: "target",
       type: "dropdown",
       options: [
         {
@@ -568,4 +549,94 @@ export const actionSettings = {
       display: "row",
     },
   ],
+};
+
+export const videoSettings = {
+  title: "Video attributes",
+  type: "text",
+  fields: [
+    {
+      name: "Src",
+      property: "src",
+      type: "text",
+      display: "row",
+    },
+    {
+      name: "Target",
+      property: "target",
+      type: "dropdown",
+      options: [
+        {
+          name: "Same tab",
+          value: "_self",
+        },
+        {
+          name: "New tab",
+          value: "_blank",
+        },
+      ],
+      display: "row",
+    },
+  ],
+};
+
+export const rawHtmlSettings = {
+  title: "Insert your html code here",
+  type: "html",
+};
+
+export const editorItemSettings = {
+  width: {
+    property: "width",
+    value: 600,
+    unit: "px",
+  },
+  height: {
+    property: "height",
+    value: "auto",
+  },
+  "margin-top": {
+    property: "margin-top",
+    value: 0,
+    unit: "px",
+  },
+  "margin-bottom": {
+    property: "margin-bottom",
+    value: 0,
+    unit: "px",
+  },
+  "margin-left": {
+    property: "margin-left",
+    value: 0,
+    unit: "px",
+  },
+  "margin-right": {
+    property: "margin-right",
+    value: 0,
+    unit: "px",
+  },
+  "padding-top": {
+    property: "padding-top",
+    value: 0,
+    unit: "px",
+  },
+  "padding-bottom": {
+    property: "padding-bottom",
+    value: 0,
+    unit: "px",
+  },
+  "padding-left": {
+    property: "padding-left",
+    value: 0,
+    unit: "px",
+  },
+  "padding-right": {
+    property: "padding-right",
+    value: 0,
+    unit: "px",
+  },
+  "background-color": {
+    property: "background-color",
+    value: "transparent",
+  },
 };

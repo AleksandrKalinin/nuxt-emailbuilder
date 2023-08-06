@@ -28,15 +28,23 @@ declare global {
 
   interface MenuItemOption {}
 
+  interface EditorElementCssOption {
+    property: string;
+    value: number | string | boolean;
+    unit?: string;
+  }
+
   interface EditorElement {
     id: string;
     tag: string;
+    cssOptions: string[];
+    htmlOptions: string[];
     placeholder?: string;
-    attributes: any[];
     markup: string;
     inlineStyles: string;
     style: string[];
-    cssProperties: CssProperty;
+    cssProperties: property;
+    htmlProperties: HtmlProperty;
     editable: boolean;
     type: string;
   }
@@ -45,7 +53,7 @@ declare global {
     id: string;
     children: EditorElement[];
     placeholder: string;
-    cssProperties: CssProperty;
+    cssProperties: property;
     inlineStyles: string;
   }
 
@@ -57,15 +65,22 @@ declare global {
     "data-type": string;
   }
 
-  interface CssProperty {
+  interface property {
     [index: string]: {
-      cssProperty: string;
+      property: string;
       value: string | number | boolean;
-      unit: string;
+      unit?: string;
     };
   }
 
-  interface settingsActive {
+  interface HtmlProperty {
+    [index: string]: {
+      property: string;
+      value: string;
+    };
+  }
+
+  interface cssSettingsActive {
     id: string;
     items: EditorItem[];
     columns: 1;

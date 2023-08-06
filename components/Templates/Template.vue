@@ -4,7 +4,7 @@
       >Premium</span
     >
     <div class="template__image template-image">
-      <img src="@/assets/images/temp.png" class="template-image__picture" />
+      <img src="@/assets/images/preview.png" class="template-image__picture" />
     </div>
     <div class="template__overlay template-overlay">
       <h2 class="template__title">{{ template.name }}</h2>

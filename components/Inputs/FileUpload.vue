@@ -8,12 +8,38 @@
         >
       </div>
       <div class="upload__btn">Upload file</div>
-      <input type="file" accept="image/*" class="upload__input" />
+      <input
+        type="file"
+        accept="image/*"
+        class="upload__input"
+        @change="onFileChanged($event)"
+      />
     </label>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const file = ref<File | null>(null);
+const encodedImage = ref<string>("");
+const currentImage = ref<string>("");
+
+async function onFileChanged($event: Event) {
+  const target = $event.target as HTMLInputElement;
+  if (target && target.files) {
+    file.value = target.files[0];
+    encodedImage.value = (await toBase64(file.value)) as string;
+    currentImage.value = encodedImage.value;
+  }
+}
+
+const toBase64 = (fileInput: Blob) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(fileInput);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+</script>
 
 <style scoped>
 .upload {

@@ -2,15 +2,47 @@
   <Transition>
     <div class="settings-wrap" v-if="settingsOpen" ref="settingsMenu">
       <div class="settings">
+        <div class="tabs" v-if="!tabsState">
+          <span
+            class="tabs-item"
+            @click="setTab($event, item.id, index)"
+            :class="currentTab === index ? 'tabs-item_active' : ''"
+            v-for="(item, index) in editorTabs"
+          >
+            {{ item.name }}
+          </span>
+        </div>
+        <!--
+        <SettingsBlock
+          v-if="tabsState"
+          :settingsActive="[dimensionsSettings]"
+          :selectedEditorRow="editorTabs[currentTab]"
+          :selectedItemProperties="
+            editorTabs[currentTab].selectedItemProperties
+          "
+          @updateProperties="updateItemCssProperties"
+          @updateEditorRowLayout="updateEditorRowLayout"
+          @updateRawHtml="updateRawHtml"
+        /> -->
+        <!--
         <div
           class="settings-block settings__block"
-          v-for="settingBlock in settingsActive"
+          v-for="settingBlock in cssSettingsActive"
         >
           <h4 class="settings-block__header">{{ settingBlock.title }}</h4>
+          <div
+            class="settings-options__item settings-item"
+            v-if="settingBlock.type === 'html'"
+          >
+            <RawHtml
+              :markup="selectedEditorRow?.markup"
+              @updateHtml="updateRawHtml"
+            />
+          </div>
           <div class="settings-block__options settings-options">
             <div
               class="settings-options__item settings-item"
-              v-for="(option, index) in settingBlock.fields"
+              v-for="option in settingBlock.fields"
               :class="
                 option.display === 'row'
                   ? 'settings-item_row'
@@ -18,50 +50,71 @@
               "
             >
               <h5 class="settings-item__header">{{ option.name }}</h5>
-              <form>
-                <InputSingle
-                  v-if="option.type === 'input'"
-                  :property="selectedItemProperties[option.property]"
-                  :itemKey="option.property"
-                  @updateEditorItem="updateItemCssProperties"
-                />
-                <InputGroup
-                  v-if="option.type === 'inputgroup'"
-                  :items="option.properties"
-                  :selectedProperties="selectedItemProperties"
-                  @inputGroupEmit="updateItemCssProperties"
-                />
-                <Colorpicker
-                  :property="option.value"
-                  :itemKey="option.property"
-                  @updateEditorItem="updateItemCssProperties"
-                  v-else-if="option.type === 'colorpicker'"
-                />
-                <Dropdown
-                  v-if="option.type === 'dropdown'"
-                  :options="option.options"
-                />
-                <TextField v-if="option.type === 'text'" />
-                <SelectionGroup
-                  v-else-if="option.type === 'selection'"
-                  :options="option.options"
-                  :property="selectedItemProperties[option.property]"
-                  :itemKey="option.property"
-                  @updateEditorItem="updateItemCssProperties"
-                />
-                <LayoutGroup
-                  v-else-if="option.type === 'layout'"
-                  :items="option.options"
-                  :activeRow="selectedEditorRow"
-                  @updateEditorRow="updateEditorRowLayout"
-                />
-                <FileUpload v-else-if="option.type === 'fileupload'" />
-                <FileUpload v-else-if="option.type === 'toggle'" />
-              </form>
+              <InputSingle
+                v-if="option.type === 'input'"
+                :property="selectedItemProperties[option.property]"
+                :itemKey="option.property"
+                @updateEditorItem="updateItemCssProperties"
+              />
+              <InputGroup
+                v-if="option.type === 'inputgroup'"
+                :items="option.properties"
+                :selectedProperties="selectedItemProperties"
+                @inputGroupEmit="updateItemCssProperties"
+              />
+              <Colorpicker
+                :property="selectedItemProperties[option.property]"
+                :itemKey="option.property"
+                @updateEditorItem="updateItemCssProperties"
+                v-else-if="option.type === 'colorpicker'"
+              />
+              <Dropdown
+                v-if="option.type === 'dropdown'"
+                :options="option.options"
+                :property="selectedItemProperties[option.property]"
+                :itemKey="option.property"
+              />
+              <TextField v-if="option.type === 'text'" />
+              <SelectionGroup
+                v-else-if="option.type === 'selection'"
+                :options="option.options"
+                :property="selectedItemProperties[option.property]"
+                :itemKey="option.property"
+                @updateEditorItem="updateItemCssProperties"
+              />
+              <LayoutGroup
+                v-else-if="option.type === 'layout'"
+                :items="option.options"
+                :activeRow="selectedEditorRow"
+                @updateEditorRow="updateEditorRowLayout"
+              />
+              <FileUpload v-else-if="option.type === 'fileupload'" />
+              <ToggleInput v-else-if="option.type === 'toggle'" />
             </div>
           </div>
-        </div>
+        </div> -->
+        <SettingsBlock
+          v-if="hasCssPropetties"
+          :settingsActive="cssSettingsActive"
+          :selectedEditorRow="selectedEditorRow"
+          :selectedItemProperties="selectedItemProperties"
+          @updateProperties="updateItemCssProperties"
+          @updateEditorRowLayout="updateEditorRowLayout"
+          @updateRawHtml="updateRawHtml"
+        />
+        <SettingsBlock
+          v-if="hasHtmlAttributes"
+          :settingsActive="htmlSettingsActive"
+          :selectedEditorRow="selectedEditorRow"
+          :selectedItemProperties="selectedItemAttributes"
+          @updateProperties="updateItemHtmlProperties"
+          @updateEditorRowLayout="updateEditorRowLayout"
+          @updateRawHtml="updateRawHtml"
+        />
       </div>
+      <KeepAlive>
+        <component :is="currentTabComponent" />
+      </KeepAlive>
     </div>
   </Transition>
 </template>
@@ -70,11 +123,22 @@
 import { useSettingsStore } from "@/store/settingsStore";
 import { useEditorStore } from "@/store/editorStore";
 import { storeToRefs } from "pinia";
+import { dimensionsSettings, editorItemSettings } from "@/constants/settings";
 
-const { settingsOpen, settingsActive } = storeToRefs(useSettingsStore());
+const { settingsOpen, cssSettingsActive, htmlSettingsActive } = storeToRefs(
+  useSettingsStore()
+);
 
-const { updateItemCssProperties, updateEditorRowLayout } = useEditorStore();
-const { selectedEditorRow } = storeToRefs(useEditorStore());
+const { selectedEditorRow, editorRows } = storeToRefs(useEditorStore());
+
+const {
+  updateItemCssProperties,
+  updateItemHtmlProperties,
+  updateEditorRowLayout,
+  updateRawHtml,
+} = useEditorStore();
+
+const { tabsState } = useTabs();
 
 const selectedItemProperties = computed(() => {
   if (selectedEditorRow.value) {
@@ -82,19 +146,55 @@ const selectedItemProperties = computed(() => {
   } else return null;
 });
 
-/*
 const selectedItemAttributes = computed(() => {
   if (selectedEditorRow.value) {
-    const item = editorRows.value.find(
-      (item: EditorRow) => item.id === selectedEditorRow.value?.id
-    );
-    return selectedEditorRow.value?.htmlAttributes;
+    return selectedEditorRow.value?.htmlProperties;
   } else return null;
 });
-*/
+
+const hasCssPropetties = computed(() => {
+  return (
+    selectedItemProperties && Object.keys(selectedItemProperties).length !== 0
+  );
+});
+
+const hasHtmlAttributes = computed(() => {
+  return (
+    selectedItemAttributes.value &&
+    Object.keys(selectedItemAttributes.value).length !== 0
+  );
+});
+
 const settingsMenu = ref(null);
 
 defineExpose({ settingsMenu });
+
+const editorTabs = computed(() => {
+  if (selectedEditorRow.value?.items) {
+    return selectedEditorRow.value?.items.map(
+      (editorItem: EditorItem, index: string) => {
+        const item = {
+          id: editorItem.id,
+          name: `Column ${index + 1}`,
+          selectedItemProperties: editorItem.cssProperties,
+        };
+        return item;
+      }
+    );
+  } else {
+    return [];
+  }
+});
+
+const currentTab: Ref<number> = ref(0);
+
+const currentTabComponent = computed(() => {
+  return editorTabs.value[currentTab.value];
+});
+
+const setTab = (e: Event, id: string, index: number) => {
+  currentTab.value = index;
+};
 </script>
 
 <style scoped>
@@ -106,6 +206,26 @@ defineExpose({ settingsMenu });
 .v-enter-from,
 .v-leave-to {
   transform: translateX(380px);
+}
+
+.tabs {
+  @apply flex text-base font-semibold w-full box-border;
+  -webkit-box-shadow: inset 0px -1px 0px 0px rgba(203, 213, 225, 1);
+  -moz-box-shadow: inset 0px -1px 0px 0px rgba(203, 213, 225, 1);
+  box-shadow: inset 0px -1px 0px 0px rgba(203, 213, 225, 1);
+}
+
+.tabs-item {
+  -webkit-box-shadow: inset 0px -1px 0px 0px rgba(203, 213, 225, 1);
+  -moz-box-shadow: inset 0px -1px 0px 0px rgba(203, 213, 225, 1);
+  box-shadow: inset 0px -1px 0px 0px rgba(203, 213, 225, 1);
+  @apply flex w-[90px] h-[50px] justify-center items-center text-center cursor-pointer transition duration-100;
+}
+
+.tabs-item_active {
+  -webkit-box-shadow: inset 0px -2px 0px 0px rgba(96, 165, 250, 1);
+  -moz-box-shadow: inset 0px -2px 0px 0px rgba(96, 165, 250, 1);
+  box-shadow: inset 0px -2px 0px 0px rgba(96, 165, 250, 1);
 }
 
 .settings-wrap {

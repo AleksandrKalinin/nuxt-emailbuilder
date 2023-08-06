@@ -52,17 +52,16 @@ import {
   typographySettings,
   imageSettings,
   dimensionsSettings,
-  actionSettings,
 } from "../constants/settings";
 
-const props = defineProps(["settingsMenuRef"]);
+defineProps(["settingsMenuRef"]);
 
 const { createBuildingBlocks, addEditorItem, addEditorRow } = useEditorStore();
 
 const { editorElements, editorRows, selectedEditorRow, currentEditorRowId } =
   storeToRefs(useEditorStore());
 
-const { setActiveSettings } = useSettingsStore();
+const { setActiveCssSettings, setActiveHtmlSettings } = useSettingsStore();
 
 const {
   selectEditorRow,
@@ -72,6 +71,8 @@ const {
   setEditableItem,
 } = useEditorStore();
 
+const { setTabsState } = useTabs();
+
 const selectElement = (event: Event) => {
   const currentTarget = event.currentTarget as HTMLElement;
   const target = event.target as HTMLElement;
@@ -79,18 +80,22 @@ const selectElement = (event: Event) => {
 
   if (target.hasAttribute("data-type")) {
     selectEditorElement(target.getAttribute("id"));
-    setActiveSettings([typographySettings]);
 
     const activeElement = editorElements.value.find(
       (el: EditorElement) => el.id === target.getAttribute("id")
     );
 
+    setActiveCssSettings(activeElement?.cssOptions);
+    setActiveHtmlSettings(activeElement?.htmlOptions);
+
     if (activeElement?.editable) {
       setEditableItem(target.getAttribute("id"));
     }
+    setTabsState(true);
   } else {
-    setActiveSettings([layoutSettings]);
+    setActiveCssSettings([layoutSettings]);
     selectEditorRow(currentTarget.getAttribute("id"));
+    setTabsState(false);
   }
 };
 
