@@ -1,84 +1,84 @@
 export const initialTypographyValues = {
   "font-size": {
-    cssProperty: "font-size",
+    property: "font-size",
     value: 14,
     unit: "px",
   },
   color: {
-    cssProperty: "color",
+    property: "color",
     value: "#222222",
   },
   "font-weight": {
-    cssProperty: "font-weight",
+    property: "font-weight",
     value: 400,
   },
   "font-style": {
-    cssProperty: "font-style",
+    property: "font-style",
     value: "normal",
   },
   "line-height": {
-    cssProperty: "line-height",
+    property: "line-height",
     value: 22,
     unit: "px",
   },
   "letter-spacing": {
-    cssProperty: "letter-spacing",
+    property: "letter-spacing",
     value: 1,
     unit: "px",
   },
   "text-align": {
-    cssProperty: "text-align",
+    property: "text-align",
     value: "left",
   },
   "text-transform": {
-    cssProperty: "text-transform",
+    property: "text-transform",
     value: "none",
   },
 };
 
 export const initialDimensionValues = {
   width: {
-    cssProperty: "width",
+    property: "width",
     value: 600,
     unit: "px",
   },
   "margin-top": {
-    cssProperty: "margin-top",
+    property: "margin-top",
     value: 0,
     unit: "px",
   },
   "margin-bottom": {
-    cssProperty: "margin-bottom",
+    property: "margin-bottom",
     value: 0,
     unit: "px",
   },
   "margin-left": {
-    cssProperty: "margin-left",
+    property: "margin-left",
     value: 0,
     unit: "px",
   },
   "margin-right": {
-    cssProperty: "margin-right",
+    property: "margin-right",
     value: 0,
     unit: "px",
   },
   "padding-top": {
-    cssProperty: "padding-top",
+    property: "padding-top",
     value: 0,
     unit: "px",
   },
   "padding-bottom": {
-    cssProperty: "padding-bottom",
+    property: "padding-bottom",
     value: 0,
     unit: "px",
   },
   "padding-left": {
-    cssProperty: "padding-left",
+    property: "padding-left",
     value: 0,
     unit: "px",
   },
   "padding-right": {
-    cssProperty: "padding-right",
+    property: "padding-right",
     value: 0,
     unit: "px",
   },

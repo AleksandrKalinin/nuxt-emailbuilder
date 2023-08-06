@@ -2,6 +2,17 @@
   <Transition>
     <div class="settings-wrap" v-if="settingsOpen" ref="settingsMenu">
       <div class="settings">
+        <div class="tabs" v-if="!tabsState">
+          <span
+            class="tabs-item"
+            @click="setTab($event, item.id, index)"
+            :class="currentTab === index ? 'tabs-item_active' : ''"
+            v-for="(item, index) in editorTabs"
+          >
+            {{ item.name }}
+          </span>
+        </div>
+        <!--
         <div
           class="settings-block settings__block"
           v-for="settingBlock in cssSettingsActive"
@@ -69,7 +80,16 @@
               <ToggleInput v-else-if="option.type === 'toggle'" />
             </div>
           </div>
-        </div>
+        </div> -->
+        <SettingsBlock
+          :settingsActive="cssSettingsActive"
+          :selectedEditorRow="selectedEditorRow"
+          :selectedItemProperties="selectedItemProperties"
+          @updateProperties="updateItemCssProperties"
+          @updateEditorRowLayout="updateEditorRowLayout"
+          @updateRawHtml="updateRawHtml"
+        />
+        <!--
         <div
           class="settings-block settings__block"
           v-for="settingBlock in htmlSettingsActive"
@@ -134,8 +154,19 @@
               <ToggleInput v-else-if="option.type === 'toggle'" />
             </div>
           </div>
-        </div>
+        </div> -->
+        <SettingsBlock
+          :settingsActive="htmlSettingsActive"
+          :selectedEditorRow="selectedEditorRow"
+          :selectedItemProperties="selectedItemAttributes"
+          @updateProperties="updateItemHtmlProperties"
+          @updateEditorRowLayout="updateEditorRowLayout"
+          @updateRawHtml="updateRawHtml"
+        />
       </div>
+      <KeepAlive>
+        <component :is="currentTabComponent" />
+      </KeepAlive>
     </div>
   </Transition>
 </template>
@@ -158,6 +189,8 @@ const {
   updateRawHtml,
 } = useEditorStore();
 
+const { tabsState } = useTabs();
+
 const selectedItemProperties = computed(() => {
   if (selectedEditorRow.value) {
     return selectedEditorRow.value?.cssProperties;
@@ -175,6 +208,32 @@ const rawHtmlContent = computed(() => {});
 const settingsMenu = ref(null);
 
 defineExpose({ settingsMenu });
+
+const editorTabs = computed(() => {
+  if (selectedEditorRow.value?.items) {
+    return selectedEditorRow.value?.items.map(
+      (row: EditorRow, index: string) => {
+        const item = {
+          id: row.id,
+          name: `Column ${index + 1}`,
+        };
+        return item;
+      }
+    );
+  } else {
+    return [];
+  }
+});
+
+const currentTab: Ref<number | null> = ref(0);
+
+const currentTabComponent = computed(() => {
+  return editorTabs[currentTab.value];
+});
+
+const setTab = (e: Event, id: string, index: number) => {
+  currentTab.value = index;
+};
 </script>
 
 <style scoped>
@@ -186,6 +245,26 @@ defineExpose({ settingsMenu });
 .v-enter-from,
 .v-leave-to {
   transform: translateX(380px);
+}
+
+.tabs {
+  @apply flex text-base font-semibold w-full box-border;
+  -webkit-box-shadow: inset 0px -1px 0px 0px rgba(203, 213, 225, 1);
+  -moz-box-shadow: inset 0px -1px 0px 0px rgba(203, 213, 225, 1);
+  box-shadow: inset 0px -1px 0px 0px rgba(203, 213, 225, 1);
+}
+
+.tabs-item {
+  -webkit-box-shadow: inset 0px -1px 0px 0px rgba(203, 213, 225, 1);
+  -moz-box-shadow: inset 0px -1px 0px 0px rgba(203, 213, 225, 1);
+  box-shadow: inset 0px -1px 0px 0px rgba(203, 213, 225, 1);
+  @apply flex w-[90px] h-[50px] justify-center items-center text-center cursor-pointer transition duration-100;
+}
+
+.tabs-item_active {
+  -webkit-box-shadow: inset 0px -2px 0px 0px rgba(96, 165, 250, 1);
+  -moz-box-shadow: inset 0px -2px 0px 0px rgba(96, 165, 250, 1);
+  box-shadow: inset 0px -2px 0px 0px rgba(96, 165, 250, 1);
 }
 
 .settings-wrap {

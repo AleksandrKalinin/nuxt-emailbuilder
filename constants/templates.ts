@@ -13,76 +13,76 @@ export const templates = [
             children: [
               {
                 cssProperties: {
-                  color: { cssProperty: "color", value: "#222222" },
+                  color: { property: "color", value: "#222222" },
                   "font-size": {
-                    cssProperty: "font-size",
+                    property: "font-size",
                     value: 26,
                     unit: "px",
                   },
-                  "font-style": { cssProperty: "font-style", value: "normal" },
-                  "font-weight": { cssProperty: "font-weight", value: 400 },
+                  "font-style": { property: "font-style", value: "normal" },
+                  "font-weight": { property: "font-weight", value: 400 },
                   "letter-spacing": {
-                    cssProperty: "letter-spacing",
+                    property: "letter-spacing",
                     value: 1,
                     unit: "px",
                   },
                   "line-height": {
-                    cssProperty: "line-height",
+                    property: "line-height",
                     value: 36,
                     unit: "px",
                   },
-                  "text-align": { cssProperty: "text-align", value: "left" },
+                  "text-align": { property: "text-align", value: "left" },
                   "text-transform": {
-                    cssProperty: "text-transform",
+                    property: "text-transform",
                     value: "none",
                   },
                   "margin-top": {
-                    cssProperty: "margin-top",
+                    property: "margin-top",
                     value: 0,
                     unit: "px",
                   },
                   "margin-bottom": {
-                    cssProperty: "margin-bottom",
+                    property: "margin-bottom",
                     value: 0,
                     unit: "px",
                   },
                   "margin-left": {
-                    cssProperty: "margin-left",
+                    property: "margin-left",
                     value: 0,
                     unit: "px",
                   },
                   "margin-right": {
-                    cssProperty: "margin-right",
+                    property: "margin-right",
                     value: 0,
                     unit: "px",
                   },
                   "padding-top": {
-                    cssProperty: "padding-top",
+                    property: "padding-top",
                     value: 0,
                     unit: "px",
                   },
                   "padding-bottom": {
-                    cssProperty: "padding-bottom",
+                    property: "padding-bottom",
                     value: 0,
                     unit: "px",
                   },
                   "padding-left": {
-                    cssProperty: "padding-left",
+                    property: "padding-left",
                     value: 0,
                     unit: "px",
                   },
                   "padding-right": {
-                    cssProperty: "padding-right",
+                    property: "padding-right",
                     value: 0,
                     unit: "px",
                   },
                   width: {
-                    cssProperty: "width",
+                    property: "width",
                     value: 100,
                     unit: "%",
                   },
                   height: {
-                    cssProperty: "height",
+                    property: "height",
                     value: "auto",
                   },
                 },
@@ -100,47 +100,47 @@ export const templates = [
             ],
             cssProperties: {
               "margin-bottom": {
-                cssProperty: "margin-bottom",
+                property: "margin-bottom",
                 value: 0,
                 unit: "px",
               },
               "margin-left": {
-                cssProperty: "margin-left",
+                property: "margin-left",
                 value: 0,
                 unit: "px",
               },
               "margin-right": {
-                cssProperty: "margin-right",
+                property: "margin-right",
                 value: 0,
                 unit: "px",
               },
-              "margin-top": { cssProperty: "margin-top", value: 0, unit: "px" },
+              "margin-top": { property: "margin-top", value: 0, unit: "px" },
               "min-height": {
-                cssProperty: "min-height",
+                property: "min-height",
                 value: 80,
                 unit: "px",
               },
               "padding-bottom": {
-                cssProperty: "padding-bottom",
+                property: "padding-bottom",
                 value: 0,
                 unit: "px",
               },
               "padding-left": {
-                cssProperty: "padding-left",
+                property: "padding-left",
                 value: 0,
                 unit: "px",
               },
               "padding-right": {
-                cssProperty: "padding-right",
+                property: "padding-right",
                 value: 0,
                 unit: "px",
               },
               "padding-top": {
-                cssProperty: "padding-top",
+                property: "padding-top",
                 value: 0,
                 unit: "px",
               },
-              width: { cssProperty: "width", value: 600, unit: "px" },
+              width: { property: "width", value: 600, unit: "px" },
             },
             inlineStyles:
               "width : 600px; min-height : 80px; margin-top : 0px; margin-bottom : 0px; margin-left : 0px; margin-right : 0px; padding-top : 0px; padding-bottom : 0px; padding-left : 0px; padding-right : 0px; ",
@@ -166,27 +166,27 @@ export const templates = [
             children: [
               {
                 cssProperties: {
-                  color: { cssProperty: "color", value: "#222222" },
+                  color: { property: "color", value: "#222222" },
                   "font-size": {
-                    cssProperty: "font-size",
+                    property: "font-size",
                     value: 26,
                     unit: "px",
                   },
-                  "font-style": { cssProperty: "font-style", value: "normal" },
-                  "font-weight": { cssProperty: "font-weight", value: 400 },
+                  "font-style": { property: "font-style", value: "normal" },
+                  "font-weight": { property: "font-weight", value: 400 },
                   "letter-spacing": {
-                    cssProperty: "letter-spacing",
+                    property: "letter-spacing",
                     value: 1,
                     unit: "px",
                   },
                   "line-height": {
-                    cssProperty: "line-height",
+                    property: "line-height",
                     value: 36,
                     unit: "px",
                   },
-                  "text-align": { cssProperty: "text-align", value: "left" },
+                  "text-align": { property: "text-align", value: "left" },
                   "text-transform": {
-                    cssProperty: "text-transform",
+                    property: "text-transform",
                     value: "none",
                   },
                 },
@@ -204,47 +204,47 @@ export const templates = [
             ],
             cssProperties: {
               "margin-bottom": {
-                cssProperty: "margin-bottom",
+                property: "margin-bottom",
                 value: 0,
                 unit: "px",
               },
               "margin-left": {
-                cssProperty: "margin-left",
+                property: "margin-left",
                 value: 0,
                 unit: "px",
               },
               "margin-right": {
-                cssProperty: "margin-right",
+                property: "margin-right",
                 value: 0,
                 unit: "px",
               },
-              "margin-top": { cssProperty: "margin-top", value: 0, unit: "px" },
+              "margin-top": { property: "margin-top", value: 0, unit: "px" },
               "min-height": {
-                cssProperty: "min-height",
+                property: "min-height",
                 value: 80,
                 unit: "px",
               },
               "padding-bottom": {
-                cssProperty: "padding-bottom",
+                property: "padding-bottom",
                 value: 0,
                 unit: "px",
               },
               "padding-left": {
-                cssProperty: "padding-left",
+                property: "padding-left",
                 value: 0,
                 unit: "px",
               },
               "padding-right": {
-                cssProperty: "padding-right",
+                property: "padding-right",
                 value: 0,
                 unit: "px",
               },
               "padding-top": {
-                cssProperty: "padding-top",
+                property: "padding-top",
                 value: 0,
                 unit: "px",
               },
-              width: { cssProperty: "width", value: 600, unit: "px" },
+              width: { property: "width", value: 600, unit: "px" },
             },
             inlineStyles:
               "width : 600px; min-height : 80px; margin-top : 0px; margin-bottom : 0px; margin-left : 0px; margin-right : 0px; padding-top : 0px; padding-bottom : 0px; padding-left : 0px; padding-right : 0px; ",
@@ -270,27 +270,27 @@ export const templates = [
             children: [
               {
                 cssProperties: {
-                  color: { cssProperty: "color", value: "#222222" },
+                  color: { property: "color", value: "#222222" },
                   "font-size": {
-                    cssProperty: "font-size",
+                    property: "font-size",
                     value: 26,
                     unit: "px",
                   },
-                  "font-style": { cssProperty: "font-style", value: "normal" },
-                  "font-weight": { cssProperty: "font-weight", value: 400 },
+                  "font-style": { property: "font-style", value: "normal" },
+                  "font-weight": { property: "font-weight", value: 400 },
                   "letter-spacing": {
-                    cssProperty: "letter-spacing",
+                    property: "letter-spacing",
                     value: 1,
                     unit: "px",
                   },
                   "line-height": {
-                    cssProperty: "line-height",
+                    property: "line-height",
                     value: 36,
                     unit: "px",
                   },
-                  "text-align": { cssProperty: "text-align", value: "left" },
+                  "text-align": { property: "text-align", value: "left" },
                   "text-transform": {
-                    cssProperty: "text-transform",
+                    property: "text-transform",
                     value: "none",
                   },
                 },
@@ -308,47 +308,47 @@ export const templates = [
             ],
             cssProperties: {
               "margin-bottom": {
-                cssProperty: "margin-bottom",
+                property: "margin-bottom",
                 value: 0,
                 unit: "px",
               },
               "margin-left": {
-                cssProperty: "margin-left",
+                property: "margin-left",
                 value: 0,
                 unit: "px",
               },
               "margin-right": {
-                cssProperty: "margin-right",
+                property: "margin-right",
                 value: 0,
                 unit: "px",
               },
-              "margin-top": { cssProperty: "margin-top", value: 0, unit: "px" },
+              "margin-top": { property: "margin-top", value: 0, unit: "px" },
               "min-height": {
-                cssProperty: "min-height",
+                property: "min-height",
                 value: 80,
                 unit: "px",
               },
               "padding-bottom": {
-                cssProperty: "padding-bottom",
+                property: "padding-bottom",
                 value: 0,
                 unit: "px",
               },
               "padding-left": {
-                cssProperty: "padding-left",
+                property: "padding-left",
                 value: 0,
                 unit: "px",
               },
               "padding-right": {
-                cssProperty: "padding-right",
+                property: "padding-right",
                 value: 0,
                 unit: "px",
               },
               "padding-top": {
-                cssProperty: "padding-top",
+                property: "padding-top",
                 value: 0,
                 unit: "px",
               },
-              width: { cssProperty: "width", value: 600, unit: "px" },
+              width: { property: "width", value: 600, unit: "px" },
             },
             inlineStyles:
               "width : 600px; min-height : 80px; margin-top : 0px; margin-bottom : 0px; margin-left : 0px; margin-right : 0px; padding-top : 0px; padding-bottom : 0px; padding-left : 0px; padding-right : 0px; ",
@@ -374,27 +374,27 @@ export const templates = [
             children: [
               {
                 cssProperties: {
-                  color: { cssProperty: "color", value: "#222222" },
+                  color: { property: "color", value: "#222222" },
                   "font-size": {
-                    cssProperty: "font-size",
+                    property: "font-size",
                     value: 26,
                     unit: "px",
                   },
-                  "font-style": { cssProperty: "font-style", value: "normal" },
-                  "font-weight": { cssProperty: "font-weight", value: 400 },
+                  "font-style": { property: "font-style", value: "normal" },
+                  "font-weight": { property: "font-weight", value: 400 },
                   "letter-spacing": {
-                    cssProperty: "letter-spacing",
+                    property: "letter-spacing",
                     value: 1,
                     unit: "px",
                   },
                   "line-height": {
-                    cssProperty: "line-height",
+                    property: "line-height",
                     value: 36,
                     unit: "px",
                   },
-                  "text-align": { cssProperty: "text-align", value: "left" },
+                  "text-align": { property: "text-align", value: "left" },
                   "text-transform": {
-                    cssProperty: "text-transform",
+                    property: "text-transform",
                     value: "none",
                   },
                 },
@@ -412,47 +412,47 @@ export const templates = [
             ],
             cssProperties: {
               "margin-bottom": {
-                cssProperty: "margin-bottom",
+                property: "margin-bottom",
                 value: 0,
                 unit: "px",
               },
               "margin-left": {
-                cssProperty: "margin-left",
+                property: "margin-left",
                 value: 0,
                 unit: "px",
               },
               "margin-right": {
-                cssProperty: "margin-right",
+                property: "margin-right",
                 value: 0,
                 unit: "px",
               },
-              "margin-top": { cssProperty: "margin-top", value: 0, unit: "px" },
+              "margin-top": { property: "margin-top", value: 0, unit: "px" },
               "min-height": {
-                cssProperty: "min-height",
+                property: "min-height",
                 value: 80,
                 unit: "px",
               },
               "padding-bottom": {
-                cssProperty: "padding-bottom",
+                property: "padding-bottom",
                 value: 0,
                 unit: "px",
               },
               "padding-left": {
-                cssProperty: "padding-left",
+                property: "padding-left",
                 value: 0,
                 unit: "px",
               },
               "padding-right": {
-                cssProperty: "padding-right",
+                property: "padding-right",
                 value: 0,
                 unit: "px",
               },
               "padding-top": {
-                cssProperty: "padding-top",
+                property: "padding-top",
                 value: 0,
                 unit: "px",
               },
-              width: { cssProperty: "width", value: 600, unit: "px" },
+              width: { property: "width", value: 600, unit: "px" },
             },
             inlineStyles:
               "width : 600px; min-height : 80px; margin-top : 0px; margin-bottom : 0px; margin-left : 0px; margin-right : 0px; padding-top : 0px; padding-bottom : 0px; padding-left : 0px; padding-right : 0px; ",
@@ -478,27 +478,27 @@ export const templates = [
             children: [
               {
                 cssProperties: {
-                  color: { cssProperty: "color", value: "#222222" },
+                  color: { property: "color", value: "#222222" },
                   "font-size": {
-                    cssProperty: "font-size",
+                    property: "font-size",
                     value: 26,
                     unit: "px",
                   },
-                  "font-style": { cssProperty: "font-style", value: "normal" },
-                  "font-weight": { cssProperty: "font-weight", value: 400 },
+                  "font-style": { property: "font-style", value: "normal" },
+                  "font-weight": { property: "font-weight", value: 400 },
                   "letter-spacing": {
-                    cssProperty: "letter-spacing",
+                    property: "letter-spacing",
                     value: 1,
                     unit: "px",
                   },
                   "line-height": {
-                    cssProperty: "line-height",
+                    property: "line-height",
                     value: 36,
                     unit: "px",
                   },
-                  "text-align": { cssProperty: "text-align", value: "left" },
+                  "text-align": { property: "text-align", value: "left" },
                   "text-transform": {
-                    cssProperty: "text-transform",
+                    property: "text-transform",
                     value: "none",
                   },
                 },
@@ -516,47 +516,47 @@ export const templates = [
             ],
             cssProperties: {
               "margin-bottom": {
-                cssProperty: "margin-bottom",
+                property: "margin-bottom",
                 value: 0,
                 unit: "px",
               },
               "margin-left": {
-                cssProperty: "margin-left",
+                property: "margin-left",
                 value: 0,
                 unit: "px",
               },
               "margin-right": {
-                cssProperty: "margin-right",
+                property: "margin-right",
                 value: 0,
                 unit: "px",
               },
-              "margin-top": { cssProperty: "margin-top", value: 0, unit: "px" },
+              "margin-top": { property: "margin-top", value: 0, unit: "px" },
               "min-height": {
-                cssProperty: "min-height",
+                property: "min-height",
                 value: 80,
                 unit: "px",
               },
               "padding-bottom": {
-                cssProperty: "padding-bottom",
+                property: "padding-bottom",
                 value: 0,
                 unit: "px",
               },
               "padding-left": {
-                cssProperty: "padding-left",
+                property: "padding-left",
                 value: 0,
                 unit: "px",
               },
               "padding-right": {
-                cssProperty: "padding-right",
+                property: "padding-right",
                 value: 0,
                 unit: "px",
               },
               "padding-top": {
-                cssProperty: "padding-top",
+                property: "padding-top",
                 value: 0,
                 unit: "px",
               },
-              width: { cssProperty: "width", value: 600, unit: "px" },
+              width: { property: "width", value: 600, unit: "px" },
             },
             inlineStyles:
               "width : 600px; min-height : 80px; margin-top : 0px; margin-bottom : 0px; margin-left : 0px; margin-right : 0px; padding-top : 0px; padding-bottom : 0px; padding-left : 0px; padding-right : 0px; ",
@@ -582,27 +582,27 @@ export const templates = [
             children: [
               {
                 cssProperties: {
-                  color: { cssProperty: "color", value: "#222222" },
+                  color: { property: "color", value: "#222222" },
                   "font-size": {
-                    cssProperty: "font-size",
+                    property: "font-size",
                     value: 26,
                     unit: "px",
                   },
-                  "font-style": { cssProperty: "font-style", value: "normal" },
-                  "font-weight": { cssProperty: "font-weight", value: 400 },
+                  "font-style": { property: "font-style", value: "normal" },
+                  "font-weight": { property: "font-weight", value: 400 },
                   "letter-spacing": {
-                    cssProperty: "letter-spacing",
+                    property: "letter-spacing",
                     value: 1,
                     unit: "px",
                   },
                   "line-height": {
-                    cssProperty: "line-height",
+                    property: "line-height",
                     value: 36,
                     unit: "px",
                   },
-                  "text-align": { cssProperty: "text-align", value: "left" },
+                  "text-align": { property: "text-align", value: "left" },
                   "text-transform": {
-                    cssProperty: "text-transform",
+                    property: "text-transform",
                     value: "none",
                   },
                 },
@@ -620,47 +620,47 @@ export const templates = [
             ],
             cssProperties: {
               "margin-bottom": {
-                cssProperty: "margin-bottom",
+                property: "margin-bottom",
                 value: 0,
                 unit: "px",
               },
               "margin-left": {
-                cssProperty: "margin-left",
+                property: "margin-left",
                 value: 0,
                 unit: "px",
               },
               "margin-right": {
-                cssProperty: "margin-right",
+                property: "margin-right",
                 value: 0,
                 unit: "px",
               },
-              "margin-top": { cssProperty: "margin-top", value: 0, unit: "px" },
+              "margin-top": { property: "margin-top", value: 0, unit: "px" },
               "min-height": {
-                cssProperty: "min-height",
+                property: "min-height",
                 value: 80,
                 unit: "px",
               },
               "padding-bottom": {
-                cssProperty: "padding-bottom",
+                property: "padding-bottom",
                 value: 0,
                 unit: "px",
               },
               "padding-left": {
-                cssProperty: "padding-left",
+                property: "padding-left",
                 value: 0,
                 unit: "px",
               },
               "padding-right": {
-                cssProperty: "padding-right",
+                property: "padding-right",
                 value: 0,
                 unit: "px",
               },
               "padding-top": {
-                cssProperty: "padding-top",
+                property: "padding-top",
                 value: 0,
                 unit: "px",
               },
-              width: { cssProperty: "width", value: 600, unit: "px" },
+              width: { property: "width", value: 600, unit: "px" },
             },
             inlineStyles:
               "width : 600px; min-height : 80px; margin-top : 0px; margin-bottom : 0px; margin-left : 0px; margin-right : 0px; padding-top : 0px; padding-bottom : 0px; padding-left : 0px; padding-right : 0px; ",
@@ -686,27 +686,27 @@ export const templates = [
             children: [
               {
                 cssProperties: {
-                  color: { cssProperty: "color", value: "#222222" },
+                  color: { property: "color", value: "#222222" },
                   "font-size": {
-                    cssProperty: "font-size",
+                    property: "font-size",
                     value: 26,
                     unit: "px",
                   },
-                  "font-style": { cssProperty: "font-style", value: "normal" },
-                  "font-weight": { cssProperty: "font-weight", value: 400 },
+                  "font-style": { property: "font-style", value: "normal" },
+                  "font-weight": { property: "font-weight", value: 400 },
                   "letter-spacing": {
-                    cssProperty: "letter-spacing",
+                    property: "letter-spacing",
                     value: 1,
                     unit: "px",
                   },
                   "line-height": {
-                    cssProperty: "line-height",
+                    property: "line-height",
                     value: 36,
                     unit: "px",
                   },
-                  "text-align": { cssProperty: "text-align", value: "left" },
+                  "text-align": { property: "text-align", value: "left" },
                   "text-transform": {
-                    cssProperty: "text-transform",
+                    property: "text-transform",
                     value: "none",
                   },
                 },
@@ -724,47 +724,47 @@ export const templates = [
             ],
             cssProperties: {
               "margin-bottom": {
-                cssProperty: "margin-bottom",
+                property: "margin-bottom",
                 value: 0,
                 unit: "px",
               },
               "margin-left": {
-                cssProperty: "margin-left",
+                property: "margin-left",
                 value: 0,
                 unit: "px",
               },
               "margin-right": {
-                cssProperty: "margin-right",
+                property: "margin-right",
                 value: 0,
                 unit: "px",
               },
-              "margin-top": { cssProperty: "margin-top", value: 0, unit: "px" },
+              "margin-top": { property: "margin-top", value: 0, unit: "px" },
               "min-height": {
-                cssProperty: "min-height",
+                property: "min-height",
                 value: 80,
                 unit: "px",
               },
               "padding-bottom": {
-                cssProperty: "padding-bottom",
+                property: "padding-bottom",
                 value: 0,
                 unit: "px",
               },
               "padding-left": {
-                cssProperty: "padding-left",
+                property: "padding-left",
                 value: 0,
                 unit: "px",
               },
               "padding-right": {
-                cssProperty: "padding-right",
+                property: "padding-right",
                 value: 0,
                 unit: "px",
               },
               "padding-top": {
-                cssProperty: "padding-top",
+                property: "padding-top",
                 value: 0,
                 unit: "px",
               },
-              width: { cssProperty: "width", value: 600, unit: "px" },
+              width: { property: "width", value: 600, unit: "px" },
             },
             inlineStyles:
               "width : 600px; min-height : 80px; margin-top : 0px; margin-bottom : 0px; margin-left : 0px; margin-right : 0px; padding-top : 0px; padding-bottom : 0px; padding-left : 0px; padding-right : 0px; ",

@@ -13,14 +13,14 @@ import {
 import { create } from "domain";
 
 export const useEditorStore = defineStore("editor", () => {
-  const createInlineStyles = (params: CssProperty) => {
+  const createInlineStyles = (params: property) => {
     let inlineStyles: string = "";
     for (const item in params) {
       let val: string | number | boolean = params[item].value;
       if (params[item].unit) {
         val += params[item].unit;
       }
-      const cssStyle = `${params[item].cssProperty} : ${val}; `;
+      const cssStyle = `${params[item].property} : ${val}; `;
       inlineStyles += cssStyle;
     }
     return inlineStyles;
@@ -250,8 +250,8 @@ export const useEditorStore = defineStore("editor", () => {
     for (const key in item.cssProperties) {
       const cssObj = item.cssProperties[key];
       cssObj.unit
-        ? (element.style[cssObj.cssProperty] = cssObj.value + cssObj.unit)
-        : (element.style[cssObj.cssProperty] = cssObj.value);
+        ? (element.style[cssObj.property] = cssObj.value + cssObj.unit)
+        : (element.style[cssObj.property] = cssObj.value);
     }
 
     if (item.placeholder) {
@@ -261,7 +261,7 @@ export const useEditorStore = defineStore("editor", () => {
     if (item.htmlProperties) {
       for (const key in item.htmlProperties) {
         element.setAttribute(
-          item.htmlProperties[key].attributeName,
+          item.htmlProperties[key].property,
           item.htmlProperties[key].value
         );
       }

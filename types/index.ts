@@ -29,7 +29,7 @@ declare global {
   interface MenuItemOption {}
 
   interface EditorElementCssOption {
-    cssProperty: string;
+    property: string;
     value: number | string | boolean;
     unit?: string;
   }
@@ -43,7 +43,7 @@ declare global {
     markup: string;
     inlineStyles: string;
     style: string[];
-    cssProperties: CssProperty;
+    cssProperties: property;
     htmlProperties: HtmlProperty;
     editable: boolean;
     type: string;
@@ -53,7 +53,7 @@ declare global {
     id: string;
     children: EditorElement[];
     placeholder: string;
-    cssProperties: CssProperty;
+    cssProperties: property;
     inlineStyles: string;
   }
 
@@ -65,9 +65,9 @@ declare global {
     "data-type": string;
   }
 
-  interface CssProperty {
+  interface property {
     [index: string]: {
-      cssProperty: string;
+      property: string;
       value: string | number | boolean;
       unit: string;
     };
@@ -75,7 +75,7 @@ declare global {
 
   interface HtmlProperty {
     [index: string]: {
-      attributeName: string;
+      property: string;
       value: string;
     };
   }

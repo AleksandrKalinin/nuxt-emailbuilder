@@ -71,6 +71,8 @@ const {
   setEditableItem,
 } = useEditorStore();
 
+const { setTabsState } = useTabs();
+
 const selectElement = (event: Event) => {
   const currentTarget = event.currentTarget as HTMLElement;
   const target = event.target as HTMLElement;
@@ -89,9 +91,11 @@ const selectElement = (event: Event) => {
     if (activeElement?.editable) {
       setEditableItem(target.getAttribute("id"));
     }
+    setTabsState(true);
   } else {
     setActiveCssSettings([layoutSettings]);
     selectEditorRow(currentTarget.getAttribute("id"));
+    setTabsState(false);
   }
 };
 
