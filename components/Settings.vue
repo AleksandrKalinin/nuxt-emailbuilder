@@ -13,6 +13,18 @@
           </span>
         </div>
         <!--
+        <SettingsBlock
+          v-if="tabsState"
+          :settingsActive="[dimensionsSettings]"
+          :selectedEditorRow="editorTabs[currentTab]"
+          :selectedItemProperties="
+            editorTabs[currentTab].selectedItemProperties
+          "
+          @updateProperties="updateItemCssProperties"
+          @updateEditorRowLayout="updateEditorRowLayout"
+          @updateRawHtml="updateRawHtml"
+        /> -->
+        <!--
         <div
           class="settings-block settings__block"
           v-for="settingBlock in cssSettingsActive"
@@ -82,6 +94,7 @@
           </div>
         </div> -->
         <SettingsBlock
+          v-if="hasCssPropetties"
           :settingsActive="cssSettingsActive"
           :selectedEditorRow="selectedEditorRow"
           :selectedItemProperties="selectedItemProperties"
@@ -89,73 +102,8 @@
           @updateEditorRowLayout="updateEditorRowLayout"
           @updateRawHtml="updateRawHtml"
         />
-        <!--
-        <div
-          class="settings-block settings__block"
-          v-for="settingBlock in htmlSettingsActive"
-        >
-          <h4 class="settings-block__header">{{ settingBlock.title }}</h4>
-          <div class="settings-block__options settings-options">
-            <div
-              class="settings-options__item settings-item"
-              v-for="option in settingBlock.fields"
-              :class="
-                option.display === 'row'
-                  ? 'settings-item_row'
-                  : 'settings-item_col'
-              "
-            >
-              <h5 class="settings-item__header">{{ option.name }}</h5>
-              <InputSingle
-                v-if="option.type === 'input'"
-                :property="selectedItemAttributes[option.property]"
-                :itemKey="option.property"
-                @updateEditorItem="updateItemHtmlProperties"
-              />
-              <InputGroup
-                v-if="option.type === 'inputgroup'"
-                :items="option.properties"
-                :selectedProperties="selectedItemAttributes"
-                @inputGroupEmit="updateItemHtmlProperties"
-              />
-              <Colorpicker
-                :property="option.value"
-                :itemKey="option.property"
-                @updateEditorItem="updateItemHtmlProperties"
-                v-else-if="option.type === 'colorpicker'"
-              />
-              <Dropdown
-                v-if="option.type === 'dropdown'"
-                :options="option.options"
-                :property="selectedItemAttributes[option.property]"
-                :itemKey="option.property"
-                @updateEditorItem="updateItemHtmlProperties"
-              />
-              <TextField
-                v-if="option.type === 'text'"
-                :property="selectedItemAttributes[option.property]"
-                :itemKey="option.property"
-                @updateEditorItem="updateItemHtmlProperties"
-              />
-              <SelectionGroup
-                v-else-if="option.type === 'selection'"
-                :options="option.options"
-                :property="selectedItemAttributes[option.property]"
-                :itemKey="option.property"
-                @updateEditorItem="updateItemHtmlProperties"
-              />
-              <LayoutGroup
-                v-else-if="option.type === 'layout'"
-                :items="option.options"
-                :activeRow="selectedEditorRow"
-                @updateEditorRow="updateEditorRowLayout"
-              />
-              <FileUpload v-else-if="option.type === 'fileupload'" />
-              <ToggleInput v-else-if="option.type === 'toggle'" />
-            </div>
-          </div>
-        </div> -->
         <SettingsBlock
+          v-if="hasHtmlAttributes"
           :settingsActive="htmlSettingsActive"
           :selectedEditorRow="selectedEditorRow"
           :selectedItemProperties="selectedItemAttributes"
@@ -175,6 +123,7 @@
 import { useSettingsStore } from "@/store/settingsStore";
 import { useEditorStore } from "@/store/editorStore";
 import { storeToRefs } from "pinia";
+import { dimensionsSettings, editorItemSettings } from "@/constants/settings";
 
 const { settingsOpen, cssSettingsActive, htmlSettingsActive } = storeToRefs(
   useSettingsStore()
@@ -203,7 +152,18 @@ const selectedItemAttributes = computed(() => {
   } else return null;
 });
 
-const rawHtmlContent = computed(() => {});
+const hasCssPropetties = computed(() => {
+  return (
+    selectedItemProperties && Object.keys(selectedItemProperties).length !== 0
+  );
+});
+
+const hasHtmlAttributes = computed(() => {
+  return (
+    selectedItemAttributes.value &&
+    Object.keys(selectedItemAttributes.value).length !== 0
+  );
+});
 
 const settingsMenu = ref(null);
 
@@ -212,10 +172,11 @@ defineExpose({ settingsMenu });
 const editorTabs = computed(() => {
   if (selectedEditorRow.value?.items) {
     return selectedEditorRow.value?.items.map(
-      (row: EditorRow, index: string) => {
+      (editorItem: EditorItem, index: string) => {
         const item = {
-          id: row.id,
+          id: editorItem.id,
           name: `Column ${index + 1}`,
+          selectedItemProperties: editorItem.cssProperties,
         };
         return item;
       }
@@ -225,10 +186,19 @@ const editorTabs = computed(() => {
   }
 });
 
-const currentTab: Ref<number | null> = ref(0);
+const currentTab: Ref<number> = ref(0);
+
+watch(editorTabs, () => {
+  if (editorTabs.value[currentTab.value]) {
+    console.log(
+      "current tab",
+      editorTabs.value[currentTab.value].selectedItemProperties
+    );
+  }
+});
 
 const currentTabComponent = computed(() => {
-  return editorTabs[currentTab.value];
+  return editorTabs.value[currentTab.value];
 });
 
 const setTab = (e: Event, id: string, index: number) => {

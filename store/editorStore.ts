@@ -11,6 +11,7 @@ import {
   initialTypographyValues,
 } from "@/constants/initialCssValues";
 import { create } from "domain";
+import { editorItemSettings } from "@/constants/settings";
 
 export const useEditorStore = defineStore("editor", () => {
   const createInlineStyles = (params: property) => {
@@ -31,8 +32,8 @@ export const useEditorStore = defineStore("editor", () => {
       id: "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
       children: [],
       placeholder: "No content here. Drag item from menu",
-      cssProperties: initialDimensionValues,
-      inlineStyles: createInlineStyles(initialDimensionValues),
+      cssProperties: editorItemSettings,
+      inlineStyles: createInlineStyles(editorItemSettings),
     },
   ]);
 
@@ -134,7 +135,7 @@ export const useEditorStore = defineStore("editor", () => {
     item.id = uuidv4();
     item.children = [];
     item.placeholder = "No content here. Drag item from menu";
-    item.cssProperties = initialDimensionValues;
+    item.cssProperties = editorItemSettings;
     item.inlineStyles = createInlineStyles(item.cssProperties);
     editorItems.value.push(item);
     return item;

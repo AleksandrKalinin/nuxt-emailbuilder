@@ -584,3 +584,59 @@ export const rawHtmlSettings = {
   title: "Insert your html code here",
   type: "html",
 };
+
+export const editorItemSettings = {
+  width: {
+    property: "width",
+    value: 600,
+    unit: "px",
+  },
+  height: {
+    property: "height",
+    value: "auto",
+  },
+  "margin-top": {
+    property: "margin-top",
+    value: 0,
+    unit: "px",
+  },
+  "margin-bottom": {
+    property: "margin-bottom",
+    value: 0,
+    unit: "px",
+  },
+  "margin-left": {
+    property: "margin-left",
+    value: 0,
+    unit: "px",
+  },
+  "margin-right": {
+    property: "margin-right",
+    value: 0,
+    unit: "px",
+  },
+  "padding-top": {
+    property: "padding-top",
+    value: 0,
+    unit: "px",
+  },
+  "padding-bottom": {
+    property: "padding-bottom",
+    value: 0,
+    unit: "px",
+  },
+  "padding-left": {
+    property: "padding-left",
+    value: 0,
+    unit: "px",
+  },
+  "padding-right": {
+    property: "padding-right",
+    value: 0,
+    unit: "px",
+  },
+  "background-color": {
+    property: "background-color",
+    value: "transparent",
+  },
+};

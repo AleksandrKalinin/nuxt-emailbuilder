@@ -63,7 +63,7 @@
           v-else-if="option.type === 'layout'"
           :items="option.options"
           :activeRow="selectedEditorRow"
-          @updateEditorRow="emit('updateEditorRowLayout')"
+          @updateEditorRow="updateRowLayout"
         />
         <FileUpload v-else-if="option.type === 'fileupload'" />
         <ToggleInput v-else-if="option.type === 'toggle'" />
@@ -73,11 +73,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps([
-  "selectedEditorRow",
-  "selectedItemProperties",
-  "settingsActive",
-]);
+defineProps(["selectedEditorRow", "selectedItemProperties", "settingsActive"]);
 
 const emit = defineEmits([
   "updateEditorRowLayout",
@@ -91,6 +87,10 @@ const updateItemHtml = (code: string) => {
 
 const updateItemProperties = (key: string, value: number) => {
   emit("updateProperties", key, value);
+};
+
+const updateRowLayout = (value: number) => {
+  emit("updateEditorRowLayout", value);
 };
 </script>
 
