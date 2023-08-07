@@ -14,11 +14,8 @@
 const props = defineProps(["el", "rowId", "itemId"]);
 
 const elementStyles = computed(() => {
-  console.log("element styles", props.el);
   return props.el.inlineStyles;
 });
-
-console.log(props.el.inlineStyles);
 
 const emit = defineEmits(["updateText", "updateElement", "setEditableBlock"]);
 

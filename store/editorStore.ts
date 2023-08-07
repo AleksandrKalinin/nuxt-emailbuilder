@@ -1,16 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
 import { defineStore } from "pinia";
-import { useSettingsStore } from "./settingsStore";
 import {
   tempBlocks,
   tempItems,
   tableWrapperProperties,
 } from "@/constants/editorItems";
-import {
-  initialDimensionValues,
-  initialTypographyValues,
-} from "@/constants/initialCssValues";
-import { create } from "domain";
 import { editorItemSettings } from "@/constants/settings";
 
 export const useEditorStore = defineStore("editor", () => {
@@ -300,6 +294,10 @@ export const useEditorStore = defineStore("editor", () => {
     );
 
     editorElements.value[index].cssProperties[key].value = value;
+
+    editorElements.value[index].inlineStyles = createInlineStyles(
+      editorElements.value[index].cssProperties
+    );
 
     editorElements.value[index].markup = createHtmlElement(
       editorElements.value[index]

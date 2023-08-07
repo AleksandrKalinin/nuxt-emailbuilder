@@ -29,6 +29,7 @@
         word-wrap: break-word;
         word-break: break-word;
         background-color: transparent;
+        line-height: 0;
       "
       v-else
       v-for="htmlEl in item.children"
@@ -190,6 +191,6 @@ const dropItem = (id: string) => {
 }
 
 .editable-wrapper {
-  @apply flex;
+  @apply inline-block w-full leading-[0];
 }
 </style>
