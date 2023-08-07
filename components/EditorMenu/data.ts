@@ -329,8 +329,7 @@ export const header = [
         },
         width: {
           property: "width",
-          value: 100,
-          unit: "%",
+          value: "auto",
         },
         height: {
           property: "height",
@@ -396,6 +395,7 @@ export const header = [
         "button_regular",
         "mx-auto",
         "grow-0",
+        "max-w-[100%]",
       ],
     },
   },

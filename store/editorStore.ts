@@ -145,8 +145,10 @@ export const useEditorStore = defineStore("editor", () => {
   };
 
   const deleteEditorRow = (id: string) => {
-    const index = editorRows.value.findIndex((item: any) => item.id == id);
-    editorRows.value.splice(index, 1);
+    if (editorRows.value.length > 1) {
+      const index = editorRows.value.findIndex((item: any) => item.id == id);
+      editorRows.value.splice(index, 1);
+    }
   };
 
   const copyEditorRow = (id: string) => {
@@ -289,28 +291,15 @@ export const useEditorStore = defineStore("editor", () => {
     key: string,
     value: string | number | boolean
   ) => {
-    const index = editorElements.value.findIndex(
-      (item) => item.id === selectedEditorRow.value?.id
-    );
-
-    editorElements.value[index].cssProperties[key].value = value;
-
-    editorElements.value[index].inlineStyles = createInlineStyles(
-      editorElements.value[index].cssProperties
-    );
-
-    editorElements.value[index].markup = createHtmlElement(
-      editorElements.value[index]
-    );
-
     editorRows.value.forEach((row: EditorRow) => {
       row.items.forEach((item: EditorItem) => {
-        const index = item.children.findIndex(
-          (el) => el.id === selectedEditorRow.value?.id
-        );
-        if (index) {
-          item.children[index] = editorElements.value[index];
-        }
+        item.children.forEach((element: EditorElement) => {
+          if (element.id === selectedEditorRow.value?.id) {
+            element.cssProperties[key].value = value;
+            element.inlineStyles = createInlineStyles(element.cssProperties);
+            element.markup = createHtmlElement(element);
+          }
+        });
       });
     });
   };
@@ -319,24 +308,14 @@ export const useEditorStore = defineStore("editor", () => {
     key: string,
     value: string | number | boolean
   ) => {
-    const index = editorElements.value.findIndex(
-      (item) => item.id === selectedEditorRow.value?.id
-    );
-
-    editorElements.value[index].htmlProperties[key].value = value;
-
-    editorElements.value[index].markup = createHtmlElement(
-      editorElements.value[index]
-    );
-
     editorRows.value.forEach((row: EditorRow) => {
       row.items.forEach((item: EditorItem) => {
-        const index = item.children.findIndex(
-          (el) => el.id === selectedEditorRow.value?.id
-        );
-        if (index) {
-          item.children[index] = editorElements.value[index];
-        }
+        item.children.forEach((element: EditorElement) => {
+          if (element.id === selectedEditorRow.value?.id) {
+            element.htmlProperties[key].value = value;
+            element.markup = createHtmlElement(element);
+          }
+        });
       });
     });
   };
