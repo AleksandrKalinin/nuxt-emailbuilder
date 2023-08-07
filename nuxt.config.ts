@@ -28,6 +28,9 @@ export default defineNuxtConfig({
     "~/assets/style/main.scss",
   ],
   modules: [
+    "@nuxtjs/tailwindcss",
+    "@vueuse/nuxt",
+    "@nuxtjs/supabase",
     [
       "@pinia/nuxt",
       {
@@ -35,9 +38,6 @@ export default defineNuxtConfig({
       },
     ],
     "nuxt-icon",
-    "@nuxtjs/tailwindcss",
-    "@vueuse/nuxt",
-    "@nuxtjs/supabase",
   ],
   routeRules: {
     "/editor/**": { ssr: false },

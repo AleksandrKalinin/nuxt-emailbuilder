@@ -1,3 +1,4 @@
+/*
 import type { PostgrestError, RealtimeChannel } from "@supabase/supabase-js";
 
 const client = useSupabaseClient();
@@ -19,7 +20,7 @@ class TemplatesService {
     return { data, error };
   }
 
-  subscribeToTemplateUpdates = () => {
+  subscribeToTemplatesUpdates = () => {
     realtimeChannel = client
       .channel("table-db-changes")
       .on(
@@ -30,7 +31,7 @@ class TemplatesService {
     realtimeChannel.subscribe();
   };
 
-  unsubscribeFromCatalogUpdates = () => {
+  unsubscribeFromTemplatesUpdates = () => {
     client.removeChannel(realtimeChannel);
   };
 }
@@ -38,3 +39,4 @@ class TemplatesService {
 const templatesService = new TemplatesService();
 
 export default templatesService;
+*/
