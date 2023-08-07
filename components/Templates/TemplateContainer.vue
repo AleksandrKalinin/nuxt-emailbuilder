@@ -15,11 +15,9 @@ import { storeToRefs } from "pinia";
 
 const { filteredEmailTemplates } = storeToRefs(useTemplateStore());
 
-const { selectTemplate, fetchTemplates } = useTemplateStore();
+const { selectTemplate } = useTemplateStore();
 
-onMounted(() => {
-  //fetchTemplates();
-});
+onMounted(() => {});
 </script>
 
 <style scoped>

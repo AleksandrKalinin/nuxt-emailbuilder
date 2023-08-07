@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { templates } from "@/constants/templates";
 import { useEditorStore } from "./editorStore";
-//import templatesService from "~/services/templatesService";
+// import templatesService from "~/services/templatesService";
 
 export const useTemplateStore = defineStore("template", () => {
   const { setEditorRows, selectEditorRow, extractFromTemplate } =
@@ -62,8 +62,5 @@ export const useTemplateStore = defineStore("template", () => {
     emailTemplates,
     filteredEmailTemplates,
     selectTemplate,
-    /*
-    fetchTemplates,
-    fetchSelectedTemplate, */
   };
 });

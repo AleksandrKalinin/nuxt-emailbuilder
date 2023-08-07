@@ -37,7 +37,7 @@
         v-if="htmlEl.id !== editableItem"
         v-dompurify-html="htmlEl.markup"
       ></div>
-      <div v-else>
+      <div v-else class="editable-wrapper">
         <Editable
           :el="htmlEl"
           :rowId="rowId"
@@ -187,5 +187,9 @@ const dropItem = (id: string) => {
 }
 .item-placeholder__text {
   @apply absolute left-[50%] -translate-x-[50%] px-2 py-1 bg-blue-400 rounded-md text-sm text-white;
+}
+
+.editable-wrapper {
+  @apply flex;
 }
 </style>
