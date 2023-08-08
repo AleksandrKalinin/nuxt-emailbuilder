@@ -2,7 +2,7 @@
   <header class="header">
     <button
       class="button button_regular button_spaced"
-      @click="createDocument(editorRows)"
+      @click="createEmailTemplate(editorRows)"
     >
       Download
     </button>
@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useEditorStore } from "@/store/editorStore";
-import { createEmailTemplate, createDocument } from "@/core/createEmail";
+import { createEmailTemplate } from "@/core/createEmailTemplate";
 
 const { editorRows } = storeToRefs(useEditorStore());
 </script>

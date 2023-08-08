@@ -8,7 +8,7 @@ import {
   bodyMso,
 } from "@/constants/emailCssProperties";
 
-export const createDocument = (data: EditorRow[]) => {
+export const createEmailTemplate = (data: EditorRow[]) => {
   let newDoc = document.implementation.createHTMLDocument();
 
   const doctype = document.implementation.createDocumentType(
@@ -18,7 +18,7 @@ export const createDocument = (data: EditorRow[]) => {
   );
 
   newDoc.doctype?.parentNode?.replaceChild(doctype, newDoc.doctype);
-  const docBody = createEmail(data);
+  const docBody = createDocumentBody(data);
   newDoc.body.setAttribute("style", applyStyle(bodyProperties.style));
 
   const bodyMsoComment = document.createComment(bodyMso);
@@ -42,7 +42,7 @@ export const createDocument = (data: EditorRow[]) => {
   });
 };
 
-export const createEmail = (data: EditorRow[]) => {
+export const createDocumentBody = (data: EditorRow[]) => {
   const table = document.createElement("table");
 
   table.setAttribute("style", applyStyle(tableProperties.style));
