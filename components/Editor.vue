@@ -98,7 +98,11 @@ const selectElement = (event: Event) => {
     }
     setTabsState(true);
   } else {
-    setActiveCssSettings([layoutSettings]);
+    const id = currentTarget.getAttribute("id");
+
+    if (id !== selectedEditorRow.value?.id) {
+      setActiveCssSettings([layoutSettings]);
+    }
     selectEditorRow(currentTarget.getAttribute("id"));
     setTabsState(false);
   }

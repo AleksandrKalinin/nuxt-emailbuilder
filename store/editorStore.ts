@@ -6,8 +6,11 @@ import {
   tableWrapperProperties,
 } from "@/constants/editorItems";
 import { editorItemSettings } from "@/constants/settings";
+import { useSettingsStore } from "./settingsStore";
 
 export const useEditorStore = defineStore("editor", () => {
+  const { toggleSettingsState } = useSettingsStore();
+
   const createInlineStyles = (params: property) => {
     let inlineStyles: string = "";
     for (const item in params) {
@@ -99,6 +102,8 @@ export const useEditorStore = defineStore("editor", () => {
 
   const selectedMenuItem = ref<MenuItem | null>(null);
 
+  const selectedEditorRow = ref<EditorElement | EditorRow | null>(null);
+
   const selectMenuItem = (item: MenuItem | null) => {
     selectedMenuItem.value = item;
   };
@@ -146,6 +151,9 @@ export const useEditorStore = defineStore("editor", () => {
 
   const deleteEditorRow = (id: string) => {
     if (editorRows.value.length > 1) {
+      if (id === selectedEditorRow.value?.id) {
+        toggleSettingsState(false);
+      }
       const index = editorRows.value.findIndex((item: any) => item.id == id);
       editorRows.value.splice(index, 1);
     }
@@ -273,11 +281,13 @@ export const useEditorStore = defineStore("editor", () => {
     return element.outerHTML;
   };
 
-  const selectedEditorRow = ref<EditorElement | EditorRow | null>(null);
-
   const selectEditorRow = (value: string | null) => {
-    const el = editorRows.value.find((item: any) => item.id == value);
-    selectedEditorRow.value = el;
+    if (value) {
+      const el = editorRows.value.find((item: any) => item.id == value);
+      selectedEditorRow.value = el;
+    } else {
+      selectedEditorRow.value = null;
+    }
   };
 
   const selectEditorElement = (value: string | null) => {
