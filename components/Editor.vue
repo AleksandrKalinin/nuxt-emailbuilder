@@ -123,7 +123,7 @@ onMounted(() => {
 }
 
 .editor-row {
-  @apply flex justify-center items-center relative after:opacity-0 after:content-[''] after:border after:border-dashed after:border-blue-300 after:w-[700px] after:absolute after:top-[0] after:left-[-50px] after:h-full;
+  @apply flex justify-center items-center relative hover:after:opacity-100 after:opacity-0 after:content-[''] after:border after:border-dashed after:border-blue-300 after:w-[700px] after:absolute after:top-[0] after:left-[-50px] after:h-full after:transition;
 }
 
 .editor-row_selected {

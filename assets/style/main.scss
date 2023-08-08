@@ -19,6 +19,10 @@
   @apply text-base tracking-[2px] px-7 py-2;
 }
 
+.button_spaced {
+  @apply mx-3;
+}
+
 .button_initial {
   @apply self-start;
 }
