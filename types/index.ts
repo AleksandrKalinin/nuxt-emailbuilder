@@ -140,4 +140,13 @@ declare global {
   interface OuterTableStyles {
     [key: string]: number;
   }
+
+  interface MetaTag {
+    properties: MetaTagItem[];
+  }
+
+  interface MetaTagItem {
+    name: string;
+    value: string;
+  }
 }

@@ -7,6 +7,7 @@ import {
 } from "@/constants/editorItems";
 import { editorItemSettings } from "@/constants/settings";
 import { useSettingsStore } from "./settingsStore";
+import { convertStringToHTML } from "@/utils/convertStringtoHTML";
 
 export const useEditorStore = defineStore("editor", () => {
   const { toggleSettingsState } = useSettingsStore();
@@ -362,23 +363,21 @@ export const useEditorStore = defineStore("editor", () => {
     }); */
   };
 
-  const updateRawHtml = (html: string) => {
+  const updateRawHtml = (htmlString: string) => {
     const index = editorElements.value.findIndex(
       (item) => item.id === selectedEditorRow.value?.id
     );
 
-    const parser = new DOMParser();
-    const parsedHtml = parser.parseFromString(html, "text/html");
-    const htmlBody = parsedHtml.body.children[0];
+    const html = convertStringToHTML(htmlString);
 
-    htmlBody.setAttribute("id", selectedEditorRow.value?.id);
-    htmlBody.setAttribute("data-type", "item");
+    html.setAttribute("id", selectedEditorRow.value?.id);
+    html.setAttribute("data-type", "item");
 
-    const attrs = htmlBody.getAttributeNames().reduce((acc, name) => {
-      return { ...acc, [name]: htmlBody.getAttribute(name) };
+    const attrs = html.getAttributeNames().reduce((acc, name) => {
+      return { ...acc, [name]: html.getAttribute(name) };
     }, {});
 
-    editorElements.value[index].markup = htmlBody.outerHTML;
+    editorElements.value[index].markup = html.outerHTML;
 
     editorRows.value.forEach((row: EditorRow) => {
       row.items.forEach((item: EditorItem) => {
