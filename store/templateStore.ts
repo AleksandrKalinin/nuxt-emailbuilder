@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
 import { templates } from "@/constants/templates";
 import { useEditorStore } from "./editorStore";
+// import templatesService from "~/services/templatesService";
 
 export const useTemplateStore = defineStore("template", () => {
-  const editorStore = useEditorStore();
   const { setEditorRows, selectEditorRow, extractFromTemplate } =
     useEditorStore();
 
@@ -34,6 +34,28 @@ export const useTemplateStore = defineStore("template", () => {
     await navigateTo("/editor");
   };
 
+  /*
+  const fetchTemplates = async () => {
+    const { data, error } = await templates.fetchTemplates();
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(data);
+    }
+  };
+
+  const fetchSelectedTemplate = async (id: string | string[]) => {
+    const { data, error } = await templatesService.fetchSelectedTemplate(
+      Number(id)
+    );
+
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(data);
+    }
+  };
+*/
   return {
     selectCategory,
     selectedCategory,

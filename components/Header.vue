@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <button class="button button_regular">Login</button>
+    <button class="button button_regular">Log in</button>
   </header>
 </template>
 

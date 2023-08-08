@@ -1,19 +1,16 @@
 import { v4 as uuidv4 } from "uuid";
 import { defineStore } from "pinia";
-import { useSettingsStore } from "./settingsStore";
 import {
   tempBlocks,
   tempItems,
   tableWrapperProperties,
 } from "@/constants/editorItems";
-import {
-  initialDimensionValues,
-  initialTypographyValues,
-} from "@/constants/initialCssValues";
-import { create } from "domain";
 import { editorItemSettings } from "@/constants/settings";
+import { useSettingsStore } from "./settingsStore";
 
 export const useEditorStore = defineStore("editor", () => {
+  const { toggleSettingsState } = useSettingsStore();
+
   const createInlineStyles = (params: property) => {
     let inlineStyles: string = "";
     for (const item in params) {
@@ -105,6 +102,8 @@ export const useEditorStore = defineStore("editor", () => {
 
   const selectedMenuItem = ref<MenuItem | null>(null);
 
+  const selectedEditorRow = ref<EditorElement | EditorRow | null>(null);
+
   const selectMenuItem = (item: MenuItem | null) => {
     selectedMenuItem.value = item;
   };
@@ -151,8 +150,13 @@ export const useEditorStore = defineStore("editor", () => {
   };
 
   const deleteEditorRow = (id: string) => {
-    const index = editorRows.value.findIndex((item: any) => item.id == id);
-    editorRows.value.splice(index, 1);
+    if (editorRows.value.length > 1) {
+      if (id === selectedEditorRow.value?.id) {
+        toggleSettingsState(false);
+      }
+      const index = editorRows.value.findIndex((item: any) => item.id == id);
+      editorRows.value.splice(index, 1);
+    }
   };
 
   const copyEditorRow = (id: string) => {
@@ -277,11 +281,13 @@ export const useEditorStore = defineStore("editor", () => {
     return element.outerHTML;
   };
 
-  const selectedEditorRow = ref<EditorElement | EditorRow | null>(null);
-
   const selectEditorRow = (value: string | null) => {
-    const el = editorRows.value.find((item: any) => item.id == value);
-    selectedEditorRow.value = el;
+    if (value) {
+      const el = editorRows.value.find((item: any) => item.id == value);
+      selectedEditorRow.value = el;
+    } else {
+      selectedEditorRow.value = null;
+    }
   };
 
   const selectEditorElement = (value: string | null) => {
@@ -295,24 +301,15 @@ export const useEditorStore = defineStore("editor", () => {
     key: string,
     value: string | number | boolean
   ) => {
-    const index = editorElements.value.findIndex(
-      (item) => item.id === selectedEditorRow.value?.id
-    );
-
-    editorElements.value[index].cssProperties[key].value = value;
-
-    editorElements.value[index].markup = createHtmlElement(
-      editorElements.value[index]
-    );
-
     editorRows.value.forEach((row: EditorRow) => {
       row.items.forEach((item: EditorItem) => {
-        const index = item.children.findIndex(
-          (el) => el.id === selectedEditorRow.value?.id
-        );
-        if (index) {
-          item.children[index] = editorElements.value[index];
-        }
+        item.children.forEach((element: EditorElement) => {
+          if (element.id === selectedEditorRow.value?.id) {
+            element.cssProperties[key].value = value;
+            element.inlineStyles = createInlineStyles(element.cssProperties);
+            element.markup = createHtmlElement(element);
+          }
+        });
       });
     });
   };
@@ -321,24 +318,14 @@ export const useEditorStore = defineStore("editor", () => {
     key: string,
     value: string | number | boolean
   ) => {
-    const index = editorElements.value.findIndex(
-      (item) => item.id === selectedEditorRow.value?.id
-    );
-
-    editorElements.value[index].htmlProperties[key].value = value;
-
-    editorElements.value[index].markup = createHtmlElement(
-      editorElements.value[index]
-    );
-
     editorRows.value.forEach((row: EditorRow) => {
       row.items.forEach((item: EditorItem) => {
-        const index = item.children.findIndex(
-          (el) => el.id === selectedEditorRow.value?.id
-        );
-        if (index) {
-          item.children[index] = editorElements.value[index];
-        }
+        item.children.forEach((element: EditorElement) => {
+          if (element.id === selectedEditorRow.value?.id) {
+            element.htmlProperties[key].value = value;
+            element.markup = createHtmlElement(element);
+          }
+        });
       });
     });
   };

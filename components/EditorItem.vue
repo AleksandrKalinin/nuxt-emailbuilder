@@ -29,6 +29,7 @@
         word-wrap: break-word;
         word-break: break-word;
         background-color: transparent;
+        line-height: 0;
       "
       v-else
       v-for="htmlEl in item.children"
@@ -37,7 +38,7 @@
         v-if="htmlEl.id !== editableItem"
         v-dompurify-html="htmlEl.markup"
       ></div>
-      <div v-else>
+      <div v-else class="editable-wrapper">
         <Editable
           :el="htmlEl"
           :rowId="rowId"
@@ -187,5 +188,9 @@ const dropItem = (id: string) => {
 }
 .item-placeholder__text {
   @apply absolute left-[50%] -translate-x-[50%] px-2 py-1 bg-blue-400 rounded-md text-sm text-white;
+}
+
+.editable-wrapper {
+  @apply inline-block w-full leading-[0];
 }
 </style>

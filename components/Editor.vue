@@ -20,6 +20,7 @@
           <div class="editor-menu__items">
             <div
               class="editor-menu__element"
+              :class="isDeleteDisabled ? 'editor-menu__element_disabled' : ''"
               title="Delete"
               @click="deleteEditorRow(row.id)"
             >
@@ -71,6 +72,10 @@ const {
   setEditableItem,
 } = useEditorStore();
 
+const isDeleteDisabled = computed(() => {
+  return editorRows.value.length === 1;
+});
+
 const { setTabsState } = useTabs();
 
 const selectElement = (event: Event) => {
@@ -93,7 +98,11 @@ const selectElement = (event: Event) => {
     }
     setTabsState(true);
   } else {
-    setActiveCssSettings([layoutSettings]);
+    const id = currentTarget.getAttribute("id");
+
+    if (id !== selectedEditorRow.value?.id) {
+      setActiveCssSettings([layoutSettings]);
+    }
     selectEditorRow(currentTarget.getAttribute("id"));
     setTabsState(false);
   }
@@ -134,5 +143,9 @@ onMounted(() => {
 
 .editor-menu__element {
   @apply p-1 m-1 min-w-[35px] min-h-[35px] flex justify-center items-center cursor-pointer hover:bg-slate-100 transition duration-100;
+}
+
+.editor-menu__element_disabled {
+  @apply opacity-40 pointer-events-none;
 }
 </style>

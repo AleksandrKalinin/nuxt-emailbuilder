@@ -3,7 +3,7 @@
     type="text"
     class="editable resize-none"
     v-model="inputValue"
-    :style="el.inlineStyles"
+    :style="elementStyles"
     @input="$emit('updateText', inputValue)"
     ref="textarea"
   >
@@ -12,6 +12,10 @@
 
 <script setup lang="ts">
 const props = defineProps(["el", "rowId", "itemId"]);
+
+const elementStyles = computed(() => {
+  return props.el.inlineStyles;
+});
 
 const emit = defineEmits(["updateText", "updateElement", "setEditableBlock"]);
 
@@ -39,6 +43,7 @@ onClickOutside(textarea, (e) => {
 .editable {
   background: transparent;
   border-radius: 0;
+  border: none;
   outline: 1px solid #60a5fa;
   width: 100%;
   resize: none;
