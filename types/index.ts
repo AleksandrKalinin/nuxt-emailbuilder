@@ -149,4 +149,14 @@ declare global {
     name: string;
     value: string;
   }
+
+  interface GenericProperty {
+    [key: string]: string | number;
+  }
+
+  interface PropertiesPreset {
+    attributes: GenericProperty;
+    classes: GenericProperty;
+    style: GenericProperty;
+  }
 }

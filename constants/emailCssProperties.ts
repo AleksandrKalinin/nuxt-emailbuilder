@@ -1,3 +1,43 @@
+export const tableProperties = {
+  attributes: {
+    cellspacing: "0",
+    cellpadding: "0",
+    role: "presentation",
+  },
+  style: {
+    "margin-left": "auto",
+    "margin-right": "auto",
+    "margin-top": 0,
+    "margin-bottom": 0,
+    "max-width": "600px",
+    "border-spacing": 0,
+    "mso-cellspacing": 0,
+    "mso-padding-alt": 0,
+  },
+  class: [],
+};
+
+export const bodyProperties = {
+  attributes: {
+    cellspacing: "0",
+    cellpadding: "0",
+    role: "presentation",
+  },
+  style: {
+    "padding-left": 0,
+    "padding-right": 0,
+    "padding-top": 0,
+    "padding-bottom": 0,
+    "margin-top": 0,
+    "margin-bottom": 0,
+    "margin-left": "auto",
+    "margin-right": "auto",
+    "background-color": "#FFFFFF",
+    "min-width": "100%",
+  },
+  class: ["ExternalClass"],
+};
+
 export const metaTags = [
   {
     properties: [
@@ -33,11 +73,15 @@ export const metaTags = [
   },
 ];
 
-const ifMso9 =
+export const htmlTags = {
+  xmlns: "http://www.w3.org/1999/xhtml",
+  "xmlns:v": "urn:schemas-microsoft-com:vml",
+  "xmlns:o": "urn:schemas-microsoft-com:office:office",
+  lang: "en",
+};
+
+export const ifMso9 =
   "[if gte mso 9]><xml><o:OfficeDocumentSettings><o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml><![endif]";
 
-const ifMsoIE =
-  '[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="background-color: #e7e7e7;"><![endif]';
-
-const ifGteMso9 =
-  '[if gte mso 9]><table cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto;min-width: 320px;max-width: 600px;"><tr><td background="https://cdn.templates.unlayer.com/assets/1688640870783-BG.png" valign="top" width="100%"><v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width: 600px;"><v:fill type="frame" src="https://cdn.templates.unlayer.com/assets/1688640870783-BG.png" /><v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0"><![endif]';
+export const bodyMso =
+  '<!--[if (gte mso 9)|(IE)]><style type="text/css">  body { background-color: #ffffff !important; }  body,  table,  td,  p,  a {  font-family: sans-serif, Arial, Helvetica !important; }</style><![endif]-->';

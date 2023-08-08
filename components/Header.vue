@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useEditorStore } from "@/store/editorStore";
-import { createEmail, createDocument } from "@/core/createEmail";
+import { createEmailTemplate, createDocument } from "@/core/createEmail";
 
 const { editorRows } = storeToRefs(useEditorStore());
 </script>
@@ -23,3 +23,4 @@ const { editorRows } = storeToRefs(useEditorStore());
   @apply w-full h-[100px] flex justify-end items-center px-5 bg-neutral-700;
 }
 </style>
+core/constructDocument

@@ -244,7 +244,12 @@ export const useEditorStore = defineStore("editor", () => {
   };
 
   const createHtmlElement = (item: EditorElement) => {
-    const element = document.createElement(item.tag);
+    let element: null | HTMLElement = null as unknown as HTMLElement;
+    if (item.tag !== "a") {
+      element = document.createElement(item.tag);
+    } else {
+      element = document.createElement("span");
+    }
     element.setAttribute("id", item.id);
     element.setAttribute("data-type", "item");
     element.addEventListener("click", (e: Event) => {

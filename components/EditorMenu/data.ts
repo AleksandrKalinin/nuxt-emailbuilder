@@ -10,65 +10,6 @@ import {
 
 export const header = [
   {
-    title: "Layout",
-    icon: "radix-icons:layout",
-    type: "element",
-    element: {
-      tag: "div",
-      placeholder: "New container",
-      cssOptions: [layoutSettings, dimensionsSettings],
-      htmlOptions: [],
-      editable: false,
-      initialCssValues: {
-        "margin-top": {
-          property: "margin-top",
-          value: 0,
-          unit: "px",
-        },
-        "margin-bottom": {
-          property: "margin-bottom",
-          value: 0,
-          unit: "px",
-        },
-        "margin-left": {
-          property: "margin-left",
-          value: 0,
-          unit: "px",
-        },
-        "margin-right": {
-          property: "margin-right",
-          value: 0,
-          unit: "px",
-        },
-        "padding-top": {
-          property: "padding-top",
-          value: 0,
-          unit: "px",
-        },
-        "padding-bottom": {
-          property: "padding-bottom",
-          value: 0,
-          unit: "px",
-        },
-        "padding-left": {
-          property: "padding-left",
-          value: 0,
-          unit: "px",
-        },
-        "padding-right": {
-          property: "padding-right",
-          value: 0,
-          unit: "px",
-        },
-        "background-color": {
-          property: "background-color",
-          value: "transparent",
-        },
-      },
-      initialHtmlValues: {},
-    },
-  },
-  {
     title: "Heading",
     icon: "radix-icons:heading",
     type: "element",
@@ -385,7 +326,7 @@ export const header = [
     icon: "radix-icons:button",
     type: "element",
     element: {
-      tag: "span",
+      tag: "a",
       editable: false,
       cssOptions: [typographySettings, dimensionsSettings],
       htmlOptions: [linkSettings],
@@ -487,10 +428,6 @@ export const header = [
         target: {
           property: "target",
           value: "_blank",
-        },
-        disabled: {
-          property: "disabled",
-          value: "true",
         },
       },
       style: [
