@@ -1,4 +1,5 @@
 import { createHtmlElement } from "./createHtmlElement";
+import emailService from "@/services/emailService";
 import { convertStringToHTML } from "@/utils/convertStringtoHTML";
 import {
   metaTags,
@@ -40,6 +41,9 @@ export const createEmailTemplate = (data: EditorRow[]) => {
     });
     newDoc.head.appendChild(tag);
   });
+
+  const serializedDocument = new XMLSerializer().serializeToString(newDoc);
+  emailService.saveEmail(serializedDocument);
 };
 
 export const createDocumentBody = (data: EditorRow[]) => {
