@@ -9,7 +9,7 @@
     /><input
       class="colorpicker__select"
       type="color"
-      :value="props.property.value"
+      :value="isColorTransparent"
       @input="setColor($event)"
     />
   </div>
@@ -17,6 +17,12 @@
 
 <script setup lang="ts">
 const props = defineProps(["property", "itemKey"]);
+
+const isColorTransparent = computed(() => {
+  if (props.property.value === "#00FFFFF") {
+    return "#FFFFFF";
+  } else return props.property.value;
+});
 
 const emit = defineEmits(["updateEditorItem"]);
 
