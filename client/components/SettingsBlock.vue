@@ -68,6 +68,15 @@
         />
         <FileUpload v-else-if="option.type === 'fileupload'" />
         <ToggleInput v-else-if="option.type === 'toggle'" />
+        <RangeInput
+          v-else-if="option.type === 'range'"
+          :max="100"
+          :min="0"
+          :step="1"
+          :property="selectedItemProperties[option.property]"
+          :itemKey="option.property"
+          @updateEditorItem="updateItemProperties"
+        />
       </div>
     </div>
   </div>

@@ -378,13 +378,13 @@ export const dimensionsSettings = {
     {
       name: "Width",
       property: "width",
-      type: "input",
+      type: "range",
       display: "row",
     },
     {
       name: "Height",
       property: "height",
-      type: "input",
+      type: "range",
       display: "row",
     },
     {

@@ -748,11 +748,13 @@ export const header = [
         },
         width: {
           property: "width",
-          value: "auto",
+          value: 100,
+          unit: "%",
         },
         height: {
           property: "height",
-          value: "auto",
+          value: 100,
+          unit: "%",
         },
         "background-color": {
           property: "background-color",
