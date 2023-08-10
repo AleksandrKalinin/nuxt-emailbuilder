@@ -26,9 +26,17 @@ export const createHtmlElement = (item: EditorElement) => {
     }
   }
 
-  if (item.style) {
-    item.style.forEach((className: string) => {
-      element.classList.add(className);
+  if (item.stylePreset) {
+    item.stylePreset.forEach(
+      (styleProperty: { property: string; value: string | number }) => {
+        element!.style[styleProperty.property] = styleProperty.value;
+      }
+    );
+  }
+
+  if (item.presetClasses) {
+    item.presetClasses.forEach((className: string) => {
+      element?.classList.add(className);
     });
   }
 

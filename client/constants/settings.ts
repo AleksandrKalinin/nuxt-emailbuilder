@@ -180,6 +180,26 @@ export const availableSettings = [
     ],
   },
   {
+    name: "Text decoration",
+    property: "text-decoration",
+    type: "selection",
+    display: "row",
+    options: [
+      {
+        name: "None",
+        icon: "ph:text-aa-light",
+        value: "none",
+        default: true,
+      },
+      {
+        name: "Underline",
+        icon: "ph:text-a-underline-light",
+        value: "underline",
+        default: false,
+      },
+    ],
+  },
+  {
     name: "Text transform",
     property: "text-transform",
     type: "selection",
@@ -481,6 +501,26 @@ export const typographySettings = {
       ],
     },
     {
+      name: "Text decoration",
+      property: "text-decoration",
+      type: "selection",
+      display: "row",
+      options: [
+        {
+          name: "None",
+          icon: "ph:text-aa-light",
+          value: "none",
+          default: true,
+        },
+        {
+          name: "Underline",
+          icon: "ph:text-a-underline-light",
+          value: "underline",
+          default: false,
+        },
+      ],
+    },
+    {
       name: "Text transform",
       property: "text-transform",
       type: "selection",
@@ -637,6 +677,32 @@ export const editorItemSettings = {
   },
   "background-color": {
     property: "background-color",
-    value: "transparent",
+    value: "#00FFFFF",
   },
+};
+
+export const borderSettings = {
+  title: "Border",
+  type: "border",
+  fields: [
+    {
+      name: "Border width",
+      property: "border-width",
+      type: "input",
+      display: "row",
+    },
+    {
+      name: "Border radius",
+      property: "border-radius",
+      type: "input",
+      display: "row",
+    },
+    {
+      name: "Border color",
+      property: "border-color",
+      type: "colorpicker",
+      value: "#222222",
+      display: "row",
+    },
+  ],
 };

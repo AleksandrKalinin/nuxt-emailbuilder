@@ -84,4 +84,22 @@ export const ifMso9 =
   "[if gte mso 9]><xml><o:OfficeDocumentSettings><o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml><![endif]";
 
 export const bodyMso =
-  '<!--[if (gte mso 9)|(IE)]><style type="text/css">  body { background-color: #ffffff !important; }  body,  table,  td,  p,  a {  font-family: sans-serif, Arial, Helvetica !important; }</style><![endif]-->';
+  '[if (gte mso 9)|(IE)]><style type="text/css">  body { background-color: #ffffff !important; }  body,  table,  td,  p,  a {  font-family: sans-serif, Arial, Helvetica !important; }</style><![endif]';
+
+const button = {
+  "text-decoration": "none",
+  "max-width": "100%",
+  "margin-right": "auto",
+  "margin-left": "auto",
+  "border-radius": 0,
+};
+
+const image = {
+  "max-width": "100%",
+};
+
+export const tableCell = {
+  width: "100%",
+  display: "inline-block",
+  "vertical-align": "top",
+};

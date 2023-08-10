@@ -6,6 +6,7 @@ import {
   imageSettings,
   videoSettings,
   rawHtmlSettings,
+  borderSettings,
 } from "@/constants/settings";
 
 export const header = [
@@ -53,6 +54,10 @@ export const header = [
         },
         "text-transform": {
           property: "text-transform",
+          value: "none",
+        },
+        "text-decoration": {
+          property: "text-decoration",
           value: "none",
         },
         "margin-top": {
@@ -106,11 +111,16 @@ export const header = [
         },
         "background-color": {
           property: "background-color",
-          value: "transparent",
+          value: "#00FFFFF",
         },
       },
       initialHtmlValues: {},
-      style: ["z-50"],
+      stylePreset: [
+        {
+          property: "z-index",
+          value: 50,
+        },
+      ],
     },
   },
   {
@@ -174,7 +184,7 @@ export const header = [
         },
         "background-color": {
           property: "background-color",
-          value: "transparent",
+          value: "#00FFFFF",
         },
         "font-size": {
           property: "font-size",
@@ -211,10 +221,19 @@ export const header = [
           property: "text-transform",
           value: "none",
         },
+        "text-decoration": {
+          property: "text-decoration",
+          value: "none",
+        },
       },
       placeholder: "This is a new text",
       initialHtmlValues: {},
-      style: "",
+      stylePreset: [
+        {
+          property: "z-index",
+          value: 50,
+        },
+      ],
     },
   },
   {
@@ -278,7 +297,7 @@ export const header = [
         },
         "background-color": {
           property: "background-color",
-          value: "transparent",
+          value: "#00FFFFF",
         },
         "font-size": {
           property: "font-size",
@@ -315,10 +334,19 @@ export const header = [
           property: "text-transform",
           value: "none",
         },
+        "text-decoration": {
+          property: "text-decoration",
+          value: "none",
+        },
       },
       placeholder: "This is a new list",
       initialHtmlValues: {},
-      style: "",
+      stylePreset: [
+        {
+          property: "z-index",
+          value: 59,
+        },
+      ],
     },
   },
   {
@@ -328,10 +356,24 @@ export const header = [
     element: {
       tag: "a",
       editable: false,
-      cssOptions: [typographySettings, dimensionsSettings],
+      cssOptions: [typographySettings, dimensionsSettings, borderSettings],
       htmlOptions: [linkSettings],
       placeholder: "Button text",
       initialCssValues: {
+        "border-width": {
+          property: "border-width",
+          value: 0,
+          unit: "px",
+        },
+        "border-radius": {
+          property: "border-radius",
+          value: 0,
+          unit: "px",
+        },
+        "border-color": {
+          property: "border-color",
+          value: "#222222",
+        },
         "margin-top": {
           property: "margin-top",
           value: 0,
@@ -364,17 +406,18 @@ export const header = [
         },
         "padding-left": {
           property: "padding-left",
-          value: 0,
+          value: 15,
           unit: "px",
         },
         "padding-right": {
           property: "padding-right",
-          value: 0,
+          value: 15,
           unit: "px",
         },
         width: {
           property: "width",
-          value: "auto",
+          value: 120,
+          unit: "px",
         },
         height: {
           property: "height",
@@ -413,10 +456,14 @@ export const header = [
         },
         "text-align": {
           property: "text-align",
-          value: "left",
+          value: "center",
         },
         "text-transform": {
           property: "text-transform",
+          value: "none",
+        },
+        "text-decoration": {
+          property: "text-decoration",
           value: "none",
         },
       },
@@ -430,13 +477,18 @@ export const header = [
           value: "_blank",
         },
       },
-      style: [
+      stylePreset: [
+        {
+          property: "display",
+          value: "block",
+        },
+        /*
         "button",
         "button_initial",
         "button_regular",
         "mx-auto",
         "grow-0",
-        "max-w-[100%]",
+        "max-w-[100%]",*/
       ],
     },
   },
@@ -503,11 +555,16 @@ export const header = [
         },
         "background-color": {
           property: "background-color",
-          value: "transparent",
+          value: "#00FFFFF",
         },
       },
       initialHtmlValues: {},
-      style: ["z-50"],
+      stylePreset: [
+        {
+          property: "z-index",
+          value: 50,
+        },
+      ],
     },
   },
   /*
@@ -683,7 +740,7 @@ export const header = [
         },
         "background-color": {
           property: "background-color",
-          value: "transparent",
+          value: "#00FFFFF",
         },
       },
       initialHtmlValues: {
@@ -692,7 +749,12 @@ export const header = [
           value: "https://i.imgur.com/SdIjrA0.png",
         },
       },
-      style: "",
+      stylePreset: [
+        {
+          property: "max-width",
+          value: "100%",
+        },
+      ],
     },
   },
   {
@@ -761,7 +823,12 @@ export const header = [
         },
       },
       initialHtmlValues: {},
-      style: ["z-50"],
+      stylePreset: [
+        {
+          property: "z-index",
+          value: 50,
+        },
+      ],
     },
   },
   {
@@ -810,9 +877,18 @@ export const header = [
           property: "text-transform",
           value: "none",
         },
+        "text-decoration": {
+          property: "text-decoration",
+          value: "none",
+        },
       },
       initialHtmlValues: {},
-      style: ["leading-none"],
+      stylePreset: [
+        {
+          property: "line-height",
+          value: "1px",
+        },
+      ],
     },
   },
   {
@@ -860,7 +936,7 @@ export const header = [
           value: "Template iframe",
         },
       },
-      style: ["iframe_disabled"],
+      presetClasses: ["iframe_disabled"],
     },
   },
   {
@@ -874,7 +950,7 @@ export const header = [
       htmlOptions: [],
       placeholder: "Insert your html code here",
       initialHtmlValues: {},
-      style: ["leading-none"],
+      stylePreset: ["line-height: 1"],
     },
   },
 ];

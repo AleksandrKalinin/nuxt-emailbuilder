@@ -6,7 +6,7 @@
     >
       Download
     </button>
-    <button class="button button_regular">Log in</button>
+    <button class="button button_regular button_spaced">Log in</button>
   </header>
 </template>
 
@@ -23,4 +23,3 @@ const { editorRows } = storeToRefs(useEditorStore());
   @apply w-full h-[100px] flex justify-end items-center px-5 bg-neutral-700;
 }
 </style>
-core/constructDocument

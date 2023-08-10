@@ -214,7 +214,8 @@ export const useEditorStore = defineStore("editor", () => {
     newItem.htmlOptions = item.htmlOptions;
     newItem.type = item.type;
     newItem.editable = item.editable;
-    newItem.style = style;
+    newItem.presetClasses = item.presetClasses;
+    newItem.stylePreset = item.stylePreset;
     newItem.cssProperties = structuredClone(item.initialCssValues);
     newItem.htmlProperties = structuredClone(item.initialHtmlValues);
     newItem.inlineStyles = createInlineStyles(item.initialCssValues);
@@ -244,7 +245,7 @@ export const useEditorStore = defineStore("editor", () => {
   };
 
   const createHtmlElement = (item: EditorElement) => {
-    let element: null | HTMLElement = null as unknown as HTMLElement;
+    let element: HTMLElement;
     if (item.tag !== "a") {
       element = document.createElement(item.tag);
     } else {
@@ -278,9 +279,17 @@ export const useEditorStore = defineStore("editor", () => {
       }
     }
 
-    if (item.style) {
-      item.style.forEach((className: string) => {
-        element.classList.add(className);
+    if (item.stylePreset) {
+      item.stylePreset.forEach(
+        (styleProperty: { property: string; value: string | number }) => {
+          element!.style[styleProperty.property] = styleProperty.value;
+        }
+      );
+    }
+
+    if (item.presetClasses) {
+      item.presetClasses.forEach((className: string) => {
+        element?.classList.add(className);
       });
     }
 
@@ -375,7 +384,7 @@ export const useEditorStore = defineStore("editor", () => {
 
     const html = convertStringToHTML(htmlString);
 
-    html.setAttribute("id", selectedEditorRow.value?.id);
+    html.setAttribute("id", selectedEditorRow.value!.id);
     html.setAttribute("data-type", "item");
 
     const attrs = html.getAttributeNames().reduce((acc, name) => {
