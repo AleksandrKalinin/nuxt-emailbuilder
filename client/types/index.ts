@@ -42,7 +42,11 @@ declare global {
     placeholder?: string;
     markup: string;
     inlineStyles: string;
-    style: string[];
+    stylePreset?: {
+      property: string;
+      value: string | number;
+    }[];
+    presetClasses?: string[];
     cssProperties: property;
     htmlProperties: HtmlProperty;
     editable: boolean;

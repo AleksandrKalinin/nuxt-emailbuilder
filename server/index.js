@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const app = express();
+const { v4: uuidv4 } = require("uuid");
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -14,8 +15,8 @@ app.post("/create", (req, res) => {
     process.env.HOME || process.env.USERPROFILE,
     "downloads/"
   );
-  var file_path = path.join(DOWNLOAD_DIR, "index.html");
-  console.log(file_path);
+  const filename = `${uuidv4()}.html`;
+  var file_path = path.join(DOWNLOAD_DIR, filename);
 
   const data = req.body;
   fs.writeFile(file_path, data.template, (err) => {

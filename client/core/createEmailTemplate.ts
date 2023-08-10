@@ -7,6 +7,7 @@ import {
   tableProperties,
   bodyProperties,
   bodyMso,
+  tableCell,
 } from "@/constants/emailCssProperties";
 
 export const createEmailTemplate = (data: EditorRow[]) => {
@@ -65,6 +66,7 @@ export const createDocumentBody = (data: EditorRow[]) => {
     const tableRow = document.createElement("tr");
     row.items.forEach((item: EditorItem) => {
       const tableCell = document.createElement("td");
+      tableCell.setAttribute("style", styleTableCell(row.items.length));
       item.children.forEach((element: EditorElement) => {
         const htmlMarkup = createHtmlElement(element);
         const htmlElement = convertStringToHTML(htmlMarkup);
@@ -84,5 +86,16 @@ const applyStyle = (properties: GenericProperty) => {
     const cssProperty = `${key}: ${properties[key]}; `;
     style += cssProperty;
   }
+  return style;
+};
+
+const styleTableCell = (cols: number) => {
+  let style = "";
+  for (const key in tableCell) {
+    const cssProperty = `${key}: ${tableCell[key]}; `;
+    style += cssProperty;
+  }
+  const maxWidth = `max-width: ${600 / cols}px`;
+  style += maxWidth;
   return style;
 };
