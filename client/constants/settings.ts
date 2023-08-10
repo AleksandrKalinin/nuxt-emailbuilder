@@ -379,7 +379,7 @@ export const dimensionsSettings = {
       name: "Width",
       property: "width",
       type: "range",
-      display: "row",
+      display: "col",
     },
     {
       name: "Height",

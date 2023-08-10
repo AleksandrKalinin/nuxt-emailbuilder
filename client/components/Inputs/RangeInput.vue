@@ -1,19 +1,21 @@
 <template>
-  <div class="custom-slider">
-    <input
-      ref="slider"
-      :value="sliderValue"
-      type="range"
-      :min="min"
-      :max="max"
-      :step="step"
-      class="slider cursor-pointer"
-      @input="setValue($event)"
-    />
-    <div class="custom-slider__labels">
-      <span>{{ sliderValue }}</span>
+  <Transition>
+    <div class="custom-slider">
+      <input
+        ref="slider"
+        :value="sliderValue"
+        type="range"
+        :min="min"
+        :max="max"
+        :step="step"
+        class="slider cursor-pointer"
+        @input="setValue($event)"
+      />
+      <div class="custom-slider__labels">
+        <span>{{ sliderValue }}</span>
+      </div>
     </div>
-  </div>
+  </Transition>
 </template>
 
 <script setup lang="ts">
@@ -76,7 +78,7 @@ watchDebounced(
   appearance: none;
   border-radius: 999px;
   z-index: 0;
-  width: 200px;
+  width: 100%;
 }
 
 .custom-slider input[type="range"]::before {
