@@ -21,6 +21,10 @@ export const header = [
       htmlOptions: [],
       placeholder: "Heading",
       initialCssValues: {
+        "font-family": {
+          property: "font-family",
+          value: "Times New Roman, sans-serif",
+        },
         "font-size": {
           property: "font-size",
           value: 26,
@@ -186,6 +190,10 @@ export const header = [
           property: "background-color",
           value: "#00FFFFF",
         },
+        "font-family": {
+          property: "font-family",
+          value: "Times New Roman, sans-serif",
+        },
         "font-size": {
           property: "font-size",
           value: 14,
@@ -298,6 +306,10 @@ export const header = [
         "background-color": {
           property: "background-color",
           value: "#00FFFFF",
+        },
+        "font-family": {
+          property: "font-family",
+          value: "Times New Roman, sans-serif",
         },
         "font-size": {
           property: "font-size",
@@ -435,6 +447,10 @@ export const header = [
         color: {
           property: "color",
           value: "#FFFFFF",
+        },
+        "font-family": {
+          property: "font-family",
+          value: "Times New Roman, sans-serif",
         },
         "font-weight": {
           property: "font-weight",
@@ -846,6 +862,10 @@ export const header = [
           property: "font-size",
           value: 14,
           unit: "px",
+        },
+        "font-family": {
+          property: "font-family",
+          value: "Times New Roman, sans-serif",
         },
         color: {
           property: "color",

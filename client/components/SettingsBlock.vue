@@ -45,6 +45,7 @@
           :options="option.options"
           :property="selectedItemProperties[option.property]"
           :itemKey="option.property"
+          @updateEditorItem="updateItemProperties"
         />
         <TextField
           v-if="option.type === 'text'"

@@ -28,6 +28,7 @@ export default defineNuxtConfig({
     "~/assets/style/main.scss",
   ],
   modules: [
+    "@nuxtjs/google-fonts",
     "@nuxtjs/tailwindcss",
     "@vueuse/nuxt",
     "@nuxtjs/supabase",
