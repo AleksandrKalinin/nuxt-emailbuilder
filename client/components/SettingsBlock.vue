@@ -124,7 +124,7 @@ const updateRowLayout = (value: number) => {
 }
 
 .settings-item__header {
-  @apply text-base text-slate-800 font-medium tracking-[0.5px];
+  @apply flex justify-between text-base text-slate-800 font-medium tracking-[0.5px] text-sm;
 }
 
 .settings-item__properties {

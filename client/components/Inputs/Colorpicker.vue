@@ -38,7 +38,7 @@ const setColor = (event: Event) => {
 }
 
 .colorpicker__input {
-  @apply h-[30px] border border-slate-300 px-[5px] outline-none leading-[30px];
+  @apply h-[30px] border border-slate-300 px-[5px] outline-none leading-[30px] text-sm;
 }
 
 .colorpicker__input::placeholder {

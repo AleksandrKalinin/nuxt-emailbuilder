@@ -31,7 +31,7 @@ const { dragEventCounter } = storeToRefs(useEditorStore());
 }
 
 .editor-menu-wrap {
-  @apply bg-slate-100 w-[380px] flex justify-center;
+  @apply bg-slate-100 w-[420px] flex justify-center;
 }
 
 .editor-menu {

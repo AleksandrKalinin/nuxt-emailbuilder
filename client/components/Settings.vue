@@ -205,7 +205,7 @@ const setTab = (e: Event, id: string, index: number) => {
 
 .v-enter-from,
 .v-leave-to {
-  transform: translateX(380px);
+  transform: translateX(420px);
 }
 
 .tabs {
@@ -229,7 +229,7 @@ const setTab = (e: Event, id: string, index: number) => {
 }
 
 .settings-wrap {
-  @apply bg-slate-100 w-[380px] flex justify-center h-full overflow-y-auto absolute right-[0] top-0;
+  @apply bg-slate-100 w-[420px] flex justify-center h-full overflow-y-auto absolute right-[0] top-0;
 }
 .settings {
   @apply flex flex-wrap w-full min-h-full h-auto justify-start items-start py-[20px] mb-auto;

@@ -29,6 +29,6 @@ const dropdownValue = ref(props.property.value);
   @apply flex;
 }
 .dropdown__select {
-  @apply w-[240px] h-[30px] border border-slate-300 outline-none leading-[30px] h-[30px] px-[10px] outline-none;
+  @apply w-[240px] h-[30px] border border-slate-300 outline-none leading-[30px] h-[30px] px-[10px] outline-none text-sm;
 }
 </style>
