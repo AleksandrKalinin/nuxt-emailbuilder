@@ -3,33 +3,33 @@
     <ul class="filter">
       <li class="filter__option filter-option">
         <input
-          type="radio"
           id="all"
+          v-model="selectedOption"
+          type="radio"
           value="all"
           class="mr-2"
-          v-model="selectedOption"
           @change="selectCategory(selectedOption)"
         />
         <label for="all" class="filter-option__label">All</label>
       </li>
       <li class="filter__option filter-option">
         <input
-          type="radio"
           id="free"
+          v-model="selectedOption"
+          type="radio"
           value="free"
           class="mr-2"
-          v-model="selectedOption"
           @change="selectCategory(selectedOption)"
         />
         <label for="free" class="filter-option__label">Free</label>
       </li>
       <li class="filter__option filter-option">
         <input
-          type="radio"
           id="premium"
+          v-model="selectedOption"
+          type="radio"
           value="premium"
           class="mr-2"
-          v-model="selectedOption"
           @change="selectCategory(selectedOption)"
         />
         <label for="premium" class="filter-option__label">Premium</label>

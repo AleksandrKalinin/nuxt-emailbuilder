@@ -1,4 +1,3 @@
-import { createHtmlElement } from "./createHtmlElement";
 import emailService from "@/services/emailService";
 import { convertStringToHTML } from "@/utils/convertStringtoHTML";
 import {
@@ -12,12 +11,12 @@ import {
 } from "@/constants/emailCssProperties";
 
 export const createEmailTemplate = (data: EditorRow[]) => {
-  let newDoc = document.implementation.createHTMLDocument();
+  const newDoc = document.implementation.createHTMLDocument();
 
   const doctype = document.implementation.createDocumentType(
     "html",
     "-//W3C//DTD XHTML 1.0 Transitional//EN",
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd",
   );
 
   newDoc.doctype?.parentNode?.replaceChild(doctype, newDoc.doctype);

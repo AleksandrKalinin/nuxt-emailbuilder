@@ -1,11 +1,11 @@
 <template>
   <div
+    :ref="editorItemRef"
     class="editor-item"
     :class="[
       selectedEditorRow === props.item.id ? 'editor-item_selected' : '',
       isActive ? 'editor-item_hovered' : '',
     ]"
-    :ref="editorItemRef"
     @dragleave="leaveDropArea($event)"
     @dragenter="enterDropArea($event)"
     @dragover="($event) => $event.preventDefault()"
@@ -16,10 +16,13 @@
         <span class="item-placeholder__text"> Drag it here </span>
       </div>
     </div>
-    <div class="editor-item__content item-content" v-if="!item.children.length">
+    <div v-if="!item.children.length" class="editor-item__content item-content">
       <span class="px-3 text-center">{{ item.placeholder }}</span>
     </div>
     <div
+      v-for="htmlEl in item.children"
+      v-else
+      :key="htmlEl.id"
       ref="el"
       style="
         margin: 0 auto;
@@ -31,8 +34,6 @@
         background-color: transparent;
         line-height: 0;
       "
-      v-else
-      v-for="htmlEl in item.children"
     >
       <div
         v-if="htmlEl.id !== editableItem"
@@ -41,11 +42,11 @@
       <div v-else class="editable-wrapper">
         <Editable
           :el="htmlEl"
-          :rowId="rowId"
-          :itemId="props.item.id"
-          @updateText="updateEditableValue"
-          @updateElement="updateEditorElement"
-          @setEditorBlock="setEditableBlock"
+          :row-id="rowId"
+          :item-id="props.item.id"
+          @update-text="updateEditableValue"
+          @update-element="updateEditorElement"
+          @set-editor-block="setEditableBlock"
         />
       </div>
     </div>
@@ -86,7 +87,7 @@ const isActive = ref<boolean>(false);
 
 const areaActive = ref(false);
 
-const enterDropArea = (event: Event) => {
+const enterDropArea = () => {
   isActive.value = true;
 
   dragEventCounter.value += 1;

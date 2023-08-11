@@ -1,19 +1,15 @@
 import { v4 as uuidv4 } from "uuid";
 import { defineStore } from "pinia";
-import {
-  tempBlocks,
-  tempItems,
-  tableWrapperProperties,
-} from "@/constants/editorItems";
+import { tempBlocks, tableWrapperProperties } from "@/constants/editorItems";
 import { editorItemSettings } from "@/constants/settings";
-import { useSettingsStore } from "./settingsStore";
+import { useSettingsStore } from "@/store/settingsStore";
 import { convertStringToHTML } from "@/utils/convertStringtoHTML";
 
 export const useEditorStore = defineStore("editor", () => {
   const { toggleSettingsState } = useSettingsStore();
 
   const createInlineStyles = (params: property) => {
-    let inlineStyles: string = "";
+    let inlineStyles = "";
     for (const item in params) {
       let val: string | number | boolean = params[item].value;
       if (params[item].unit) {
@@ -112,7 +108,7 @@ export const useEditorStore = defineStore("editor", () => {
   const updateEditorRowLayout = (cols: number) => {
     const id = selectedEditorRow.value?.id;
     const index = editorRows.value.findIndex(
-      (item: EditorRow) => item.id === id
+      (item: EditorRow) => item.id === id,
     );
     editorRows.value[index].columns = cols;
     const nestedItems = selectedEditorRow.value?.items.length;
@@ -124,7 +120,7 @@ export const useEditorStore = defineStore("editor", () => {
     } else if (nestedItems! > cols) {
       const newItems = toRaw(editorRows.value)[index].items.slice(
         0,
-        -(nestedItems! - cols)
+        -(nestedItems! - cols),
       );
       editorRows.value[index].items = toRaw(newItems);
     }
@@ -155,13 +151,13 @@ export const useEditorStore = defineStore("editor", () => {
       if (id === selectedEditorRow.value?.id) {
         toggleSettingsState(false);
       }
-      const index = editorRows.value.findIndex((item: any) => item.id == id);
+      const index = editorRows.value.findIndex((item: any) => item.id === id);
       editorRows.value.splice(index, 1);
     }
   };
 
   const copyEditorRow = (id: string) => {
-    const index = editorRows.value.findIndex((row: any) => row.id == id);
+    const index = editorRows.value.findIndex((row: any) => row.id === id);
     const copiedRow = structuredClone(toRaw(editorRows.value[index]));
 
     const newEditorItems = copiedRow.items.map((item: EditorItem) => {
@@ -202,10 +198,9 @@ export const useEditorStore = defineStore("editor", () => {
   const editorElements = ref<EditorElement[]>([]);
 
   const addEditorElement = (id: string, item: any) => {
-    const index = editorItems.value.findIndex((item: any) => item.id == id);
+    const index = editorItems.value.findIndex((item: any) => item.id === id);
     const tagName: string = item.tag;
     const placeholder: string = item.placeholder;
-    const style: string[] = item.style;
     const newItem = {} as EditorElement;
     newItem.id = uuidv4();
     newItem.tag = tagName;
@@ -228,10 +223,10 @@ export const useEditorStore = defineStore("editor", () => {
   const updateEditorElement = (
     itemId: string,
     elementId: string,
-    text: string
+    text: string,
   ) => {
     const editorItemIndex = editorItems.value.findIndex(
-      (item: EditorItem) => item.id === itemId
+      (item: EditorItem) => item.id === itemId,
     );
     const editorElementIndex = editorItems.value[
       editorItemIndex
@@ -274,7 +269,7 @@ export const useEditorStore = defineStore("editor", () => {
       for (const key in item.htmlProperties) {
         element.setAttribute(
           item.htmlProperties[key].property,
-          item.htmlProperties[key].value
+          item.htmlProperties[key].value,
         );
       }
     }
@@ -283,7 +278,7 @@ export const useEditorStore = defineStore("editor", () => {
       item.stylePreset.forEach(
         (styleProperty: { property: string; value: string | number }) => {
           element!.style[styleProperty.property] = styleProperty.value;
-        }
+        },
       );
     }
 
@@ -298,7 +293,7 @@ export const useEditorStore = defineStore("editor", () => {
 
   const selectEditorRow = (value: string | null) => {
     if (value) {
-      const el = editorRows.value.find((item: any) => item.id == value);
+      const el = editorRows.value.find((item: any) => item.id === value);
       selectedEditorRow.value = el;
     } else {
       selectedEditorRow.value = null;
@@ -306,7 +301,7 @@ export const useEditorStore = defineStore("editor", () => {
   };
 
   const selectEditorElement = (value: string | null) => {
-    const el = editorElements.value.find((item: any) => item.id == value);
+    const el = editorElements.value.find((item: any) => item.id === value);
     if (el) {
       selectedEditorRow.value = el;
     }
@@ -314,7 +309,7 @@ export const useEditorStore = defineStore("editor", () => {
 
   const updateItemCssProperties = (
     key: string,
-    value: string | number | boolean
+    value: string | number | boolean,
   ) => {
     editorRows.value.forEach((row: EditorRow) => {
       row.items.forEach((item: EditorItem) => {
@@ -331,7 +326,7 @@ export const useEditorStore = defineStore("editor", () => {
 
   const updateItemHtmlProperties = (
     key: string,
-    value: string | number | boolean
+    value: string | number | boolean,
   ) => {
     editorRows.value.forEach((row: EditorRow) => {
       row.items.forEach((item: EditorItem) => {
@@ -358,10 +353,9 @@ export const useEditorStore = defineStore("editor", () => {
   };
 
   const extractFromTemplate = (rows: EditorRow[]) => {
-    rows.map((row: EditorRow) => {
-      row.items.map((item: EditorItem, index: number) => {
-        item.children.map((element: EditorElement) => {
-          editorItems.push;
+    rows.forEach((row: EditorRow) => {
+      row.items.forEach((item: EditorItem) => {
+        item.children.forEach((element: EditorElement) => {
           editorElements.value.push(element);
         });
       });
@@ -379,7 +373,7 @@ export const useEditorStore = defineStore("editor", () => {
 
   const updateRawHtml = (htmlString: string) => {
     const index = editorElements.value.findIndex(
-      (item) => item.id === selectedEditorRow.value?.id
+      (item) => item.id === selectedEditorRow.value?.id,
     );
 
     const html = convertStringToHTML(htmlString);
@@ -387,16 +381,12 @@ export const useEditorStore = defineStore("editor", () => {
     html.setAttribute("id", selectedEditorRow.value!.id);
     html.setAttribute("data-type", "item");
 
-    const attrs = html.getAttributeNames().reduce((acc, name) => {
-      return { ...acc, [name]: html.getAttribute(name) };
-    }, {});
-
     editorElements.value[index].markup = html.outerHTML;
 
     editorRows.value.forEach((row: EditorRow) => {
       row.items.forEach((item: EditorItem) => {
         const index = item.children.findIndex(
-          (el) => el.id === selectedEditorRow.value?.id
+          (el) => el.id === selectedEditorRow.value?.id,
         );
         if (index) {
           item.children[index] = editorElements.value[index];

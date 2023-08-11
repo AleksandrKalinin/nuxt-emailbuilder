@@ -1,37 +1,19 @@
 export {};
 
 declare global {
-  interface EmailTemplate {
-    id: string;
-    name: string;
-    category: string;
-    preview: string;
-    content: EditorRow[];
+  interface property {
+    [index: string]: {
+      property: string;
+      value: string | number | boolean;
+      unit?: string;
+    };
   }
 
-  interface MenuItem {
-    element: any;
-    icon: string;
-    options: any;
-    title: string;
-    type: string;
-  }
-
-  interface MenuItemElement {
-    attributes: string[];
-    initialCssValues: any;
-    placeholder: string;
-    style: string[];
-    tag: string;
-    editable: false;
-  }
-
-  interface MenuItemOption {}
-
-  interface EditorElementCssOption {
-    property: string;
-    value: number | string | boolean;
-    unit?: string;
+  interface HtmlProperty {
+    [index: string]: {
+      property: string;
+      value: string;
+    };
   }
 
   interface EditorElement {
@@ -69,19 +51,37 @@ declare global {
     "data-type": string;
   }
 
-  interface property {
-    [index: string]: {
-      property: string;
-      value: string | number | boolean;
-      unit?: string;
-    };
+  interface EmailTemplate {
+    id: string;
+    name: string;
+    category: string;
+    preview: string;
+    content: EditorRow[];
   }
 
-  interface HtmlProperty {
-    [index: string]: {
-      property: string;
-      value: string;
-    };
+  interface MenuItem {
+    element: any;
+    icon: string;
+    options: any;
+    title: string;
+    type: string;
+  }
+
+  interface MenuItemElement {
+    attributes: string[];
+    initialCssValues: any;
+    placeholder: string;
+    style: string[];
+    tag: string;
+    editable: false;
+  }
+
+  interface MenuItemOption {}
+
+  interface EditorElementCssOption {
+    property: string;
+    value: number | string | boolean;
+    unit?: string;
   }
 
   interface cssSettingsActive {
@@ -98,6 +98,13 @@ declare global {
     title: string;
   }
 
+  interface SettingsFieldOption {
+    name: string;
+    icon: string;
+    value: number | string | boolean;
+    default: boolean;
+  }
+
   interface SettingsField {
     display: string;
     name: string;
@@ -107,17 +114,12 @@ declare global {
     options?: SettingsFieldOption[];
   }
 
-  interface SettingsFieldOption {
-    name: string;
-    icon: string;
-    value: number | string | boolean;
-    default: boolean;
+  interface BlockAttribute {
+    [key: string]: string;
   }
 
-  interface BlockItem {
-    columns: number;
-    id: 1;
-    content: BlockContent[];
+  interface BlockStyling {
+    [key: string]: string | number | boolean;
   }
 
   interface BlockContent {
@@ -127,12 +129,10 @@ declare global {
     value: string;
   }
 
-  interface BlockAttribute {
-    [key: string]: string;
-  }
-
-  interface BlockStyling {
-    [key: string]: string | number | boolean;
+  interface BlockItem {
+    columns: number;
+    id: 1;
+    content: BlockContent[];
   }
 
   interface OuterTable {}
@@ -145,13 +145,13 @@ declare global {
     [key: string]: number;
   }
 
-  interface MetaTag {
-    properties: MetaTagItem[];
-  }
-
   interface MetaTagItem {
     name: string;
     value: string;
+  }
+
+  interface MetaTag {
+    properties: MetaTagItem[];
   }
 
   interface GenericProperty {

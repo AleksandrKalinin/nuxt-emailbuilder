@@ -1,6 +1,6 @@
 <template>
   <div class="template group">
-    <span class="template__ribbon" v-if="template.category === 'premium'"
+    <span v-if="template.category === 'premium'" class="template__ribbon"
       >Premium</span
     >
     <div class="template__image template-image">

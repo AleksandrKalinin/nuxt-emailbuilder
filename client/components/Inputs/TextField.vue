@@ -1,6 +1,6 @@
 <template>
   <div class="text-field">
-    <input class="text-field__input" v-model="inputValue" />
+    <input v-model="inputValue" class="text-field__input" />
     <button class="text-field__button" @click.prevent="applyValue(inputValue)">
       Apply
     </button>

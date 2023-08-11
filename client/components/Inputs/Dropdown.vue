@@ -1,14 +1,15 @@
 <template>
   <div class="drowpdown">
     <select
+      :value="dropdownValue"
       class="dropdown__select dropdown-select"
       @change="emit('updateEditorItem', props.itemKey, $event.target.value)"
-      :value="dropdownValue"
     >
       <option
-        class="dropdown-select__option"
-        v-for="option in options"
+        v-for="(option, index) in options"
+        :key="index"
         :value="option.value"
+        class="dropdown-select__option"
       >
         {{ option.name }}
       </option>

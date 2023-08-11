@@ -1,11 +1,11 @@
 <template>
   <textarea
+    ref="textarea"
+    v-model="inputValue"
     type="text"
     class="editable resize-none"
-    v-model="inputValue"
     :style="elementStyles"
     @input="$emit('updateText', inputValue)"
-    ref="textarea"
   >
   </textarea>
 </template>
@@ -33,7 +33,7 @@ onMounted(() => {
   focusInput();
 });
 
-onClickOutside(textarea, (e) => {
+onClickOutside(textarea, () => {
   emit("updateElement", props.itemId, props.el.id, inputValue.value);
   inputValue.value = "";
 });

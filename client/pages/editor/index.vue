@@ -2,7 +2,7 @@
   <Header />
   <div class="editor-outer-wrap">
     <div class="editor-inner-wrap">
-      <Editor :settingsMenuRef="settings ? settings.settingsMenu : null" />
+      <Editor :settings-menu-ref="settings ? settings.settingsMenu : null" />
     </div>
     <Settings ref="settings" />
     <EditorMenu />

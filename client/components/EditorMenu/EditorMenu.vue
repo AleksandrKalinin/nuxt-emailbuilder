@@ -2,9 +2,10 @@
   <div class="editor-menu-wrap">
     <div class="editor-menu">
       <div
-        class="editor-menu__item menu-item"
-        v-for="item in header"
+        v-for="(item, index) in header"
+        :key="index"
         draggable="true"
+        class="editor-menu__item menu-item"
         @mousedown="selectMenuItem(item)"
         @mouseup="selectMenuItem(null)"
         @dragend="checkDropZone(item.element)"

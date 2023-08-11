@@ -1,17 +1,17 @@
 <template>
   <div class="templates-container">
-    <Template
+    <TemplateItem
       v-for="template in filteredEmailTemplates"
       :key="template.id"
       :template="template"
-      @selectTemplate="selectTemplate"
+      @select-template="selectTemplate"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { useTemplateStore } from "@/store/templateStore";
 import { storeToRefs } from "pinia";
+import { useTemplateStore } from "@/store/templateStore";
 
 const { filteredEmailTemplates } = storeToRefs(useTemplateStore());
 

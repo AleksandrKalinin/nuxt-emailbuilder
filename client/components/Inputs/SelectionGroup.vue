@@ -1,13 +1,14 @@
 <template>
   <div class="selection-group">
     <div
-      class="selection-group__item selection-item"
-      v-for="item in options"
+      v-for="(item, index) in options"
+      :key="index"
       :class="
         item.value === props.property.value ? 'selection-item_selected' : ''
       "
       :title="item.name"
       :value="item.value"
+      class="selection-group__item selection-item"
       @click="emit('updateEditorItem', props.itemKey, item.value)"
     >
       <Icon :name="item.icon" size="20px" />

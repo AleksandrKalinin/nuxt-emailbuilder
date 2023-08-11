@@ -1,14 +1,16 @@
 <template>
   <div class="layout-group">
     <div
-      class="layout-group__item layout-item"
-      v-for="item in items"
+      v-for="(item, index) in items"
+      :key="index"
       :class="activeRow?.columns === item.number ? 'layout-item_active' : ''"
+      class="layout-group__item layout-item"
       @click="emit('updateEditorRow', item.number)"
     >
       <span
+        v-for="(el, elIndex) in item.number"
+        :key="elIndex"
         class="layout-item__column layout-column"
-        v-for="el in item.number"
         >{{ el }}</span
       >
     </div>
@@ -16,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["items", "activeRow"]);
+defineProps(["items", "activeRow"]);
 
 const emit = defineEmits(["updateEditorRow"]);
 </script>

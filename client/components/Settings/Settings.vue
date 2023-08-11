@@ -1,13 +1,14 @@
 <template>
   <Transition>
-    <div class="settings-wrap" v-if="settingsOpen" ref="settingsMenu">
+    <div v-if="settingsOpen" ref="settingsMenu" class="settings-wrap">
       <div class="settings">
-        <div class="tabs" v-if="!tabsState">
+        <div v-if="!tabsState" class="tabs">
           <span
-            class="tabs-item"
-            @click="setTab($event, item.id, index)"
-            :class="currentTab === index ? 'tabs-item_active' : ''"
             v-for="(item, index) in editorTabs"
+            :key="index"
+            class="tabs-item"
+            :class="currentTab === index ? 'tabs-item_active' : ''"
+            @click="setTab(index)"
           >
             {{ item.name }}
           </span>
@@ -95,21 +96,21 @@
         </div> -->
         <SettingsBlock
           v-if="hasCssPropetties"
-          :settingsActive="cssSettingsActive"
-          :selectedEditorRow="selectedEditorRow"
-          :selectedItemProperties="selectedItemProperties"
-          @updateProperties="updateItemCssProperties"
-          @updateEditorRowLayout="updateEditorRowLayout"
-          @updateRawHtml="updateRawHtml"
+          :settings-active="cssSettingsActive"
+          :selected-editor-row="selectedEditorRow"
+          :selected-item-properties="selectedItemProperties"
+          @update-properties="updateItemCssProperties"
+          @update-editor-row-layout="updateEditorRowLayout"
+          @update-raw-html="updateRawHtml"
         />
         <SettingsBlock
           v-if="hasHtmlAttributes"
-          :settingsActive="htmlSettingsActive"
-          :selectedEditorRow="selectedEditorRow"
-          :selectedItemProperties="selectedItemAttributes"
-          @updateProperties="updateItemHtmlProperties"
-          @updateEditorRowLayout="updateEditorRowLayout"
-          @updateRawHtml="updateRawHtml"
+          :settings-active="htmlSettingsActive"
+          :selected-editor-row="selectedEditorRow"
+          :selected-item-properties="selectedItemAttributes"
+          @update-properties="updateItemHtmlProperties"
+          @update-editor-row-layout="updateEditorRowLayout"
+          @update-raw-html="updateRawHtml"
         />
       </div>
       <KeepAlive>
@@ -120,16 +121,15 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
 import { useSettingsStore } from "@/store/settingsStore";
 import { useEditorStore } from "@/store/editorStore";
-import { storeToRefs } from "pinia";
-import { dimensionsSettings, editorItemSettings } from "@/constants/settings";
 
 const { settingsOpen, cssSettingsActive, htmlSettingsActive } = storeToRefs(
-  useSettingsStore()
+  useSettingsStore(),
 );
 
-const { selectedEditorRow, editorRows } = storeToRefs(useEditorStore());
+const { selectedEditorRow } = storeToRefs(useEditorStore());
 
 const {
   updateItemCssProperties,
@@ -179,7 +179,7 @@ const editorTabs = computed(() => {
           selectedItemProperties: editorItem.cssProperties,
         };
         return item;
-      }
+      },
     );
   } else {
     return [];
@@ -192,7 +192,7 @@ const currentTabComponent = computed(() => {
   return editorTabs.value[currentTab.value];
 });
 
-const setTab = (e: Event, id: string, index: number) => {
+const setTab = (index: number) => {
   currentTab.value = index;
 };
 </script>

@@ -19,6 +19,7 @@ module.exports = {
       "error",
       {
         endOfLine: "auto",
+        trailingComma: "all",
       },
     ],
   },

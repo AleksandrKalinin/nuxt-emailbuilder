@@ -1,11 +1,11 @@
 <template>
   <div class="input-group">
-    <div class="input-group__item" v-for="item in items">
+    <div v-for="(item, index) in items" :key="index" class="input-group__item">
       <h6 class="input-group__header">{{ item.name }}</h6>
       <InputSingle
         :property="selectedProperties[item.property]"
-        :itemKey="item.property"
-        @updateEditorItem="(a, b) => emit('inputGroupEmit', a, b)"
+        :item-key="item.property"
+        @update-editor-item="(a, b) => emit('inputGroupEmit', a, b)"
       />
     </div>
   </div>

@@ -52,7 +52,7 @@ watchEffect(() => {
     const progress = getProgress(
       sliderValue.value,
       Number(slider.value.min),
-      Number(slider.value.max)
+      Number(slider.value.max),
     );
     setCSSProgress(progress);
   }
@@ -63,7 +63,7 @@ watchDebounced(
   () => {
     emit("updateEditorItem", props.itemKey, Number(sliderValue.value));
   },
-  { debounce: 100, maxWait: 500 }
+  { debounce: 100, maxWait: 500 },
 );
 </script>
 

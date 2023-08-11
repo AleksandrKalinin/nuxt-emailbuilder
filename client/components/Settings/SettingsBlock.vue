@@ -1,22 +1,24 @@
 <template>
   <div
+    v-for="(settingBlock, index) in settingsActive"
+    :key="index"
     class="settings-block settings__block"
-    v-for="settingBlock in settingsActive"
   >
     <h4 class="settings-block__header">{{ settingBlock.title }}</h4>
     <div
-      class="settings-options__item settings-item"
       v-if="settingBlock.type === 'html'"
+      class="settings-options__item settings-item"
     >
       <RawHtml
         :markup="selectedEditorRow?.markup"
-        @updateHtml="updateItemHtml"
+        @update-html="updateItemHtml"
       />
     </div>
     <div class="settings-block__options settings-options">
       <div
+        v-for="(option, optionIndex) in settingBlock.fields"
+        :key="optionIndex"
         class="settings-options__item settings-item"
-        v-for="option in settingBlock.fields"
         :class="
           option.display === 'row' ? 'settings-item_row' : 'settings-item_col'
         "
@@ -27,53 +29,53 @@
             v-if="option.property === 'width'"
             placeholder="Auto"
             :property="selectedItemProperties[option.property]"
-            :itemKey="option.property"
-            @updateEditorItem="updateItemProperties"
+            :item-key="option.property"
+            @update-editor-item="updateItemProperties"
           />
         </h5>
         <InputSingle
           v-if="option.type === 'input'"
           :property="selectedItemProperties[option.property]"
-          :itemKey="option.property"
-          @updateEditorItem="updateItemProperties"
+          :item-key="option.property"
+          @update-editor-item="updateItemProperties"
         />
         <InputGroup
           v-if="option.type === 'inputgroup'"
           :items="option.properties"
-          :selectedProperties="selectedItemProperties"
-          @inputGroupEmit="updateItemProperties"
+          :selected-properties="selectedItemProperties"
+          @input-group-emit="updateItemProperties"
         />
         <Colorpicker
-          :property="selectedItemProperties[option.property]"
-          :itemKey="option.property"
-          @updateEditorItem="updateItemProperties"
           v-else-if="option.type === 'colorpicker'"
+          :property="selectedItemProperties[option.property]"
+          :item-key="option.property"
+          @update-editor-item="updateItemProperties"
         />
         <Dropdown
           v-if="option.type === 'dropdown'"
           :options="option.options"
           :property="selectedItemProperties[option.property]"
-          :itemKey="option.property"
-          @updateEditorItem="updateItemProperties"
+          :item-key="option.property"
+          @update-editor-item="updateItemProperties"
         />
         <TextField
           v-if="option.type === 'text'"
           :property="selectedItemProperties[option.property]"
-          :itemKey="option.property"
-          @updateEditorItem="updateItemProperties"
+          :item-key="option.property"
+          @update-editor-item="updateItemProperties"
         />
         <SelectionGroup
           v-else-if="option.type === 'selection'"
           :options="option.options"
           :property="selectedItemProperties[option.property]"
-          :itemKey="option.property"
-          @updateEditorItem="updateItemProperties"
+          :item-key="option.property"
+          @update-editor-item="updateItemProperties"
         />
         <LayoutGroup
           v-else-if="option.type === 'layout'"
           :items="option.options"
-          :activeRow="selectedEditorRow"
-          @updateEditorRow="updateRowLayout"
+          :active-row="selectedEditorRow"
+          @update-editor-row="updateRowLayout"
         />
         <FileUpload v-else-if="option.type === 'fileupload'" />
         <Transition>
@@ -86,8 +88,8 @@
             :min="0"
             :step="1"
             :property="selectedItemProperties[option.property]"
-            :itemKey="option.property"
-            @updateEditorItem="updateItemProperties"
+            :item-key="option.property"
+            @update-editor-item="updateItemProperties"
           />
         </Transition>
       </div>
