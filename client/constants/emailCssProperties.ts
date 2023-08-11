@@ -34,6 +34,7 @@ export const bodyProperties = {
     "margin-right": "auto",
     "background-color": "#FFFFFF",
     "min-width": "100%",
+    "box-sizing": "border-box",
   },
   class: ["ExternalClass"],
 };

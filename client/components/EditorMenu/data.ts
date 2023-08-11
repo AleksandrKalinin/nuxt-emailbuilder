@@ -728,28 +728,27 @@ export const header = [
         },
         "padding-top": {
           property: "padding-top",
-          value: 0,
+          value: 10,
           unit: "px",
         },
         "padding-bottom": {
           property: "padding-bottom",
-          value: 0,
+          value: 10,
           unit: "px",
         },
         "padding-left": {
           property: "padding-left",
-          value: 0,
+          value: 10,
           unit: "px",
         },
         "padding-right": {
           property: "padding-right",
-          value: 0,
+          value: 10,
           unit: "px",
         },
         width: {
           property: "width",
-          value: 100,
-          unit: "%",
+          value: "auto",
         },
         height: {
           property: "height",

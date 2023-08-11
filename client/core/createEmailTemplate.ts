@@ -70,9 +70,8 @@ export const createDocumentBody = (data: EditorRow[]) => {
       const tableCell = document.createElement("td");
       tableCell.setAttribute("style", styleTableCell(row.items.length));
       item.children.forEach((element: EditorElement) => {
-        const htmlMarkup = createHtmlElement(element);
-        const htmlElement = convertStringToHTML(htmlMarkup);
-        tableCell.appendChild(htmlElement);
+        const markup = convertStringToHTML(element.markup);
+        tableCell.appendChild(markup);
       });
       tableRow.appendChild(tableCell);
     });
