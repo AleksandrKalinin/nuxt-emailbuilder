@@ -21,7 +21,16 @@
           option.display === 'row' ? 'settings-item_row' : 'settings-item_col'
         "
       >
-        <h5 class="settings-item__header">{{ option.name }}</h5>
+        <h5 class="settings-item__header">
+          {{ option.name }}
+          <ToggleInput
+            v-if="option.property === 'width'"
+            placeholder="Auto"
+            :property="selectedItemProperties[option.property]"
+            :itemKey="option.property"
+            @updateEditorItem="updateItemProperties"
+          />
+        </h5>
         <InputSingle
           v-if="option.type === 'input'"
           :property="selectedItemProperties[option.property]"
@@ -45,6 +54,7 @@
           :options="option.options"
           :property="selectedItemProperties[option.property]"
           :itemKey="option.property"
+          @updateEditorItem="updateItemProperties"
         />
         <TextField
           v-if="option.type === 'text'"
@@ -66,7 +76,20 @@
           @updateEditorRow="updateRowLayout"
         />
         <FileUpload v-else-if="option.type === 'fileupload'" />
-        <ToggleInput v-else-if="option.type === 'toggle'" />
+        <Transition>
+          <RangeInput
+            v-if="
+              option.type === 'range' &&
+              selectedItemProperties[option.property].value !== 'auto'
+            "
+            :max="100"
+            :min="0"
+            :step="1"
+            :property="selectedItemProperties[option.property]"
+            :itemKey="option.property"
+            @updateEditorItem="updateItemProperties"
+          />
+        </Transition>
       </div>
     </div>
   </div>
@@ -95,6 +118,15 @@ const updateRowLayout = (value: number) => {
 </script>
 
 <style scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.1s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 .settings-block {
   @apply w-full mb-[10px];
 }
@@ -123,7 +155,7 @@ const updateRowLayout = (value: number) => {
 }
 
 .settings-item__header {
-  @apply text-base text-slate-800 font-medium tracking-[0.5px];
+  @apply flex justify-between text-base text-slate-800 font-medium tracking-[0.5px] text-sm;
 }
 
 .settings-item__properties {

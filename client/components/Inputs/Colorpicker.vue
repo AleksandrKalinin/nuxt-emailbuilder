@@ -8,8 +8,9 @@
       :value="props.property.value"
     /><input
       class="colorpicker__select"
+      title="Select color"
       type="color"
-      :value="props.property.value"
+      :value="isColorTransparent"
       @input="setColor($event)"
     />
   </div>
@@ -17,6 +18,12 @@
 
 <script setup lang="ts">
 const props = defineProps(["property", "itemKey"]);
+
+const isColorTransparent = computed(() => {
+  if (props.property.value === "#00FFFFF") {
+    return "#FFFFFF";
+  } else return props.property.value;
+});
 
 const emit = defineEmits(["updateEditorItem"]);
 
@@ -32,7 +39,7 @@ const setColor = (event: Event) => {
 }
 
 .colorpicker__input {
-  @apply h-[30px] border border-slate-300 px-[5px] outline-none leading-[30px];
+  @apply h-[30px] border border-slate-300 px-[5px] outline-none leading-[30px] text-sm;
 }
 
 .colorpicker__input::placeholder {
@@ -41,12 +48,13 @@ const setColor = (event: Event) => {
 }
 
 .colorpicker__select {
-  @apply min-h-[30px] min-w-[30px] max-h-[30px] max-w-[30px];
+  @apply min-h-[30px] min-w-[30px] max-h-[30px] max-w-[30px] border border-slate-300 ml-[-1px];
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  border: none;
-  margin: 0;
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
   padding: 0;
   outline: 0;
   overflow: hidden;

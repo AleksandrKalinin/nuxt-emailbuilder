@@ -34,6 +34,7 @@ export const bodyProperties = {
     "margin-right": "auto",
     "background-color": "#FFFFFF",
     "min-width": "100%",
+    "box-sizing": "border-box",
   },
   class: ["ExternalClass"],
 };
@@ -98,8 +99,14 @@ const image = {
   "max-width": "100%",
 };
 
-export const tableCell = {
+export const tableCellProperties = {
   width: "100%",
   display: "inline-block",
   "vertical-align": "top",
+  "margin-left": "auto",
+  "margin-right": "auto",
+};
+
+export const tableRowProperties = {
+  "text-align": "center",
 };

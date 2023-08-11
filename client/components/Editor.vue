@@ -96,6 +96,7 @@ const selectElement = (event: Event) => {
     if (activeElement?.editable) {
       setEditableItem(target.getAttribute("id"));
     }
+
     setTabsState(true);
   } else {
     const id = currentTarget.getAttribute("id");

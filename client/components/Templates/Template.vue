@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["template"]);
+defineProps(["template"]);
 
 const emit = defineEmits(["selectTemplate"]);
 </script>

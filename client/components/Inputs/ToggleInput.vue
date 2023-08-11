@@ -1,43 +1,64 @@
 <template>
   <div class="toggle">
-    <span class="toggle__text">No</span>
     <label class="switch">
-      <input type="checkbox" :checked="true" :value="true" :name="'toggle'" />
+      <input
+        type="checkbox"
+        :checked="ifAuto"
+        :value="ifAuto"
+        :name="'toggle'"
+        @change="setAutoProperty($event)"
+      />
       <div class="slider round"></div>
     </label>
-    <span class="toggle__text">Yes</span>
+    <span class="toggle__text">{{ placeholder }}</span>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const props = defineProps(["placeholder", "itemKey", "property"]);
+
+const emit = defineEmits(["updateEditorItem"]);
+
+const ifAuto = computed(() => {
+  if (props.property.value === "auto") {
+    return true;
+  } else {
+    return false;
+  }
+});
+
+const setAutoProperty = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  const value: number | string = target.checked ? "auto" : 100;
+  emit("updateEditorItem", props.itemKey, value);
+};
+</script>
 
 <style scoped>
+
 .toggle {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .toggle__text {
   font-size: 14px;
-  color: rgb(71 85 105);
   letter-spacing: 1px;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .switch-text {
-  font-size: 16px;
-  font-weight: 800;
+  font-size: 14px;
   line-height: 20px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: #19202c;
 }
 
 .switch {
   position: relative;
   display: inline-block;
-  width: 52px;
-  height: 28px;
+  width: 32px;
+  height: 18px;
   margin: 0 8px;
 }
 
@@ -55,35 +76,38 @@
   right: 0;
   bottom: 0;
   background-color: #ffffff;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  width: 52px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  width: 32px;
+  border-radius: 16px;
+  border: 1px solid rgb(148 163 184)
 }
 
 .slider:before {
   position: absolute;
   content: "";
-  height: 24px;
-  width: 24px;
+  height: 12px;
+  width: 12px;
   left: 2px;
   bottom: 2px;
   background-color: rgb(148 163 184);
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border-radius: 50%;
 }
 
 input:checked + .slider:before {
-  background-color: rgb(96 165 250);
+  background-color: #16A34A;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px rgb(96 165 250);
+  box-shadow: 0 0 1px #16A34A);
 }
 
 input:checked + .slider:before {
-  transform: translateX(24px);
-  -webkit-transform: translateX(24px);
-  -ms-transform: translateX(24px);
+  transform: translateX(14px);
+  -webkit-transform: translateX(14px);
+  -ms-transform: translateX(14px);
 }
 
 .toggle .switch-text {

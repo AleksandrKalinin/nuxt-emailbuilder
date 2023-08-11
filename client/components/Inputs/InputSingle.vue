@@ -54,7 +54,7 @@ const updateValue = (event: Event) => {
 }
 
 .input-single__input {
-  @apply w-[60px] h-[30px] border border-slate-300 px-[5px] outline-none leading-[30px];
+  @apply w-[60px] h-[30px] border border-slate-300 px-[5px] outline-none leading-[30px] text-sm;
 }
 
 .input-single__input::placeholder {

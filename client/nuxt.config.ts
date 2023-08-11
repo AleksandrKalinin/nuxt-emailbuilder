@@ -21,6 +21,10 @@ export default defineNuxtConfig({
       path: "~/components/Templates",
       global: true,
     },
+    {
+      path: "~/components/Settings",
+      global: true,
+    },
   ],
   css: [
     "~/assets/style/radio.scss",
@@ -28,6 +32,7 @@ export default defineNuxtConfig({
     "~/assets/style/main.scss",
   ],
   modules: [
+    "@nuxtjs/google-fonts",
     "@nuxtjs/tailwindcss",
     "@vueuse/nuxt",
     "@nuxtjs/supabase",

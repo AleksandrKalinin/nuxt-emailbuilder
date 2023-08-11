@@ -17,12 +17,10 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
 import { header } from "./data";
 import { useEditorStore } from "@/store/editorStore";
 
 const { selectMenuItem, checkDropZone } = useEditorStore();
-const { dragEventCounter } = storeToRefs(useEditorStore());
 </script>
 
 <style scoped>
@@ -31,7 +29,7 @@ const { dragEventCounter } = storeToRefs(useEditorStore());
 }
 
 .editor-menu-wrap {
-  @apply bg-slate-100 w-[380px] flex justify-center;
+  @apply bg-slate-100 w-[420px] overflow-y-auto flex justify-center;
 }
 
 .editor-menu {

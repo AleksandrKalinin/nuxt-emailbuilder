@@ -378,13 +378,13 @@ export const dimensionsSettings = {
     {
       name: "Width",
       property: "width",
-      type: "input",
-      display: "row",
+      type: "range",
+      display: "col",
     },
     {
       name: "Height",
       property: "height",
-      type: "input",
+      type: "range",
       display: "row",
     },
     {
@@ -401,6 +401,38 @@ export const typographySettings = {
   title: "Typography",
   type: "typography",
   fields: [
+    {
+      name: "Font family",
+      property: "font-family",
+      type: "dropdown",
+      options: [
+        {
+          name: "Arial",
+          value: "Arial, sans-serif",
+        },
+        {
+          name: "Times New Roman",
+          value: "Times New Roman, sans-serif",
+        },
+        {
+          name: "Georgia",
+          value: "Georgia, sans-serif",
+        },
+        {
+          name: "Courier New",
+          value: "Courier New, sans-serif",
+        },
+        {
+          name: "Verdana",
+          value: "Verdana, sans-serif",
+        },
+        {
+          name: "Tahoma",
+          value: "Tahome, sans-serif",
+        },
+      ],
+      display: "row",
+    },
     {
       name: "Font size",
       property: "font-size",

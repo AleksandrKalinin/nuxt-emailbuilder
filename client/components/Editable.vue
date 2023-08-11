@@ -47,5 +47,6 @@ onClickOutside(textarea, (e) => {
   outline: 1px solid #60a5fa;
   width: 100%;
   resize: none;
+  height: auto;
 }
 </style>
