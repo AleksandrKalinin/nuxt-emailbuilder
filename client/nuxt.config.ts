@@ -21,6 +21,10 @@ export default defineNuxtConfig({
       path: "~/components/Templates",
       global: true,
     },
+    {
+      path: "~/components/Settings",
+      global: true,
+    },
   ],
   css: [
     "~/assets/style/radio.scss",

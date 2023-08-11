@@ -73,7 +73,6 @@ const editorItemRef = ref(props.item.id);
 
 const {
   selectedMenuItem,
-  dragActive,
   dragEventCounter,
   selectedEditorRow,
   editableItem,
@@ -108,8 +107,6 @@ const leaveDropArea = (event: Event) => {
     areaActive.value = false;
   }
 };
-
-const targetItem = ref(null);
 
 const editableValue = ref<string>("");
 

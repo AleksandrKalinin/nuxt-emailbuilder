@@ -17,12 +17,10 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
 import { header } from "./data";
 import { useEditorStore } from "@/store/editorStore";
 
 const { selectMenuItem, checkDropZone } = useEditorStore();
-const { dragEventCounter } = storeToRefs(useEditorStore());
 </script>
 
 <style scoped>
