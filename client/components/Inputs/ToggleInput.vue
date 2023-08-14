@@ -15,7 +15,16 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["placeholder", "itemKey", "property"]);
+interface ToggleInputProps {
+  placeholder: string;
+  itemKey: string;
+  property: {
+    property: string;
+    value: number | string | boolean;
+  };
+}
+
+const props = defineProps<ToggleInputProps>();
 
 const emit = defineEmits(["updateEditorItem"]);
 
@@ -35,7 +44,6 @@ const setAutoProperty = (e: Event) => {
 </script>
 
 <style scoped>
-
 .toggle {
   display: flex;
   align-items: center;
@@ -80,7 +88,7 @@ const setAutoProperty = (e: Event) => {
   transition: 0.2s;
   width: 32px;
   border-radius: 16px;
-  border: 1px solid rgb(148 163 184)
+  border: 1px solid rgb(148 163 184);
 }
 
 .slider:before {
@@ -97,11 +105,11 @@ const setAutoProperty = (e: Event) => {
 }
 
 input:checked + .slider:before {
-  background-color: #16A34A;
+  background-color: #16a34a;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #16A34A);
+  box-shadow: 0 0 1px #16a34a;
 }
 
 input:checked + .slider:before {

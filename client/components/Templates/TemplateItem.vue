@@ -18,7 +18,11 @@
 </template>
 
 <script setup lang="ts">
-defineProps(["template"]);
+interface TemplateItemProps {
+  template: EmailTemplate;
+}
+
+defineProps<TemplateItemProps>();
 
 const emit = defineEmits(["selectTemplate"]);
 </script>

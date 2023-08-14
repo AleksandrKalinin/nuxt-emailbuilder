@@ -10,7 +10,7 @@ export const useSettingsStore = defineStore("settings", () => {
     settingsOpen.value = state;
   };
 
-  const setActiveCssSettings = (properties: MenuSetting[]) => {
+  const setActiveCssSettings = (properties: SettingsBlock[]) => {
     if (properties) {
       properties.forEach(() => {
         cssSettingsActive.value = properties;
@@ -19,7 +19,7 @@ export const useSettingsStore = defineStore("settings", () => {
     toggleSettingsState(true);
   };
 
-  const setActiveHtmlSettings = (properties: MenuSetting[]) => {
+  const setActiveHtmlSettings = (properties: SettingsBlock[]) => {
     if (properties) {
       properties.forEach(() => {
         htmlSettingsActive.value = properties;

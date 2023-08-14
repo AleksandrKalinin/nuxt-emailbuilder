@@ -8,11 +8,19 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["property", "itemKey"]);
+interface TextFieldProps {
+  property: {
+    property: string;
+    value: string | number | boolean;
+  };
+  itemKey: string;
+}
+
+const props = defineProps<TextFieldProps>();
 
 const emit = defineEmits(["updateEditorItem"]);
 
-const inputValue = ref<string>(props.property.value);
+const inputValue = ref<string>(props.property.value as string);
 
 const applyValue = (value: string) => {
   emit("updateEditorItem", props.itemKey, value);

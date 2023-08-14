@@ -1,5 +1,8 @@
 {
   "css.customData": [".vscode/tailwind.json"],
+  "vue.lint.unknownAtRules": "ignore",
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   }

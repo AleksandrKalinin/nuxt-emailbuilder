@@ -51,7 +51,11 @@ import { useEditorStore } from "@/store/editorStore";
 import { useSettingsStore } from "@/store/settingsStore";
 import { layoutSettings } from "@/constants/settings";
 
-defineProps(["settingsMenuRef"]);
+interface EditorProps {
+  settingsMenuRef: null;
+}
+
+defineProps<EditorProps>();
 
 const { createBuildingBlocks, addEditorRow } = useEditorStore();
 
@@ -86,8 +90,8 @@ const selectElement = (event: Event) => {
       (el: EditorElement) => el.id === target.getAttribute("id"),
     );
 
-    setActiveCssSettings(activeElement?.cssOptions);
-    setActiveHtmlSettings(activeElement?.htmlOptions);
+    setActiveCssSettings(activeElement!.cssOptions);
+    setActiveHtmlSettings(activeElement!.htmlOptions);
 
     if (activeElement?.editable) {
       setEditableItem(target.getAttribute("id"));

@@ -18,7 +18,12 @@
 </template>
 
 <script setup lang="ts">
-defineProps(["items", "activeRow"]);
+interface LayoutGroupProps {
+  activeRow: EditorRow;
+  items: LayoutOption[];
+}
+
+defineProps<LayoutGroupProps>();
 
 const emit = defineEmits(["updateEditorRow"]);
 </script>

@@ -23,7 +23,11 @@ const props = defineProps<{
   min: number;
   max: number;
   step: number;
-  property: GenericProperty;
+  property: {
+    property: string;
+    value: number | string | boolean;
+    unit?: string;
+  };
   itemKey: string;
 }>();
 
@@ -50,7 +54,7 @@ const setCSSProgress = (progress: number) => {
 watchEffect(() => {
   if (slider.value) {
     const progress = getProgress(
-      sliderValue.value,
+      Number(sliderValue.value),
       Number(slider.value.min),
       Number(slider.value.max),
     );

@@ -1,7 +1,7 @@
 export {};
 
 declare global {
-  interface property {
+  interface SingleProperty {
     [index: string]: {
       property: string;
       value: string | number | boolean;
@@ -16,11 +16,51 @@ declare global {
     };
   }
 
+  interface SettingsFieldOption {
+    name: string;
+    icon: string;
+    value: number | string | boolean;
+    default: boolean;
+  }
+
+  interface SettingsFieldProperty {
+    name: string;
+    property: string;
+    value: number;
+  }
+
+  interface SettingsField {
+    display: string;
+    name: string;
+    property: string;
+    type: string;
+    properties?: SettingsFieldProperty[];
+    value?: string | boolean | number;
+    options?: SettingsFieldOption[];
+  }
+
+  interface LayoutField {
+    display: string;
+    name: string;
+    property: string;
+    type: string;
+    options: {
+      name: string;
+      number: number;
+    }[];
+  }
+
+  interface SettingsBlock {
+    title: string;
+    type: string;
+    fields: SettingsField[] | LayoutField[];
+  }
+
   interface EditorElement {
     id: string;
     tag: string;
-    cssOptions: string[];
-    htmlOptions: string[];
+    cssOptions: SettingsBlock[];
+    htmlOptions: SettingsBlock[];
     placeholder?: string;
     markup: string;
     inlineStyles: string;
@@ -29,7 +69,7 @@ declare global {
       value: string | number;
     }[];
     presetClasses?: string[];
-    cssProperties: property;
+    cssProperties: SingleProperty;
     htmlProperties: HtmlProperty;
     editable: boolean;
     type: string;
@@ -39,7 +79,7 @@ declare global {
     id: string;
     children: EditorElement[];
     placeholder: string;
-    cssProperties: property;
+    cssProperties: SingleProperty;
     inlineStyles: string;
   }
 
@@ -57,26 +97,35 @@ declare global {
     category: string;
     preview: string;
     content: EditorRow[];
+    created_at: Date;
   }
 
-  interface MenuItem {
-    element: any;
-    icon: string;
-    options: any;
-    title: string;
-    type: string;
+  interface InitialHtmlValues<T> {
+    [key: string]: T;
   }
 
   interface MenuItemElement {
-    attributes: string[];
-    initialCssValues: any;
+    cssOptions: SettingsBlock[];
+    editable: true;
+    htmlOptions: SettingsBlock[];
+    initialCssValues: { [key: string]: SingleProperty };
+    initialHtmlValues: { [key: string]: HtmlProperty };
     placeholder: string;
-    style: string[];
+    stylePreset: {
+      property: string;
+      value: string | number | boolean;
+    }[];
     tag: string;
-    editable: false;
   }
 
   interface MenuItemOption {}
+
+  interface MenuItem {
+    element: MenuItemElement;
+    icon: string;
+    title: string;
+    type: string;
+  }
 
   interface EditorElementCssOption {
     property: string;
@@ -91,27 +140,9 @@ declare global {
     "data-type": string;
   }
 
-  interface SettingsBlock {}
-
   interface MenuSetting {
     type: string;
     title: string;
-  }
-
-  interface SettingsFieldOption {
-    name: string;
-    icon: string;
-    value: number | string | boolean;
-    default: boolean;
-  }
-
-  interface SettingsField {
-    display: string;
-    name: string;
-    property: string;
-    type: string;
-    value?: string | boolean | number;
-    options?: SettingsFieldOption[];
   }
 
   interface BlockAttribute {
@@ -162,5 +193,15 @@ declare global {
     attributes: GenericProperty;
     classes: GenericProperty;
     style: GenericProperty;
+  }
+
+  interface DropdownOption {
+    name: string;
+    value: string;
+  }
+
+  interface LayoutOption {
+    name: string;
+    number: number;
   }
 }

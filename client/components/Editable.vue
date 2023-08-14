@@ -11,7 +11,13 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["el", "rowId", "itemId"]);
+interface EditableProps {
+  el: EditorElement;
+  rowId: string;
+  itemId: string;
+}
+
+const props = defineProps<EditableProps>();
 
 const elementStyles = computed(() => {
   return props.el.inlineStyles;

@@ -8,12 +8,12 @@ import { convertStringToHTML } from "@/utils/convertStringtoHTML";
 export const useEditorStore = defineStore("editor", () => {
   const { toggleSettingsState } = useSettingsStore();
 
-  const createInlineStyles = (params: property) => {
+  const createInlineStyles = (params: SingleProperty) => {
     let inlineStyles = "";
     for (const item in params) {
       let val: string | number | boolean = params[item].value;
       if (params[item].unit) {
-        val += params[item].unit;
+        val += params[item].unit as string;
       }
       const cssStyle = `${params[item].property} : ${val}; `;
       inlineStyles += cssStyle;
@@ -52,18 +52,23 @@ export const useEditorStore = defineStore("editor", () => {
     const table = document.createElement("table");
     const attrs: OuterTableAttributes = tableWrapperProperties.attributes;
     const styles: OuterTableStyles = tableWrapperProperties.styles;
+
     for (const key in attrs) {
       table.setAttribute(key, attrs[key]);
     }
+
     for (const key in styles) {
-      table.style[key] = styles[key];
+      (table.style as any)[key] = styles[key];
     }
+
     const tbody = document.createElement("tbody");
     const tr = document.createElement("tr");
     const td = document.createElement("td");
+
     blocks.forEach((block) => {
       td.insertAdjacentHTML("beforeend", block);
     });
+
     tr.innerHTML = td.outerHTML;
     tbody.innerHTML = tr.outerHTML;
     table.innerHTML = tbody.innerHTML;
@@ -77,20 +82,25 @@ export const useEditorStore = defineStore("editor", () => {
       const tbody = document.createElement("tbody");
       const tr = document.createElement("tr");
       const td = document.createElement("td");
+
       block.content.forEach((item) => {
         const htmlItem = document.createElement(item.type);
         htmlItem.innerText = item.value;
+
         for (const key in item.attributes) {
           htmlItem.setAttribute(key, item.attributes[key]);
         }
+
         for (const key in item.styling) {
-          htmlItem.style[key] = item.styling[key];
+          (htmlItem.style as any)[key] = item.styling[key];
         }
+
         td.innerHTML = htmlItem.outerHTML;
         tr.innerHTML = td.outerHTML;
         tbody.insertAdjacentHTML("beforeend", tr.outerHTML);
         table.innerHTML = tbody.outerHTML;
       });
+
       blocks.push(table.outerHTML);
     });
     createOuterTable(blocks);
@@ -110,8 +120,10 @@ export const useEditorStore = defineStore("editor", () => {
     const index = editorRows.value.findIndex(
       (item: EditorRow) => item.id === id,
     );
+
     editorRows.value[index].columns = cols;
-    const nestedItems = selectedEditorRow.value?.items.length;
+    const nestedItems = (selectedEditorRow.value as EditorRow).items.length;
+
     if (nestedItems! < cols) {
       for (let i = 0; i < cols - nestedItems!; i++) {
         const newEditorItem = addEditorItem();
@@ -257,8 +269,8 @@ export const useEditorStore = defineStore("editor", () => {
     for (const key in item.cssProperties) {
       const cssObj = item.cssProperties[key];
       cssObj.unit
-        ? (element.style[cssObj.property] = cssObj.value + cssObj.unit)
-        : (element.style[cssObj.property] = cssObj.value);
+        ? ((element.style as any)[cssObj.property] = cssObj.value + cssObj.unit)
+        : ((element.style as any)[cssObj.property] = cssObj.value);
     }
 
     if (item.placeholder) {
@@ -277,7 +289,7 @@ export const useEditorStore = defineStore("editor", () => {
     if (item.stylePreset) {
       item.stylePreset.forEach(
         (styleProperty: { property: string; value: string | number }) => {
-          element!.style[styleProperty.property] = styleProperty.value;
+          (element!.style as any)[styleProperty.property] = styleProperty.value;
         },
       );
     }
@@ -324,10 +336,7 @@ export const useEditorStore = defineStore("editor", () => {
     });
   };
 
-  const updateItemHtmlProperties = (
-    key: string,
-    value: string | number | boolean,
-  ) => {
+  const updateItemHtmlProperties = (key: string, value: string) => {
     editorRows.value.forEach((row: EditorRow) => {
       row.items.forEach((item: EditorItem) => {
         item.children.forEach((element: EditorElement) => {

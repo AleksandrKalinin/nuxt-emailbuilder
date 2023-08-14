@@ -10,8 +10,14 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["markup"]);
+interface RawHtmlProps {
+  markup: string;
+}
+
+const props = defineProps<RawHtmlProps>();
+
 defineEmits(["updateHtml"]);
+
 const htmlCodeValue = ref(props.markup);
 </script>
 

@@ -3,11 +3,11 @@
     :ref="editorItemRef"
     class="editor-item"
     :class="[
-      selectedEditorRow === props.item.id ? 'editor-item_selected' : '',
+      selectedEditorRow?.id === props.item.id ? 'editor-item_selected' : '',
       isActive ? 'editor-item_hovered' : '',
     ]"
     @dragleave="leaveDropArea($event)"
-    @dragenter="enterDropArea($event)"
+    @dragenter="enterDropArea()"
     @dragover="($event) => $event.preventDefault()"
     @drop="dropItem(props.item.id)"
   >
@@ -66,7 +66,13 @@ import { storeToRefs } from "pinia";
 import { useEditorStore } from "@/store/editorStore";
 import { useSettingsStore } from "@/store/settingsStore";
 
-const props = defineProps(["item", "menuRef", "rowId"]);
+interface EditorItemProps {
+  item: EditorItem;
+  menuRef: null | MaybeRef;
+  rowId: string;
+}
+
+const props = defineProps<EditorItemProps>();
 
 const { toggleSettingsState } = useSettingsStore();
 
@@ -115,7 +121,7 @@ const updateEditableValue = (text: string) => {
   editableValue.value = text;
 };
 
-onClickOutside(editorItemRef, (e) => {
+onClickOutside(editorItemRef as MaybeRef, (e) => {
   if (editableBlock.value === props.item.id && editableItem.value) {
     const currentId = editableItem.value as string;
     updateEditorElement(props.item.id, currentId, editableValue.value);
@@ -132,7 +138,7 @@ const dropItem = (id: string) => {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .editor-item {
   @apply relative z-20 h-auto self-stretch;
 }

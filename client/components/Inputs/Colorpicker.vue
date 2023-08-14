@@ -17,7 +17,15 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["property", "itemKey"]);
+interface ColorpickerProps {
+  property: {
+    property: string;
+    value: string | boolean | number;
+  };
+  itemKey: string;
+}
+
+const props = defineProps<ColorpickerProps>();
 
 const isColorTransparent = computed(() => {
   if (props.property.value === "#00FFFFF") {
