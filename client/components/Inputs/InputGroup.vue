@@ -1,18 +1,29 @@
 <template>
   <div class="input-group">
-    <div class="input-group__item" v-for="item in items">
+    <div v-for="(item, index) in items" :key="index" class="input-group__item">
       <h6 class="input-group__header">{{ item.name }}</h6>
       <InputSingle
-        :property="selectedProperties[item.property]"
-        :itemKey="item.property"
-        @updateEditorItem="(a, b) => emit('inputGroupEmit', a, b)"
+        :property="
+          selectedProperties[item.property as keyof typeof selectedProperties]
+        "
+        :item-key="item.property"
+        @update-editor-item="(a, b) => emit('inputGroupEmit', a, b)"
       />
+      <span>{{
+        selectedProperties[item.property as keyof typeof selectedProperties]
+      }}</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-defineProps(["items", "selectedProperties"]);
+interface InputGroupProps {
+  items: SettingsFieldProperty[];
+  selectedProperties: SingleProperty;
+}
+
+defineProps<InputGroupProps>();
+
 const emit = defineEmits(["inputGroupEmit"]);
 </script>
 

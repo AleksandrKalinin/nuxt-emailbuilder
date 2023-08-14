@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { templates } from "@/constants/templates";
-import { useEditorStore } from "./editorStore";
+import { useEditorStore } from "@/store/editorStore";
 // import templatesService from "~/services/templatesService";
 
 export const useTemplateStore = defineStore("template", () => {

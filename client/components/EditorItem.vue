@@ -1,13 +1,13 @@
 <template>
   <div
+    :ref="editorItemRef"
     class="editor-item"
     :class="[
-      selectedEditorRow === props.item.id ? 'editor-item_selected' : '',
+      selectedEditorRow?.id === props.item.id ? 'editor-item_selected' : '',
       isActive ? 'editor-item_hovered' : '',
     ]"
-    :ref="editorItemRef"
     @dragleave="leaveDropArea($event)"
-    @dragenter="enterDropArea($event)"
+    @dragenter="enterDropArea()"
     @dragover="($event) => $event.preventDefault()"
     @drop="dropItem(props.item.id)"
   >
@@ -16,10 +16,13 @@
         <span class="item-placeholder__text"> Drag it here </span>
       </div>
     </div>
-    <div class="editor-item__content item-content" v-if="!item.children.length">
+    <div v-if="!item.children.length" class="editor-item__content item-content">
       <span class="px-3 text-center">{{ item.placeholder }}</span>
     </div>
     <div
+      v-for="htmlEl in item.children"
+      v-else
+      :key="htmlEl.id"
       ref="el"
       style="
         margin: 0 auto;
@@ -31,8 +34,6 @@
         background-color: transparent;
         line-height: 0;
       "
-      v-else
-      v-for="htmlEl in item.children"
     >
       <div
         v-if="htmlEl.id !== editableItem"
@@ -41,11 +42,11 @@
       <div v-else class="editable-wrapper">
         <Editable
           :el="htmlEl"
-          :rowId="rowId"
-          :itemId="props.item.id"
-          @updateText="updateEditableValue"
-          @updateElement="updateEditorElement"
-          @setEditorBlock="setEditableBlock"
+          :row-id="rowId"
+          :item-id="props.item.id"
+          @update-text="updateEditableValue"
+          @update-element="updateEditorElement"
+          @set-editor-block="setEditableBlock"
         />
       </div>
     </div>
@@ -65,7 +66,13 @@ import { storeToRefs } from "pinia";
 import { useEditorStore } from "@/store/editorStore";
 import { useSettingsStore } from "@/store/settingsStore";
 
-const props = defineProps(["item", "menuRef", "rowId"]);
+interface EditorItemProps {
+  item: EditorItem;
+  menuRef: null | MaybeRef;
+  rowId: string;
+}
+
+const props = defineProps<EditorItemProps>();
 
 const { toggleSettingsState } = useSettingsStore();
 
@@ -86,7 +93,7 @@ const isActive = ref<boolean>(false);
 
 const areaActive = ref(false);
 
-const enterDropArea = (event: Event) => {
+const enterDropArea = () => {
   isActive.value = true;
 
   dragEventCounter.value += 1;
@@ -114,7 +121,7 @@ const updateEditableValue = (text: string) => {
   editableValue.value = text;
 };
 
-onClickOutside(editorItemRef, (e) => {
+onClickOutside(editorItemRef as MaybeRef, (e) => {
   if (editableBlock.value === props.item.id && editableItem.value) {
     const currentId = editableItem.value as string;
     updateEditorElement(props.item.id, currentId, editableValue.value);
@@ -131,7 +138,7 @@ const dropItem = (id: string) => {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .editor-item {
   @apply relative z-20 h-auto self-stretch;
 }

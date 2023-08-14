@@ -1,16 +1,23 @@
 <template>
   <textarea
+    ref="textarea"
+    v-model="htmlCodeValue"
     type="text"
     class="html-editor"
-    v-model="htmlCodeValue"
-    @input.lazy="$emit('updateHtml', htmlCodeValue)"
-    ref="textarea"
+    @input="$emit('updateHtml', htmlCodeValue)"
   >
   </textarea>
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["markup"]);
+interface RawHtmlProps {
+  markup: string;
+}
+
+const props = defineProps<RawHtmlProps>();
+
+defineEmits(["updateHtml"]);
+
 const htmlCodeValue = ref(props.markup);
 </script>
 

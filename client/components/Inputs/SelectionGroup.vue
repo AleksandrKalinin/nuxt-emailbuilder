@@ -1,14 +1,13 @@
 <template>
   <div class="selection-group">
     <div
-      class="selection-group__item selection-item"
-      v-for="item in options"
-      :class="
-        item.value === props.property.value ? 'selection-item_selected' : ''
-      "
+      v-for="(item, index) in options"
+      :key="index"
+      :class="item.value === property.value ? 'selection-item_selected' : ''"
       :title="item.name"
       :value="item.value"
-      @click="emit('updateEditorItem', props.itemKey, item.value)"
+      class="selection-group__item selection-item"
+      @click="emit('updateEditorItem', itemKey, item.value)"
     >
       <Icon :name="item.icon" size="20px" />
     </div>
@@ -16,7 +15,16 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["options", "property", "itemKey"]);
+interface SelectionGroup {
+  options: SettingsFieldOption[];
+  property: {
+    property: string;
+    value: string | number | boolean;
+  };
+  itemKey: string;
+}
+
+defineProps<SelectionGroup>();
 
 const emit = defineEmits(["updateEditorItem"]);
 </script>

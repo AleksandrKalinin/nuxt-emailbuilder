@@ -87,18 +87,6 @@ export const ifMso9 =
 export const bodyMso =
   '[if (gte mso 9)|(IE)]><style type="text/css">  body { background-color: #ffffff !important; }  body,  table,  td,  p,  a {  font-family: sans-serif, Arial, Helvetica !important; }</style><![endif]';
 
-const button = {
-  "text-decoration": "none",
-  "max-width": "100%",
-  "margin-right": "auto",
-  "margin-left": "auto",
-  "border-radius": 0,
-};
-
-const image = {
-  "max-width": "100%",
-};
-
 export const tableCellProperties = {
   width: "100%",
   display: "inline-block",

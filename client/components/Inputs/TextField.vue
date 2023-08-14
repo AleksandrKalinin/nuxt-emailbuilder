@@ -1,6 +1,6 @@
 <template>
   <div class="text-field">
-    <input class="text-field__input" v-model="inputValue" />
+    <input v-model="inputValue" class="text-field__input" />
     <button class="text-field__button" @click.prevent="applyValue(inputValue)">
       Apply
     </button>
@@ -8,11 +8,19 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["property", "itemKey"]);
+interface TextFieldProps {
+  property: {
+    property: string;
+    value: string | number | boolean;
+  };
+  itemKey: string;
+}
+
+const props = defineProps<TextFieldProps>();
 
 const emit = defineEmits(["updateEditorItem"]);
 
-const inputValue = ref<string>(props.property.value);
+const inputValue = ref<string>(props.property.value as string);
 
 const applyValue = (value: string) => {
   emit("updateEditorItem", props.itemKey, value);

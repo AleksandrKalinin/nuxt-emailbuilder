@@ -1,75 +1,7 @@
 export {};
 
 declare global {
-  interface EmailTemplate {
-    id: string;
-    name: string;
-    category: string;
-    preview: string;
-    content: EditorRow[];
-  }
-
-  interface MenuItem {
-    element: any;
-    icon: string;
-    options: any;
-    title: string;
-    type: string;
-  }
-
-  interface MenuItemElement {
-    attributes: string[];
-    initialCssValues: any;
-    placeholder: string;
-    style: string[];
-    tag: string;
-    editable: false;
-  }
-
-  interface MenuItemOption {}
-
-  interface EditorElementCssOption {
-    property: string;
-    value: number | string | boolean;
-    unit?: string;
-  }
-
-  interface EditorElement {
-    id: string;
-    tag: string;
-    cssOptions: string[];
-    htmlOptions: string[];
-    placeholder?: string;
-    markup: string;
-    inlineStyles: string;
-    stylePreset?: {
-      property: string;
-      value: string | number;
-    }[];
-    presetClasses?: string[];
-    cssProperties: property;
-    htmlProperties: HtmlProperty;
-    editable: boolean;
-    type: string;
-  }
-
-  interface EditorItem {
-    id: string;
-    children: EditorElement[];
-    placeholder: string;
-    cssProperties: property;
-    inlineStyles: string;
-  }
-
-  interface EditorRow {
-    title?: string;
-    id: string;
-    items: EditorItem[];
-    columns: 1;
-    "data-type": string;
-  }
-
-  interface property {
+  interface SingleProperty {
     [index: string]: {
       property: string;
       value: string | number | boolean;
@@ -84,29 +16,6 @@ declare global {
     };
   }
 
-  interface cssSettingsActive {
-    id: string;
-    items: EditorItem[];
-    columns: 1;
-    "data-type": string;
-  }
-
-  interface SettingsBlock {}
-
-  interface MenuSetting {
-    type: string;
-    title: string;
-  }
-
-  interface SettingsField {
-    display: string;
-    name: string;
-    property: string;
-    type: string;
-    value?: string | boolean | number;
-    options?: SettingsFieldOption[];
-  }
-
   interface SettingsFieldOption {
     name: string;
     icon: string;
@@ -114,10 +23,134 @@ declare global {
     default: boolean;
   }
 
-  interface BlockItem {
-    columns: number;
-    id: 1;
-    content: BlockContent[];
+  interface SettingsFieldProperty {
+    name: string;
+    property: string;
+    value: number;
+  }
+
+  interface SettingsField {
+    display: string;
+    name: string;
+    property: string;
+    type: string;
+    properties?: SettingsFieldProperty[];
+    value?: string | boolean | number;
+    options?: SettingsFieldOption[];
+  }
+
+  interface LayoutField {
+    display: string;
+    name: string;
+    property: string;
+    type: string;
+    options: {
+      name: string;
+      number: number;
+    }[];
+  }
+
+  interface SettingsBlock {
+    title: string;
+    type: string;
+    fields: SettingsField[] | LayoutField[];
+  }
+
+  interface EditorElement {
+    id: string;
+    tag: string;
+    cssOptions: SettingsBlock[];
+    htmlOptions: SettingsBlock[];
+    placeholder?: string;
+    markup: string;
+    inlineStyles: string;
+    stylePreset?: {
+      property: string;
+      value: string | number;
+    }[];
+    presetClasses?: string[];
+    cssProperties: SingleProperty;
+    htmlProperties: HtmlProperty;
+    editable: boolean;
+    type: string;
+  }
+
+  interface EditorItem {
+    id: string;
+    children: EditorElement[];
+    placeholder: string;
+    cssProperties: SingleProperty;
+    inlineStyles: string;
+  }
+
+  interface EditorRow {
+    title?: string;
+    id: string;
+    items: EditorItem[];
+    columns: 1;
+    "data-type": string;
+  }
+
+  interface EmailTemplate {
+    id: string;
+    name: string;
+    category: string;
+    preview: string;
+    content: EditorRow[];
+    created_at: Date;
+  }
+
+  interface InitialHtmlValues<T> {
+    [key: string]: T;
+  }
+
+  interface MenuItemElement {
+    cssOptions: SettingsBlock[];
+    editable: true;
+    htmlOptions: SettingsBlock[];
+    initialCssValues: { [key: string]: SingleProperty };
+    initialHtmlValues: { [key: string]: HtmlProperty };
+    placeholder: string;
+    stylePreset: {
+      property: string;
+      value: string | number | boolean;
+    }[];
+    tag: string;
+  }
+
+  interface MenuItemOption {}
+
+  interface MenuItem {
+    element: MenuItemElement;
+    icon: string;
+    title: string;
+    type: string;
+  }
+
+  interface EditorElementCssOption {
+    property: string;
+    value: number | string | boolean;
+    unit?: string;
+  }
+
+  interface cssSettingsActive {
+    id: string;
+    items: EditorItem[];
+    columns: 1;
+    "data-type": string;
+  }
+
+  interface MenuSetting {
+    type: string;
+    title: string;
+  }
+
+  interface BlockAttribute {
+    [key: string]: string;
+  }
+
+  interface BlockStyling {
+    [key: string]: string | number | boolean;
   }
 
   interface BlockContent {
@@ -127,12 +160,10 @@ declare global {
     value: string;
   }
 
-  interface BlockAttribute {
-    [key: string]: string;
-  }
-
-  interface BlockStyling {
-    [key: string]: string | number | boolean;
+  interface BlockItem {
+    columns: number;
+    id: 1;
+    content: BlockContent[];
   }
 
   interface OuterTable {}
@@ -145,13 +176,13 @@ declare global {
     [key: string]: number;
   }
 
-  interface MetaTag {
-    properties: MetaTagItem[];
-  }
-
   interface MetaTagItem {
     name: string;
     value: string;
+  }
+
+  interface MetaTag {
+    properties: MetaTagItem[];
   }
 
   interface GenericProperty {
@@ -162,5 +193,15 @@ declare global {
     attributes: GenericProperty;
     classes: GenericProperty;
     style: GenericProperty;
+  }
+
+  interface DropdownOption {
+    name: string;
+    value: string;
+  }
+
+  interface LayoutOption {
+    name: string;
+    number: number;
   }
 }

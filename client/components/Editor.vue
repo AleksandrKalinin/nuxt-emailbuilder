@@ -3,9 +3,10 @@
     <VueDraggableNext class="dragArea list-group w-full" :list="editorRows">
       <div
         v-for="row in editorRows"
+        :id="row.id"
+        :key="row.id"
         class="editor-row"
         :class="selectedEditorRow?.id === row.id ? 'editor-row_selected' : ''"
-        :id="row.id"
         @click="selectElement($event)"
       >
         <EditorItem
@@ -13,8 +14,8 @@
           :key="element.id"
           :item="element"
           :style="element.inlineStyles"
-          :menuRef="settingsMenuRef"
-          :rowId="row.id"
+          :menu-ref="settingsMenuRef"
+          :row-id="row.id"
         />
         <div class="editor-row__menu editor-menu">
           <div class="editor-menu__items">
@@ -44,20 +45,19 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
 import { VueDraggableNext } from "vue-draggable-next";
 import { useEditorStore } from "@/store/editorStore";
 import { useSettingsStore } from "@/store/settingsStore";
-import { storeToRefs } from "pinia";
-import {
-  layoutSettings,
-  typographySettings,
-  imageSettings,
-  dimensionsSettings,
-} from "../constants/settings";
+import { layoutSettings } from "@/constants/settings";
 
-defineProps(["settingsMenuRef"]);
+interface EditorProps {
+  settingsMenuRef: null;
+}
 
-const { createBuildingBlocks, addEditorItem, addEditorRow } = useEditorStore();
+defineProps<EditorProps>();
+
+const { createBuildingBlocks, addEditorRow } = useEditorStore();
 
 const { editorElements, editorRows, selectedEditorRow, currentEditorRowId } =
   storeToRefs(useEditorStore());
@@ -87,11 +87,11 @@ const selectElement = (event: Event) => {
     selectEditorElement(target.getAttribute("id"));
 
     const activeElement = editorElements.value.find(
-      (el: EditorElement) => el.id === target.getAttribute("id")
+      (el: EditorElement) => el.id === target.getAttribute("id"),
     );
 
-    setActiveCssSettings(activeElement?.cssOptions);
-    setActiveHtmlSettings(activeElement?.htmlOptions);
+    setActiveCssSettings(activeElement!.cssOptions);
+    setActiveHtmlSettings(activeElement!.htmlOptions);
 
     if (activeElement?.editable) {
       setEditableItem(target.getAttribute("id"));

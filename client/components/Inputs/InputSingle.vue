@@ -21,14 +21,23 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["property", "itemKey", "opt", "max", "min"]);
+interface SingleInputProps {
+  property: {
+    property: string;
+    value: number | string | boolean;
+    unit?: string;
+  };
+  itemKey: string;
+}
+
+const props = defineProps<SingleInputProps>();
 
 const emit = defineEmits(["updateEditorItem"]);
 
 const inputValue = ref(props.property.value);
 
 const decreaseValue = () => {
-  if (inputValue.value > 0) {
+  if ((inputValue.value as number) > 0) {
     inputValue.value = Number(inputValue.value) - 1;
   }
   emit("updateEditorItem", props.itemKey, Number(inputValue.value));

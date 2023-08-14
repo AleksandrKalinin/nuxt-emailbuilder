@@ -1,5 +1,4 @@
 import {
-  layoutSettings,
   typographySettings,
   dimensionsSettings,
   linkSettings,
@@ -504,7 +503,7 @@ export const header = [
         "button_regular",
         "mx-auto",
         "grow-0",
-        "max-w-[100%]",*/
+        "max-w-[100%]", */
       ],
     },
   },

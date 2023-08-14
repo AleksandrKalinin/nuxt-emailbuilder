@@ -3,7 +3,6 @@ export const createHtmlElement = (item: EditorElement) => {
   element.setAttribute("id", item.id);
   element.addEventListener("click", (e: Event) => {
     e.stopPropagation();
-    const target = e.target as HTMLElement;
   });
 
   for (const key in item.cssProperties) {
@@ -21,7 +20,7 @@ export const createHtmlElement = (item: EditorElement) => {
     for (const key in item.htmlProperties) {
       element.setAttribute(
         item.htmlProperties[key].property,
-        item.htmlProperties[key].value
+        item.htmlProperties[key].value,
       );
     }
   }
@@ -30,7 +29,7 @@ export const createHtmlElement = (item: EditorElement) => {
     item.stylePreset.forEach(
       (styleProperty: { property: string; value: string | number }) => {
         element!.style[styleProperty.property] = styleProperty.value;
-      }
+      },
     );
   }
 

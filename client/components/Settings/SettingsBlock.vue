@@ -1,22 +1,24 @@
 <template>
   <div
+    v-for="(settingBlock, index) in settingsActive"
+    :key="index"
     class="settings-block settings__block"
-    v-for="settingBlock in settingsActive"
   >
     <h4 class="settings-block__header">{{ settingBlock.title }}</h4>
     <div
-      class="settings-options__item settings-item"
       v-if="settingBlock.type === 'html'"
+      class="settings-options__item settings-item"
     >
       <RawHtml
-        :markup="selectedEditorRow?.markup"
-        @updateHtml="updateItemHtml"
+        :markup="(selectedEditorRow as EditorElement).markup"
+        @update-html="updateItemHtml"
       />
     </div>
     <div class="settings-block__options settings-options">
       <div
+        v-for="(option, optionIndex) in settingBlock.fields"
+        :key="optionIndex"
         class="settings-options__item settings-item"
-        v-for="option in settingBlock.fields"
         :class="
           option.display === 'row' ? 'settings-item_row' : 'settings-item_col'
         "
@@ -26,68 +28,98 @@
           <ToggleInput
             v-if="option.property === 'width'"
             placeholder="Auto"
-            :property="selectedItemProperties[option.property]"
-            :itemKey="option.property"
-            @updateEditorItem="updateItemProperties"
+            :property="
+              selectedItemProperties[
+                option.property as keyof typeof selectedItemProperties
+              ]
+            "
+            :item-key="option.property"
+            @update-editor-item="updateItemProperties"
           />
         </h5>
         <InputSingle
           v-if="option.type === 'input'"
-          :property="selectedItemProperties[option.property]"
-          :itemKey="option.property"
-          @updateEditorItem="updateItemProperties"
+          :property="
+            selectedItemProperties[
+              option.property as keyof typeof selectedItemProperties
+            ]
+          "
+          :item-key="option.property"
+          @update-editor-item="updateItemProperties"
         />
         <InputGroup
           v-if="option.type === 'inputgroup'"
-          :items="option.properties"
-          :selectedProperties="selectedItemProperties"
-          @inputGroupEmit="updateItemProperties"
+          :items="(option as SettingsField).properties!"
+          :selected-properties="selectedItemProperties"
+          @input-group-emit="updateItemProperties"
         />
         <Colorpicker
-          :property="selectedItemProperties[option.property]"
-          :itemKey="option.property"
-          @updateEditorItem="updateItemProperties"
           v-else-if="option.type === 'colorpicker'"
+          :property="
+            selectedItemProperties[
+              option.property as keyof typeof selectedItemProperties
+            ]
+          "
+          :item-key="option.property"
+          @update-editor-item="updateItemProperties"
         />
         <Dropdown
           v-if="option.type === 'dropdown'"
-          :options="option.options"
-          :property="selectedItemProperties[option.property]"
-          :itemKey="option.property"
-          @updateEditorItem="updateItemProperties"
+          :options="option.options as DropdownOption[]"
+          :property="
+            selectedItemProperties[
+              option.property as keyof typeof selectedItemProperties
+            ]
+          "
+          :item-key="option.property"
+          @update-editor-item="updateItemProperties"
         />
         <TextField
           v-if="option.type === 'text'"
-          :property="selectedItemProperties[option.property]"
-          :itemKey="option.property"
-          @updateEditorItem="updateItemProperties"
+          :property="
+            selectedItemProperties[
+              option.property as keyof typeof selectedItemProperties
+            ]
+          "
+          :item-key="option.property"
+          @update-editor-item="updateItemProperties"
         />
         <SelectionGroup
           v-else-if="option.type === 'selection'"
-          :options="option.options"
-          :property="selectedItemProperties[option.property]"
-          :itemKey="option.property"
-          @updateEditorItem="updateItemProperties"
+          :options="option.options as SettingsFieldOption[]"
+          :property="
+            selectedItemProperties[
+              option.property as keyof typeof selectedItemProperties
+            ]
+          "
+          :item-key="option.property"
+          @update-editor-item="updateItemProperties"
         />
         <LayoutGroup
           v-else-if="option.type === 'layout'"
-          :items="option.options"
-          :activeRow="selectedEditorRow"
-          @updateEditorRow="updateRowLayout"
+          :items="option.options as LayoutOption[]"
+          :active-row="selectedEditorRow as EditorRow"
+          @update-editor-row="updateRowLayout"
         />
         <FileUpload v-else-if="option.type === 'fileupload'" />
         <Transition>
           <RangeInput
             v-if="
               option.type === 'range' &&
-              selectedItemProperties[option.property].value !== 'auto'
+              selectedItemProperties[
+                option.property as keyof typeof selectedItemProperties
+              ].value !== 'auto'
             "
             :max="100"
             :min="0"
             :step="1"
-            :property="selectedItemProperties[option.property]"
-            :itemKey="option.property"
-            @updateEditorItem="updateItemProperties"
+            :property="
+              selectedItemProperties[
+                option.property as keyof typeof selectedItemProperties
+              ]
+            "
+            :item-key="option.property"
+            @update-editor-item="updateItemProperties"
           />
         </Transition>
       </div>
@@ -96,7 +128,13 @@
 </template>
 
 <script setup lang="ts">
-defineProps(["selectedEditorRow", "selectedItemProperties", "settingsActive"]);
+interface SettingsBlockProps {
+  selectedEditorRow: EditorElement | EditorRow;
+  selectedItemProperties: SingleProperty;
+  settingsActive: SettingsBlock[];
+}
+
+defineProps<SettingsBlockProps>();
 
 const emit = defineEmits([
   "updateEditorRowLayout",

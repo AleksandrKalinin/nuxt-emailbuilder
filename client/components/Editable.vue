@@ -1,17 +1,23 @@
 <template>
   <textarea
+    ref="textarea"
+    v-model="inputValue"
     type="text"
     class="editable resize-none"
-    v-model="inputValue"
     :style="elementStyles"
     @input="$emit('updateText', inputValue)"
-    ref="textarea"
   >
   </textarea>
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["el", "rowId", "itemId"]);
+interface EditableProps {
+  el: EditorElement;
+  rowId: string;
+  itemId: string;
+}
+
+const props = defineProps<EditableProps>();
 
 const elementStyles = computed(() => {
   return props.el.inlineStyles;
@@ -33,7 +39,7 @@ onMounted(() => {
   focusInput();
 });
 
-onClickOutside(textarea, (e) => {
+onClickOutside(textarea, () => {
   emit("updateElement", props.itemId, props.el.id, inputValue.value);
   inputValue.value = "";
 });
