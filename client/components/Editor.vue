@@ -38,7 +38,11 @@
         </div>
       </div>
     </VueDraggableNext>
-    <button class="button button_regular mx-auto mt-3" @click="addEditorRow()">
+    <button
+      id="editorBtn"
+      class="button button_regular mx-auto mt-3"
+      @click="addEditorRow()"
+    >
       Add
     </button>
   </div>
@@ -87,7 +91,7 @@ const selectElement = (event: Event) => {
     selectEditorElement(target.getAttribute("id"));
 
     const activeElement = editorElements.value.find(
-      (el: EditorElement) => el.id === target.getAttribute("id"),
+      (el: EditorElement) => el.id === target.getAttribute("id")
     );
 
     setActiveCssSettings(activeElement!.cssOptions);

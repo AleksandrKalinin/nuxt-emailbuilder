@@ -24,6 +24,7 @@
       v-else
       :key="htmlEl.id"
       ref="el"
+      class="editor-item__block"
       style="
         margin: 0 auto;
         min-width: 100%;
@@ -38,6 +39,7 @@
       <div
         v-if="htmlEl.id !== editableItem"
         v-dompurify-html="htmlEl.markup"
+        class="editor-item__markup"
       ></div>
       <div v-else class="editable-wrapper">
         <Editable
