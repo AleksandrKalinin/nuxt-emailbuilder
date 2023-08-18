@@ -99,7 +99,7 @@ export function editorTest() {
         });
     });
 */
-    /*
+
     it("drags and drops an element from one region to another", () => {
       cy.visit("http://localhost:3000/editor");
       const draggableSelector = ".menu-item[title='Heading']";
@@ -119,29 +119,16 @@ export function editorTest() {
             .find(droppableSelector)
             .then(($droppable) => {
               const dropCoords = $droppable[0].getBoundingClientRect();
+              const x = dropCoords.x - dragCoords.x + 20;
+              const y = dropCoords.y - dragCoords.y + 20;
               cy.wrap($draggable)
                 .trigger("mousedown", { force: true })
-                .trigger(
-                  "mousemove",
-                  dropCoords.x - dragCoords.x + 20,
-                  dropCoords.y - dragCoords.y + 20,
-                  {
-                    clientX: dropCoords.x - dragCoords.x + 20,
-                    clientY: dropCoords.y - dragCoords.y + 20,
-                    force: true,
-                  }
-                )
+                .trigger("drag", x, y, {
+                  force: true,
+                })
                 .trigger("mouseup");
-
-              cy.wrap($droppable)
-                .trigger("dragenter")
-                .trigger("dragover", { force: true })
-                .trigger("drop", { force: true })
-                .wait(50)
-                .trigger("dragend", { force: true });
             });
         });
     });
-*/
   });
 }

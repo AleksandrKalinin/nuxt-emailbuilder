@@ -9,9 +9,6 @@
         :item-key="item.property"
         @update-editor-item="(a, b) => emit('inputGroupEmit', a, b)"
       />
-      <span>{{
-        selectedProperties[item.property as keyof typeof selectedProperties]
-      }}</span>
     </div>
   </div>
 </template>

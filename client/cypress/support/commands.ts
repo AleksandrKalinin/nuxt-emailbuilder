@@ -1,3 +1,5 @@
+require("@4tw/cypress-drag-drop");
+
 /// <reference types="cypress" />
 // ***********************************************
 // This example commands.ts shows you how to
@@ -37,16 +39,16 @@
 // }
 // cypress/support/commands.ts
 
+/*
 declare global {
   namespace Cypress {
     interface Chainable {
-      /** Custom command to drag subject to target */
       drag(target: string, options?: Partial<TypeOptions>): Chainable<Element>;
     }
   }
 }
 
-/** Adds custom command `cy.drag` to the global `cy` object  */
+
 Cypress.Commands.add(
   "drag",
   { prevSubject: "element" },
@@ -88,3 +90,4 @@ Cypress.Commands.add(
       });
   }
 );
+*/

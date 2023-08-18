@@ -9,7 +9,7 @@ module.exports = {
     parser: "@typescript-eslint/parser",
   },
   extends: ["@nuxtjs/eslint-config-typescript", "plugin:prettier/recommended"],
-  plugins: [],
+  plugins: ["vitest"],
   rules: {
     "vue/no-multiple-template-root": 0,
     "vue/multi-word-component-names": 0,

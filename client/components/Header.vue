@@ -1,12 +1,18 @@
 <template>
   <header class="header">
-    <button
-      class="button button_regular button_spaced"
-      @click="createEmailTemplate(editorRows)"
-    >
-      Download
-    </button>
-    <button class="button button_regular button_spaced">Log in</button>
+    <nav class="header-menu">
+      <a id="templates" to="/" class="header-menu__link">Templates</a>
+      <a id="editor" to="/editor" class="header-menu__link">Editor</a>
+    </nav>
+    <div class="header-buttons">
+      <button
+        class="button button_regular button_spaced"
+        @click="createEmailTemplate(editorRows)"
+      >
+        Download
+      </button>
+      <button class="button button_regular button_spaced">Log in</button>
+    </div>
   </header>
 </template>
 
@@ -20,6 +26,18 @@ const { editorRows } = storeToRefs(useEditorStore());
 
 <style scoped>
 .header {
-  @apply w-full h-[100px] flex justify-end items-center px-5 bg-neutral-700;
+  @apply w-full h-[100px] flex justify-between items-center px-5 bg-neutral-700;
+}
+
+.header-buttons {
+  @apply flex;
+}
+
+.header-menu {
+  color: #ffffff;
+}
+
+.header-menu__link {
+  margin: 0 5px;
 }
 </style>
