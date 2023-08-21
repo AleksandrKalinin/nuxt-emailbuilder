@@ -5,7 +5,6 @@ import Header from "../components/Header.vue";
 
 function mountHeader() {
   const wrapper = mount(Header);
-  console.log(wrapper.vm);
   return wrapper;
 }
 

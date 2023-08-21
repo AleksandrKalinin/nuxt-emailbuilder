@@ -16,8 +16,6 @@ import { useTemplateStore } from "@/store/templateStore";
 const { filteredEmailTemplates } = storeToRefs(useTemplateStore());
 
 const { selectTemplate } = useTemplateStore();
-
-onMounted(() => {});
 </script>
 
 <style scoped>

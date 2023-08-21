@@ -204,4 +204,9 @@ declare global {
     name: string;
     number: number;
   }
+
+  interface CypressENV {
+    HOME: string;
+    USERPROFILE: string;
+  }
 }

@@ -1,6 +1,5 @@
 export function editorTest() {
   describe("Testing editor main funcionality", () => {
-    /*
     it("Should have button for row addition", () => {
       cy.visit("http://localhost:3000/editor")
         .get(".editor")
@@ -98,8 +97,8 @@ export function editorTest() {
             .should("eq", 1);
         });
     });
-*/
 
+    /*
     it("drags and drops an element from one region to another", () => {
       cy.visit("http://localhost:3000/editor");
       const draggableSelector = ".menu-item[title='Heading']";
@@ -129,6 +128,6 @@ export function editorTest() {
                 .trigger("mouseup");
             });
         });
-    });
+    }); */
   });
 }

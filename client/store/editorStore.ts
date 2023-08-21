@@ -245,6 +245,10 @@ export const useEditorStore = defineStore("editor", () => {
     ].children.findIndex((element: EditorElement) => element.id === elementId);
     const targetElement =
       editorItems.value[editorItemIndex].children[editorElementIndex];
+    console.log(targetElement);
+    console.log(editorItems.value);
+    console.log(editorItemIndex);
+    console.log(editorElementIndex);
     targetElement.placeholder = text;
     editorItems.value[editorItemIndex].children[editorElementIndex].markup =
       createHtmlElement(targetElement);

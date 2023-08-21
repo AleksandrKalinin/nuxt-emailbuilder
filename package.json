@@ -5,12 +5,12 @@
     "lint-staged": "^14.0.0"
   },
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "cd .. && husky install front/.husky",
     "test": "lint-staged"
   },
   "lint-staged": {
     "*.{js,ts,css,sass,vue}": [
-      "cd client && npm run lint"
+      "npm run lint"
     ]
   }
 }

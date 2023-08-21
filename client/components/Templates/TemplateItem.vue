@@ -8,11 +8,12 @@
     </div>
     <div class="template__overlay template-overlay">
       <h2 class="template__title">{{ template.name }}</h2>
-      <a
+      <button
         class="button button_small cursor-pointer"
-        @click="emit('selectTemplate', template)"
-        >Open template</a
+        @click.prevent="emit('selectTemplate', template)"
       >
+        Open template
+      </button>
     </div>
   </div>
 </template>

@@ -1,17 +1,24 @@
 <template>
   <header class="header">
     <nav class="header-menu">
-      <a id="templates" to="/" class="header-menu__link">Templates</a>
-      <a id="editor" to="/editor" class="header-menu__link">Editor</a>
+      <NuxtLink id="templates" to="/" class="header-menu__link"
+        >Templates</NuxtLink
+      >
+      <NuxtLink id="editor" to="/editor" class="header-menu__link"
+        >Editor</NuxtLink
+      >
     </nav>
     <div class="header-buttons">
       <button
+        id="download"
         class="button button_regular button_spaced"
         @click="createEmailTemplate(editorRows)"
       >
         Download
       </button>
-      <button class="button button_regular button_spaced">Log in</button>
+      <button id="login" class="button button_regular button_spaced">
+        Log in
+      </button>
     </div>
   </header>
 </template>
