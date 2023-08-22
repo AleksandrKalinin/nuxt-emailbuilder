@@ -3,7 +3,7 @@ import { headerTest } from "./header.cy";
 import { editorTest } from "./editor.cy";
 
 describe("Running tests", () => {
-  // headerTest();
+  headerTest();
   templatesTest();
   editorTest();
 });

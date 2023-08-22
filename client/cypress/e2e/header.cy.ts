@@ -1,4 +1,7 @@
+import { type } from "os";
 import path from "path";
+
+type ObjectLike = Cypress.ObjectLike;
 
 export function headerTest() {
   describe("Testing header", () => {
@@ -20,13 +23,12 @@ export function headerTest() {
       });
     });
 
-    it("should download template", () => {
+    it("Should download template", () => {
       const DOWNLOAD_DIR = path.join(
-        (String(process.env.HOME) as string) ||
-          (String(process.env.USERPROFILE) as string),
-        "downloads/"
+        (Cypress.env().HOME as string) || (Cypress.env().USERPROFILE as string),
+        "Downloads"
       );
-      cy.log(DOWNLOAD_DIR);
+      cy.wait(2000);
       cy.task("downloads", DOWNLOAD_DIR).then((before) => {
         cy.visit("http://localhost:3000/editor");
         cy.get("header").within(() => {
@@ -34,6 +36,7 @@ export function headerTest() {
         });
 
         cy.task("downloads", DOWNLOAD_DIR).then((after) => {
+          cy.wait(2000);
           expect(after.length).to.be.eq(before.length + 1);
         });
       });
