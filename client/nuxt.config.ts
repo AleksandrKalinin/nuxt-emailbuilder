@@ -46,6 +46,7 @@ export default defineNuxtConfig({
     "nuxt-icon",
   ],
   routeRules: {
+    "/**": { ssr: false },
     "/editor/**": { ssr: false },
   },
 });

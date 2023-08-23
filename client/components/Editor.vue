@@ -1,5 +1,5 @@
 <template>
-  <div class="editor">
+  <div id="editorArea" class="editor">
     <VueDraggableNext class="dragArea list-group w-full" :list="editorRows">
       <div
         v-for="row in editorRows"

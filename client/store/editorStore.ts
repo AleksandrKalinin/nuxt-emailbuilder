@@ -253,6 +253,7 @@ export const useEditorStore = defineStore("editor", () => {
     editorItems.value[editorItemIndex].children[editorElementIndex].markup =
       createHtmlElement(targetElement);
     setEditableItem(null);
+    console.log(editorRows.value);
   };
 
   const createHtmlElement = (item: EditorElement) => {

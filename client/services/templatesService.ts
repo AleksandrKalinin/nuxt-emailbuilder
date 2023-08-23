@@ -1,8 +1,8 @@
-/*
-import type { PostgrestError, RealtimeChannel } from "@supabase/supabase-js";
+// import type { PostgrestError, RealtimeChannel } from "@supabase/supabase-js";
 
 const client = useSupabaseClient();
-let realtimeChannel: RealtimeChannel;
+
+// let realtimeChannel: RealtimeChannel;
 
 class TemplatesService {
   async fetchTemplates() {
@@ -20,23 +20,40 @@ class TemplatesService {
     return { data, error };
   }
 
-  subscribeToTemplatesUpdates = () => {
-    realtimeChannel = client
-      .channel("table-db-changes")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "templates" },
-        () => this.fetchTemplates()
-      );
-    realtimeChannel.subscribe();
-  };
+  async uploadImage(filename: string, image: File) {
+    console.log(filename, image);
+    const { data, error } = await client.storage
+      .from("templates")
+      .upload(`${filename}.png`, image, {
+        cacheControl: "3600",
+        upsert: false,
+        contentType: "image/png",
+      });
+    return { data, error };
+  }
 
-  unsubscribeFromTemplatesUpdates = () => {
-    client.removeChannel(realtimeChannel);
-  };
+  getImageUrl(url: string) {
+    const path = client.storage.from("templates").getPublicUrl(url)
+      .data.publicUrl;
+    return path;
+  }
+
+  // subscribeToTemplatesUpdates = () => {
+  //   realtimeChannel = client
+  //     .channel("table-db-changes")
+  //     .on(
+  //       "postgres_changes",
+  //       { event: "*", schema: "public", table: "templates" },
+  //       () => this.fetchTemplates()
+  //     );
+  //   realtimeChannel.subscribe();
+  // };
+
+  // unsubscribeFromTemplatesUpdates = () => {
+  //   client.removeChannel(realtimeChannel);
+  // };
 }
 
 const templatesService = new TemplatesService();
 
 export default templatesService;
-*/

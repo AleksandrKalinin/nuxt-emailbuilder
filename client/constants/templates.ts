@@ -1,5 +1,946 @@
 export const templates = [
   {
+    name: "Infographic Promotion Email 4",
+    id: "6b6cd153-2e16-41d8-a3b6-99f175877614",
+    category: "free",
+    preview: "preview.png",
+    created_at: new Date(),
+    content: [
+      {
+        id: "c089b428-f859-465c-ae77-83a9d00a2cc3",
+        items: [
+          {
+            id: "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
+            children: [
+              {
+                id: "a38d3c2f-09f5-400c-a5af-735409e7b3ff",
+                tag: "h1",
+                placeholder: "Heading",
+                cssOptions: [
+                  {
+                    title: "Typography",
+                    type: "typography",
+                    fields: [
+                      {
+                        name: "Font family",
+                        property: "font-family",
+                        type: "dropdown",
+                        options: [
+                          { name: "Arial", value: "Arial, sans-serif" },
+                          {
+                            name: "Times New Roman",
+                            value: "Times New Roman, sans-serif",
+                          },
+                          { name: "Georgia", value: "Georgia, sans-serif" },
+                          {
+                            name: "Courier New",
+                            value: "Courier New, sans-serif",
+                          },
+                          { name: "Verdana", value: "Verdana, sans-serif" },
+                          { name: "Tahoma", value: "Tahome, sans-serif" },
+                        ],
+                        display: "row",
+                      },
+                      {
+                        name: "Font size",
+                        property: "font-size",
+                        type: "input",
+                        display: "row",
+                      },
+                      {
+                        name: "Font color",
+                        property: "color",
+                        type: "colorpicker",
+                        value: "#222222",
+                        display: "row",
+                      },
+                      {
+                        name: "Font weight",
+                        property: "font-weight",
+                        type: "selection",
+                        display: "row",
+                        options: [
+                          {
+                            name: "Light",
+                            icon: "ph:text-b-light",
+                            value: 300,
+                            default: false,
+                          },
+                          {
+                            name: "Regular",
+                            icon: "ph:text-b",
+                            value: 400,
+                            default: true,
+                          },
+                          {
+                            name: "Bold",
+                            icon: "ph:text-b-bold",
+                            value: 600,
+                            default: false,
+                          },
+                        ],
+                      },
+                      {
+                        name: "Font style",
+                        property: "font-style",
+                        type: "selection",
+                        display: "row",
+                        options: [
+                          {
+                            name: "Normal",
+                            icon: "bx:font",
+                            value: "normal",
+                            default: true,
+                          },
+                          {
+                            name: "Italic",
+                            icon: "tabler:italic",
+                            value: "italic",
+                            default: false,
+                          },
+                        ],
+                      },
+                      {
+                        name: "Line height",
+                        property: "line-height",
+                        type: "input",
+                        display: "row",
+                      },
+                      {
+                        name: "Letter spacing",
+                        property: "letter-spacing",
+                        type: "input",
+                        display: "row",
+                        max: 100,
+                        min: 0,
+                      },
+                      {
+                        name: "Text align",
+                        property: "text-align",
+                        type: "selection",
+                        display: "row",
+                        options: [
+                          {
+                            name: "Left",
+                            icon: "ph:text-align-left-light",
+                            value: "left",
+                            default: true,
+                          },
+                          {
+                            name: "Center",
+                            icon: "ph:text-align-center-light",
+                            value: "center",
+                            default: false,
+                          },
+                          {
+                            name: "Right",
+                            icon: "ph:text-align-right-light",
+                            value: "right",
+                            default: false,
+                          },
+                        ],
+                      },
+                      {
+                        name: "Text decoration",
+                        property: "text-decoration",
+                        type: "selection",
+                        display: "row",
+                        options: [
+                          {
+                            name: "None",
+                            icon: "ph:text-aa-light",
+                            value: "none",
+                            default: true,
+                          },
+                          {
+                            name: "Underline",
+                            icon: "ph:text-a-underline-light",
+                            value: "underline",
+                            default: false,
+                          },
+                        ],
+                      },
+                      {
+                        name: "Text transform",
+                        property: "text-transform",
+                        type: "selection",
+                        display: "row",
+                        options: [
+                          {
+                            name: "None",
+                            icon: "mdi:format-letter-case",
+                            value: "none",
+                            default: true,
+                          },
+                          {
+                            name: "Lowercase",
+                            icon: "mdi:format-lowercase",
+                            value: "lowercase",
+                            default: false,
+                          },
+                          {
+                            name: "Uppercase",
+                            icon: "mdi:format-uppercase",
+                            value: "uppercase",
+                            default: false,
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    title: "Dimensions",
+                    type: "dimension",
+                    fields: [
+                      {
+                        name: "Margin",
+                        value: "margin",
+                        type: "inputgroup",
+                        display: "col",
+                        properties: [
+                          { name: "Top", property: "margin-top", value: 0 },
+                          {
+                            name: "Bottom",
+                            property: "margin-bottom",
+                            value: 0,
+                          },
+                          { name: "Left", property: "margin-left", value: 0 },
+                          { name: "Right", property: "margin-right", value: 0 },
+                        ],
+                      },
+                      {
+                        name: "Padding",
+                        value: "padding",
+                        type: "inputgroup",
+                        display: "col",
+                        properties: [
+                          { name: "Top", property: "padding-top", value: 0 },
+                          {
+                            name: "Bottom",
+                            property: "padding-bottom",
+                            value: 0,
+                          },
+                          { name: "Left", property: "padding-left", value: 0 },
+                          {
+                            name: "Right",
+                            property: "padding-right",
+                            value: 0,
+                          },
+                        ],
+                      },
+                      {
+                        name: "Width",
+                        property: "width",
+                        type: "range",
+                        display: "col",
+                      },
+                      {
+                        name: "Height",
+                        property: "height",
+                        type: "range",
+                        display: "row",
+                      },
+                      {
+                        name: "Background",
+                        property: "background-color",
+                        type: "colorpicker",
+                        value: "#FFFFFF",
+                        display: "row",
+                      },
+                    ],
+                  },
+                ],
+                htmlOptions: [],
+                editable: true,
+                stylePreset: [{ property: "z-index", value: 50 }],
+                cssProperties: {
+                  "font-family": {
+                    property: "font-family",
+                    value: "Times New Roman, sans-serif",
+                  },
+                  "font-size": { property: "font-size", value: 30, unit: "px" },
+                  color: { property: "color", value: "#222222" },
+                  "font-weight": { property: "font-weight", value: 400 },
+                  "font-style": { property: "font-style", value: "normal" },
+                  "line-height": {
+                    property: "line-height",
+                    value: 40,
+                    unit: "px",
+                  },
+                  "letter-spacing": {
+                    property: "letter-spacing",
+                    value: 1,
+                    unit: "px",
+                  },
+                  "text-align": { property: "text-align", value: "center" },
+                  "text-transform": {
+                    property: "text-transform",
+                    value: "none",
+                  },
+                  "text-decoration": {
+                    property: "text-decoration",
+                    value: "none",
+                  },
+                  "margin-top": {
+                    property: "margin-top",
+                    value: 5,
+                    unit: "px",
+                  },
+                  "margin-bottom": {
+                    property: "margin-bottom",
+                    value: 5,
+                    unit: "px",
+                  },
+                  "margin-left": {
+                    property: "margin-left",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "margin-right": {
+                    property: "margin-right",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "padding-top": {
+                    property: "padding-top",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "padding-bottom": {
+                    property: "padding-bottom",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "padding-left": {
+                    property: "padding-left",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "padding-right": {
+                    property: "padding-right",
+                    value: 0,
+                    unit: "px",
+                  },
+                  width: { property: "width", value: 100, unit: "%" },
+                  height: { property: "height", value: "auto" },
+                  "background-color": {
+                    property: "background-color",
+                    value: "#00FFFFF",
+                  },
+                },
+                htmlProperties: {},
+                inlineStyles:
+                  "font-family : Times New Roman, sans-serif; font-size : 30px; color : #222222; font-weight : 400; font-style : normal; line-height : 40px; letter-spacing : 1px; text-align : center; text-transform : none; text-decoration : none; margin-top : 5px; margin-bottom : 5px; margin-left : 0px; margin-right : 0px; padding-top : 0px; padding-bottom : 0px; padding-left : 0px; padding-right : 0px; width : 100%; height : auto; background-color : #00FFFFF; ",
+                markup:
+                  '<h1 id="a38d3c2f-09f5-400c-a5af-735409e7b3ff" data-type="item" style="font-family: &quot;Times New Roman&quot;, sans-serif; font-size: 30px; color: rgb(34, 34, 34); font-weight: 400; font-style: normal; line-height: 40px; letter-spacing: 1px; text-align: center; text-transform: none; text-decoration: none; margin: 5px 0px; padding: 0px; width: 100%; height: auto; z-index: 50;">Heading</h1>',
+              },
+            ],
+            placeholder: "No content here. Drag item from menu",
+            cssProperties: {
+              width: { property: "width", value: 600, unit: "px" },
+              height: { property: "height", value: "auto" },
+              "margin-top": { property: "margin-top", value: 0, unit: "px" },
+              "margin-bottom": {
+                property: "margin-bottom",
+                value: 0,
+                unit: "px",
+              },
+              "margin-left": { property: "margin-left", value: 0, unit: "px" },
+              "margin-right": {
+                property: "margin-right",
+                value: 0,
+                unit: "px",
+              },
+              "padding-top": { property: "padding-top", value: 0, unit: "px" },
+              "padding-bottom": {
+                property: "padding-bottom",
+                value: 0,
+                unit: "px",
+              },
+              "padding-left": {
+                property: "padding-left",
+                value: 0,
+                unit: "px",
+              },
+              "padding-right": {
+                property: "padding-right",
+                value: 0,
+                unit: "px",
+              },
+              "background-color": {
+                property: "background-color",
+                value: "#00FFFFF",
+              },
+            },
+            inlineStyles:
+              "width : 600px; height : auto; margin-top : 0px; margin-bottom : 0px; margin-left : 0px; margin-right : 0px; padding-top : 0px; padding-bottom : 0px; padding-left : 0px; padding-right : 0px; background-color : #00FFFFF; ",
+          },
+        ],
+        columns: 1,
+        "data-type": "block",
+      },
+      {
+        id: "f7cc80c6-6180-456d-87df-51f53ec4bfd8",
+        items: [
+          {
+            id: "4eed7916-a015-4696-9b97-0125500e18ba",
+            children: [
+              {
+                id: "59a3cf5a-509e-4a92-b2bb-62c376f2d522",
+                tag: "img",
+                cssOptions: [
+                  {
+                    title: "Dimensions",
+                    type: "dimension",
+                    fields: [
+                      {
+                        name: "Margin",
+                        value: "margin",
+                        type: "inputgroup",
+                        display: "col",
+                        properties: [
+                          { name: "Top", property: "margin-top", value: 0 },
+                          {
+                            name: "Bottom",
+                            property: "margin-bottom",
+                            value: 0,
+                          },
+                          { name: "Left", property: "margin-left", value: 0 },
+                          { name: "Right", property: "margin-right", value: 0 },
+                        ],
+                      },
+                      {
+                        name: "Padding",
+                        value: "padding",
+                        type: "inputgroup",
+                        display: "col",
+                        properties: [
+                          { name: "Top", property: "padding-top", value: 0 },
+                          {
+                            name: "Bottom",
+                            property: "padding-bottom",
+                            value: 0,
+                          },
+                          { name: "Left", property: "padding-left", value: 0 },
+                          {
+                            name: "Right",
+                            property: "padding-right",
+                            value: 0,
+                          },
+                        ],
+                      },
+                      {
+                        name: "Width",
+                        property: "width",
+                        type: "range",
+                        display: "col",
+                      },
+                      {
+                        name: "Height",
+                        property: "height",
+                        type: "range",
+                        display: "row",
+                      },
+                      {
+                        name: "Background",
+                        property: "background-color",
+                        type: "colorpicker",
+                        value: "#FFFFFF",
+                        display: "row",
+                      },
+                    ],
+                  },
+                ],
+                htmlOptions: [
+                  {
+                    title: "Image",
+                    type: "image",
+                    fields: [
+                      {
+                        name: "Image",
+                        property: "src",
+                        type: "text",
+                        display: "row",
+                      },
+                    ],
+                  },
+                ],
+                editable: false,
+                stylePreset: [{ property: "max-width", value: "100%" }],
+                cssProperties: {
+                  "margin-top": {
+                    property: "margin-top",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "margin-bottom": {
+                    property: "margin-bottom",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "margin-left": {
+                    property: "margin-left",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "margin-right": {
+                    property: "margin-right",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "padding-top": {
+                    property: "padding-top",
+                    value: 10,
+                    unit: "px",
+                  },
+                  "padding-bottom": {
+                    property: "padding-bottom",
+                    value: 10,
+                    unit: "px",
+                  },
+                  "padding-left": {
+                    property: "padding-left",
+                    value: 10,
+                    unit: "px",
+                  },
+                  "padding-right": {
+                    property: "padding-right",
+                    value: 10,
+                    unit: "px",
+                  },
+                  width: { property: "width", value: "auto" },
+                  height: { property: "height", value: 100, unit: "%" },
+                  "background-color": {
+                    property: "background-color",
+                    value: "#00FFFFF",
+                  },
+                },
+                htmlProperties: {
+                  src: {
+                    property: "src",
+                    value:
+                      "https://images.unsplash.com/photo-1682685797366-715d29e33f9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                  },
+                },
+                inlineStyles:
+                  "margin-top : 0px; margin-bottom : 0px; margin-left : 0px; margin-right : 0px; padding-top : 10px; padding-bottom : 10px; padding-left : 10px; padding-right : 10px; width : auto; height : 100%; background-color : #00FFFFF; ",
+                markup:
+                  '<img id="59a3cf5a-509e-4a92-b2bb-62c376f2d522" data-type="item" src="https://images.unsplash.com/photo-1682685797366-715d29e33f9d?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80" style="margin: 0px; padding: 10px; width: auto; height: 100%; max-width: 100%;">',
+              },
+            ],
+            placeholder: "No content here. Drag item from menu",
+            cssProperties: {
+              width: { property: "width", value: 600, unit: "px" },
+              height: { property: "height", value: "auto" },
+              "margin-top": { property: "margin-top", value: 0, unit: "px" },
+              "margin-bottom": {
+                property: "margin-bottom",
+                value: 0,
+                unit: "px",
+              },
+              "margin-left": { property: "margin-left", value: 0, unit: "px" },
+              "margin-right": {
+                property: "margin-right",
+                value: 0,
+                unit: "px",
+              },
+              "padding-top": { property: "padding-top", value: 0, unit: "px" },
+              "padding-bottom": {
+                property: "padding-bottom",
+                value: 0,
+                unit: "px",
+              },
+              "padding-left": {
+                property: "padding-left",
+                value: 0,
+                unit: "px",
+              },
+              "padding-right": {
+                property: "padding-right",
+                value: 0,
+                unit: "px",
+              },
+              "background-color": {
+                property: "background-color",
+                value: "#00FFFFF",
+              },
+            },
+            inlineStyles:
+              "width : 600px; height : auto; margin-top : 0px; margin-bottom : 0px; margin-left : 0px; margin-right : 0px; padding-top : 0px; padding-bottom : 0px; padding-left : 0px; padding-right : 0px; background-color : #00FFFFF; ",
+          },
+          {
+            id: "d039d193-26cf-4e99-9bac-425694734adf",
+            children: [
+              {
+                id: "ef7a8229-3c80-4538-867d-506d4c7df8be",
+                tag: "p",
+                placeholder: "This is a new text",
+                cssOptions: [
+                  {
+                    title: "Typography",
+                    type: "typography",
+                    fields: [
+                      {
+                        name: "Font family",
+                        property: "font-family",
+                        type: "dropdown",
+                        options: [
+                          { name: "Arial", value: "Arial, sans-serif" },
+                          {
+                            name: "Times New Roman",
+                            value: "Times New Roman, sans-serif",
+                          },
+                          { name: "Georgia", value: "Georgia, sans-serif" },
+                          {
+                            name: "Courier New",
+                            value: "Courier New, sans-serif",
+                          },
+                          { name: "Verdana", value: "Verdana, sans-serif" },
+                          { name: "Tahoma", value: "Tahome, sans-serif" },
+                        ],
+                        display: "row",
+                      },
+                      {
+                        name: "Font size",
+                        property: "font-size",
+                        type: "input",
+                        display: "row",
+                      },
+                      {
+                        name: "Font color",
+                        property: "color",
+                        type: "colorpicker",
+                        value: "#222222",
+                        display: "row",
+                      },
+                      {
+                        name: "Font weight",
+                        property: "font-weight",
+                        type: "selection",
+                        display: "row",
+                        options: [
+                          {
+                            name: "Light",
+                            icon: "ph:text-b-light",
+                            value: 300,
+                            default: false,
+                          },
+                          {
+                            name: "Regular",
+                            icon: "ph:text-b",
+                            value: 400,
+                            default: true,
+                          },
+                          {
+                            name: "Bold",
+                            icon: "ph:text-b-bold",
+                            value: 600,
+                            default: false,
+                          },
+                        ],
+                      },
+                      {
+                        name: "Font style",
+                        property: "font-style",
+                        type: "selection",
+                        display: "row",
+                        options: [
+                          {
+                            name: "Normal",
+                            icon: "bx:font",
+                            value: "normal",
+                            default: true,
+                          },
+                          {
+                            name: "Italic",
+                            icon: "tabler:italic",
+                            value: "italic",
+                            default: false,
+                          },
+                        ],
+                      },
+                      {
+                        name: "Line height",
+                        property: "line-height",
+                        type: "input",
+                        display: "row",
+                      },
+                      {
+                        name: "Letter spacing",
+                        property: "letter-spacing",
+                        type: "input",
+                        display: "row",
+                        max: 100,
+                        min: 0,
+                      },
+                      {
+                        name: "Text align",
+                        property: "text-align",
+                        type: "selection",
+                        display: "row",
+                        options: [
+                          {
+                            name: "Left",
+                            icon: "ph:text-align-left-light",
+                            value: "left",
+                            default: true,
+                          },
+                          {
+                            name: "Center",
+                            icon: "ph:text-align-center-light",
+                            value: "center",
+                            default: false,
+                          },
+                          {
+                            name: "Right",
+                            icon: "ph:text-align-right-light",
+                            value: "right",
+                            default: false,
+                          },
+                        ],
+                      },
+                      {
+                        name: "Text decoration",
+                        property: "text-decoration",
+                        type: "selection",
+                        display: "row",
+                        options: [
+                          {
+                            name: "None",
+                            icon: "ph:text-aa-light",
+                            value: "none",
+                            default: true,
+                          },
+                          {
+                            name: "Underline",
+                            icon: "ph:text-a-underline-light",
+                            value: "underline",
+                            default: false,
+                          },
+                        ],
+                      },
+                      {
+                        name: "Text transform",
+                        property: "text-transform",
+                        type: "selection",
+                        display: "row",
+                        options: [
+                          {
+                            name: "None",
+                            icon: "mdi:format-letter-case",
+                            value: "none",
+                            default: true,
+                          },
+                          {
+                            name: "Lowercase",
+                            icon: "mdi:format-lowercase",
+                            value: "lowercase",
+                            default: false,
+                          },
+                          {
+                            name: "Uppercase",
+                            icon: "mdi:format-uppercase",
+                            value: "uppercase",
+                            default: false,
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    title: "Dimensions",
+                    type: "dimension",
+                    fields: [
+                      {
+                        name: "Margin",
+                        value: "margin",
+                        type: "inputgroup",
+                        display: "col",
+                        properties: [
+                          { name: "Top", property: "margin-top", value: 0 },
+                          {
+                            name: "Bottom",
+                            property: "margin-bottom",
+                            value: 0,
+                          },
+                          { name: "Left", property: "margin-left", value: 0 },
+                          { name: "Right", property: "margin-right", value: 0 },
+                        ],
+                      },
+                      {
+                        name: "Padding",
+                        value: "padding",
+                        type: "inputgroup",
+                        display: "col",
+                        properties: [
+                          { name: "Top", property: "padding-top", value: 0 },
+                          {
+                            name: "Bottom",
+                            property: "padding-bottom",
+                            value: 0,
+                          },
+                          { name: "Left", property: "padding-left", value: 0 },
+                          {
+                            name: "Right",
+                            property: "padding-right",
+                            value: 0,
+                          },
+                        ],
+                      },
+                      {
+                        name: "Width",
+                        property: "width",
+                        type: "range",
+                        display: "col",
+                      },
+                      {
+                        name: "Height",
+                        property: "height",
+                        type: "range",
+                        display: "row",
+                      },
+                      {
+                        name: "Background",
+                        property: "background-color",
+                        type: "colorpicker",
+                        value: "#FFFFFF",
+                        display: "row",
+                      },
+                    ],
+                  },
+                ],
+                htmlOptions: [],
+                editable: true,
+                stylePreset: [{ property: "z-index", value: 50 }],
+                cssProperties: {
+                  "margin-top": {
+                    property: "margin-top",
+                    value: 5,
+                    unit: "px",
+                  },
+                  "margin-bottom": {
+                    property: "margin-bottom",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "margin-left": {
+                    property: "margin-left",
+                    value: 5,
+                    unit: "px",
+                  },
+                  "margin-right": {
+                    property: "margin-right",
+                    value: 5,
+                    unit: "px",
+                  },
+                  "padding-top": {
+                    property: "padding-top",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "padding-bottom": {
+                    property: "padding-bottom",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "padding-left": {
+                    property: "padding-left",
+                    value: 0,
+                    unit: "px",
+                  },
+                  "padding-right": {
+                    property: "padding-right",
+                    value: 0,
+                    unit: "px",
+                  },
+                  width: { property: "width", value: 100, unit: "%" },
+                  height: { property: "height", value: "auto" },
+                  "background-color": {
+                    property: "background-color",
+                    value: "#00FFFFF",
+                  },
+                  "font-family": {
+                    property: "font-family",
+                    value: "Times New Roman, sans-serif",
+                  },
+                  "font-size": { property: "font-size", value: 14, unit: "px" },
+                  color: { property: "color", value: "#222222" },
+                  "font-weight": { property: "font-weight", value: 400 },
+                  "font-style": { property: "font-style", value: "normal" },
+                  "line-height": {
+                    property: "line-height",
+                    value: 22,
+                    unit: "px",
+                  },
+                  "letter-spacing": {
+                    property: "letter-spacing",
+                    value: 1,
+                    unit: "px",
+                  },
+                  "text-align": { property: "text-align", value: "left" },
+                  "text-transform": {
+                    property: "text-transform",
+                    value: "none",
+                  },
+                  "text-decoration": {
+                    property: "text-decoration",
+                    value: "none",
+                  },
+                },
+                htmlProperties: {},
+                inlineStyles:
+                  "margin-top : 5px; margin-bottom : 0px; margin-left : 5px; margin-right : 5px; padding-top : 0px; padding-bottom : 0px; padding-left : 0px; padding-right : 0px; width : 100%; height : auto; background-color : #00FFFFF; font-family : Times New Roman, sans-serif; font-size : 14px; color : #222222; font-weight : 400; font-style : normal; line-height : 22px; letter-spacing : 1px; text-align : left; text-transform : none; text-decoration : none; ",
+                markup:
+                  '<p id="ef7a8229-3c80-4538-867d-506d4c7df8be" data-type="item" style="margin: 5px 5px 0px; padding: 0px; width: 100%; height: auto; font-family: &quot;Times New Roman&quot;, sans-serif; font-size: 14px; color: rgb(34, 34, 34); font-weight: 400; font-style: normal; line-height: 22px; letter-spacing: 1px; text-align: left; text-transform: none; text-decoration: none; z-index: 50;">This is a new text</p>',
+              },
+            ],
+            placeholder: "No content here. Drag item from menu",
+            cssProperties: {
+              width: { property: "width", value: 600, unit: "px" },
+              height: { property: "height", value: "auto" },
+              "margin-top": { property: "margin-top", value: 0, unit: "px" },
+              "margin-bottom": {
+                property: "margin-bottom",
+                value: 0,
+                unit: "px",
+              },
+              "margin-left": { property: "margin-left", value: 0, unit: "px" },
+              "margin-right": {
+                property: "margin-right",
+                value: 0,
+                unit: "px",
+              },
+              "padding-top": { property: "padding-top", value: 0, unit: "px" },
+              "padding-bottom": {
+                property: "padding-bottom",
+                value: 0,
+                unit: "px",
+              },
+              "padding-left": {
+                property: "padding-left",
+                value: 0,
+                unit: "px",
+              },
+              "padding-right": {
+                property: "padding-right",
+                value: 0,
+                unit: "px",
+              },
+              "background-color": {
+                property: "background-color",
+                value: "#00FFFFF",
+              },
+            },
+            inlineStyles:
+              "width : 600px; height : auto; margin-top : 0px; margin-bottom : 0px; margin-left : 0px; margin-right : 0px; padding-top : 0px; padding-bottom : 0px; padding-left : 0px; padding-right : 0px; background-color : #00FFFFF; ",
+          },
+        ],
+        columns: 2,
+        "data-type": "block",
+      },
+    ],
+  },
+  {
     name: "Infographic Promotion Email",
     id: "6b6cd153-2e16-41d8-a3b6-99f175877614",
     category: "free",

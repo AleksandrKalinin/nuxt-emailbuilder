@@ -16,6 +16,13 @@
       >
         Download
       </button>
+      <button
+        id="save"
+        class="button button_regular button_spaced"
+        @click="saveFile(editorRows)"
+      >
+        Save
+      </button>
       <button id="login" class="button button_regular button_spaced">
         Log in
       </button>
@@ -26,9 +33,12 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useEditorStore } from "@/store/editorStore";
+import { useTemplateStore } from "@/store/templateStore";
 import { createEmailTemplate } from "@/core/createEmailTemplate";
 
 const { editorRows } = storeToRefs(useEditorStore());
+
+const { saveTemplate, saveFile } = useTemplateStore();
 </script>
 
 <style scoped>
