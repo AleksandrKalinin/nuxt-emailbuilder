@@ -245,15 +245,10 @@ export const useEditorStore = defineStore("editor", () => {
     ].children.findIndex((element: EditorElement) => element.id === elementId);
     const targetElement =
       editorItems.value[editorItemIndex].children[editorElementIndex];
-    // console.log(targetElement);
-    // console.log(editorItems.value);
-    // console.log(editorItemIndex);
-    // console.log(editorElementIndex);
     targetElement.placeholder = text;
     editorItems.value[editorItemIndex].children[editorElementIndex].markup =
       createHtmlElement(targetElement);
     setEditableItem(null);
-    console.log(editorRows.value);
   };
 
   const createHtmlElement = (item: EditorElement) => {
@@ -367,8 +362,10 @@ export const useEditorStore = defineStore("editor", () => {
   };
 
   const extractFromTemplate = (rows: EditorRow[]) => {
+    editorItems.value = [];
     rows.forEach((row: EditorRow) => {
       row.items.forEach((item: EditorItem) => {
+        editorItems.value.push(item);
         item.children.forEach((element: EditorElement) => {
           editorElements.value.push(element);
         });

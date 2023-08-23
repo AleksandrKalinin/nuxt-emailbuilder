@@ -15,7 +15,6 @@ class EmailService {
   }
 
   async saveFile(template: any) {
-    console.log("template", template);
     try {
       await useFetch("http://localhost:5000/download", {
         method: "post",

@@ -21,7 +21,6 @@ class TemplatesService {
   }
 
   async uploadImage(filename: string, image: File) {
-    console.log(filename, image);
     const { data, error } = await client.storage
       .from("templates")
       .upload(`${filename}.png`, image, {

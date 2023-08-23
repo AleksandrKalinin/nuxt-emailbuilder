@@ -53,7 +53,6 @@ export const useTemplateStore = defineStore("template", () => {
           .then((blob) => {
             const filename: string = uuidv4();
             const file = new File([blob], filename, { type: blob.type });
-            console.log(file);
             return file;
           });
       })
@@ -73,7 +72,6 @@ export const useTemplateStore = defineStore("template", () => {
     await file.then((res) => {
       console.log(res);
     });
-    // console.log(file);
     const { data, error } = await templatesService.uploadImage(file.name, file);
     if (error) throw Error;
     if (data?.path) {
