@@ -1,7 +1,14 @@
 {
   // https://nuxt.com/docs/guide/concepts/typescript
   "compilerOptions": {
-    "noErrorTruncation": true
+    "noErrorTruncation": true,
+    "types": [
+      "cypress",
+      "@4tw/cypress-drag-drop",
+      "node",
+      "cypress-real-events"
+    ],
+    "baseUrl": "."
   },
   "extends": "./.nuxt/tsconfig.json"
 }

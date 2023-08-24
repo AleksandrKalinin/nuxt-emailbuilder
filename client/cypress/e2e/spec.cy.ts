@@ -1,5 +1,9 @@
 import { templatesTest } from "./templates.cy";
+import { headerTest } from "./header.cy";
+import { editorTest } from "./editor.cy";
 
-describe("testing templates", () => {
+describe("Running tests", () => {
+  headerTest();
   templatesTest();
+  editorTest();
 });

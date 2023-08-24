@@ -4,47 +4,51 @@
       <li class="filter__option filter-option">
         <input
           id="all"
-          v-model="selectedOption"
+          v-model="selectedCategory"
           type="radio"
           value="all"
           class="mr-2"
-          @change="selectCategory(selectedOption)"
+          @change="selectCategory(($event.target as HTMLInputElement).value)"
         />
         <label for="all" class="filter-option__label">All</label>
       </li>
       <li class="filter__option filter-option">
         <input
           id="free"
-          v-model="selectedOption"
+          v-model="selectedCategory"
           type="radio"
           value="free"
           class="mr-2"
-          @change="selectCategory(selectedOption)"
+          @change="selectCategory(($event.target as HTMLInputElement).value)"
         />
         <label for="free" class="filter-option__label">Free</label>
       </li>
       <li class="filter__option filter-option">
         <input
           id="premium"
-          v-model="selectedOption"
+          v-model="selectedCategory"
           type="radio"
           value="premium"
           class="mr-2"
-          @change="selectCategory(selectedOption)"
+          @change="selectCategory(($event.target as HTMLInputElement).value)"
         />
         <label for="premium" class="filter-option__label">Premium</label>
       </li>
     </ul>
-    <p class="text-md font-medium">Total: 23 templates</p>
+    <p class="text-md font-medium">
+      Total: {{ filteredEmailTemplates.length }} templates
+    </p>
   </div>
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
 import { useTemplateStore } from "@/store/templateStore";
 
+const { selectedCategory, filteredEmailTemplates } = storeToRefs(
+  useTemplateStore()
+);
 const { selectCategory } = useTemplateStore();
-
-const selectedOption = ref("all");
 </script>
 
 <style scoped>

@@ -4,6 +4,7 @@
       <div
         v-for="(item, index) in header"
         :key="index"
+        :title="item.title"
         draggable="true"
         class="editor-menu__item menu-item"
         @mousedown="selectMenuItem(item)"

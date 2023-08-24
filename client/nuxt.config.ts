@@ -32,6 +32,7 @@ export default defineNuxtConfig({
     "~/assets/style/main.scss",
   ],
   modules: [
+    "nuxt-vitest",
     "@nuxtjs/google-fonts",
     "@nuxtjs/tailwindcss",
     "@vueuse/nuxt",
@@ -45,6 +46,7 @@ export default defineNuxtConfig({
     "nuxt-icon",
   ],
   routeRules: {
+    "/**": { ssr: false },
     "/editor/**": { ssr: false },
   },
 });

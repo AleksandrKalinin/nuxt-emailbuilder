@@ -4,15 +4,16 @@
       >Premium</span
     >
     <div class="template__image template-image">
-      <img src="@/assets/images/preview.png" class="template-image__picture" />
+      <img :src="template.preview" class="template-image__picture" />
     </div>
     <div class="template__overlay template-overlay">
       <h2 class="template__title">{{ template.name }}</h2>
-      <a
+      <button
         class="button button_small cursor-pointer"
-        @click="emit('selectTemplate', template)"
-        >Open template</a
+        @click.prevent="emit('selectTemplate', template)"
       >
+        Open template
+      </button>
     </div>
   </div>
 </template>

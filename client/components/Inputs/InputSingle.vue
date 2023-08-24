@@ -1,6 +1,10 @@
 <template>
   <div class="input-single">
-    <button class="input-single__button" @click.prevent="decreaseValue()">
+    <button
+      id="btnDecrement"
+      class="input-single__button"
+      @click.prevent="decreaseValue()"
+    >
       <Icon name="radix-icons:minus" color="#475569" size="12px" />
     </button>
     <input
@@ -12,6 +16,7 @@
     />
     <span class="input-single__units ml-[-1px]">px</span>
     <button
+      id="btnIncrement"
       class="input-single__button ml-[-1px]"
       @click.prevent="increaseValue()"
     >

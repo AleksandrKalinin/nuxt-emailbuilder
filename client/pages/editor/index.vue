@@ -17,6 +17,6 @@ const settings = ref(null);
 }
 
 .editor-inner-wrap {
-  @apply w-[calc(100%-420px)] min-h-full h-auto overflow-y-auto flex py-[50px];
+  @apply w-[calc(100%-420px)] min-h-full h-auto overflow-y-auto flex pt-[50px] mb-[50px];
 }
 </style>
