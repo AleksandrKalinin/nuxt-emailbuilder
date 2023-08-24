@@ -19,7 +19,7 @@
       <button
         id="save"
         class="button button_regular button_spaced"
-        @click="saveFile(editorRows)"
+        @click="saveTemplate(editorRows)"
       >
         Save
       </button>

@@ -21,7 +21,7 @@ export const useEditorStore = defineStore("editor", () => {
     return inlineStyles;
   };
 
-  const editorItems = ref<any>([
+  const editorItems = ref<EditorItem[]>([
     {
       id: "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
       children: [],
@@ -31,7 +31,7 @@ export const useEditorStore = defineStore("editor", () => {
     },
   ]);
 
-  const editorRows = ref<any>([
+  const editorRows = ref<EditorRow[]>([
     {
       id: "c089b428-f859-465c-ae77-83a9d00a2cc3",
       items: [toRaw(editorItems.value[0])],
@@ -363,7 +363,9 @@ export const useEditorStore = defineStore("editor", () => {
 
   const extractFromTemplate = (rows: EditorRow[]) => {
     editorItems.value = [];
+    editorRows.value = [];
     rows.forEach((row: EditorRow) => {
+      editorRows.value.push(row);
       row.items.forEach((item: EditorItem) => {
         editorItems.value.push(item);
         item.children.forEach((element: EditorElement) => {

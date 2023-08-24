@@ -1,8 +1,9 @@
-// import type { PostgrestError, RealtimeChannel } from "@supabase/supabase-js";
+import type { PostgrestError, RealtimeChannel } from "@supabase/supabase-js";
+import { v4 as uuidv4 } from "uuid";
 
 const client = useSupabaseClient();
 
-// let realtimeChannel: RealtimeChannel;
+let realtimeChannel: RealtimeChannel;
 
 class TemplatesService {
   async fetchTemplates() {
@@ -20,6 +21,22 @@ class TemplatesService {
     return { data, error };
   }
 
+  async uploadTemplate(template: EditorRow[], preview: string) {
+    const initialValues = {
+      created_at: new Date().toISOString(),
+      template_id: uuidv4(),
+      name: "Generic name",
+      preview,
+      category: "free",
+      content: template,
+    };
+
+    const { error } = await client.from("templates").insert([initialValues]);
+    if (error) {
+      throw new Error(error.message);
+    }
+  }
+
   async uploadImage(filename: string, image: File) {
     const { data, error } = await client.storage
       .from("templates")
@@ -28,6 +45,9 @@ class TemplatesService {
         upsert: false,
         contentType: "image/png",
       });
+    if (error) {
+      throw new Error(error.message);
+    }
     return { data, error };
   }
 
@@ -37,20 +57,20 @@ class TemplatesService {
     return path;
   }
 
-  // subscribeToTemplatesUpdates = () => {
-  //   realtimeChannel = client
-  //     .channel("table-db-changes")
-  //     .on(
-  //       "postgres_changes",
-  //       { event: "*", schema: "public", table: "templates" },
-  //       () => this.fetchTemplates()
-  //     );
-  //   realtimeChannel.subscribe();
-  // };
+  subscribeToTemplatesUpdates = () => {
+    realtimeChannel = client
+      .channel("table-db-changes")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "templates" },
+        () => this.fetchTemplates()
+      );
+    realtimeChannel.subscribe();
+  };
 
-  // unsubscribeFromTemplatesUpdates = () => {
-  //   client.removeChannel(realtimeChannel);
-  // };
+  unsubscribeFromTemplatesUpdates = () => {
+    client.removeChannel(realtimeChannel);
+  };
 }
 
 const templatesService = new TemplatesService();

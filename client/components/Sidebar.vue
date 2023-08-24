@@ -35,7 +35,9 @@
         <label for="premium" class="filter-option__label">Premium</label>
       </li>
     </ul>
-    <p class="text-md font-medium">Total: 23 templates</p>
+    <p class="text-md font-medium">
+      Total: {{ filteredEmailTemplates.length }} templates
+    </p>
   </div>
 </template>
 
@@ -43,7 +45,9 @@
 import { storeToRefs } from "pinia";
 import { useTemplateStore } from "@/store/templateStore";
 
-const { selectedCategory } = storeToRefs(useTemplateStore());
+const { selectedCategory, filteredEmailTemplates } = storeToRefs(
+  useTemplateStore()
+);
 const { selectCategory } = useTemplateStore();
 </script>
 

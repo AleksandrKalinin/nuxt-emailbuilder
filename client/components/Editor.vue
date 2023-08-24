@@ -1,50 +1,54 @@
 <template>
   <div id="editorArea" class="editor">
-    <VueDraggableNext class="dragArea list-group w-full" :list="editorRows">
-      <div
-        v-for="row in editorRows"
-        :id="row.id"
-        :key="row.id"
-        class="editor-row"
-        :class="selectedEditorRow?.id === row.id ? 'editor-row_selected' : ''"
-        @click="selectElement($event)"
-      >
-        <EditorItem
-          v-for="element in row.items"
-          :key="element.id"
-          :item="element"
-          :style="element.inlineStyles"
-          :menu-ref="settingsMenuRef"
-          :row-id="row.id"
-        />
-        <div class="editor-row__menu editor-menu">
-          <div class="editor-menu__items">
-            <div
-              class="editor-menu__element"
-              :class="isDeleteDisabled ? 'editor-menu__element_disabled' : ''"
-              title="Delete"
-              @click="deleteEditorRow(row.id)"
-            >
-              <Icon name="radix-icons:trash" size="20px" />
-            </div>
-            <div
-              class="editor-menu__element"
-              title="Duplicate"
-              @click="copyEditorRow(row.id)"
-            >
-              <Icon name="radix-icons:copy" size="20px" />
+    <div id="editorContent" class="editor-content">
+      <VueDraggableNext class="dragArea list-group w-full" :list="editorRows">
+        <div
+          v-for="row in editorRows"
+          :id="row.id"
+          :key="row.id"
+          class="editor-row"
+          :class="selectedEditorRow?.id === row.id ? 'editor-row_selected' : ''"
+          @click="selectElement($event)"
+        >
+          <EditorItem
+            v-for="element in row.items"
+            :key="element.id"
+            :item="element"
+            :style="element.inlineStyles"
+            :menu-ref="settingsMenuRef"
+            :row-id="row.id"
+          />
+          <div class="editor-row__menu editor-menu">
+            <div class="editor-menu__items">
+              <div
+                class="editor-menu__element"
+                :class="isDeleteDisabled ? 'editor-menu__element_disabled' : ''"
+                title="Delete"
+                @click="deleteEditorRow(row.id)"
+              >
+                <Icon name="radix-icons:trash" size="20px" />
+              </div>
+              <div
+                class="editor-menu__element"
+                title="Duplicate"
+                @click="copyEditorRow(row.id)"
+              >
+                <Icon name="radix-icons:copy" size="20px" />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </VueDraggableNext>
-    <button
-      id="editorBtn"
-      class="button button_regular mx-auto mt-3"
-      @click="addEditorRow()"
-    >
-      Add
-    </button>
+      </VueDraggableNext>
+    </div>
+    <div class="editor__button">
+      <button
+        id="editorBtn"
+        class="button button_regular mx-auto mt-3"
+        @click="addEditorRow()"
+      >
+        Add
+      </button>
+    </div>
   </div>
 </template>
 
@@ -120,7 +124,11 @@ onMounted(() => {
 
 <style scoped>
 .editor {
-  @apply max-w-[600px] w-full min-h-[calc(100%-100px)] h-[1000px] border mx-auto bg-slate-100;
+  @apply max-w-[600px] w-full min-h-[calc(100%-100px)] h-full border mx-auto bg-slate-100;
+}
+
+.editor-content {
+  @apply bg-white;
 }
 
 .editor-placeholder {
@@ -152,5 +160,9 @@ onMounted(() => {
 
 .editor-menu__element_disabled {
   @apply opacity-40 pointer-events-none;
+}
+
+.editor__button {
+  @apply mb-[50px];
 }
 </style>

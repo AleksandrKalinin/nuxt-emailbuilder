@@ -33,7 +33,6 @@ describe("Testing Input component", () => {
     const input = mountComponent().find("input");
     const btnIncrement = mountComponent().find("#btnIncrement");
     const btnDecrement = mountComponent().find("#btnDecrement");
-    // console.log(input);
     expect(input.text()).toEqual("");
     await btnIncrement.trigger("click");
     await btnIncrement.trigger("click");

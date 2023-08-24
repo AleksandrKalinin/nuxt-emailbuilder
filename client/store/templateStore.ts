@@ -13,7 +13,7 @@ export const useTemplateStore = defineStore("template", () => {
 
   const emailTemplates = ref<EmailTemplate[] | []>([]);
 
-  emailTemplates.value = templates;
+  // emailTemplates.value = templates;
 
   const selectedCategory = ref<string>("all");
 
@@ -33,22 +33,17 @@ export const useTemplateStore = defineStore("template", () => {
 
   const selectTemplate = async (template: EmailTemplate) => {
     setEditorRows(template.content);
-    extractFromTemplate(template.content);
+    extractFromTemplate(JSON.parse(template.content));
     selectEditorRow(template.id);
     await navigateTo("/editor");
   };
-
-  // const createTemplatePreview = (id: string) => {
-  //   htmlToImage.toPng(document.getElementById(id)).then(function (dataUrl) {
-  //     download(dataUrl, "my-node.png");
-  //   });
-  // };
 
   const createTemplatePreview = async (targetEl: HTMLElement) => {
     const preview = await htmlToImage
       .toPng(targetEl)
       .then((dataUrl) => {
-        fetch(dataUrl)
+        emailService.saveImage(dataUrl);
+        return fetch(dataUrl)
           .then((response) => response.blob())
           .then((blob) => {
             const filename: string = uuidv4();
@@ -67,24 +62,28 @@ export const useTemplateStore = defineStore("template", () => {
   };
 
   const saveTemplate = async (template: EditorRow[]) => {
-    const targetEl = document.getElementById("editorArea") as HTMLElement;
-    const file = createTemplatePreview(targetEl);
-    await file.then((res) => {
-      console.log(res);
+    const targetEl = document.getElementById("editorContent") as HTMLElement;
+    const fileRes = createTemplatePreview(targetEl);
+
+    await fileRes.then(async (file) => {
+      const { data, error } = await templatesService.uploadImage(
+        file.name,
+        file
+      );
+      if (error) throw Error;
+      if (data?.path) {
+        const path = templatesService.getImageUrl(data?.path);
+        await templatesService.uploadTemplate(template, path);
+      }
     });
-    const { data, error } = await templatesService.uploadImage(file.name, file);
-    if (error) throw Error;
-    if (data?.path) {
-      const path = templatesService.getImageUrl(data?.path);
-    }
   };
 
   const fetchTemplates = async () => {
     const { data, error } = await templatesService.fetchTemplates();
     if (error) {
-      console.log(error);
+      throw new Error(error.message);
     } else {
-      console.log(data);
+      emailTemplates.value = data;
     }
   };
 
@@ -93,7 +92,7 @@ export const useTemplateStore = defineStore("template", () => {
       Number(id)
     );
     if (error) {
-      console.log(error);
+      throw new Error(error.message);
     } else {
       console.log(data);
     }

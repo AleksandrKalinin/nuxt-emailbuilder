@@ -27,6 +27,19 @@ class EmailService {
       throw new Error(err);
     }
   }
+
+  async saveImage(image: any) {
+    try {
+      await useFetch("http://localhost:5000/image", {
+        method: "post",
+        body: {
+          image,
+        },
+      });
+    } catch (err) {
+      throw new Error("Unable to save image");
+    }
+  }
 }
 
 const emailService = new EmailService();
