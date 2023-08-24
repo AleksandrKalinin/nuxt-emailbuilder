@@ -4,6 +4,8 @@ import { tempBlocks, tableWrapperProperties } from "@/constants/editorItems";
 import { editorItemSettings } from "@/constants/settings";
 import { useSettingsStore } from "@/store/settingsStore";
 import { convertStringToHTML } from "@/utils/convertStringtoHTML";
+import emailService from "@/services/emailService";
+import { createEmailTemplate } from "@/core/createEmailTemplate";
 
 export const useEditorStore = defineStore("editor", () => {
   const { toggleSettingsState } = useSettingsStore();
@@ -373,15 +375,6 @@ export const useEditorStore = defineStore("editor", () => {
         });
       });
     });
-    /*
-    rows.map((row: EditorRow) => {
-      row.items.map((item: EditorItem, index: number) => {
-        item.children.map((element: EditorElement) => {
-          editorElements.value.push(element);
-          editorItems.value[index].children.push(element);
-        });
-      });
-    }); */
   };
 
   const updateRawHtml = (htmlString: string) => {
@@ -406,6 +399,11 @@ export const useEditorStore = defineStore("editor", () => {
         }
       });
     });
+  };
+
+  const sendEmail = async (email: string) => {
+    const template = createEmailTemplate(editorRows.value);
+    await emailService.sendEmail(email, template);
   };
 
   return {
@@ -439,5 +437,6 @@ export const useEditorStore = defineStore("editor", () => {
     updateEditorElement,
     extractFromTemplate,
     updateRawHtml,
+    sendEmail,
   };
 });

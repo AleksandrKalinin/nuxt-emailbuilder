@@ -23,7 +23,6 @@ class EmailService {
         },
       });
     } catch (err) {
-      console.log(err);
       throw new Error(err);
     }
   }
@@ -38,6 +37,20 @@ class EmailService {
       });
     } catch (err) {
       throw new Error("Unable to save image");
+    }
+  }
+
+  async sendEmail(email: string, template: string) {
+    try {
+      await useFetch("http://localhost:5000/send", {
+        method: "post",
+        body: {
+          email,
+          template,
+        },
+      });
+    } catch (err) {
+      throw new Error(err);
     }
   }
 }

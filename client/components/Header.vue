@@ -9,13 +9,14 @@
       >
     </nav>
     <div class="header-buttons">
+      <!--
       <button
         id="download"
         class="button button_regular button_spaced"
         @click="createEmailTemplate(editorRows)"
       >
         Download
-      </button>
+      </button> -->
       <button
         id="save"
         class="button button_regular button_spaced"
@@ -25,6 +26,13 @@
       </button>
       <button id="login" class="button button_regular button_spaced">
         Log in
+      </button>
+      <button
+        id="send"
+        class="button button_regular button_spaced"
+        @click="sendEmail('aleksandr_kalinin_1995@mail.ru')"
+      >
+        Send
       </button>
     </div>
   </header>
@@ -38,6 +46,7 @@ import { createEmailTemplate } from "@/core/createEmailTemplate";
 
 const { editorRows } = storeToRefs(useEditorStore());
 
+const { sendEmail } = useEditorStore();
 const { saveTemplate, saveFile } = useTemplateStore();
 </script>
 

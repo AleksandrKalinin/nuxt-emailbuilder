@@ -3,8 +3,9 @@ const fs = require("fs");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
-const app = express();
+const nodemailer = require("nodemailer");
 const { v4: uuidv4 } = require("uuid");
+const app = express();
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
@@ -63,6 +64,30 @@ app.post("/image", (req, res) => {
     }
   });
 });
+
+app.post("/send", (req, res) => {
+  sendMail(req.body.email, req.body.template);
+});
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: "1995kalininaleksandr@gmail.com",
+    pass: "ltgreftivxgjqfqq",
+  },
+});
+
+async function sendMail(email, template) {
+  const info = await transporter.sendMail({
+    from: "aleksandr_kalinin_1995@mail.ru",
+    to: email,
+    subject: "E-mail template",
+    text: "Your template",
+    html: template,
+  });
+}
 
 app.listen(5000, () => {
   console.log("Listening on port 5000!");

@@ -1,4 +1,3 @@
-import emailService from "@/services/emailService";
 import { convertStringToHTML } from "@/utils/convertStringtoHTML";
 import {
   metaTags,
@@ -16,7 +15,7 @@ export const createEmailTemplate = (data: EditorRow[]) => {
   const doctype = document.implementation.createDocumentType(
     "html",
     "-//W3C//DTD XHTML 1.0 Transitional//EN",
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd",
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
   );
 
   newDoc.doctype?.parentNode?.replaceChild(doctype, newDoc.doctype);
@@ -44,7 +43,9 @@ export const createEmailTemplate = (data: EditorRow[]) => {
   });
 
   const serializedDocument = new XMLSerializer().serializeToString(newDoc);
-  emailService.saveEmail(serializedDocument);
+
+  return serializedDocument;
+  // emailService.saveEmail(serializedDocument);
 };
 
 export const createDocumentBody = (data: EditorRow[]) => {
