@@ -1,8 +1,6 @@
 import * as htmlToImage from "html-to-image";
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
 import { v4 as uuidv4 } from "uuid";
 import { defineStore } from "pinia";
-import { templates } from "@/constants/templates";
 import { useEditorStore } from "@/store/editorStore";
 import templatesService from "~/services/templatesService";
 import emailService from "~/services/emailService";
@@ -12,8 +10,6 @@ export const useTemplateStore = defineStore("template", () => {
     useEditorStore();
 
   const emailTemplates = ref<EmailTemplate[] | []>([]);
-
-  // emailTemplates.value = templates;
 
   const selectedCategory = ref<string>("all");
 
@@ -93,8 +89,6 @@ export const useTemplateStore = defineStore("template", () => {
     );
     if (error) {
       throw new Error(error.message);
-    } else {
-      console.log(data);
     }
   };
 
