@@ -65,7 +65,7 @@ interface EditorProps {
 
 defineProps<EditorProps>();
 
-const { createBuildingBlocks, addEditorRow } = useEditorStore();
+const { addEditorRow } = useEditorStore();
 
 const { editorElements, editorRows, selectedEditorRow, currentEditorRowId } =
   storeToRefs(useEditorStore());
@@ -116,10 +116,6 @@ const selectElement = (event: Event) => {
     setTabsState(false);
   }
 };
-
-onMounted(() => {
-  createBuildingBlocks();
-});
 </script>
 
 <style scoped>

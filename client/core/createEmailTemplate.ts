@@ -45,7 +45,7 @@ export const createEmailTemplate = (data: EditorRow[]) => {
   const serializedDocument = new XMLSerializer().serializeToString(newDoc);
 
   return serializedDocument;
-  // emailService.saveEmail(serializedDocument);
+  // emailService.saveToLocal(serializedDocument);
 };
 
 export const createDocumentBody = (data: EditorRow[]) => {

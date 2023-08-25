@@ -6,7 +6,7 @@ import templatesService from "~/services/templatesService";
 import emailService from "~/services/emailService";
 
 export const useTemplateStore = defineStore("template", () => {
-  const { setEditorRows, selectEditorRow, extractFromTemplate } =
+  const { selectEditorRow, extractFromTemplate, setEditorRows } =
     useEditorStore();
 
   const emailTemplates = ref<EmailTemplate[] | []>([]);
@@ -28,9 +28,12 @@ export const useTemplateStore = defineStore("template", () => {
   });
 
   const selectTemplate = async (template: EmailTemplate) => {
-    setEditorRows(template.content);
-    extractFromTemplate(JSON.parse(template.content));
-    selectEditorRow(template.id);
+    const store = useEditorStore();
+    const content = template.content as string;
+
+    store.setEditorRows(template.content);
+    store.extractFromTemplate(JSON.parse(content));
+    store.selectEditorRow(template.id);
     await navigateTo("/editor");
   };
 
@@ -84,11 +87,21 @@ export const useTemplateStore = defineStore("template", () => {
   };
 
   const fetchSelectedTemplate = async (id: string | string[]) => {
-    const { data, error } = await templatesService.fetchSelectedTemplate(
-      Number(id)
-    );
+    const { error } = await templatesService.fetchSelectedTemplate(Number(id));
     if (error) {
       throw new Error(error.message);
+    }
+  };
+
+  const uploadTemplateToStorage = async (template: string) => {
+    const id = uuidv4();
+    const { data, error } = await emailService.uploadToStorage(id, template);
+    if (error) {
+      throw new Error(error.message);
+    }
+    if (data?.path) {
+      const path = emailService.getTemplateUrl(data?.path);
+      return path;
     }
   };
 
@@ -102,5 +115,6 @@ export const useTemplateStore = defineStore("template", () => {
     fetchSelectedTemplate,
     saveTemplate,
     saveFile,
+    uploadTemplateToStorage,
   };
 });

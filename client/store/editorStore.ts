@@ -1,14 +1,15 @@
 import { v4 as uuidv4 } from "uuid";
 import { defineStore } from "pinia";
-import { tempBlocks, tableWrapperProperties } from "@/constants/editorItems";
 import { editorItemSettings } from "@/constants/settings";
 import { useSettingsStore } from "@/store/settingsStore";
+import { useTemplateStore } from "@/store/templateStore";
 import { convertStringToHTML } from "@/utils/convertStringtoHTML";
-import emailService from "@/services/emailService";
 import { createEmailTemplate } from "@/core/createEmailTemplate";
+import emailService from "@/services/emailService";
 
 export const useEditorStore = defineStore("editor", () => {
   const { toggleSettingsState } = useSettingsStore();
+  const { uploadTemplateToStorage } = useTemplateStore();
 
   const createInlineStyles = (params: SingleProperty) => {
     let inlineStyles = "";
@@ -47,67 +48,6 @@ export const useEditorStore = defineStore("editor", () => {
   };
 
   const currentEditorRowId = ref<string | null>(null);
-  const editorBlocks = ref<any>(tempBlocks);
-  const editorTemplate = ref<string | null>(null);
-
-  const createOuterTable = (blocks: string[]) => {
-    const table = document.createElement("table");
-    const attrs: OuterTableAttributes = tableWrapperProperties.attributes;
-    const styles: OuterTableStyles = tableWrapperProperties.styles;
-
-    for (const key in attrs) {
-      table.setAttribute(key, attrs[key]);
-    }
-
-    for (const key in styles) {
-      (table.style as any)[key] = styles[key];
-    }
-
-    const tbody = document.createElement("tbody");
-    const tr = document.createElement("tr");
-    const td = document.createElement("td");
-
-    blocks.forEach((block) => {
-      td.insertAdjacentHTML("beforeend", block);
-    });
-
-    tr.innerHTML = td.outerHTML;
-    tbody.innerHTML = tr.outerHTML;
-    table.innerHTML = tbody.innerHTML;
-    editorTemplate.value = table.outerHTML;
-  };
-
-  const createBuildingBlocks = () => {
-    const blocks = [] as string[];
-    editorBlocks.value.forEach((block: BlockItem) => {
-      const table = document.createElement("table");
-      const tbody = document.createElement("tbody");
-      const tr = document.createElement("tr");
-      const td = document.createElement("td");
-
-      block.content.forEach((item) => {
-        const htmlItem = document.createElement(item.type);
-        htmlItem.innerText = item.value;
-
-        for (const key in item.attributes) {
-          htmlItem.setAttribute(key, item.attributes[key]);
-        }
-
-        for (const key in item.styling) {
-          (htmlItem.style as any)[key] = item.styling[key];
-        }
-
-        td.innerHTML = htmlItem.outerHTML;
-        tr.innerHTML = td.outerHTML;
-        tbody.insertAdjacentHTML("beforeend", tr.outerHTML);
-        table.innerHTML = tbody.outerHTML;
-      });
-
-      blocks.push(table.outerHTML);
-    });
-    createOuterTable(blocks);
-    return blocks;
-  };
 
   const selectedMenuItem = ref<MenuItem | null>(null);
 
@@ -403,15 +343,14 @@ export const useEditorStore = defineStore("editor", () => {
 
   const sendEmail = async (email: string) => {
     const template = createEmailTemplate(editorRows.value);
+    await uploadTemplateToStorage(template);
     await emailService.sendEmail(email, template);
   };
 
   return {
-    editorTemplate,
     editorElements,
     editorItems,
     editorRows,
-    createBuildingBlocks,
     selectedMenuItem,
     selectMenuItem,
     addEditorRow,
