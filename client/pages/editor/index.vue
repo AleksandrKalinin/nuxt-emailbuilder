@@ -1,4 +1,5 @@
 <template>
+  <Modal />
   <Header />
   <div class="editor-outer-wrap">
     <div class="editor-inner-wrap">

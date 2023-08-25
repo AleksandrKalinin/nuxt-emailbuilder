@@ -12,27 +12,29 @@
       <!--
       <button
         id="download"
-        class="button button_regular button_spaced"
+        class="button button_regular button_spaced button_normal"
         @click="createEmailTemplate(editorRows)"
       >
         Download
       </button> -->
       <button
         id="save"
-        class="button button_regular button_spaced"
+        class="button button_regular button_spaced button_normal"
         @click="saveTemplate(editorRows)"
       >
         Save
       </button>
-
-      <button
-        v-if="onEditor"
-        id="send"
-        class="button button_regular button_spaced"
-        @click="sendEmail('aleksandr_kalinin_1995@mail.ru')"
-      >
-        Export
-      </button>
+      <Modal>
+        <template #trigger>
+          <button
+            v-if="onEditor"
+            id="send"
+            class="button button_regular button_spaced button_normal"
+          >
+            Export
+          </button>
+        </template>
+      </Modal>
     </div>
   </header>
 </template>
@@ -44,8 +46,7 @@ import { useTemplateStore } from "@/store/templateStore";
 
 const { editorRows } = storeToRefs(useEditorStore());
 
-const { sendEmail } = useEditorStore();
-const { saveTemplate, saveFile } = useTemplateStore();
+const { saveTemplate } = useTemplateStore();
 const route = useRoute();
 
 const onEditor = computed(() => {
