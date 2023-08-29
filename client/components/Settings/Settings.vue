@@ -2,98 +2,6 @@
   <Transition>
     <div v-if="settingsOpen" ref="settingsMenu" class="settings-wrap">
       <div class="settings">
-        <div v-if="!tabsState" class="tabs">
-          <span
-            v-for="(item, index) in editorTabs"
-            :key="index"
-            class="tabs-item"
-            :class="currentTab === index ? 'tabs-item_active' : ''"
-            @click="setTab(index)"
-          >
-            {{ item.name }}
-          </span>
-        </div>
-        <!--
-        <SettingsBlock
-          v-if="tabsState"
-          :settingsActive="[dimensionsSettings]"
-          :selectedEditorRow="editorTabs[currentTab]"
-          :selectedItemProperties="
-            editorTabs[currentTab].selectedItemProperties
-          "
-          @updateProperties="updateItemCssProperties"
-          @updateEditorRowLayout="updateEditorRowLayout"
-          @updateRawHtml="updateRawHtml"
-        /> -->
-        <!--
-        <div
-          class="settings-block settings__block"
-          v-for="settingBlock in cssSettingsActive"
-        >
-          <h4 class="settings-block__header">{{ settingBlock.title }}</h4>
-          <div
-            class="settings-options__item settings-item"
-            v-if="settingBlock.type === 'html'"
-          >
-            <RawHtml
-              :markup="selectedEditorRow?.markup"
-              @updateHtml="updateRawHtml"
-            />
-          </div>
-          <div class="settings-block__options settings-options">
-            <div
-              class="settings-options__item settings-item"
-              v-for="option in settingBlock.fields"
-              :class="
-                option.display === 'row'
-                  ? 'settings-item_row'
-                  : 'settings-item_col'
-              "
-            >
-              <h5 class="settings-item__header">{{ option.name }}</h5>
-              <InputSingle
-                v-if="option.type === 'input'"
-                :property="selectedItemProperties[option.property]"
-                :itemKey="option.property"
-                @updateEditorItem="updateItemCssProperties"
-              />
-              <InputGroup
-                v-if="option.type === 'inputgroup'"
-                :items="option.properties"
-                :selectedProperties="selectedItemProperties"
-                @inputGroupEmit="updateItemCssProperties"
-              />
-              <Colorpicker
-                :property="selectedItemProperties[option.property]"
-                :itemKey="option.property"
-                @updateEditorItem="updateItemCssProperties"
-                v-else-if="option.type === 'colorpicker'"
-              />
-              <Dropdown
-                v-if="option.type === 'dropdown'"
-                :options="option.options"
-                :property="selectedItemProperties[option.property]"
-                :itemKey="option.property"
-              />
-              <TextField v-if="option.type === 'text'" />
-              <SelectionGroup
-                v-else-if="option.type === 'selection'"
-                :options="option.options"
-                :property="selectedItemProperties[option.property]"
-                :itemKey="option.property"
-                @updateEditorItem="updateItemCssProperties"
-              />
-              <LayoutGroup
-                v-else-if="option.type === 'layout'"
-                :items="option.options"
-                :activeRow="selectedEditorRow"
-                @updateEditorRow="updateEditorRowLayout"
-              />
-              <FileUpload v-else-if="option.type === 'fileupload'" />
-              <ToggleInput v-else-if="option.type === 'toggle'" />
-            </div>
-          </div>
-        </div> -->
         <SettingsBlock
           v-if="hasCssPropetties"
           :settings-active="cssSettingsActive"
@@ -102,6 +10,7 @@
           @update-properties="updateItemCssProperties"
           @update-editor-row-layout="updateEditorRowLayout"
           @update-raw-html="updateRawHtml"
+          @update-nested-icons="updateItemNestedIcons"
         />
         <SettingsBlock
           v-if="hasHtmlAttributes"
@@ -111,6 +20,7 @@
           @update-properties="updateItemHtmlProperties"
           @update-editor-row-layout="updateEditorRowLayout"
           @update-raw-html="updateRawHtml"
+          @update-nested-icons="updateItemNestedIcons"
         />
       </div>
       <KeepAlive>
@@ -126,7 +36,7 @@ import { useSettingsStore } from "@/store/settingsStore";
 import { useEditorStore } from "@/store/editorStore";
 
 const { settingsOpen, cssSettingsActive, htmlSettingsActive } = storeToRefs(
-  useSettingsStore(),
+  useSettingsStore()
 );
 
 const { selectedEditorRow } = storeToRefs(useEditorStore());
@@ -136,6 +46,7 @@ const {
   updateItemHtmlProperties,
   updateEditorRowLayout,
   updateRawHtml,
+  updateItemNestedIcons,
 } = useEditorStore();
 
 const { tabsState } = useTabs();
@@ -179,7 +90,7 @@ const editorTabs = computed(() => {
           selectedItemProperties: editorItem.cssProperties,
         };
         return item;
-      },
+      }
     );
   } else {
     return [];

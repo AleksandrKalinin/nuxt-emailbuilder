@@ -9,14 +9,18 @@ class TemplatesService {
   async fetchTemplates() {
     const { data, error } = await client
       .from("templates")
-      .select("id, created_at, template_id, name, preview, category, content");
+      .select(
+        "id, created_at, template_id, name, preview, type, content, category"
+      );
     return { data, error };
   }
 
   async fetchSelectedTemplate(id: number) {
     const { data, error } = await client
       .from("templates")
-      .select("id, created_at, template_id, name, preview, category, content")
+      .select(
+        "id, created_at, template_id, name, preview, type, content, category"
+      )
       .eq("id", id);
     return { data, error };
   }
@@ -27,8 +31,9 @@ class TemplatesService {
       template_id: uuidv4(),
       name: "Generic name",
       preview,
-      category: "free",
+      type: "free",
       content: template,
+      category: "General",
     };
 
     const { error } = await client.from("templates").insert([initialValues]);

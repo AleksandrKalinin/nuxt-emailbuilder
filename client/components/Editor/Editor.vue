@@ -1,5 +1,5 @@
 <template>
-  <div id="editorArea" class="editor">
+  <div id="editorArea" ref="editor" class="editor">
     <div id="editorContent" class="editor-content">
       <VueDraggableNext class="dragArea list-group w-full" :list="editorRows">
         <div
@@ -43,7 +43,7 @@
     <div class="editor__button">
       <button
         id="editorBtn"
-        class="button button_regular mx-auto mt-3"
+        class="button button_regular button_normal mx-auto"
         @click="addEditorRow()"
       >
         Add
@@ -65,7 +65,7 @@ interface EditorProps {
 
 defineProps<EditorProps>();
 
-const { createBuildingBlocks, addEditorRow } = useEditorStore();
+const { addEditorRow } = useEditorStore();
 
 const { editorElements, editorRows, selectedEditorRow, currentEditorRowId } =
   storeToRefs(useEditorStore());
@@ -117,9 +117,7 @@ const selectElement = (event: Event) => {
   }
 };
 
-onMounted(() => {
-  createBuildingBlocks();
-});
+const editor = ref(null);
 </script>
 
 <style scoped>
@@ -163,6 +161,6 @@ onMounted(() => {
 }
 
 .editor__button {
-  @apply mb-[50px];
+  @apply mb-[50px] pt-[12px];
 }
 </style>

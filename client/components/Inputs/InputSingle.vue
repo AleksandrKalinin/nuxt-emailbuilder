@@ -72,8 +72,7 @@ const updateValue = (event: Event) => {
 }
 
 .input-single__input::placeholder {
-  line-height: 22px;
-  font-weight: 300;
+  @apply font-light leading-[22px];
 }
 
 .input-single__units {

@@ -1,6 +1,14 @@
 export {};
 
 declare global {
+  interface SocialIcon {
+    name: string;
+    property: string;
+    src: string;
+    title: string;
+    link: string;
+  }
+
   interface SingleProperty {
     [index: string]: {
       property: string;
@@ -61,7 +69,7 @@ declare global {
     tag: string;
     cssOptions: SettingsBlock[];
     htmlOptions: SettingsBlock[];
-    placeholder?: string;
+    placeholder?: string | undefined;
     markup: string;
     inlineStyles: string;
     stylePreset?: {
@@ -69,8 +77,11 @@ declare global {
       value: string | number;
     }[];
     presetClasses?: string[];
+    nestedIcons: SocialIcon[];
     cssProperties: SingleProperty;
     htmlProperties: HtmlProperty;
+    initialCssValues?: SingleProperty | undefined;
+    initialHtmlValues?: HtmlProperty | undefined;
     editable: boolean;
     type: string;
   }
@@ -94,6 +105,7 @@ declare global {
   interface EmailTemplate {
     id: string;
     name: string;
+    type: string;
     category: string;
     preview: string;
     content: EditorRow[];
@@ -208,5 +220,11 @@ declare global {
   interface CypressENV {
     HOME: string;
     USERPROFILE: string;
+  }
+
+  interface SelectOption {
+    label: string | number;
+    selected: boolean;
+    number: number;
   }
 }

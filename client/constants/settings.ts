@@ -738,3 +738,136 @@ export const borderSettings = {
     },
   ],
 };
+
+export const iconSettings = {
+  title: "Position",
+  type: "selection",
+  fields: [
+    {
+      name: "Align",
+      property: "align",
+      type: "selection",
+      display: "row",
+      options: [
+        {
+          name: "Left",
+          icon: "ph:text-align-left-light",
+          value: "left",
+          default: true,
+        },
+        {
+          name: "Center",
+          icon: "ph:text-align-center-light",
+          value: "center",
+          default: false,
+        },
+        {
+          name: "Right",
+          icon: "ph:text-align-right-light",
+          value: "right",
+          default: false,
+        },
+      ],
+    },
+  ],
+};
+
+export const hoverSettings = {
+  title: "Hover",
+  type: "hover",
+  fields: [
+    {
+      name: "Color on hover",
+      property: "color",
+      type: "colorpicker",
+      value: "#222222",
+      display: "row",
+    },
+    {
+      name: "Background on hover",
+      property: "border-radius",
+      type: "colorpicker",
+      value: "#222222",
+      display: "row",
+    },
+    {
+      name: "Border color on hover",
+      property: "border-color",
+      type: "colorpicker",
+      value: "#222222",
+      display: "row",
+    },
+  ],
+};
+
+export const socialSettings = {
+  name: "Social icons",
+  title: "Social",
+  type: "social",
+  fields: [
+    {
+      name: "Available icons",
+      property: "icons",
+      type: "social",
+      display: "col",
+      options: [
+        {
+          name: "Email",
+          property: "Email",
+          src: "https://i.imgur.com/2DW8kFe.png",
+          title: "email",
+          link: "https://gmail.com",
+        },
+        {
+          name: "Linkedin",
+          property: "Linkedin",
+          src: "https://i.imgur.com/dnIhxsE.png",
+          title: "Linkedin",
+          link: "https://linkedin.com",
+        },
+        {
+          name: "Twitter",
+          property: "Twitter",
+          src: "https://i.imgur.com/3nq2NlP.png",
+          title: "Twitter",
+          link: "https://twitter.com",
+        },
+        {
+          name: "Whatsapp",
+          property: "Whatsapp",
+          src: "https://i.imgur.com/zP2oyJj.png",
+          title: "Whatsapp",
+          link: "https://whatsapp.com",
+        },
+        {
+          name: "Telegram",
+          property: "Telegram",
+          src: "https://i.imgur.com/RpfXb5a.png",
+          title: "Telegram",
+          link: "https://telegram.com",
+        },
+        {
+          name: "Skype",
+          property: "Skype",
+          src: "https://i.imgur.com/jNwm3NJ.png",
+          title: "Skype",
+          link: "https://skype.com",
+        },
+        {
+          name: "Youtube",
+          property: "Youtube",
+          src: "https://i.imgur.com/du4B57t.png",
+          title: "Youtube",
+          link: "https://youtube.com",
+        },
+        {
+          name: "Tiktok",
+          property: "Tiktok",
+          src: "https://i.imgur.com/2qxw50T.png",
+          title: "Tiktok",
+          link: "https://tiktok.com",
+        },
+      ],
+    },
+  ],
+};

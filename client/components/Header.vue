@@ -9,23 +9,24 @@
       >
     </nav>
     <div class="header-buttons">
-      <button
-        id="download"
-        class="button button_regular button_spaced"
-        @click="createEmailTemplate(editorRows)"
-      >
-        Download
-      </button>
-      <button
+      <!-- <button
         id="save"
-        class="button button_regular button_spaced"
+        class="button button_regular button_spaced button_normal"
         @click="saveTemplate(editorRows)"
       >
         Save
-      </button>
-      <button id="login" class="button button_regular button_spaced">
-        Log in
-      </button>
+      </button> -->
+      <Modal>
+        <template #trigger>
+          <button
+            v-if="onEditor"
+            id="send"
+            class="button button_regular button_spaced button_normal"
+          >
+            Export
+          </button>
+        </template>
+      </Modal>
     </div>
   </header>
 </template>
@@ -34,11 +35,15 @@
 import { storeToRefs } from "pinia";
 import { useEditorStore } from "@/store/editorStore";
 import { useTemplateStore } from "@/store/templateStore";
-import { createEmailTemplate } from "@/core/createEmailTemplate";
 
 const { editorRows } = storeToRefs(useEditorStore());
 
-const { saveTemplate, saveFile } = useTemplateStore();
+const { saveTemplate } = useTemplateStore();
+const route = useRoute();
+
+const onEditor = computed(() => {
+  return route.name === "editor";
+});
 </script>
 
 <style scoped>
@@ -51,10 +56,6 @@ const { saveTemplate, saveFile } = useTemplateStore();
 }
 
 .header-menu {
-  color: #ffffff;
-}
-
-.header-menu__link {
-  margin: 0 5px;
+  @apply flex text-white gap-5;
 }
 </style>

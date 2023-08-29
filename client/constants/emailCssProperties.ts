@@ -10,6 +10,7 @@ export const tableProperties = {
     "margin-top": 0,
     "margin-bottom": 0,
     "max-width": "600px",
+    width: "100%",
     "border-spacing": 0,
     "mso-cellspacing": 0,
     "mso-padding-alt": 0,

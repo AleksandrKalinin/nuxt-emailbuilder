@@ -1,12 +1,16 @@
 import { v4 as uuidv4 } from "uuid";
 import { defineStore } from "pinia";
-import { tempBlocks, tableWrapperProperties } from "@/constants/editorItems";
 import { editorItemSettings } from "@/constants/settings";
 import { useSettingsStore } from "@/store/settingsStore";
+import { useTemplateStore } from "@/store/templateStore";
 import { convertStringToHTML } from "@/utils/convertStringtoHTML";
+import { createEmailTemplate } from "@/core/createEmailTemplate";
+import emailService from "@/services/emailService";
+import { appendNestedIcons } from "@/core/appendNestedIcons";
 
 export const useEditorStore = defineStore("editor", () => {
   const { toggleSettingsState } = useSettingsStore();
+  const { uploadTemplateToStorage } = useTemplateStore();
 
   const createInlineStyles = (params: SingleProperty) => {
     let inlineStyles = "";
@@ -45,67 +49,6 @@ export const useEditorStore = defineStore("editor", () => {
   };
 
   const currentEditorRowId = ref<string | null>(null);
-  const editorBlocks = ref<any>(tempBlocks);
-  const editorTemplate = ref<string | null>(null);
-
-  const createOuterTable = (blocks: string[]) => {
-    const table = document.createElement("table");
-    const attrs: OuterTableAttributes = tableWrapperProperties.attributes;
-    const styles: OuterTableStyles = tableWrapperProperties.styles;
-
-    for (const key in attrs) {
-      table.setAttribute(key, attrs[key]);
-    }
-
-    for (const key in styles) {
-      (table.style as any)[key] = styles[key];
-    }
-
-    const tbody = document.createElement("tbody");
-    const tr = document.createElement("tr");
-    const td = document.createElement("td");
-
-    blocks.forEach((block) => {
-      td.insertAdjacentHTML("beforeend", block);
-    });
-
-    tr.innerHTML = td.outerHTML;
-    tbody.innerHTML = tr.outerHTML;
-    table.innerHTML = tbody.innerHTML;
-    editorTemplate.value = table.outerHTML;
-  };
-
-  const createBuildingBlocks = () => {
-    const blocks = [] as string[];
-    editorBlocks.value.forEach((block: BlockItem) => {
-      const table = document.createElement("table");
-      const tbody = document.createElement("tbody");
-      const tr = document.createElement("tr");
-      const td = document.createElement("td");
-
-      block.content.forEach((item) => {
-        const htmlItem = document.createElement(item.type);
-        htmlItem.innerText = item.value;
-
-        for (const key in item.attributes) {
-          htmlItem.setAttribute(key, item.attributes[key]);
-        }
-
-        for (const key in item.styling) {
-          (htmlItem.style as any)[key] = item.styling[key];
-        }
-
-        td.innerHTML = htmlItem.outerHTML;
-        tr.innerHTML = td.outerHTML;
-        tbody.insertAdjacentHTML("beforeend", tr.outerHTML);
-        table.innerHTML = tbody.outerHTML;
-      });
-
-      blocks.push(table.outerHTML);
-    });
-    createOuterTable(blocks);
-    return blocks;
-  };
 
   const selectedMenuItem = ref<MenuItem | null>(null);
 
@@ -169,13 +112,14 @@ export const useEditorStore = defineStore("editor", () => {
   };
 
   const copyEditorRow = (id: string) => {
-    const index = editorRows.value.findIndex((row: any) => row.id === id);
+    const index = editorRows.value.findIndex((row: EditorRow) => row.id === id);
+
     const copiedRow = structuredClone(toRaw(editorRows.value[index]));
 
     const newEditorItems = copiedRow.items.map((item: EditorItem) => {
       const newElements = item.children.map((el: EditorElement) => {
         el.id = uuidv4();
-        el.markup = createHtmlElement(el);
+        el.markup = createHtmlElement(el, true);
         editorElements.value.push(el);
         return el;
       });
@@ -209,24 +153,44 @@ export const useEditorStore = defineStore("editor", () => {
 
   const editorElements = ref<EditorElement[]>([]);
 
-  const addEditorElement = (id: string, item: any) => {
-    const index = editorItems.value.findIndex((item: any) => item.id === id);
+  const addEditorElement = (id: string, item: EditorElement) => {
+    const index = editorItems.value.findIndex(
+      (item: EditorElement) => item.id === id
+    );
     const tagName: string = item.tag;
-    const placeholder: string = item.placeholder;
-    const newItem = {} as EditorElement;
+    const placeholder: string | undefined = item.placeholder;
+    const newItem = (({
+      tag,
+      placeholder,
+      cssOptions,
+      htmlOptions,
+      type,
+      editable,
+      presetClasses,
+      stylePreset,
+    }) => ({
+      tag,
+      placeholder,
+      cssOptions,
+      htmlOptions,
+      type,
+      editable,
+      presetClasses,
+      stylePreset,
+    }))(item) as EditorElement;
+
     newItem.id = uuidv4();
-    newItem.tag = tagName;
-    newItem.placeholder = placeholder;
-    newItem.cssOptions = item.cssOptions;
-    newItem.htmlOptions = item.htmlOptions;
-    newItem.type = item.type;
-    newItem.editable = item.editable;
-    newItem.presetClasses = item.presetClasses;
-    newItem.stylePreset = item.stylePreset;
-    newItem.cssProperties = structuredClone(item.initialCssValues);
-    newItem.htmlProperties = structuredClone(item.initialHtmlValues);
-    newItem.inlineStyles = createInlineStyles(item.initialCssValues);
-    newItem.markup = createHtmlElement(newItem);
+
+    if (item.initialCssValues) {
+      newItem.cssProperties = structuredClone(item.initialCssValues);
+      newItem.inlineStyles = createInlineStyles(item.initialCssValues);
+    }
+    if (item.initialHtmlValues) {
+      newItem.htmlProperties = structuredClone(item.initialHtmlValues);
+    }
+
+    newItem.nestedIcons = item.nestedIcons;
+    newItem.markup = createHtmlElement(newItem, true);
 
     editorElements.value.push(newItem);
     editorItems.value[index].children.push(newItem);
@@ -247,17 +211,40 @@ export const useEditorStore = defineStore("editor", () => {
       editorItems.value[editorItemIndex].children[editorElementIndex];
     targetElement.placeholder = text;
     editorItems.value[editorItemIndex].children[editorElementIndex].markup =
-      createHtmlElement(targetElement);
+      createHtmlElement(targetElement, true);
     setEditableItem(null);
   };
 
-  const createHtmlElement = (item: EditorElement) => {
+  const replaceTag = (tag: string) => {
     let element: HTMLElement;
-    if (item.tag !== "a") {
-      element = document.createElement(item.tag);
-    } else {
-      element = document.createElement("span");
+    switch (tag) {
+      case "a":
+        element = document.createElement("span");
+        break;
+      case "iframe":
+        element = document.createElement("div");
+        break;
+      default:
+        element = document.createElement(tag);
+        break;
     }
+
+    return element;
+  };
+
+  const createHtmlElement = (
+    item: EditorElement,
+    replacementRequired: boolean
+  ) => {
+    let element: HTMLElement;
+    switch (replacementRequired) {
+      case true:
+        element = replaceTag(item.tag);
+        break;
+      case false:
+        element = document.createElement(item.tag);
+    }
+
     element.setAttribute("id", item.id);
     element.setAttribute("data-type", "item");
     element.addEventListener("click", (e: Event) => {
@@ -300,12 +287,16 @@ export const useEditorStore = defineStore("editor", () => {
       });
     }
 
+    if (item.nestedIcons) {
+      element = appendNestedIcons(element, item.nestedIcons, false);
+    }
+
     return element.outerHTML;
   };
 
   const selectEditorRow = (value: string | null) => {
     if (value) {
-      const el = editorRows.value.find((item: any) => item.id === value);
+      const el = editorRows.value.find((item: EditorRow) => item.id === value);
       selectedEditorRow.value = el;
     } else {
       selectedEditorRow.value = null;
@@ -319,6 +310,19 @@ export const useEditorStore = defineStore("editor", () => {
     }
   };
 
+  const updateItemNestedIcons = (icons: SocialIcon[]) => {
+    editorRows.value.forEach((row: EditorRow) => {
+      row.items.forEach((item: EditorItem) => {
+        item.children.forEach((element: EditorElement) => {
+          if (element.id === selectedEditorRow.value?.id) {
+            element.nestedIcons = icons;
+            element.markup = createHtmlElement(element, true);
+          }
+        });
+      });
+    });
+  };
+
   const updateItemCssProperties = (
     key: string,
     value: string | number | boolean
@@ -329,7 +333,7 @@ export const useEditorStore = defineStore("editor", () => {
           if (element.id === selectedEditorRow.value?.id) {
             element.cssProperties[key].value = value;
             element.inlineStyles = createInlineStyles(element.cssProperties);
-            element.markup = createHtmlElement(element);
+            element.markup = createHtmlElement(element, true);
           }
         });
       });
@@ -342,7 +346,7 @@ export const useEditorStore = defineStore("editor", () => {
         item.children.forEach((element: EditorElement) => {
           if (element.id === selectedEditorRow.value?.id) {
             element.htmlProperties[key].value = value;
-            element.markup = createHtmlElement(element);
+            element.markup = createHtmlElement(element, true);
           }
         });
       });
@@ -373,15 +377,6 @@ export const useEditorStore = defineStore("editor", () => {
         });
       });
     });
-    /*
-    rows.map((row: EditorRow) => {
-      row.items.map((item: EditorItem, index: number) => {
-        item.children.map((element: EditorElement) => {
-          editorElements.value.push(element);
-          editorItems.value[index].children.push(element);
-        });
-      });
-    }); */
   };
 
   const updateRawHtml = (htmlString: string) => {
@@ -408,12 +403,18 @@ export const useEditorStore = defineStore("editor", () => {
     });
   };
 
+  const sendEmail = async (email: string) => {
+    const template = createEmailTemplate(editorRows.value);
+    const filepath = await uploadTemplateToStorage(template);
+    if (filepath) {
+      await emailService.sendEmail(email, template, filepath);
+    }
+  };
+
   return {
-    editorTemplate,
     editorElements,
     editorItems,
     editorRows,
-    createBuildingBlocks,
     selectedMenuItem,
     selectMenuItem,
     addEditorRow,
@@ -439,5 +440,7 @@ export const useEditorStore = defineStore("editor", () => {
     updateEditorElement,
     extractFromTemplate,
     updateRawHtml,
+    sendEmail,
+    updateItemNestedIcons,
   };
 });

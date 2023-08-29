@@ -1,6 +1,6 @@
 <template>
   <div class="template group">
-    <span v-if="template.category === 'premium'" class="template__ribbon"
+    <span v-if="template.type === 'premium'" class="template__ribbon"
       >Premium</span
     >
     <div class="template__image template-image">
@@ -9,7 +9,7 @@
     <div class="template__overlay template-overlay">
       <h2 class="template__title">{{ template.name }}</h2>
       <button
-        class="button button_small cursor-pointer"
+        class="button button_small button_normal cursor-pointer"
         @click.prevent="emit('selectTemplate', template)"
       >
         Open template
@@ -51,5 +51,9 @@ const emit = defineEmits(["selectTemplate"]);
 
 .template__title {
   @apply text-2xl text-center mb-5 font-semibold;
+}
+
+.template__category {
+  @apply absolute top-[10px] right-[10px] border border-blue-400 text-blue-400 text-sm rounded-sm px-2 py-1;
 }
 </style>

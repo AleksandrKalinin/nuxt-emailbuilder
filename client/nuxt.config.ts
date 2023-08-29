@@ -28,6 +28,7 @@ export default defineNuxtConfig({
   ],
   css: [
     "~/assets/style/radio.scss",
+    "~/assets/style/checkbox.scss",
     "~/assets/style/variables.scss",
     "~/assets/style/main.scss",
   ],
@@ -45,6 +46,11 @@ export default defineNuxtConfig({
     ],
     "nuxt-icon",
   ],
+  googleFonts: {
+    families: {
+      Raleway: [400, 500, 600, 700],
+    },
+  },
   routeRules: {
     "/**": { ssr: false },
     "/editor/**": { ssr: false },

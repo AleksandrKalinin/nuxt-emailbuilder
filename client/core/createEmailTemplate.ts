@@ -1,8 +1,7 @@
-import emailService from "@/services/emailService";
+import { createHtmlElement } from "./createHtmlElement";
 import { convertStringToHTML } from "@/utils/convertStringtoHTML";
 import {
   metaTags,
-  ifMso9,
   tableProperties,
   bodyProperties,
   bodyMso,
@@ -16,7 +15,7 @@ export const createEmailTemplate = (data: EditorRow[]) => {
   const doctype = document.implementation.createDocumentType(
     "html",
     "-//W3C//DTD XHTML 1.0 Transitional//EN",
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd",
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
   );
 
   newDoc.doctype?.parentNode?.replaceChild(doctype, newDoc.doctype);
@@ -44,7 +43,9 @@ export const createEmailTemplate = (data: EditorRow[]) => {
   });
 
   const serializedDocument = new XMLSerializer().serializeToString(newDoc);
-  emailService.saveEmail(serializedDocument);
+
+  return serializedDocument;
+  // emailService.saveToLocal(serializedDocument);
 };
 
 export const createDocumentBody = (data: EditorRow[]) => {
@@ -69,8 +70,11 @@ export const createDocumentBody = (data: EditorRow[]) => {
       const tableCell = document.createElement("td");
       tableCell.setAttribute("style", styleTableCell(row.items.length));
       item.children.forEach((element: EditorElement) => {
-        const markup = convertStringToHTML(element.markup);
-        tableCell.appendChild(markup);
+        const markup = createHtmlElement(element);
+
+        const convertedMarkup = convertStringToHTML(markup);
+
+        tableCell.appendChild(convertedMarkup);
       });
       tableRow.appendChild(tableCell);
     });

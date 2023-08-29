@@ -37,6 +37,12 @@
             @update-editor-item="updateItemProperties"
           />
         </h5>
+        <SocialGroup
+          v-if="option.type === 'social'"
+          :items="option.options"
+          :selected-icons="selectedEditorRow.nestedIcons"
+          @update-nested-icons="updateNestedIcons"
+        />
         <InputSingle
           v-if="option.type === 'input'"
           :property="
@@ -110,8 +116,6 @@
                 option.property as keyof typeof selectedItemProperties
               ].value !== 'auto'
             "
-            :max="100"
-            :min="0"
             :step="1"
             :property="
               selectedItemProperties[
@@ -140,6 +144,7 @@ const emit = defineEmits([
   "updateEditorRowLayout",
   "updateProperties",
   "updateRawHtml",
+  "updateNestedIcons",
 ]);
 
 const updateItemHtml = (code: string) => {
@@ -152,6 +157,10 @@ const updateItemProperties = (key: string, value: number) => {
 
 const updateRowLayout = (value: number) => {
   emit("updateEditorRowLayout", value);
+};
+
+const updateNestedIcons = (icons: any) => {
+  emit("updateNestedIcons", icons);
 };
 </script>
 
