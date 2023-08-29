@@ -98,7 +98,7 @@ declare global {
     title?: string;
     id: string;
     items: EditorItem[];
-    columns: 1;
+    columns: number;
     "data-type": string;
   }
 

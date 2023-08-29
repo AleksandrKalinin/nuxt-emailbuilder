@@ -38,7 +38,6 @@
     "prettier": "^3.0.1",
     "sass": "^1.63.6",
     "sass-loader": "^13.3.2",
-    "supabase": "^1.68.6",
     "typescript": "^5.1.6",
     "unplugin-auto-import": "^0.16.6",
     "uuid": "^9.0.0",
@@ -58,6 +57,7 @@
     "html-to-image": "^1.11.11",
     "http-proxy": "^1.18.1",
     "pinia": "^2.1.4",
+    "supabase": "^1.88.0",
     "vue-tsc": "^1.8.6"
   }
 }
