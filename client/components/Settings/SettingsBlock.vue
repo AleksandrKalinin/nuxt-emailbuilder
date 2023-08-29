@@ -138,7 +138,7 @@ interface SettingsBlockProps {
   settingsActive: SettingsBlock[];
 }
 
-const props = defineProps<SettingsBlockProps>();
+defineProps<SettingsBlockProps>();
 
 const emit = defineEmits([
   "updateEditorRowLayout",

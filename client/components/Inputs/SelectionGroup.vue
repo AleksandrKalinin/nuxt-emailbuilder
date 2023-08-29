@@ -24,7 +24,7 @@ interface SelectionGroup {
   itemKey: string;
 }
 
-const props = defineProps<SelectionGroup>();
+defineProps<SelectionGroup>();
 
 const emit = defineEmits(["updateEditorItem"]);
 </script>

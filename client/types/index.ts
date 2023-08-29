@@ -103,6 +103,7 @@ declare global {
   interface EmailTemplate {
     id: string;
     name: string;
+    type: string;
     category: string;
     preview: string;
     content: EditorRow[];
@@ -217,5 +218,11 @@ declare global {
   interface CypressENV {
     HOME: string;
     USERPROFILE: string;
+  }
+
+  interface SelectOption {
+    label: string | number;
+    selected: boolean;
+    number: number;
   }
 }

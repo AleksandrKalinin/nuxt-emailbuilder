@@ -9,14 +9,6 @@
       >
     </nav>
     <div class="header-buttons">
-      <!--
-      <button
-        id="download"
-        class="button button_regular button_spaced button_normal"
-        @click="createEmailTemplate(editorRows)"
-      >
-        Download
-      </button> -->
       <button
         id="save"
         class="button button_regular button_spaced button_normal"
@@ -64,10 +56,6 @@ const onEditor = computed(() => {
 }
 
 .header-menu {
-  color: #ffffff;
-}
-
-.header-menu__link {
-  margin: 0 5px;
+  @apply flex text-white gap-5;
 }
 </style>

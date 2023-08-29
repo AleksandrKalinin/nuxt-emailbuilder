@@ -11,7 +11,7 @@ export const createHtmlElement = (item: EditorElement) => {
     const cssObj = item.cssProperties[key];
     cssObj.unit
       ? (element.style[cssObj.property as any] = cssObj.value + cssObj.unit)
-      : (element.style[cssObj.property as string] = cssObj.value);
+      : (element.style[cssObj.property as any] = cssObj.value);
   }
 
   if (item.placeholder) {
@@ -30,7 +30,7 @@ export const createHtmlElement = (item: EditorElement) => {
   if (item.stylePreset) {
     item.stylePreset.forEach(
       (styleProperty: { property: string; value: string | number }) => {
-        element!.style[styleProperty.property] = styleProperty.value;
+        element!.style[styleProperty.property as any] = styleProperty.value;
       }
     );
   }
