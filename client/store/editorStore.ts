@@ -155,10 +155,8 @@ export const useEditorStore = defineStore("editor", () => {
 
   const addEditorElement = (id: string, item: EditorElement) => {
     const index = editorItems.value.findIndex(
-      (item: EditorElement) => item.id === id
+      (item: EditorItem) => item.id === id
     );
-    const tagName: string = item.tag;
-    const placeholder: string | undefined = item.placeholder;
     const newItem = (({
       tag,
       placeholder,

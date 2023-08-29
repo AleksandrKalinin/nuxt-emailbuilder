@@ -1,6 +1,7 @@
 import * as htmlToImage from "html-to-image";
 import { v4 as uuidv4 } from "uuid";
 import { defineStore } from "pinia";
+import type { PostgrestError } from "@supabase/supabase-js";
 import { useEditorStore } from "@/store/editorStore";
 import templatesService from "~/services/templatesService";
 import emailService from "~/services/emailService";
@@ -95,7 +96,7 @@ export const useTemplateStore = defineStore("template", () => {
     if (error) {
       throw new Error(error.message);
     } else {
-      emailTemplates.value = data;
+      emailTemplates.value = data as unknown as EmailTemplate[];
     }
   };
 
@@ -108,10 +109,7 @@ export const useTemplateStore = defineStore("template", () => {
 
   const uploadTemplateToStorage = async (template: string) => {
     const id = uuidv4();
-    const { data, error } = await emailService.uploadToStorage(id, template);
-    if (error) {
-      throw new Error(error.message);
-    }
+    const { data } = await emailService.uploadToStorage(id, template);
     if (data?.path) {
       const path = emailService.getTemplateUrl(data?.path);
       return path;
