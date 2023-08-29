@@ -258,128 +258,6 @@ export const header = [
     },
   },
   {
-    title: "List",
-    icon: "radix-icons:list-bullet",
-    type: "list",
-    element: {
-      tag: "ul",
-      editable: true,
-      cssOptions: [typographySettings, dimensionsSettings],
-      htmlOptions: [],
-      initialCssValues: {
-        "margin-top": {
-          property: "margin-top",
-          value: 0,
-          unit: "px",
-        },
-        "margin-bottom": {
-          property: "margin-bottom",
-          value: 0,
-          unit: "px",
-        },
-        "margin-left": {
-          property: "margin-left",
-          value: 0,
-          unit: "px",
-        },
-        "margin-right": {
-          property: "margin-right",
-          value: 0,
-          unit: "px",
-        },
-        "padding-top": {
-          property: "padding-top",
-          value: 0,
-          unit: "px",
-        },
-        "padding-bottom": {
-          property: "padding-bottom",
-          value: 0,
-          unit: "px",
-        },
-        "padding-left": {
-          property: "padding-left",
-          value: 0,
-          unit: "px",
-        },
-        "padding-right": {
-          property: "padding-right",
-          value: 0,
-          unit: "px",
-        },
-        width: {
-          property: "width",
-          value: 100,
-          unit: "%",
-        },
-        height: {
-          property: "height",
-          value: "auto",
-        },
-        "background-color": {
-          property: "background-color",
-          value: "#00FFFFF",
-        },
-        "font-family": {
-          property: "font-family",
-          value: "Times New Roman, sans-serif",
-        },
-        "font-size": {
-          property: "font-size",
-          value: 14,
-          unit: "px",
-        },
-        color: {
-          property: "color",
-          value: "#222222",
-        },
-        "font-weight": {
-          property: "font-weight",
-          value: 400,
-        },
-        "font-style": {
-          property: "font-style",
-          value: "normal",
-        },
-        "line-height": {
-          property: "line-height",
-          value: 22,
-          unit: "px",
-        },
-        "letter-spacing": {
-          property: "letter-spacing",
-          value: 1,
-          unit: "px",
-        },
-        "text-align": {
-          property: "text-align",
-          value: "left",
-        },
-        "text-transform": {
-          property: "text-transform",
-          value: "none",
-        },
-        "text-decoration": {
-          property: "text-decoration",
-          value: "none",
-        },
-      },
-      placeholder: "This is a new list",
-      initialHtmlValues: {},
-      stylePreset: [
-        {
-          property: "z-index",
-          value: 59,
-        },
-        {
-          property: "box-sizing",
-          value: "border-box",
-        },
-      ],
-      presetClasses: [],
-    },
-  },
-  {
     title: "Button",
     icon: "radix-icons:button",
     type: "element",
@@ -869,71 +747,6 @@ export const header = [
     },
   },
   {
-    title: "Table",
-    icon: "radix-icons:table",
-    type: "table",
-    element: {
-      tag: "table",
-      editable: false,
-      cssOptions: [typographySettings, dimensionsSettings],
-      htmlOptions: [],
-      placeholder: "This is a new table",
-      initialCssValues: {
-        "font-size": {
-          property: "font-size",
-          value: 14,
-          unit: "px",
-        },
-        "font-family": {
-          property: "font-family",
-          value: "Times New Roman, sans-serif",
-        },
-        color: {
-          property: "color",
-          value: "#222222",
-        },
-        "font-weight": {
-          property: "font-weight",
-          value: 400,
-        },
-        "font-style": {
-          property: "font-style",
-          value: "normal",
-        },
-        "line-height": {
-          property: "line-height",
-          value: 22,
-          unit: "px",
-        },
-        "letter-spacing": {
-          property: "letter-spacing",
-          value: 1,
-          unit: "px",
-        },
-        "text-align": {
-          property: "text-align",
-          value: "left",
-        },
-        "text-transform": {
-          property: "text-transform",
-          value: "none",
-        },
-        "text-decoration": {
-          property: "text-decoration",
-          value: "none",
-        },
-      },
-      initialHtmlValues: {},
-      stylePreset: [
-        {
-          property: "line-height",
-          value: "1px",
-        },
-      ],
-      presetClasses: ["iframe_disabled"],
-    },
-  },
-  {
     title: "Video",
     icon: "octicon:video-24",
     type: "element",
@@ -993,7 +806,12 @@ export const header = [
       htmlOptions: [],
       placeholder: "Insert your html code here",
       initialHtmlValues: {},
-      stylePreset: ["line-height: 1"],
+      stylePreset: [
+        {
+          property: "line-height",
+          value: "1",
+        },
+      ],
     },
   },
 ];

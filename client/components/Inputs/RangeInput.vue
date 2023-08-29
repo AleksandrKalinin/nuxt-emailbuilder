@@ -57,17 +57,7 @@ const sliderValue = ref(props.property.value);
 
 const unitValue = ref(props.property.unit);
 
-const updateUnitValue = (val: string) => {
-  console.log(val);
-};
-
-// const sliderValue = computed(() => {
-//   if (props.property.unit === "px") {
-//     return 50;
-//   } else {
-//     return props.property.value;
-//   }
-// });
+const updateUnitValue = (val: string) => {};
 
 const slider: Ref<HTMLInputElement | null> = ref(null);
 

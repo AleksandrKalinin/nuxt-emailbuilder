@@ -54,7 +54,6 @@
 
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import { useElementSize } from "@vueuse/core";
 import { VueDraggableNext } from "vue-draggable-next";
 import { useEditorStore } from "@/store/editorStore";
 import { useSettingsStore } from "@/store/settingsStore";
@@ -119,12 +118,6 @@ const selectElement = (event: Event) => {
 };
 
 const editor = ref(null);
-
-const { width, height } = useElementSize(editor);
-
-function onResize({ width, height }: { width: number; height: number }) {
-  console.log(width, height);
-}
 </script>
 
 <style scoped>
