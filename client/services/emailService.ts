@@ -74,13 +74,14 @@ class EmailService {
     }
   }
 
-  async sendEmail(email: string, template: string) {
+  async sendEmail(email: string, template: string, filepath: string) {
     try {
       await useFetch("http://localhost:5000/send", {
         method: "post",
         body: {
           email,
           template,
+          filepath,
         },
       });
     } catch (err) {

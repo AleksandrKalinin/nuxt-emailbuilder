@@ -29,7 +29,7 @@
           v-model="selectedCategory"
           type="radio"
           value="premium"
-          class="mr-2"
+          class="mr-2 filter-option__input"
           @change="selectCategory(($event.target as HTMLInputElement).value)"
         />
         <label for="premium" class="filter-option__label">Premium</label>

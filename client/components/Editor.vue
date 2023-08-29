@@ -1,5 +1,5 @@
 <template>
-  <div id="editorArea" class="editor">
+  <div id="editorArea" ref="editor" class="editor">
     <div id="editorContent" class="editor-content">
       <VueDraggableNext class="dragArea list-group w-full" :list="editorRows">
         <div
@@ -43,7 +43,7 @@
     <div class="editor__button">
       <button
         id="editorBtn"
-        class="button button_regular mx-auto mt-3"
+        class="button button_regular button_normal mx-auto"
         @click="addEditorRow()"
       >
         Add
@@ -54,6 +54,7 @@
 
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
+import { useElementSize } from "@vueuse/core";
 import { VueDraggableNext } from "vue-draggable-next";
 import { useEditorStore } from "@/store/editorStore";
 import { useSettingsStore } from "@/store/settingsStore";
@@ -116,6 +117,14 @@ const selectElement = (event: Event) => {
     setTabsState(false);
   }
 };
+
+const editor = ref(null);
+
+const { width, height } = useElementSize(editor);
+
+function onResize({ width, height }: { width: number; height: number }) {
+  console.log(width, height);
+}
 </script>
 
 <style scoped>
@@ -159,6 +168,6 @@ const selectElement = (event: Event) => {
 }
 
 .editor__button {
-  @apply mb-[50px];
+  @apply mb-[50px] pt-[12px];
 }
 </style>

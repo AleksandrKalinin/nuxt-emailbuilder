@@ -1,17 +1,15 @@
-import { appendNestedIcons } from "@/core/appendNestedIcons";
-
-export const createHtmlElement = (item: EditorElement) => {
-  let element = document.createElement(item.tag);
+export const applyPropertiesToElement = (item: EditorElement) => {
+  const element = document.createElement(item.tag);
   element.setAttribute("id", item.id);
-  // element.addEventListener("click", (e: Event) => {
-  //   e.stopPropagation();
-  // });
+  element.addEventListener("click", (e: Event) => {
+    e.stopPropagation();
+  });
 
   for (const key in item.cssProperties) {
     const cssObj = item.cssProperties[key];
     cssObj.unit
-      ? (element.style[cssObj.property as any] = cssObj.value + cssObj.unit)
-      : (element.style[cssObj.property as string] = cssObj.value);
+      ? (element.style[cssObj.property] = cssObj.value + cssObj.unit)
+      : (element.style[cssObj.property] = cssObj.value);
   }
 
   if (item.placeholder) {
@@ -39,10 +37,6 @@ export const createHtmlElement = (item: EditorElement) => {
     item.presetClasses.forEach((className: string) => {
       element?.classList.add(className);
     });
-  }
-
-  if (item.nestedIcons) {
-    element = appendNestedIcons(element, item.nestedIcons);
   }
 
   return element.outerHTML;

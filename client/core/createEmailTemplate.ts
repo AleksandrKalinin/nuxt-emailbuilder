@@ -8,6 +8,7 @@ import {
   tableCellProperties,
   tableRowProperties,
 } from "@/constants/emailCssProperties";
+import { createHtmlElement } from "./createHtmlElement";
 
 export const createEmailTemplate = (data: EditorRow[]) => {
   const newDoc = document.implementation.createHTMLDocument();
@@ -70,8 +71,18 @@ export const createDocumentBody = (data: EditorRow[]) => {
       const tableCell = document.createElement("td");
       tableCell.setAttribute("style", styleTableCell(row.items.length));
       item.children.forEach((element: EditorElement) => {
-        const markup = convertStringToHTML(element.markup);
-        tableCell.appendChild(markup);
+        /*
+        const htmlEl = document.createElement(element.tag);
+        htmlEl.setAttribute("id", element.id);
+        htmlEl.addEventListener("click", (e: Event) => {
+          e.stopPropagation();
+        });
+        */
+        const markup = createHtmlElement(element);
+        console.log("markup", markup);
+        const convertedMarkup = convertStringToHTML(markup);
+        // const markup = convertStringToHTML(element.markup);
+        tableCell.appendChild(convertedMarkup);
       });
       tableRow.appendChild(tableCell);
     });

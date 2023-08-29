@@ -1,18 +1,40 @@
 <template>
   <Transition>
-    <div class="custom-slider">
-      <input
-        ref="slider"
-        :value="sliderValue"
-        type="range"
-        :min="min"
-        :max="max"
-        :step="step"
-        class="slider cursor-pointer"
-        @input="setValue($event)"
-      />
-      <div class="custom-slider__labels">
-        <span>{{ sliderValue }}</span>
+    <div class="slider">
+      <div class="slider__wrapper">
+        <input
+          ref="slider"
+          :value="sliderValue"
+          type="range"
+          :min="min"
+          :max="max"
+          :step="step"
+          class="slider__input slider-input cursor-pointer"
+          @input="setValue($event)"
+        />
+        <div class="slider__labels slider-labels">
+          <span>{{ sliderValue }}</span>
+        </div>
+      </div>
+      <div class="slider__units slider-units">
+        <label class="slider-units__label"
+          ><input
+            v-model="unitValue"
+            type="radio"
+            class="slider-units__input"
+            value="px"
+            @change="updateUnitValue(($event.target as HTMLInputElement).value)"
+          />Pixels</label
+        >
+        <label class="slider-units__label"
+          ><input
+            v-model="unitValue"
+            type="radio"
+            class="slider-units__input"
+            value="%"
+            @change="updateUnitValue(($event.target as HTMLInputElement).value)"
+          />Percents</label
+        >
       </div>
     </div>
   </Transition>
@@ -20,8 +42,6 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  min: number;
-  max: number;
   step: number;
   property: {
     property: string;
@@ -34,7 +54,25 @@ const props = defineProps<{
 const emit = defineEmits(["updateEditorItem"]);
 
 const sliderValue = ref(props.property.value);
+
+const unitValue = ref(props.property.unit);
+
+const updateUnitValue = (val: string) => {
+  console.log(val);
+};
+
+// const sliderValue = computed(() => {
+//   if (props.property.unit === "px") {
+//     return 50;
+//   } else {
+//     return props.property.value;
+//   }
+// });
+
 const slider: Ref<HTMLInputElement | null> = ref(null);
+
+const min = 0;
+const max = 100;
 
 const setValue = (e: Event) => {
   const target = e.target as HTMLInputElement;
@@ -56,7 +94,7 @@ watchEffect(() => {
     const progress = getProgress(
       Number(sliderValue.value),
       Number(slider.value.min),
-      Number(slider.value.max),
+      Number(slider.value.max)
     );
     setCSSProgress(progress);
   }
@@ -67,17 +105,17 @@ watchDebounced(
   () => {
     emit("updateEditorItem", props.itemKey, Number(sliderValue.value));
   },
-  { debounce: 100, maxWait: 500 },
+  { debounce: 100, maxWait: 500 }
 );
 </script>
 
 <style scoped>
-.custom-slider {
+.slider__wrapper {
   --trackHeight: 5px;
   --thumbRadius: 1rem;
 }
 
-.custom-slider input[type="range"] {
+.slider__wrapper input[type="range"] {
   position: relative;
   appearance: none;
   border-radius: 999px;
@@ -85,7 +123,7 @@ watchDebounced(
   width: 100%;
 }
 
-.custom-slider input[type="range"]::before {
+.slider__wrapper input[type="range"]::before {
   content: "";
   position: absolute;
   width: var(--ProgressPercent, 100%);
@@ -95,21 +133,21 @@ watchDebounced(
   border-radius: 999px;
 }
 
-.custom-slider input[type="range"]::-webkit-slider-runnable-track {
+.slider__wrapper input[type="range"]::-webkit-slider-runnable-track {
   appearance: none;
   background: #e9e9e9;
   height: var(--trackHeight);
   border-radius: 999px;
 }
 
-.custom-slider input[type="range"]::-moz-range-track {
+.slider__wrapper input[type="range"]::-moz-range-track {
   appearance: none;
   background: #60a5fa;
   height: var(--trackHeight);
   border-radius: 999px;
 }
 
-.custom-slider input[type="range"]::-webkit-slider-thumb {
+.slider__wrapper input[type="range"]::-webkit-slider-thumb {
   position: relative;
   width: var(--thumbRadius);
   height: var(--thumbRadius);
@@ -121,7 +159,23 @@ watchDebounced(
   z-index: 1;
 }
 
-.custom-slider__labels {
+.slider-units {
+  @apply flex items-center;
+}
+
+.slider-units__label {
+  @apply flex items-center cursor-pointer;
+}
+
+.slider-units__input {
+  @apply h-[16px] w-[16px] cursor-pointer mr-1;
+}
+
+.slider-units__label:not(:first-child) .slider-units__input {
+  @apply ml-4;
+}
+
+.slider__labels {
   @apply flex w-full justify-end text-sm;
 }
 </style>

@@ -9,7 +9,7 @@
     <div class="template__overlay template-overlay">
       <h2 class="template__title">{{ template.name }}</h2>
       <button
-        class="button button_small cursor-pointer"
+        class="button button_small button_normal cursor-pointer"
         @click.prevent="emit('selectTemplate', template)"
       >
         Open template

@@ -6,6 +6,9 @@ import {
   videoSettings,
   rawHtmlSettings,
   borderSettings,
+  hoverSettings,
+  socialSettings,
+  iconSettings,
 } from "@/constants/settings";
 
 export const header = [
@@ -110,7 +113,8 @@ export const header = [
         },
         height: {
           property: "height",
-          value: "auto",
+          value: 36,
+          unit: "px",
         },
         "background-color": {
           property: "background-color",
@@ -123,7 +127,12 @@ export const header = [
           property: "z-index",
           value: 50,
         },
+        {
+          property: "box-sizing",
+          value: "border-box",
+        },
       ],
+      presetClasses: [],
     },
   },
   {
@@ -240,7 +249,12 @@ export const header = [
           property: "z-index",
           value: 50,
         },
+        {
+          property: "box-sizing",
+          value: "border-box",
+        },
       ],
+      presetClasses: [],
     },
   },
   {
@@ -357,7 +371,12 @@ export const header = [
           property: "z-index",
           value: 59,
         },
+        {
+          property: "box-sizing",
+          value: "border-box",
+        },
       ],
+      presetClasses: [],
     },
   },
   {
@@ -366,7 +385,7 @@ export const header = [
     type: "element",
     element: {
       tag: "a",
-      editable: false,
+      editable: true,
       cssOptions: [typographySettings, dimensionsSettings, borderSettings],
       htmlOptions: [linkSettings],
       placeholder: "Button text",
@@ -497,13 +516,10 @@ export const header = [
           property: "display",
           value: "block",
         },
-        /*
-        "button",
-        "button_initial",
-        "button_regular",
-        "mx-auto",
-        "grow-0",
-        "max-w-[100%]", */
+        {
+          property: "box-sizing",
+          value: "border-box",
+        },
       ],
     },
   },
@@ -579,19 +595,23 @@ export const header = [
           property: "z-index",
           value: 50,
         },
+        {
+          property: "box-sizing",
+          value: "border-box",
+        },
       ],
+      presetClasses: [],
     },
   },
-  /*
   {
     title: "Icon",
     icon: "radix-icons:star",
     type: "element",
     element: {
-      tag: "span",
+      tag: "div",
       editable: false,
-      cssOptions: [typographySettings, dimensionsSettings],
-      htmlOptions: [linkSettings],
+      cssOptions: [dimensionsSettings, socialSettings],
+      htmlOptions: [iconSettings],
       initialCssValues: {
         "margin-top": {
           property: "margin-top",
@@ -615,12 +635,12 @@ export const header = [
         },
         "padding-top": {
           property: "padding-top",
-          value: 10,
+          value: 0,
           unit: "px",
         },
         "padding-bottom": {
           property: "padding-bottom",
-          value: 10,
+          value: 0,
           unit: "px",
         },
         "padding-left": {
@@ -640,61 +660,61 @@ export const header = [
         },
         height: {
           property: "height",
-          value: "auto",
-        },
-        "font-size": {
-          property: "font-size",
-          value: 14,
+          value: "60",
           unit: "px",
         },
-        color: {
-          property: "color",
-          value: "#ffffff",
-        },
-        "font-weight": {
-          property: "font-weight",
-          value: 400,
-        },
-        "font-style": {
-          property: "font-style",
-          value: "normal",
-        },
-        "line-height": {
-          property: "line-height",
-          value: 22,
-          unit: "px",
-        },
-        "letter-spacing": {
-          property: "letter-spacing",
-          value: 1,
-          unit: "px",
-        },
-        "text-align": {
-          property: "text-align",
-          value: "left",
-        },
-        "text-transform": {
-          property: "text-transform",
-          value: "none",
+        "background-color": {
+          property: "background-color",
+          value: "#00FFFFF",
         },
       },
       initialHtmlValues: {
-        href: {
-          property: "href",
-          value: "https://developer.mozilla.org/ru/docs/Web/HTML/Element/video",
+        src: {
+          property: "src",
+          value: "https://i.imgur.com/2DW8kFe.png",
         },
-        target: {
-          property: "target",
-          value: "_blank",
+        title: {
+          property: "title",
+          value: "twitter",
         },
-        disabled: {
-          property: "disabled",
-          value: "true",
+        align: {
+          property: "align",
+          value: "center",
         },
       },
-      style: [],
+      stylePreset: [
+        {
+          property: "width",
+          value: "100%",
+        },
+        {
+          property: "height",
+          value: "35px",
+        },
+        {
+          property: "box-sizing",
+          value: "border-box",
+        },
+      ],
+      presetClasses: [],
+      nestedIcons: [
+        {
+          name: "Email",
+          property: "Email",
+          src: "https://i.imgur.com/2DW8kFe.png",
+          title: "email",
+          link: "https://gmail.com",
+        },
+        {
+          name: "Linkedin",
+          property: "Linkedin",
+          src: "https://i.imgur.com/dnIhxsE.png",
+          title: "Linkedin",
+          link: "https://linkedin.com",
+        },
+      ],
     },
-  }, */
+  },
   {
     title: "Image",
     icon: "radix-icons:image",
@@ -747,7 +767,8 @@ export const header = [
         },
         width: {
           property: "width",
-          value: "auto",
+          value: 600,
+          unit: "px",
         },
         height: {
           property: "height",
@@ -769,6 +790,10 @@ export const header = [
         {
           property: "max-width",
           value: "100%",
+        },
+        {
+          property: "box-sizing",
+          value: "border-box",
         },
       ],
     },
@@ -830,12 +855,12 @@ export const header = [
         },
         height: {
           property: "height",
-          value: 2,
+          value: 20,
           unit: "px",
         },
-        background: {
-          property: "background",
-          value: "#444444",
+        "background-color": {
+          property: "background-color",
+          value: "#222222",
         },
       },
       initialHtmlValues: {},
@@ -843,6 +868,10 @@ export const header = [
         {
           property: "z-index",
           value: 50,
+        },
+        {
+          property: "box-sizing",
+          value: "border-box",
         },
       ],
     },
@@ -909,6 +938,7 @@ export const header = [
           value: "1px",
         },
       ],
+      presetClasses: ["iframe_disabled"],
     },
   },
   {
@@ -956,7 +986,8 @@ export const header = [
           value: "Template iframe",
         },
       },
-      presetClasses: ["iframe_disabled"],
+      stylePreset: [],
+      presetClasses: [],
     },
   },
   {

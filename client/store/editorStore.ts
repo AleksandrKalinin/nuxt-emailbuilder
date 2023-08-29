@@ -6,6 +6,7 @@ import { useTemplateStore } from "@/store/templateStore";
 import { convertStringToHTML } from "@/utils/convertStringtoHTML";
 import { createEmailTemplate } from "@/core/createEmailTemplate";
 import emailService from "@/services/emailService";
+import { appendNestedIcons } from "@/core/appendNestedIcons";
 
 export const useEditorStore = defineStore("editor", () => {
   const { toggleSettingsState } = useSettingsStore();
@@ -117,7 +118,7 @@ export const useEditorStore = defineStore("editor", () => {
     const newEditorItems = copiedRow.items.map((item: EditorItem) => {
       const newElements = item.children.map((el: EditorElement) => {
         el.id = uuidv4();
-        el.markup = createHtmlElement(el);
+        el.markup = createHtmlElement(el, true);
         editorElements.value.push(el);
         return el;
       });
@@ -168,7 +169,8 @@ export const useEditorStore = defineStore("editor", () => {
     newItem.cssProperties = structuredClone(item.initialCssValues);
     newItem.htmlProperties = structuredClone(item.initialHtmlValues);
     newItem.inlineStyles = createInlineStyles(item.initialCssValues);
-    newItem.markup = createHtmlElement(newItem);
+    newItem.nestedIcons = item.nestedIcons;
+    newItem.markup = createHtmlElement(newItem, true);
 
     editorElements.value.push(newItem);
     editorItems.value[index].children.push(newItem);
@@ -189,17 +191,40 @@ export const useEditorStore = defineStore("editor", () => {
       editorItems.value[editorItemIndex].children[editorElementIndex];
     targetElement.placeholder = text;
     editorItems.value[editorItemIndex].children[editorElementIndex].markup =
-      createHtmlElement(targetElement);
+      createHtmlElement(targetElement, true);
     setEditableItem(null);
   };
 
-  const createHtmlElement = (item: EditorElement) => {
+  const replaceTag = (tag: string) => {
     let element: HTMLElement;
-    if (item.tag !== "a") {
-      element = document.createElement(item.tag);
-    } else {
-      element = document.createElement("span");
+    switch (tag) {
+      case "a":
+        element = document.createElement("span");
+        break;
+      case "iframe":
+        element = document.createElement("div");
+        break;
+      default:
+        element = document.createElement(tag);
+        break;
     }
+
+    return element;
+  };
+
+  const createHtmlElement = (
+    item: EditorElement,
+    replacementRequired: boolean
+  ) => {
+    let element: HTMLElement;
+    switch (replacementRequired) {
+      case true:
+        element = replaceTag(item.tag);
+        break;
+      case false:
+        element = document.createElement(item.tag);
+    }
+
     element.setAttribute("id", item.id);
     element.setAttribute("data-type", "item");
     element.addEventListener("click", (e: Event) => {
@@ -242,6 +267,10 @@ export const useEditorStore = defineStore("editor", () => {
       });
     }
 
+    if (item.nestedIcons) {
+      element = appendNestedIcons(element, item.nestedIcons);
+    }
+
     return element.outerHTML;
   };
 
@@ -261,6 +290,19 @@ export const useEditorStore = defineStore("editor", () => {
     }
   };
 
+  const updateItemNestedIcons = (icons: SocialIcon[]) => {
+    editorRows.value.forEach((row: EditorRow) => {
+      row.items.forEach((item: EditorItem) => {
+        item.children.forEach((element: EditorElement) => {
+          if (element.id === selectedEditorRow.value?.id) {
+            element.nestedIcons = icons;
+            element.markup = createHtmlElement(element, true);
+          }
+        });
+      });
+    });
+  };
+
   const updateItemCssProperties = (
     key: string,
     value: string | number | boolean
@@ -271,7 +313,7 @@ export const useEditorStore = defineStore("editor", () => {
           if (element.id === selectedEditorRow.value?.id) {
             element.cssProperties[key].value = value;
             element.inlineStyles = createInlineStyles(element.cssProperties);
-            element.markup = createHtmlElement(element);
+            element.markup = createHtmlElement(element, true);
           }
         });
       });
@@ -284,7 +326,7 @@ export const useEditorStore = defineStore("editor", () => {
         item.children.forEach((element: EditorElement) => {
           if (element.id === selectedEditorRow.value?.id) {
             element.htmlProperties[key].value = value;
-            element.markup = createHtmlElement(element);
+            element.markup = createHtmlElement(element, true);
           }
         });
       });
@@ -343,8 +385,10 @@ export const useEditorStore = defineStore("editor", () => {
 
   const sendEmail = async (email: string) => {
     const template = createEmailTemplate(editorRows.value);
-    await uploadTemplateToStorage(template);
-    await emailService.sendEmail(email, template);
+    const filepath = await uploadTemplateToStorage(template);
+    if (filepath) {
+      await emailService.sendEmail(email, template, filepath);
+    }
   };
 
   return {
@@ -377,5 +421,6 @@ export const useEditorStore = defineStore("editor", () => {
     extractFromTemplate,
     updateRawHtml,
     sendEmail,
+    updateItemNestedIcons,
   };
 });

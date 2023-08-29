@@ -1,6 +1,14 @@
 export {};
 
 declare global {
+  interface SocialIcon {
+    name: string;
+    property: string;
+    src: string;
+    title: string;
+    link: string;
+  }
+
   interface SingleProperty {
     [index: string]: {
       property: string;
@@ -69,6 +77,7 @@ declare global {
       value: string | number;
     }[];
     presetClasses?: string[];
+    nestedIcons: SocialIcon[];
     cssProperties: SingleProperty;
     htmlProperties: HtmlProperty;
     editable: boolean;

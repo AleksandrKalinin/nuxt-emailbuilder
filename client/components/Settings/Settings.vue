@@ -2,6 +2,7 @@
   <Transition>
     <div v-if="settingsOpen" ref="settingsMenu" class="settings-wrap">
       <div class="settings">
+        <!--
         <div v-if="!tabsState" class="tabs">
           <span
             v-for="(item, index) in editorTabs"
@@ -12,7 +13,7 @@
           >
             {{ item.name }}
           </span>
-        </div>
+        </div> -->
         <!--
         <SettingsBlock
           v-if="tabsState"
@@ -102,6 +103,7 @@
           @update-properties="updateItemCssProperties"
           @update-editor-row-layout="updateEditorRowLayout"
           @update-raw-html="updateRawHtml"
+          @update-nested-icons="updateItemNestedIcons"
         />
         <SettingsBlock
           v-if="hasHtmlAttributes"
@@ -111,6 +113,7 @@
           @update-properties="updateItemHtmlProperties"
           @update-editor-row-layout="updateEditorRowLayout"
           @update-raw-html="updateRawHtml"
+          @update-nested-icons="updateItemNestedIcons"
         />
       </div>
       <KeepAlive>
@@ -126,7 +129,7 @@ import { useSettingsStore } from "@/store/settingsStore";
 import { useEditorStore } from "@/store/editorStore";
 
 const { settingsOpen, cssSettingsActive, htmlSettingsActive } = storeToRefs(
-  useSettingsStore(),
+  useSettingsStore()
 );
 
 const { selectedEditorRow } = storeToRefs(useEditorStore());
@@ -136,6 +139,7 @@ const {
   updateItemHtmlProperties,
   updateEditorRowLayout,
   updateRawHtml,
+  updateItemNestedIcons,
 } = useEditorStore();
 
 const { tabsState } = useTabs();
@@ -179,7 +183,7 @@ const editorTabs = computed(() => {
           selectedItemProperties: editorItem.cssProperties,
         };
         return item;
-      },
+      }
     );
   } else {
     return [];

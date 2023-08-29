@@ -25,6 +25,7 @@
               type="text"
               placeholder="Your email"
               class="modal-form__input"
+              required
             />
             <div class="modal-form__buttons modal-button">
               <button
@@ -53,6 +54,12 @@ import { useEditorStore } from "@/store/editorStore";
 const { sendEmail } = useEditorStore();
 
 const email = ref("");
+
+const validateEmail = (email: string) => {
+  const re = /\S+@\S+\.\S+/;
+  return re.test(email);
+};
+
 const modal = ref(null);
 const modalOpen = ref(false);
 
@@ -65,9 +72,13 @@ const clearInput = () => {
 };
 
 const sendTemplate = () => {
-  clearInput();
-  toggleModal(false);
-  sendEmail("aleksandr_kalinin_1995@mail.ru");
+  if (validateEmail(email.value)) {
+    sendEmail(email.value);
+    clearInput();
+    toggleModal(false);
+  } else {
+    alert("not valid");
+  }
 };
 
 const cancelDispatch = () => {
