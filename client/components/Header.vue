@@ -9,13 +9,13 @@
       >
     </nav>
     <div class="header-buttons">
-      <button
+      <!-- <button
         id="save"
         class="button button_regular button_spaced button_normal"
         @click="saveTemplate(editorRows)"
       >
         Save
-      </button>
+      </button> -->
       <Modal>
         <template #trigger>
           <button

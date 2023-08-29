@@ -112,7 +112,8 @@ export const useEditorStore = defineStore("editor", () => {
   };
 
   const copyEditorRow = (id: string) => {
-    const index = editorRows.value.findIndex((row: any) => row.id === id);
+    const index = editorRows.value.findIndex((row: EditorRow) => row.id === id);
+
     const copiedRow = structuredClone(toRaw(editorRows.value[index]));
 
     const newEditorItems = copiedRow.items.map((item: EditorItem) => {
@@ -152,23 +153,42 @@ export const useEditorStore = defineStore("editor", () => {
 
   const editorElements = ref<EditorElement[]>([]);
 
-  const addEditorElement = (id: string, item: any) => {
-    const index = editorItems.value.findIndex((item: any) => item.id === id);
+  const addEditorElement = (id: string, item: EditorElement) => {
+    const index = editorItems.value.findIndex(
+      (item: EditorElement) => item.id === id
+    );
     const tagName: string = item.tag;
-    const placeholder: string = item.placeholder;
-    const newItem = {} as EditorElement;
+    const placeholder: string | undefined = item.placeholder;
+    const newItem = (({
+      tag,
+      placeholder,
+      cssOptions,
+      htmlOptions,
+      type,
+      editable,
+      presetClasses,
+      stylePreset,
+    }) => ({
+      tag,
+      placeholder,
+      cssOptions,
+      htmlOptions,
+      type,
+      editable,
+      presetClasses,
+      stylePreset,
+    }))(item) as EditorElement;
+
     newItem.id = uuidv4();
-    newItem.tag = tagName;
-    newItem.placeholder = placeholder;
-    newItem.cssOptions = item.cssOptions;
-    newItem.htmlOptions = item.htmlOptions;
-    newItem.type = item.type;
-    newItem.editable = item.editable;
-    newItem.presetClasses = item.presetClasses;
-    newItem.stylePreset = item.stylePreset;
-    newItem.cssProperties = structuredClone(item.initialCssValues);
-    newItem.htmlProperties = structuredClone(item.initialHtmlValues);
-    newItem.inlineStyles = createInlineStyles(item.initialCssValues);
+
+    if (item.initialCssValues) {
+      newItem.cssProperties = structuredClone(item.initialCssValues);
+      newItem.inlineStyles = createInlineStyles(item.initialCssValues);
+    }
+    if (item.initialHtmlValues) {
+      newItem.htmlProperties = structuredClone(item.initialHtmlValues);
+    }
+
     newItem.nestedIcons = item.nestedIcons;
     newItem.markup = createHtmlElement(newItem, true);
 
@@ -276,7 +296,7 @@ export const useEditorStore = defineStore("editor", () => {
 
   const selectEditorRow = (value: string | null) => {
     if (value) {
-      const el = editorRows.value.find((item: any) => item.id === value);
+      const el = editorRows.value.find((item: EditorRow) => item.id === value);
       selectedEditorRow.value = el;
     } else {
       selectedEditorRow.value = null;

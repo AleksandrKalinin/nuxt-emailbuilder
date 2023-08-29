@@ -1,14 +1,13 @@
+import { createHtmlElement } from "./createHtmlElement";
 import { convertStringToHTML } from "@/utils/convertStringtoHTML";
 import {
   metaTags,
-  ifMso9,
   tableProperties,
   bodyProperties,
   bodyMso,
   tableCellProperties,
   tableRowProperties,
 } from "@/constants/emailCssProperties";
-import { createHtmlElement } from "./createHtmlElement";
 
 export const createEmailTemplate = (data: EditorRow[]) => {
   const newDoc = document.implementation.createHTMLDocument();

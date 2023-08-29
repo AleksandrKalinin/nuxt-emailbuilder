@@ -43,8 +43,7 @@ export const useTemplateStore = defineStore("template", () => {
 
   const selectTemplate = async (template: EmailTemplate) => {
     const store = useEditorStore();
-    const content = template.content as string;
-
+    const content = template.content as unknown as string;
     store.setEditorRows(template.content);
     store.extractFromTemplate(JSON.parse(content));
     store.selectEditorRow(template.id);

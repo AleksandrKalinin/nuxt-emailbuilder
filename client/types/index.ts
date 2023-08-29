@@ -69,7 +69,7 @@ declare global {
     tag: string;
     cssOptions: SettingsBlock[];
     htmlOptions: SettingsBlock[];
-    placeholder?: string;
+    placeholder?: string | undefined;
     markup: string;
     inlineStyles: string;
     stylePreset?: {
@@ -80,6 +80,8 @@ declare global {
     nestedIcons: SocialIcon[];
     cssProperties: SingleProperty;
     htmlProperties: HtmlProperty;
+    initialCssValues?: SingleProperty | undefined;
+    initialHtmlValues?: HtmlProperty | undefined;
     editable: boolean;
     type: string;
   }
