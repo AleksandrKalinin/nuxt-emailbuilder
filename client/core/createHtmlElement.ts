@@ -3,9 +3,6 @@ import { appendNestedIcons } from "@/core/appendNestedIcons";
 export const createHtmlElement = (item: EditorElement) => {
   let element = document.createElement(item.tag);
   element.setAttribute("id", item.id);
-  // element.addEventListener("click", (e: Event) => {
-  //   e.stopPropagation();
-  // });
 
   for (const key in item.cssProperties) {
     const cssObj = item.cssProperties[key];
@@ -42,7 +39,7 @@ export const createHtmlElement = (item: EditorElement) => {
   }
 
   if (item.nestedIcons) {
-    element = appendNestedIcons(element, item.nestedIcons);
+    element = appendNestedIcons(element, item.nestedIcons, true);
   }
 
   return element.outerHTML;

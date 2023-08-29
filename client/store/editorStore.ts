@@ -268,7 +268,7 @@ export const useEditorStore = defineStore("editor", () => {
     }
 
     if (item.nestedIcons) {
-      element = appendNestedIcons(element, item.nestedIcons);
+      element = appendNestedIcons(element, item.nestedIcons, false);
     }
 
     return element.outerHTML;

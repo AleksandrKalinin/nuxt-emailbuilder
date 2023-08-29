@@ -669,14 +669,6 @@ export const header = [
         },
       },
       initialHtmlValues: {
-        src: {
-          property: "src",
-          value: "https://i.imgur.com/2DW8kFe.png",
-        },
-        title: {
-          property: "title",
-          value: "twitter",
-        },
         align: {
           property: "align",
           value: "center",
