@@ -1,6 +1,5 @@
 {
   "devDependencies": {
-    "@nuxtjs/google-fonts": "^3.0.2",
     "download": "^8.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.0"
