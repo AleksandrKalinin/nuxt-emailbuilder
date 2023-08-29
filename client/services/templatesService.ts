@@ -1,7 +1,8 @@
-import type { PostgrestError, RealtimeChannel } from "@supabase/supabase-js";
+import type { RealtimeChannel } from "@supabase/supabase-js";
 import { v4 as uuidv4 } from "uuid";
+import type { Database } from "~/types/supabase";
 
-const client = useSupabaseClient();
+const client = useSupabaseClient<Database>();
 
 let realtimeChannel: RealtimeChannel;
 

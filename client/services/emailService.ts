@@ -1,6 +1,12 @@
-import type { PostgrestError, RealtimeChannel } from "@supabase/supabase-js";
+import type { PostgrestError } from "@supabase/supabase-js";
+import type { Database } from "~/types/supabase";
 
-const client = useSupabaseClient();
+const client = useSupabaseClient<Database>();
+
+function getErrorMessage(error: unknown) {
+  if (error instanceof Error) return error.message;
+  return String(error);
+}
 
 class EmailService {
   async saveToLocal(template: string) {
@@ -11,8 +17,8 @@ class EmailService {
           template,
         },
       });
-    } catch (err) {
-      throw new Error(err);
+    } catch (error) {
+      if (error instanceof Error) return error.message;
     }
   }
 
@@ -24,8 +30,8 @@ class EmailService {
           template,
         },
       });
-    } catch (err) {
-      throw new Error(err);
+    } catch (error) {
+      if (error instanceof Error) return error.message;
     }
   }
 
@@ -56,8 +62,8 @@ class EmailService {
           template,
         },
       });
-    } catch (err) {
-      throw new Error(err);
+    } catch (error) {
+      if (error instanceof Error) return error.message;
     }
   }
 
@@ -69,8 +75,8 @@ class EmailService {
           image,
         },
       });
-    } catch (err) {
-      throw new Error("Unable to save image");
+    } catch (error) {
+      if (error instanceof Error) return error.message;
     }
   }
 
@@ -84,8 +90,8 @@ class EmailService {
           filepath,
         },
       });
-    } catch (err) {
-      throw new Error(err);
+    } catch (error) {
+      if (error instanceof Error) return error.message;
     }
   }
 }
