@@ -1,0 +1,20 @@
+.skeleton-bg {
+  animation: skeletonBg 1.5s infinite;
+  @apply cursor-auto;
+}
+
+.skeleton-button {
+  @apply flex items-center transition duration-200 text-lg px-7 py-2 text-white border min-w-[130px];
+}
+
+@keyframes skeletonBg {
+  0% {
+    background-color: #eeeeee;
+  }
+  50% {
+    background-color: #e5e5ea;
+  }
+  100% {
+    background-color: #eeeeee;
+  }
+}

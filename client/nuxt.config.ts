@@ -27,6 +27,7 @@ export default defineNuxtConfig({
     },
   ],
   css: [
+    "~/assets/style/skeleton.scss",
     "~/assets/style/radio.scss",
     "~/assets/style/checkbox.scss",
     "~/assets/style/variables.scss",

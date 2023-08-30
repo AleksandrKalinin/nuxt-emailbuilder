@@ -8,6 +8,7 @@ import emailService from "~/services/emailService";
 
 export const useTemplateStore = defineStore("template", () => {
   const emailTemplates = ref<EmailTemplate[] | []>([]);
+  const emailTemplatesLoaded = ref(false);
 
   const selectedType = ref<string>("all");
 
@@ -97,6 +98,7 @@ export const useTemplateStore = defineStore("template", () => {
       throw new Error(error.message);
     } else {
       emailTemplates.value = data as unknown as EmailTemplate[];
+      emailTemplatesLoaded.value = true;
     }
   };
 
@@ -121,6 +123,7 @@ export const useTemplateStore = defineStore("template", () => {
     selectedType,
     selectedCategories,
     emailTemplates,
+    emailTemplatesLoaded,
     filteredEmailTemplates,
     filteredByCategory,
     selectTemplate,

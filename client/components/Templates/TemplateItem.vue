@@ -1,21 +1,23 @@
 <template>
-  <div class="template group">
-    <span v-if="template.type === 'premium'" class="template__ribbon"
-      >Premium</span
-    >
-    <div class="template__image template-image">
-      <img :src="template.preview" class="template-image__picture" />
-    </div>
-    <div class="template__overlay template-overlay">
-      <h2 class="template__title">{{ template.name }}</h2>
-      <button
-        class="button button_small button_normal cursor-pointer"
-        @click.prevent="emit('selectTemplate', template)"
+  <Transition>
+    <div class="template group">
+      <span v-if="template.type === 'premium'" class="template__ribbon"
+        >Premium</span
       >
-        Open template
-      </button>
+      <div class="template__image template-image">
+        <img :src="template.preview" class="template-image__picture" />
+      </div>
+      <div class="template__overlay template-overlay">
+        <h2 class="template__title">{{ template.name }}</h2>
+        <button
+          class="button button_small button_normal cursor-pointer"
+          @click.prevent="emit('selectTemplate', template)"
+        >
+          Open template
+        </button>
+      </div>
     </div>
-  </div>
+  </Transition>
 </template>
 
 <script setup lang="ts">

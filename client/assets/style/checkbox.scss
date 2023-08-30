@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   user-select: none;
-  padding: 0.4em 0;
+  padding: 0;
   box-sizing: border-box;
 
   input[type="checkbox"] {
@@ -15,7 +15,7 @@
   }
 
   input[type="checkbox"] + div {
-    border: 2px solid #8d9aa9;
+    border: 1px solid #8d9aa9;
     height: 18px;
     width: 18px;
     box-sizing: border-box;
