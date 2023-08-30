@@ -15,7 +15,7 @@
   }
 
   input[type="checkbox"] + div {
-    border: 1px solid #8d9aa9;
+    border: 1px solid #dddddd;
     height: 18px;
     width: 18px;
     box-sizing: border-box;
@@ -49,12 +49,12 @@
     left: 20%;
     top: calc(50% - 2px);
     position: absolute;
-    background: #8d9aa9;
+    background: #dddddd;
     border-radius: 1px;
   }
 
   input[type="checkbox"]:disabled ~ div {
-    color: #8d9aa9;
+    color: #dddddd;
     cursor: not-allowed;
   }
 

@@ -4,7 +4,7 @@
     <Sidebar
       v-if="categories.length"
       :categories="categories"
-      :templates-length="filteredEmailTemplates.length"
+      :templates-length="filteredByCategory.length"
       :selected-categories="selectedCategories"
       :selected-type="selectedType"
     />
@@ -16,8 +16,12 @@
 import { storeToRefs } from "pinia";
 import { useTemplateStore } from "@/store/templateStore";
 
-const { selectedType, filteredEmailTemplates, selectedCategories } =
-  storeToRefs(useTemplateStore());
+const {
+  selectedType,
+  filteredEmailTemplates,
+  filteredByCategory,
+  selectedCategories,
+} = storeToRefs(useTemplateStore());
 
 const categories = computed(() => {
   const labels = [

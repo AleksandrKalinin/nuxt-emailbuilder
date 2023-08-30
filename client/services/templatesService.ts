@@ -7,12 +7,13 @@ const client = useSupabaseClient<Database>();
 let realtimeChannel: RealtimeChannel;
 
 class TemplatesService {
-  async fetchTemplates() {
+  async fetchTemplates(from: number, to: number) {
     const { data, error } = await client
       .from("templates")
       .select(
         "id, created_at, template_id, name, preview, type, content, category"
-      );
+      )
+      .range(from, to);
     return { data, error };
   }
 
