@@ -20,13 +20,23 @@
         <template #trigger>
           <button
             v-if="onEditor"
-            id="send"
+            id="export"
             class="button button_regular button_spaced button_normal"
           >
             Export
           </button>
         </template>
       </Modal>
+      <AuthModal>
+        <template #trigger>
+          <button
+            id="signup"
+            class="button button_regular button_spaced button_normal"
+          >
+            Sign up
+          </button>
+        </template>
+      </AuthModal>
     </div>
   </header>
 </template>

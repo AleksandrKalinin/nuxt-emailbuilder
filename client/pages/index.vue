@@ -4,7 +4,7 @@
     <Sidebar
       v-if="categories.length"
       :categories="categories"
-      :templates-length="filteredByCategory.length"
+      :templates-length="emailCategories.length"
       :selected-categories="selectedCategories"
       :selected-type="selectedType"
     />
@@ -16,27 +16,25 @@
 import { storeToRefs } from "pinia";
 import { useTemplateStore } from "@/store/templateStore";
 
-const {
-  selectedType,
-  filteredEmailTemplates,
-  filteredByCategory,
-  selectedCategories,
-} = storeToRefs(useTemplateStore());
+const { selectedType, selectedCategories, emailCategories } = storeToRefs(
+  useTemplateStore()
+);
+
+const { fetchCategories } = useTemplateStore();
 
 const categories = computed(() => {
-  const labels = [
-    ...new Set(
-      filteredEmailTemplates.value?.map((item: EmailTemplate) => item.category)
-    ),
-  ].map((label) => {
+  const labels = [...new Set(emailCategories.value)].map((label) => {
     const obj = {} as SelectOption;
     obj.label = label;
     obj.selected = false;
-    obj.number = filteredEmailTemplates.value?.filter(
-      (item: EmailTemplate) => item.category === label
-    ).length;
+    obj.number = emailCategories.value?.filter((item: string) => item === label)
+      .length as number;
     return obj;
   });
   return labels;
+});
+
+onMounted(() => {
+  fetchCategories();
 });
 </script>

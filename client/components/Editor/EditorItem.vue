@@ -38,6 +38,7 @@
     >
       <div
         v-if="htmlEl.id !== editableItem"
+        ref="markup"
         v-dompurify-html="htmlEl.markup"
         class="editor-item__markup"
       ></div>
@@ -46,6 +47,7 @@
           :el="htmlEl"
           :row-id="rowId"
           :item-id="props.item.id"
+          :element-width="elementWidth"
           @update-text="updateEditableValue"
           @update-element="updateEditorElement"
           @set-editor-block="setEditableBlock"
@@ -73,6 +75,18 @@ interface EditorItemProps {
   menuRef: null | MaybeRef;
   rowId: string;
 }
+
+const markup = ref(null);
+
+const elementWidth = computed(() => {
+  let width: string | number = "auto";
+
+  if (Object.keys(markup.value).length) {
+    const wrapEl = (markup.value[0] as HTMLElement).firstElementChild;
+    width = (wrapEl as HTMLElement).offsetWidth;
+  }
+  return width;
+});
 
 const props = defineProps<EditorItemProps>();
 

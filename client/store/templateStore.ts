@@ -10,6 +10,9 @@ export const useTemplateStore = defineStore("template", () => {
   const emailTemplatesLoaded = ref(false);
   const display = ref(0);
 
+  const emailCategories = ref<string[] | []>([]);
+  const emailCategoriesLoaded = ref(false);
+
   const setDisplay = () => {
     display.value += 5;
   };
@@ -113,6 +116,17 @@ export const useTemplateStore = defineStore("template", () => {
     }
   };
 
+  const fetchCategories = async () => {
+    const { data, error } = await templatesService.fetchCategories();
+    if (error) {
+      throw new Error(error.message);
+    } else {
+      const formatted = data?.map((item) => item.category) as string[];
+      emailCategories.value = formatted;
+      emailCategoriesLoaded.value = true;
+    }
+  };
+
   const fetchSelectedTemplate = async (id: string | string[]) => {
     const { error } = await templatesService.fetchSelectedTemplate(Number(id));
     if (error) {
@@ -135,11 +149,14 @@ export const useTemplateStore = defineStore("template", () => {
     selectedCategories,
     emailTemplates,
     emailTemplatesLoaded,
+    emailCategories,
+    emailCategoriesLoaded,
     filteredEmailTemplates,
     filteredByCategory,
     selectTemplate,
     fetchTemplates,
     fetchSelectedTemplate,
+    fetchCategories,
     saveTemplate,
     saveFile,
     uploadTemplateToStorage,

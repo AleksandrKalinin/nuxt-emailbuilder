@@ -1,6 +1,9 @@
 <template>
   <div class="templates-wrapper">
-    <div v-if="emailTemplatesLoaded" class="templates-container">
+    <div
+      v-if="emailTemplatesLoaded && filteredByCategory.length"
+      class="templates-container"
+    >
       <TransitionGroup name="templates">
         <TemplateItem
           v-for="template in filteredByCategory"
@@ -9,6 +12,12 @@
           @select-template="selectTemplate"
         />
       </TransitionGroup>
+    </div>
+    <div
+      v-else-if="emailTemplatesLoaded && !filteredByCategory.length"
+      class="templates-none"
+    >
+      No templates for display
     </div>
     <div v-else class="templates-container">
       <TransitionGroup name="templates">
@@ -43,10 +52,14 @@ onMounted(() => {
 
 <style scoped>
 .templates-wrapper {
-  @apply flex flex-col py-10 px-10;
+  @apply flex flex-col py-10 px-10 w-[calc(100%-270px)];
 }
 .templates-container {
   @apply w-full flex justify-start flex-wrap gap-5;
+}
+
+.templates-none {
+  @apply w-full h-full flex justify-center items-center;
 }
 
 .templates-button {

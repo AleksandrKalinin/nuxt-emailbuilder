@@ -324,8 +324,7 @@ export const header = [
         },
         width: {
           property: "width",
-          value: 120,
-          unit: "px",
+          value: "auto",
         },
         height: {
           property: "height",
@@ -388,11 +387,15 @@ export const header = [
           property: "target",
           value: "_blank",
         },
+        align: {
+          property: "align",
+          value: "center",
+        },
       },
       stylePreset: [
         {
           property: "display",
-          value: "block",
+          value: "inline-block",
         },
         {
           property: "box-sizing",

@@ -78,6 +78,11 @@ class TemplatesService {
   unsubscribeFromTemplatesUpdates = () => {
     client.removeChannel(realtimeChannel);
   };
+
+  async fetchCategories() {
+    const { data, error } = await client.from("templates").select("category");
+    return { data, error };
+  }
 }
 
 const templatesService = new TemplatesService();
