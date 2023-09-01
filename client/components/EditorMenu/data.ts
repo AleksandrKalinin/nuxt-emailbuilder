@@ -775,11 +775,11 @@ export const header = [
         },
         width: {
           property: "width",
-          value: "600",
+          value: "100%",
         },
         height: {
           property: "height",
-          value: "300",
+          value: "100%",
         },
         src: {
           property: "src",

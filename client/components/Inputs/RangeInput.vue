@@ -57,7 +57,15 @@ const sliderValue = ref(props.property.value);
 
 const unitValue = ref(props.property.unit);
 
-const updateUnitValue = (val: string) => {};
+const updateUnitValue = (val: string) => {
+  unitValue.value = val;
+  emit(
+    "updateEditorItem",
+    props.itemKey,
+    Number(sliderValue.value),
+    unitValue.value
+  );
+};
 
 const slider: Ref<HTMLInputElement | null> = ref(null);
 
@@ -93,7 +101,12 @@ watchEffect(() => {
 watchDebounced(
   sliderValue,
   () => {
-    emit("updateEditorItem", props.itemKey, Number(sliderValue.value));
+    emit(
+      "updateEditorItem",
+      props.itemKey,
+      Number(sliderValue.value),
+      unitValue.value
+    );
   },
   { debounce: 100, maxWait: 500 }
 );

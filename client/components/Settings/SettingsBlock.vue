@@ -40,7 +40,7 @@
         <SocialGroup
           v-if="option.type === 'social'"
           :items="option.options"
-          :selected-icons="selectedEditorRow.nestedIcons"
+          :selected-icons="(selectedEditorRow as EditorElement).nestedIcons"
           @update-nested-icons="updateNestedIcons"
         />
         <InputSingle
@@ -151,8 +151,8 @@ const updateItemHtml = (code: string) => {
   emit("updateRawHtml", code);
 };
 
-const updateItemProperties = (key: string, value: number) => {
-  emit("updateProperties", key, value);
+const updateItemProperties = (key: string, value: number, unit: string) => {
+  emit("updateProperties", key, value, unit);
 };
 
 const updateRowLayout = (value: number) => {

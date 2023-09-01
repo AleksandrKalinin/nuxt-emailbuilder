@@ -222,7 +222,7 @@ export const useEditorStore = defineStore("editor", () => {
         element = document.createElement("span");
         break;
       case "iframe":
-        element = document.createElement("div");
+        element = document.createElement("iframe");
         break;
       default:
         element = document.createElement(tag);
@@ -325,13 +325,17 @@ export const useEditorStore = defineStore("editor", () => {
 
   const updateItemCssProperties = (
     key: string,
-    value: string | number | boolean
+    value: string | number | boolean,
+    unit: string
   ) => {
     editorRows.value.forEach((row: EditorRow) => {
       row.items.forEach((item: EditorItem) => {
         item.children.forEach((element: EditorElement) => {
           if (element.id === selectedEditorRow.value?.id) {
             element.cssProperties[key].value = value;
+            if (unit) {
+              element.cssProperties[key].unit = unit;
+            }
             element.inlineStyles = createInlineStyles(element.cssProperties);
             element.markup = createHtmlElement(element, true);
           }
@@ -340,7 +344,11 @@ export const useEditorStore = defineStore("editor", () => {
     });
   };
 
-  const updateItemHtmlProperties = (key: string, value: string) => {
+  const updateItemHtmlProperties = (
+    key: string,
+    value: string,
+    unit: string
+  ) => {
     editorRows.value.forEach((row: EditorRow) => {
       row.items.forEach((item: EditorItem) => {
         item.children.forEach((element: EditorElement) => {
