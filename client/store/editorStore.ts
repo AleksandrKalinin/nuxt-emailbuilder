@@ -35,14 +35,16 @@ export const useEditorStore = defineStore("editor", () => {
     },
   ]);
 
-  const editorRows = ref<EditorRow[]>([
+  const initialRowsValue = [
     {
       id: "c089b428-f859-465c-ae77-83a9d00a2cc3",
       items: [toRaw(editorItems.value[0])],
       columns: 1,
       "data-type": "block",
     },
-  ]);
+  ];
+
+  const editorRows = ref<EditorRow[]>(initialRowsValue);
 
   const setEditorRows = (rows: EditorRow[]) => {
     editorRows.value = rows;
@@ -295,7 +297,7 @@ export const useEditorStore = defineStore("editor", () => {
   const selectEditorRow = (value: string | null) => {
     if (value) {
       const el = editorRows.value.find((item: EditorRow) => item.id === value);
-      selectedEditorRow.value = el;
+      selectedEditorRow.value = el as EditorRow;
     } else {
       selectedEditorRow.value = null;
     }
@@ -440,5 +442,6 @@ export const useEditorStore = defineStore("editor", () => {
     updateRawHtml,
     sendEmail,
     updateItemNestedIcons,
+    initialRowsValue,
   };
 });

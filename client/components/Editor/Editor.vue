@@ -65,7 +65,7 @@ interface EditorProps {
 
 defineProps<EditorProps>();
 
-const { addEditorRow } = useEditorStore();
+const { addEditorRow, initialRowsValue } = useEditorStore();
 
 const { editorElements, editorRows, selectedEditorRow, currentEditorRowId } =
   storeToRefs(useEditorStore());
@@ -78,6 +78,7 @@ const {
   deleteEditorRow,
   copyEditorRow,
   setEditableItem,
+  setEditorRows,
 } = useEditorStore();
 
 const isDeleteDisabled = computed(() => {
@@ -118,6 +119,10 @@ const selectElement = (event: Event) => {
 };
 
 const editor = ref(null);
+
+onBeforeUnmount(() => {
+  setEditorRows(initialRowsValue);
+});
 </script>
 
 <style scoped>

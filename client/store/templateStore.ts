@@ -19,7 +19,7 @@ export const useTemplateStore = defineStore("template", () => {
 
   const selectedType = ref<string>("all");
 
-  const selectedCategories = ref([]);
+  const selectedCategories = ref<string[]>([]);
 
   const selectType = (type: string) => {
     selectedType.value = type;
